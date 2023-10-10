@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.reclamos.AgregarReclamoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/agregarReclamo_Titulo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Titulo"
+        />
+
+    <EditText
+        android:id="@+id/agregarReclamo_Descripcion"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:hint="Descrpicion"
+        />
+
+    <TextView
+        android:layout_marginTop="15dp"
+        android:id="@+id/agregarReclamo_Mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom"
+        android:layout_marginBottom="50dp">
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/agregarReclamo_volver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_volver"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="230dp"
+            android:backgroundTint="#00AEEF"
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/agregarReclamo_agregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00AEEF"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_add"
+            />
+
+
+
+    </LinearLayout>
+
+
+</FrameLayout>

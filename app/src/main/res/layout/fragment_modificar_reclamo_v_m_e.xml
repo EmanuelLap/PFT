@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.reclamos.ModificarReclamoVMEFragment">
+
+    <EditText
+        android:id="@+id/modificarReclamoVME_Titulo"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Titulo"
+        />
+
+    <EditText
+        android:id="@+id/modificarReclamoVME_Descripcion"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:hint="Descrpicion"
+        />
+
+    <EditText
+        android:id="@+id/modificarReclamoVME_VME"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Evento/Empresa/Institución (VME)"
+        />
+
+
+    <EditText
+        android:id="@+id/modificarReclamoVME_semestre"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Semestre"
+        />
+
+    <EditText
+        android:id="@+id/modificarReclamoVME_fecha"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Fecha"
+        />
+
+    <EditText
+        android:id="@+id/modificarReclamoVME_docente"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Docente"
+        />
+
+    <EditText
+        android:id="@+id/modificarReclamoVME_creditos"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Creditos"
+        />
+
+    <TextView
+        android:id="@+id/modificarReclamoVME_Mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/modificarReclamoVME_volver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_volver"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="230dp"
+            android:backgroundTint="#00AEEF"
+
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/modificarReclamoVME_agregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_check"
+            android:backgroundTint="#00AEEF"
+
+            />
+
+
+
+    </LinearLayout>
+
+</LinearLayout>

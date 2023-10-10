@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.login.LoginActivity"
+    >
+
+    <ImageView
+        android:src="@mipmap/login"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:theme="@style/Theme.PFT.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/login_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#3A454B"
+            app:popupTheme="@style/Theme.PFT.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+
+    <EditText
+        android:id="@+id/login_usuario"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de usuario"
+        android:gravity="center"
+        android:textSize="24dp"
+        android:background="#FFFFFF"
+        android:layout_marginBottom="15dp"
+        android:alpha="0.8"
+        />
+
+    <EditText
+        android:id="@+id/login_contrasena"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:hint="Contraseña"
+        android:textSize="24dp"
+        android:background="#FFFFFF"
+        android:alpha="0.8"
+        />
+
+    <TextView
+        android:id="@+id/login_mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="24dp"
+        />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00AEEF"
+            android:text="Ingresar"
+            android:layout_marginBottom="30dp"
+            android:textSize="24dp"
+            />
+
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_marginBottom="56dp"
+        android:paddingTop="140dp"
+        >
+
+        <TextView
+            android:id="@+id/login_recuperar_contrasena"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recuperar contraseña"
+            android:textSize="24dp"
+            android:background="#FFFFFF"
+            android:textColor="#3A454B"
+            android:alpha="0.8"
+            android:layout_marginBottom="15dp"
+            />
+
+        <TextView
+            android:id="@+id/login_registrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrarme"
+            android:textSize="24dp"
+            android:textColor="#3A454B"
+            android:background="#FFFFFF"
+            android:alpha="0.8"
+            />
+
+
+    </LinearLayout>
+
+</FrameLayout>

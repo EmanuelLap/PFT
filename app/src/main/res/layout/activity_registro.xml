@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.login.RegistroActivity">
+
+    <EditText
+        android:id="@+id/registro_documento"
+        android:layout_marginTop="50dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Documento"
+        />
+
+    <EditText
+        android:id="@+id/registro_nombre"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        />
+
+    <EditText
+        android:id="@+id/registro_apellido"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Apellido"
+        />
+
+    <EditText
+        android:id="@+id/registro_nombre_usuario"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Nombre de usuario"
+        />
+    <EditText
+        android:id="@+id/registro_contrasena"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Contrasña"
+        />
+    <EditText
+        android:id="@+id/registro_confirmar_contrasena"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirma la contraseña"
+        />
+
+    <EditText
+        android:id="@+id/registro_email_institucional"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Email institucional"
+        />
+
+
+    <EditText
+        android:id="@+id/registro_email_personal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Email personal"
+        />
+    <EditText
+        android:id="@+id/registro_confirmar_email_personal"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Confirma el email personal"
+        />
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="65dp"
+    android:orientation="horizontal">
+
+    <EditText
+        android:id="@+id/registro_telefono"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:hint="Telefono"
+        />
+
+    <EditText
+        android:id="@+id/registro_genero"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="135dp"
+        android:layout_height="wrap_content"
+        android:hint="Género"
+        />
+
+</LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/registro_fec_nac"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:hint="Fec nacimiento"
+            />
+
+        <EditText
+            android:id="@+id/registro_localidad"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:hint="Localidad"
+            />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/registro_departamento"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Departamento"
+        />
+
+
+    <EditText
+        android:id="@+id/registro_ITR"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="ITR"
+        />
+    <EditText
+        android:id="@+id/registro_area"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="Area"
+        />
+
+    <TextView
+        android:id="@+id/registro_Mensaje"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/registro_volver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_volver"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="230dp"
+            android:backgroundTint="#00AEEF"
+
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/registro_agregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_check"
+            android:backgroundTint="#00AEEF"
+
+            />
+
+    </LinearLayout>
+
+</LinearLayout>
