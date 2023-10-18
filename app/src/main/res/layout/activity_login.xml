@@ -62,13 +62,13 @@
         />
 
     <TextView
-        android:id="@+id/login_mensaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="24dp"
         />
 
         <Button
+            android:id="@+id/login_ingresar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#00AEEF"
@@ -77,6 +77,18 @@
             android:textSize="24dp"
             />
 
+        <TextView
+            android:id="@+id/login_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="#CA1414"
+            android:gravity="center"
+            android:background="@color/white"
+            android:alpha="0"
+
+            />
 
 
 

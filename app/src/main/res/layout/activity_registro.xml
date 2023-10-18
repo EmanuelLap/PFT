@@ -175,7 +175,7 @@
         android:orientation="horizontal">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/registro_volver"
+            android:id="@+id/registro_btnVolver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_volver"
@@ -186,7 +186,7 @@
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/registro_agregar"
+            android:id="@+id/registro_btnConfirmar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
