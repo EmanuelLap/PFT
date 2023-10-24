@@ -13,7 +13,7 @@
         android:orientation="vertical">
 
     <EditText
-        android:id="@+id/agregarReclamoAPT_OPT_Titulo"
+        android:id="@+id/agregarReclamoAPE_OPT_Titulo"
         android:layout_marginTop="50dp"
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
@@ -22,7 +22,7 @@
         />
 
     <EditText
-        android:id="@+id/agregarReclamoAPT_OPT_Descripcion"
+        android:id="@+id/agregarReclamoAPE_OPT_Descripcion"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
@@ -31,7 +31,7 @@
         />
 
     <EditText
-        android:id="@+id/agregarReclamoAPT_OPT_VME"
+        android:id="@+id/agregarReclamoAPE_OPT_actividad"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
@@ -40,35 +40,92 @@
         />
 
 
-    <EditText
-        android:id="@+id/agregarReclamoAPT_OPT_semestre"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Semestre"
-        />
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:text="Semestre:"
+
+                />
+            <Spinner
+                android:id="@+id/agregarReclamoAPE_OPT_semestre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona un semestre" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha:"
+                android:textSize="18dp"
+                />
+
+            <TextView
+                android:id="@+id/agregarReclamoAPE_OPT_fecha_seleccionada"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                />
+
+            <Button
+                android:id="@+id/agregarReclamoAPE_OPT_fecha"
+                android:backgroundTint="#00AEEF"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:paddingLeft="30dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_calendar"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Docente:"
+                android:textSize="18dp"
+                />
+
+            <Spinner
+                android:id="@+id/agregarReclamoAPE_OPT_docente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona un docente" />
+
+        </LinearLayout>
 
     <EditText
-        android:id="@+id/agregarReclamoAPT_OPT_fecha"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Fecha"
-        />
-
-    <EditText
-        android:id="@+id/agregarReclamoAPT_OPT_docente"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Docente"
-        />
-
-    <EditText
-        android:id="@+id/agregarReclamoAPT_OPT_creditos"
+        android:id="@+id/agregarReclamoAPE_OPT_creditos"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
@@ -77,7 +134,7 @@
         />
 
     <TextView
-        android:id="@+id/agregarReclamoAPT_OPT_Mensaje"
+        android:id="@+id/agregarReclamoAPE_OPT_Mensaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
@@ -91,7 +148,7 @@
         android:layout_gravity="bottom">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/agregarReclamoAPT_OPT_volver"
+            android:id="@+id/agregarReclamoAPE_OPT_volver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_volver"
@@ -102,7 +159,7 @@
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/agregarReclamoAPT_OPT_agregar"
+            android:id="@+id/agregarReclamoAPE_OPT_agregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

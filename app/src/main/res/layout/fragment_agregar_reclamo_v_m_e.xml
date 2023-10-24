@@ -34,33 +34,90 @@
         android:hint="Evento/Empresa/Institución (VME)"
         />
 
-
-    <EditText
-        android:id="@+id/agregarReclamoVME_semestre"
+    <LinearLayout
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Semestre"
-        />
+        android:orientation="horizontal">
 
-    <EditText
-        android:id="@+id/agregarReclamoVME_fecha"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Fecha"
-        />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="18dp"
+            android:text="Semestre:"
 
-    <EditText
-        android:id="@+id/agregarReclamoVME_docente"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+            />
+    <Spinner
+        android:id="@+id/agregarReclamoVme_semestre"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Docente"
-        />
+        android:layout_marginLeft="10dp"
+        android:hint="Selecciona un semestre" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fecha:"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/agregarReclamoVME_fecha_seleccionada"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            />
+
+        <Button
+            android:id="@+id/agregarReclamoVME_fecha"
+            android:backgroundTint="#00AEEF"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:paddingLeft="30dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar"
+            />
+
+
+
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Docente:"
+            android:textSize="18dp"
+            />
+
+        <Spinner
+            android:id="@+id/agregarReclamoVME_docente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Selecciona un docente" />
+
+    </LinearLayout>
+
 
     <EditText
         android:id="@+id/agregarReclamoVME_creditos"
@@ -68,7 +125,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Creditos"
+        android:hint="Créditos"
         />
 
     <TextView

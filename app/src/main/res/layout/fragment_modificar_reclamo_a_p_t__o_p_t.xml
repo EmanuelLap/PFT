@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.reclamos.ModificarReclamoAPT_OPTFragment">
+    tools:context=".ui.reclamos.ModificarReclamoAPE_OPTFragment">
 
     <EditText
         android:id="@+id/modificarReclamoAPT_OPT_Titulo"

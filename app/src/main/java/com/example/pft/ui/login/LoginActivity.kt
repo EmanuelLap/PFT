@@ -59,6 +59,7 @@ class LoginActivity : AppCompatActivity() {
                 mensaje.alpha=0.8f
                 mensaje.text = "Ingresa una contraseña"
             } else {
+                /*
 //                val call = apiService.autenticarUsuario(usuarioIngresado, contrasenaIngresada)
                 val credenciales =Credenciales(usuarioIngresado, contrasenaIngresada) ;
 //                val credenciales =Credenciales("admin", "1")
@@ -77,9 +78,10 @@ class LoginActivity : AppCompatActivity() {
                                 val editor = sharedPreferences.edit()
                                 editor.putString("token", logResp.token)
                                 editor.apply()
-
+*/
                                 val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
                                 startActivity(mainActivity)
+                /*
                             } else {
                                 // La respuesta fue exitosa, pero no contiene un token válido.
                                 mensaje.alpha = 0.8f
@@ -100,7 +102,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 })
-
+*/
             }
 
         }

@@ -13,13 +13,13 @@
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.pft.ui.reclamos.AgregarReclamoFragment"
+        android:name="com.example.pft.ui.eventos.EventoFragment"
         android:label="Eventos"
         tools:layout="@layout/fragment_evento" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.pft.ui.reclamos.AgregarReclamoFragment"
+        android:name="com.example.pft.ui.reclamos.ReclamoFragment"
         android:label="Reclamos"
         tools:layout="@layout/fragment_reclamo" />
 </navigation>
