@@ -9,6 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.pft.ApiService
 import com.example.pft.MainActivity
+import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.LoginResponse
@@ -80,7 +81,9 @@ class LoginActivity : AppCompatActivity() {
                                 editor.apply()
 */
                                 val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
-                                startActivity(mainActivity)
+                                val mainActivityAnalista = Intent(this@LoginActivity, MainActivity_analista::class.java)
+
+                startActivity(mainActivityAnalista)
                 /*
                             } else {
                                 // La respuesta fue exitosa, pero no contiene un token válido.

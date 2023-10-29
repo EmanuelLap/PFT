@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view"
+    >
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_perfil_analista"
+            android:icon="@drawable/ic_perfil"
+            android:title="Mi Perfil" />
+        <item
+            android:id="@+id/nav_eventos_analista"
+            android:icon="@drawable/ic_evento"
+            android:title="Eventos" />
+        <item
+            android:id="@+id/nav_reclamos_analista"
+            android:icon="@drawable/ic_reclamo"
+            android:title="Reclamos" />
+    </group>
+</menu>
