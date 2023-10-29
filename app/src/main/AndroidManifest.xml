@@ -17,7 +17,8 @@
         tools:targetApi="31">
         <activity
             android:name=".MainActivity_analista"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.PFT.NoActionBar"></activity>/>
         <activity
             android:name=".ui.login.RegistroActivity"
             android:exported="false" />
