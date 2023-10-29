@@ -83,7 +83,12 @@ class LoginActivity : AppCompatActivity() {
                                 val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
                                 val mainActivityAnalista = Intent(this@LoginActivity, MainActivity_analista::class.java)
 
+                if(usuarioIngresado=="analista")
                 startActivity(mainActivityAnalista)
+                else{
+                    startActivity(mainActivity)
+
+                }
                 /*
                             } else {
                                 // La respuesta fue exitosa, pero no contiene un token válido.
