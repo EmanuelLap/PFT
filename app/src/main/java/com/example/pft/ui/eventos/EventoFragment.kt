@@ -22,8 +22,7 @@ class EventoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_evento, container, false)
         val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
 
-        // Configurar el RecyclerView con un LinearLayoutManager
-        recyclerView.layoutManager = LinearLayoutManager(context)
+
 
         // Configurar el RecyclerView con un GridLayoutManager
         val columnCount = 2 // Cambia esto al número deseado de columnas

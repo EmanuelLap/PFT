@@ -55,7 +55,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Contrasña"
+        android:hint="Contraseña"
         />
     <EditText
         android:id="@+id/registro_confirmar_contrasena"
@@ -104,7 +104,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="135dp"
         android:layout_height="wrap_content"
-        android:hint="Telefono"
+        android:hint="Teléfono"
         />
 
     <EditText
@@ -133,6 +133,31 @@
             />
 
         <EditText
+            android:id="@+id/registro_itr"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:hint="ITR"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/registro_departamento"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="135dp"
+            android:layout_height="wrap_content"
+            android:hint="Departamento"
+            />
+
+        <EditText
             android:id="@+id/registro_localidad"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"
@@ -143,32 +168,37 @@
 
     </LinearLayout>
 
-    <EditText
-        android:id="@+id/registro_departamento"
+    <LinearLayout
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Departamento"
-        />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="18dp"
+            android:text="Tipo de usuario"
+
+            />
+        <Spinner
+            android:id="@+id/registro_tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Selecciona un semestre" />
+
+    </LinearLayout>
 
 
-    <EditText
-        android:id="@+id/registro_ITR"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="ITR"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/registro_recyclerView_estudiante"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
         />
-    <EditText
-        android:id="@+id/registro_area"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:hint="Area"
-        />
+
 
     <TextView
         android:id="@+id/registro_Mensaje"

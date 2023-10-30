@@ -6,8 +6,6 @@
     android:layout_marginBottom="10dp"
     >
 
-    <!-- Puedes agregar elementos de contenido personalizado aquí -->
-    <!-- Por ejemplo, un TextView para mostrar texto en la sección -->
 <TextView
     android:id="@+id/seccion_evento_textView"
     android:layout_width="wrap_content"
