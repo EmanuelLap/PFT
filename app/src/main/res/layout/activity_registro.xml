@@ -12,122 +12,247 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingHorizontal="50dp"
     >
 
     <EditText
         android:id="@+id/registro_documento"
         android:layout_marginTop="50dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Documento"
         />
 
+    <TextView
+        android:id="@+id/registro_mensaje_documento"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
+        />
+
+
+
     <EditText
         android:id="@+id/registro_nombre"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre"
+        />
+
+    <TextView
+        android:id="@+id/registro_mensaje_nombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
         />
 
     <EditText
         android:id="@+id/registro_apellido"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Apellido"
+        />
+
+    <TextView
+        android:id="@+id/registro_mensaje_apellido"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
         />
 
     <EditText
         android:id="@+id/registro_nombre_usuario"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre de usuario"
         />
+
+    <TextView
+        android:id="@+id/registro_mensaje_nombre_usuario"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
+        />
+
     <EditText
         android:id="@+id/registro_contrasena"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Contraseña"
         />
+
+    <TextView
+        android:id="@+id/registro_mensaje_contrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
+        />
+
     <EditText
         android:id="@+id/registro_confirmar_contrasena"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirma la contraseña"
+        />
+
+    <TextView
+        android:id="@+id/registro_mensaje_confirmar_contrasena"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
         />
 
     <EditText
         android:id="@+id/registro_email_institucional"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email institucional"
+        />
+
+    <TextView
+        android:id="@+id/registro_mensaje_email_institucional"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
         />
 
 
     <EditText
         android:id="@+id/registro_email_personal"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Email personal"
         />
+
+    <TextView
+        android:id="@+id/registro_mensaje_email_personal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#FCCA1414"
+        android:alpha="0"
+        />
+
     <EditText
         android:id="@+id/registro_confirmar_email_personal"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Confirma el email personal"
         />
 
+    <TextView
+        android:id="@+id/registro_mensaje_confirmar_email_personal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:background="#CA1414"
+        android:alpha="0"
+        />
+
 <LinearLayout
     android:layout_width="match_parent"
-    android:layout_height="65dp"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
 
     <EditText
         android:id="@+id/registro_telefono"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="135dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:hint="Teléfono"
         />
+
+
 
     <EditText
         android:id="@+id/registro_genero"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="30dp"
-        android:layout_width="135dp"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:hint="Género"
         />
+
+
 
 </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/registro_mensaje_telefono"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CA1414"
+            android:alpha="0"
+            />
+
+        <TextView
+            android:id="@+id/registro_mensaje_genero"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CA1414"
+            android:alpha="0"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/registro_fec_nac"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_width="135dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="Fec nacimiento"
             />
@@ -136,7 +261,7 @@
             android:id="@+id/registro_itr"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"
-            android:layout_width="135dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="ITR"
             />
@@ -145,14 +270,42 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="65dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/registro_mensaje_fec_nac"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CA1414"
+            android:alpha="0"
+            />
+
+        <TextView
+            android:id="@+id/registro_mensaje_itr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CA1414"
+            android:alpha="0"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <EditText
             android:id="@+id/registro_departamento"
             android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_width="135dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="Departamento"
             />
@@ -161,7 +314,7 @@
             android:id="@+id/registro_localidad"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="30dp"
-            android:layout_width="135dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:hint="Localidad"
             />
@@ -169,7 +322,33 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/registro_mensaje_departamento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CA1414"
+            android:alpha="0"
+            />
+
+        <TextView
+            android:id="@+id/registro_mensaje_localidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CA1414"
+            android:alpha="0"
+            />
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -177,7 +356,6 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
             android:textSize="18dp"
             android:text="Tipo de usuario"
 
@@ -188,6 +366,24 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:hint="Selecciona un semestre" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/registro_mensaje_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:gravity="center"
+            android:background="#CA1414"
+            android:alpha="0"
+            />
 
     </LinearLayout>
 
@@ -216,8 +412,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_volver"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="230dp"
+            android:layout_marginRight="200dp"
             android:backgroundTint="#00AEEF"
 
             />
