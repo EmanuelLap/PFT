@@ -5,10 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pft.entidades.Evento
 
-class EventoAdapter (private val lista: ArrayList<String>) : RecyclerView.Adapter<EventoAdapter.ViewHolder>() {
+class EventoAdapter(private val lista: List<Evento>) : RecyclerView.Adapter<EventoAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val textView: TextView = itemView.findViewById(R.id.seccion_evento_textView)
@@ -22,8 +22,11 @@ class EventoAdapter (private val lista: ArrayList<String>) : RecyclerView.Adapte
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = lista[position]
+        val texto = "${item.titulo}\n ${item.tipoEvento} \n ${item.inicio} \n ${item.fin}"
+        holder.textView.text=texto
+/*
         holder.textView.text = item
-        if (item == "Evento 1") {
+        if (item. == "Evento 1") {
             holder.imageView.setImageResource(R.mipmap.login)
         } else if(item=="Evento 2"){
             holder.imageView.setImageResource(R.mipmap.dia)
@@ -32,6 +35,8 @@ class EventoAdapter (private val lista: ArrayList<String>) : RecyclerView.Adapte
         }else if(item=="Evento 4"){
             holder.imageView.setImageResource(R.mipmap.noche)
         }
+
+ */
     }
 
 

@@ -1,16 +1,21 @@
 package com.example.pft.ui.eventos
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.pft.EventoAdapter
+import android.widget.ListView
+import com.example.pft.ApiService
 import com.example.pft.R
+import com.example.pft.entidades.Evento
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 
 class EventoFragment : Fragment() {
@@ -20,26 +25,48 @@ class EventoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_evento, container, false)
-        val recyclerView = view.findViewById<RecyclerView>(R.id.recyclerView)
+        val listaEventos=view.findViewById<ListView>(R.id.listaEventos)
 
 
+        Log.d("EventoFragment", "onCreateView")
 
-        // Configurar el RecyclerView con un GridLayoutManager
-        val columnCount = 2 // Cambia esto al número deseado de columnas
-        val layoutManager = GridLayoutManager(context, columnCount)
-        recyclerView.layoutManager = layoutManager
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
 
-        // Crear una lista de datos o modelos que deseas mostrar en las secciones
-        val lista = ArrayList<String>()
-        // Agregar elementos a listaDeDatos aquí
-        lista.add("Evento 1")
-        lista.add("Evento 2")
-        lista.add("Evento 3")
-        lista.add("Evento 4")
-        // Crear un adaptador personalizado y asignarlo al RecyclerView
-        val adapter = EventoAdapter(lista)
+        val apiService = retrofit.create(ApiService::class.java)
 
-        recyclerView.adapter = adapter
+        val call = apiService.obtenerEventos()
+
+        Log.d("EventoFragment", "Before API call")
+
+        call.enqueue(object : Callback<List<Evento>> {
+            override fun onResponse(call: Call<List<Evento>>, response: Response<List<Evento>>) {
+                if (response.isSuccessful) {
+                    val eventos = response.body()
+                    Log.d("EventoFragment", "API call successful. Eventos: $eventos")
+
+                    // Configurar el ArrayAdapter
+                    val adapter = ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_list_item_1,
+                        eventos?.map { "${it.titulo} - ${it.modalidadEvento}" } ?: emptyList()
+                    )
+
+                    // Asignar el adapter al ListView
+                    listaEventos.adapter = adapter
+                } else {
+                    Log.e("EventoFragment", "API call failed with code ${response.code()}")
+                    // Resto del código para manejar errores...
+                }
+            }
+
+            override fun onFailure(call: Call<List<Evento>>, t: Throwable) {
+                Log.e("EventoFragment", "API call failed", t)
+                // Resto del código para manejar errores...
+            }
+        })
 
         return view
     }

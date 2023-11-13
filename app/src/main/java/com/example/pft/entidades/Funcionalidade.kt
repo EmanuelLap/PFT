@@ -1,8 +1,8 @@
 package com.example.pft.entidades
 
-data class ItrDTO(
+data class Funcionalidade(
     val activo: Boolean,
-    val departamento: String,
+    val descripcion: String,
     val id: Int,
     val nombre: String
 )

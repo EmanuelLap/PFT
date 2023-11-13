@@ -1,5 +1,6 @@
 package com.example.pft
 
+import com.example.pft.entidades.Evento
 import com.example.pft.entidades.LoginResponse
 import com.example.pft.ui.login.Credenciales
 import retrofit2.Call
@@ -22,5 +23,8 @@ interface ApiService {
     fun login(
         @Body credentials: Credenciales
     ): Call<LoginResponse>
+
+    @GET("ByteMinds_s4/rest/eventos/listar")
+    fun obtenerEventos(): Call<List<Evento>>
 
 }
