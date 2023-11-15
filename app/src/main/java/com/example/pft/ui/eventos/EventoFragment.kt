@@ -12,6 +12,7 @@ import android.widget.ListView
 import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.entidades.Evento
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -54,7 +55,7 @@ class EventoFragment : Fragment() {
                     val adapter = ArrayAdapter(
                         requireContext(),
                         android.R.layout.simple_list_item_1,
-                        eventos?.map { "${it.titulo} - ${it.modalidadEvento}" } ?: emptyList()
+                        eventos?.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}"  } ?: emptyList()
                     )
 
                     // Asignar el adapter al ListView
@@ -62,9 +63,15 @@ class EventoFragment : Fragment() {
 
                     // Al realizar click en cualquier elemento de la lista
                     listaEventos.setOnItemClickListener { adapterView, view, i, l ->
-                        val selectedItem = adapter.getItem(i)
-                        val item = eventos!!.get(i).toString()
-                        evento.putExtra("evento", item)
+                        val eventoSeleccionado = eventos!!.get(i)
+
+                        // Convierte el objeto Evento a una cadena JSON (por ejemplo, utilizando Gson)
+                        val eventoJson = Gson().toJson(eventoSeleccionado)
+
+                        // Crea un Intent y agrega la cadena JSON como extra
+                        evento.putExtra("evento", eventoJson)
+
+                        // Iniciar la actividad con el Intent configurado
                         startActivity(evento)
                     }
                 } else {

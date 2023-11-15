@@ -41,7 +41,7 @@
 
 
         <TextView
-            android:id="@+id/evento_nombre"
+            android:id="@+id/evento_titulo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -49,45 +49,9 @@
             android:background="#FFFFFF"
             android:layout_marginBottom="15dp"
             android:alpha="0.8"
-            android:text="nombre"
+            android:text="titulo"
             />
 
-        <TextView
-            android:id="@+id/evento_inicio"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24dp"
-            android:background="#FFFFFF"
-            android:layout_marginBottom="15dp"
-            android:alpha="0.8"
-            android:text="inicio"
-            />
-
-        <TextView
-            android:id="@+id/evento_fin"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24dp"
-            android:background="#FFFFFF"
-            android:layout_marginBottom="15dp"
-            android:alpha="0.8"
-            android:text="fin"
-            />
-
-
-        <TextView
-            android:id="@+id/evento_localizacion"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="24dp"
-            android:background="#FFFFFF"
-            android:layout_marginBottom="15dp"
-            android:alpha="0.8"
-            android:text="localización"
-            />
 
         <TextView
             android:id="@+id/evento_tipo"
@@ -114,10 +78,50 @@
             />
 
         <TextView
+            android:id="@+id/evento_localizacion"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.8"
+            android:text="localización"
+            />
+
+
+
+        <TextView
+            android:id="@+id/evento_inicio"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.8"
+            android:text="inicio"
+            />
+
+        <TextView
+            android:id="@+id/evento_fin"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.8"
+            android:text="fin"
+            />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24dp"
             />
+
+
 
         <Button
             android:id="@+id/evento_registrarReclamo"
@@ -130,7 +134,7 @@
             />
 
         <TextView
-            android:id="@+id/login_mensaje"
+            android:id="@+id/evento_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24dp"
@@ -165,7 +169,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/registro_btnVolver"
+                android:id="@+id/evento_btnVolver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_volver"
@@ -174,15 +178,7 @@
 
                 />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/registro_btnConfirmar"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end"
-                android:src="@drawable/ic_check"
-                android:backgroundTint="#00AEEF"
 
-                />
 
         </LinearLayout>
 
