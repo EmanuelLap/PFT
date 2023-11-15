@@ -1,5 +1,6 @@
 package com.example.pft.ui.eventos
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -39,6 +40,8 @@ class EventoFragment : Fragment() {
 
         val call = apiService.obtenerEventos()
 
+        val evento = Intent(requireContext(), EventoActivity::class.java)
+
         Log.d("EventoFragment", "Before API call")
 
         call.enqueue(object : Callback<List<Evento>> {
@@ -56,6 +59,14 @@ class EventoFragment : Fragment() {
 
                     // Asignar el adapter al ListView
                     listaEventos.adapter = adapter
+
+                    // Al realizar click en cualquier elemento de la lista
+                    listaEventos.setOnItemClickListener { adapterView, view, i, l ->
+                        val selectedItem = adapter.getItem(i)
+                        val item = eventos!!.get(i).toString()
+                        evento.putExtra("evento", item)
+                        startActivity(evento)
+                    }
                 } else {
                     Log.e("EventoFragment", "API call failed with code ${response.code()}")
                     // Resto del código para manejar errores...
