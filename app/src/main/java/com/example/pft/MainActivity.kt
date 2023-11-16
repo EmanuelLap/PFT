@@ -12,6 +12,9 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.appcompat.app.AppCompatActivity
 import com.example.pft.databinding.ActivityMainBinding
+import com.example.pft.ui.eventos.EventoFragment
+import com.example.pft.ui.perfil.PerfilFragment
+import com.example.pft.ui.reclamos.ReclamoFragment
 import java.util.Locale
 
 class MainActivity : AppCompatActivity() {
@@ -25,10 +28,23 @@ class MainActivity : AppCompatActivity() {
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
 
+        val usuario=intent.getStringExtra("usuario")
+
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
+
+        val bundle = Bundle()
+        bundle.putString("usuario", usuario)
+
+        val fragmentReclamo = ReclamoFragment()
+        val fragmentEvento = EventoFragment()
+        val fragmentPerfil = PerfilFragment()
+
+        fragmentReclamo.arguments = bundle
+        fragmentEvento.arguments= bundle
+        fragmentPerfil.arguments=bundle
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView

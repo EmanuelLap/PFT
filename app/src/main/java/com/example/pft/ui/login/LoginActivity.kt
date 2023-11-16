@@ -13,6 +13,7 @@ import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.LoginResponse
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -60,7 +61,7 @@ class LoginActivity : AppCompatActivity() {
                 mensaje.alpha=0.8f
                 mensaje.text = "Ingresa una contraseña"
             } else {
-                /*
+
 //                val call = apiService.autenticarUsuario(usuarioIngresado, contrasenaIngresada)
                 val credenciales =Credenciales(usuarioIngresado, contrasenaIngresada) ;
 //                val credenciales =Credenciales("admin", "1")
@@ -70,6 +71,8 @@ class LoginActivity : AppCompatActivity() {
                     override fun onResponse(call: Call<LoginResponse>, response: Response<LoginResponse>) {
                         if (response.isSuccessful) {
                             val logResp = response.body()
+
+                            val responseJson= Gson().toJson(logResp)
                             Log.d("LoginActivity", "ResponseBody: $logResp")
                             if (logResp?.token != null && logResp.token!!.isNotEmpty()) {
 
@@ -79,17 +82,18 @@ class LoginActivity : AppCompatActivity() {
                                 val editor = sharedPreferences.edit()
                                 editor.putString("token", logResp.token)
                                 editor.apply()
-*/
+
                                 val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
                                 val mainActivityAnalista = Intent(this@LoginActivity, MainActivity_analista::class.java)
 
                 if(usuarioIngresado=="analista")
                 startActivity(mainActivityAnalista)
                 else{
+                    mainActivity.putExtra("usuario", responseJson )
                     startActivity(mainActivity)
 
                 }
-                /*
+
                             } else {
                                 // La respuesta fue exitosa, pero no contiene un token válido.
                                 mensaje.alpha = 0.8f
@@ -110,7 +114,7 @@ class LoginActivity : AppCompatActivity() {
                         }
                     }
                 })
-*/
+
             }
 
         }

@@ -12,4 +12,23 @@ data class EventoId(
     val tipoEvento: TipoEvento,
     val titulo: String,
     val tutorResponsableEventoDTOCollection: List<TutorResponsableEventoDTOCollection>
+
+
+
 )
+{
+    constructor(evento: Evento) : this(
+        id = evento.id,
+        bajaLogica=evento.bajaLogica,
+        fin=evento.fin,
+        inicio=evento.inicio,
+        itrDTO=evento.itrDTO,
+        localizacion=evento.localizacion,
+        modalidadEvento=evento.modalidadEvento,
+        tipoEstadoEvento=evento.tipoEstadoEvento,
+        tipoEvento=evento.tipoEvento,
+        titulo=evento.titulo,
+        tutorResponsableEventoDTOCollection=evento.tutorResponsableEventoDTOCollection,
+    )
+}
+
