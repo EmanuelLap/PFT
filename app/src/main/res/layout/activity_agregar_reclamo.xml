@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.reclamos.AgregarReclamoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/agregarReclamoActivity_Titulo"
+            android:layout_marginTop="50dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Titulo"
+            />
+
+        <EditText
+            android:id="@+id/agregarReclamoActivity_Descripcion"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
+            android:hint="Descrpición"
+            />
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:text="Evento:"
+
+                />
+            <Spinner
+                android:id="@+id/agregarReclamoActivity_evento"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona un evento" />
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:text="Semestre:"
+
+                />
+            <Spinner
+                android:id="@+id/agregarReclamoActivity_semestre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona un semestre" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Fecha:"
+                android:textSize="18dp"
+                />
+
+            <TextView
+                android:id="@+id/agregarReclamoActivity_fecha_seleccionada"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                />
+
+            <Button
+                android:id="@+id/agregarReclamoActivity_fecha"
+                android:backgroundTint="#00AEEF"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:paddingLeft="30dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_calendar"
+                />
+
+
+
+
+        </LinearLayout>
+
+
+
+        <EditText
+            android:id="@+id/agregarReclamoActivity_creditos"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="30dp"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:hint="Créditos"
+            />
+
+        <TextView
+            android:id="@+id/agregarReclamoActivity_Mensaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/agregarReclamoActivity_volver"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_volver"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="230dp"
+            android:backgroundTint="#00AEEF"
+
+            />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/agregarReclamoActivity_agregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="#00AEEF"
+
+            />
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

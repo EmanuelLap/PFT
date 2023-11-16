@@ -49,6 +49,9 @@ class ReclamoFragment : Fragment() {
 
         val reclamo = Intent(requireContext(),ReclamoActivity::class.java)
 
+        val agregarReclamo = Intent(requireContext(),AgregarReclamoActivity::class.java)
+
+
 
         btn_agregar = view.findViewById(R.id.reclamos_agregar)
         listaReclamos=view.findViewById(R.id.reclamos_lista)
@@ -109,9 +112,7 @@ class ReclamoFragment : Fragment() {
 
                 when (item.itemId) {
                     R.id.opcion1 -> {
-                        val fragmentOpcion1 = AgregarReclamoFragment()
-                       replaceFragment(fragmentManager,
-                           R.id.nav_host_fragment_content_main,fragmentOpcion1)
+                        startActivity(agregarReclamo)
                         true
                     }
                     R.id.opcion2 -> {
