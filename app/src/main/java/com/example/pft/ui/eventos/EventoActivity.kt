@@ -44,11 +44,11 @@ class EventoActivity : AppCompatActivity() {
         btn_volver=findViewById(R.id.evento_btnVolver)
 
         titulo.text=eventoSeleccionado.titulo
-        tipo.text=eventoSeleccionado.tipoEvento.nombre
-        modalidad.text=eventoSeleccionado.modalidadEvento.nombre
-        localizacion.text=eventoSeleccionado.localizacion
-        inicio.text=eventoSeleccionado.inicio.toString()
-        fin.text=eventoSeleccionado.fin.toString()
+        tipo.text="Tipo: ${eventoSeleccionado.tipoEvento.nombre}"
+        modalidad.text="Modalidad: ${eventoSeleccionado.modalidadEvento.nombre}"
+        localizacion.text="Localización: ${eventoSeleccionado.localizacion}"
+        inicio.text="Inicio: ${eventoSeleccionado.inicio.toString()}"
+        fin.text="Fin: ${eventoSeleccionado.fin.toString()}"
 
 
         btn_volver.setOnClickListener{

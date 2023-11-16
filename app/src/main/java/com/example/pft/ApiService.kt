@@ -2,6 +2,7 @@ package com.example.pft
 
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.LoginResponse
+import com.example.pft.entidades.Reclamo
 import com.example.pft.ui.login.Credenciales
 import retrofit2.Call
 import retrofit2.http.Body
@@ -26,5 +27,8 @@ interface ApiService {
 
     @GET("ByteMinds_s4/rest/eventos/listar")
     fun obtenerEventos(): Call<List<Evento>>
+
+    @GET("ByteMinds_s4/rest/reclamos/listar")
+    fun obtenerReclamos(): Call<List<Reclamo>>
 
 }

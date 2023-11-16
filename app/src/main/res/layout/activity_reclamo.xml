@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.reclamos.ReclamoActivity"
+    >
+
+    <ImageView
+        android:src="@mipmap/login"
+        android:scaleType="centerCrop"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:alpha="0.7"
+        />
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:theme="@style/Theme.PFT.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/login_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#3A454B"
+            app:popupTheme="@style/Theme.PFT.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="50dp"
+        >
+
+
+
+        <TextView
+            android:id="@+id/reclamoAct_titulo"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.8"
+            android:text="titulo"
+            />
+
+
+        <TextView
+            android:id="@+id/reclamoAct_detalle"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.8"
+            android:text="detalle"
+            />
+
+        <TextView
+            android:id="@+id/reclamoAct_estado"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="24dp"
+            android:background="#FFFFFF"
+            android:layout_marginBottom="15dp"
+            android:alpha="0.8"
+            android:text="estado"
+            />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            />
+
+
+
+        <Button
+            android:id="@+id/reclamoAct_modificarReclamo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00AEEF"
+            android:text="Modificar reclamo"
+            android:layout_marginBottom="30dp"
+            android:textSize="24dp"
+            />
+
+        <TextView
+            android:id="@+id/reclamoAct_mensaje"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="24dp"
+            android:textStyle="bold"
+            android:textColor="#CA1414"
+            android:gravity="center"
+            android:background="@color/white"
+            android:alpha="0"
+            />
+
+
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:orientation="vertical"
+        android:layout_gravity="bottom"
+        android:gravity="center"
+        android:layout_marginBottom="56dp"
+        android:paddingTop="140dp"
+        android:paddingHorizontal="50dp"
+
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/reclamoAct_btnVolver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_volver"
+                android:layout_marginRight="200dp"
+                android:backgroundTint="#00AEEF"
+
+                />
+
+
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</FrameLayout>
