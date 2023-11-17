@@ -12,7 +12,7 @@
         android:id="@+id/menuAnalistaEventos"
         android:title="Eventos"
         />
-    <!--
+
     <item
         android:id="@+id/menuAnalistaReclamos"
         android:title="Reclamos"
@@ -22,5 +22,5 @@
         android:id="@+id/menuAnalistaCerrarSesión"
         android:title="Cerrar Sesión"
         />
-    -->
+
 </menu>

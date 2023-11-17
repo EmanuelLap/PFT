@@ -8,11 +8,19 @@
     android:layout_above="@+id/analistaBottomNavigationView">
 
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/analistaBottomNavigationView"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        app:menu="@menu/main_analista_menu" />
+        android:layout_gravity="top"
+        android:theme="@style/Theme.PFT.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/analista_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#3A454B"
+            app:popupTheme="@style/Theme.PFT.PopupOverlay"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
 
 </FrameLayout>
