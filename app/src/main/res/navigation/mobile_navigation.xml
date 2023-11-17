@@ -22,4 +22,10 @@
         android:name="com.example.pft.ui.reclamos.ReclamoFragment"
         android:label="Reclamos"
         tools:layout="@layout/fragment_reclamo" />
+
+    <activity
+        android:id="@+id/nav_cerrarSesion"
+        android:name="com.example.pft.ui.login.LoginActivity"
+        android:label="Cerrar Sesión"
+        tools:layout="@layout/activity_login" />
 </navigation>

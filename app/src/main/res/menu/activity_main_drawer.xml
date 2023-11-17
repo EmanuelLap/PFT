@@ -17,5 +17,10 @@
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_reclamo"
             android:title="Reclamos" />
+
+        <item
+            android:id="@+id/nav_cerrarSesion"
+            android:icon="@drawable/ic_logout"
+            android:title="Cerrar Sesión" />
     </group>
 </menu>
