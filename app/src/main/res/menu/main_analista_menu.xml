@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menuAnalistaUsuarios"
+        android:title="Usuario"
+        />
+    <item
+        android:id="@+id/menuAnalistaEventos"
+        android:title="Eventos"
+        />
+    <item
+        android:id="@+id/menuAnalistaReclamos"
+        android:title="Reclamos"
+        />
+</menu>
