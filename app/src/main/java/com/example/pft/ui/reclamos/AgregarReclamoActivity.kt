@@ -55,6 +55,9 @@ class AgregarReclamoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_reclamo)
 
+        val locale = Locale("es", "ES")
+        Locale.setDefault(locale)
+
         //Declaro rutas a elementos
         titulo=findViewById(R.id.agregarReclamoActivity_Titulo)
         detalle=findViewById(R.id.agregarReclamoActivity_Descripcion)

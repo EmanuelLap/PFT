@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,11 @@
     android:orientation="vertical"
     tools:context=".ui.eventos.Evento_analistaActivity">
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
 
         <TextView
             android:layout_width="match_parent"
@@ -20,7 +24,7 @@
             />
 
         <EditText
-            android:id="@+id/Usuarios_AnalistaActivity_nombre"
+            android:id="@+id/Evento_AnalistaActivity_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
@@ -140,37 +144,45 @@
             android:drawableLeft="@drawable/ic_calendar"
             />
 
-        <TextView
-            android:layout_marginLeft="30dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Fin:"
-            android:textSize="18dp"
-            />
-
-        <TextView
-            android:id="@+id/Evento_AnalistaActivity_fin_seleccion"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            />
-
-        <Button
-            android:id="@+id/Evento_AnalistaActivity_fin"
-            android:backgroundTint="#00AEEF"
-            android:layout_marginLeft="10dp"
-            android:layout_width="wrap_content"
-            android:paddingLeft="30dp"
-            android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_calendar"
-            />
 
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+    <TextView
+        android:layout_marginLeft="30dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fin:"
+        android:textSize="18dp"
+        />
+
+    <TextView
+        android:id="@+id/Evento_AnalistaActivity_fin_seleccion"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        />
+
     <Button
-        android:id="@+id/Usuarios_AnalistaActivity_btnFiltrar"
+        android:id="@+id/Evento_AnalistaActivity_fin"
+        android:backgroundTint="#00AEEF"
+        android:layout_marginLeft="10dp"
+        android:layout_width="wrap_content"
+        android:paddingLeft="30dp"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_calendar"
+        />
+
+    </LinearLayout>
+    <Button
+        android:id="@+id/Evento_AnalistaActivity_btnFiltrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -182,9 +194,9 @@
         android:backgroundTint="#00AEEF"/>
 
     <ListView
-        android:id="@+id/eventoAnalista_list"
+        android:id="@+id/Evento_Analista_lista"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="300dp"
         />
 
     <LinearLayout
@@ -195,7 +207,7 @@
         android:layout_marginTop="50dp">
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/eventoAnalista_volver"
+            android:id="@+id/Evento_Analista_volver"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_volver"
@@ -207,7 +219,7 @@
 
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/eventoAnalista_agregar"
+            android:id="@+id/Evento_Analista_agregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
@@ -216,8 +228,7 @@
 
             />
 
-
-
     </LinearLayout>
 
-</LinearLayout>
+    </LinearLayout>
+</ScrollView>
