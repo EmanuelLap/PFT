@@ -86,8 +86,14 @@ class LoginActivity : AppCompatActivity() {
                                 val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
                                 val mainActivityAnalista = Intent(this@LoginActivity, MainActivity_analista::class.java)
 
-                if(usuarioIngresado=="analista")
-                startActivity(mainActivityAnalista)
+                if(logResp.user?.utipo =="ANALISTA") {
+                    mainActivityAnalista.putExtra("usuario", responseJson)
+                    startActivity(mainActivityAnalista)
+                }
+                else if(logResp.user?.utipo=="ESTUDIANTE"){
+                    mainActivity.putExtra("usuario", responseJson )
+                    startActivity(mainActivity)
+                }
                 else{
                     mainActivity.putExtra("usuario", responseJson )
                     startActivity(mainActivity)
