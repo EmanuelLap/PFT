@@ -41,7 +41,7 @@
 
 
         <TextView
-            android:id="@+id/reclamoAct_titulo"
+            android:id="@+id/reclamoSel_titulo"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -54,7 +54,7 @@
 
 
         <TextView
-            android:id="@+id/reclamoAct_detalle"
+            android:id="@+id/reclamoSel_detalle"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -66,28 +66,53 @@
             />
 
         <TextView
-            android:id="@+id/reclamoAct_estado"
+            android:id="@+id/reclamoSel_estado"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:textSize="24dp"
+            android:textSize="24sp"
             android:background="#FFFFFF"
             android:layout_marginBottom="15dp"
             android:alpha="0.8"
             android:text="Estado"
             />
 
-        <TextView
-            android:id="@+id/reclamoAct_respuesta"
+        <LinearLayout
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="15dp"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#FFFFFF"
+            android:alpha="0.8"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:textSize="24sp"
+                android:text="Actualizar estado:"
+
+                />
+            <Spinner
+                android:id="@+id/reclamoSel_actEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona un tipo de evento" />
+
+        </LinearLayout>
+        <EditText
+            android:id="@+id/reclamoSel_respuesta"
+            android:layout_width="300dp"
+            android:layout_height="120dp"
             android:gravity="center"
             android:textSize="24dp"
             android:background="#FFFFFF"
             android:layout_marginBottom="15dp"
             android:alpha="0.8"
-            android:text="Respuesta"
-            />
+            android:hint="Respuesta"            />
 
 
 
@@ -100,17 +125,17 @@
 
 
         <Button
-            android:id="@+id/reclamoAct_modificarReclamo"
+            android:id="@+id/reclamoSel_btnModificarReclamo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#00AEEF"
-            android:text="Modificar reclamo"
+            android:text="Actualizar reclamo"
             android:layout_marginBottom="30dp"
             android:textSize="24dp"
             />
 
         <TextView
-            android:id="@+id/reclamoAct_mensaje"
+            android:id="@+id/reclamoSel_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24dp"
@@ -145,7 +170,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/reclamoAct_btnVolver"
+                android:id="@+id/reclamoSel_btnVolver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_volver"

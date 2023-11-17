@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
@@ -16,6 +17,7 @@ import com.example.pft.R
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Reclamo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,6 +39,52 @@ class Reclamo_analistaActivity : AppCompatActivity() {
         listaReclamos=findViewById(R.id.reclamoAnalista_lista)
         volver=findViewById(R.id.reclamoAnalista_volver)
 
+        //spinner estado
+
+        val estadoOpciones = ArrayList<String>()
+        estadoOpciones.add("Ingresado")
+        estadoOpciones.add("En proceso")
+        estadoOpciones.add("Finalizado")
+
+
+        // Crear un ArrayAdapter y establecerlo en el Spinner
+        val estadoAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, estadoOpciones)
+        estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        estado.adapter = estadoAdapter
+
+        estado.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: android.view.View?,
+                position: Int,
+                id: Long
+            ) {
+                // Manejar la selección aquí
+                val opcionSeleccionada = estadoOpciones[position]
+                when (opcionSeleccionada) {
+                    "Ingresado" -> {
+                        // Realizar acciones específicas para "Ingresado"
+                    }
+
+                    "En proceso" -> {
+                        // Realizar acciones específicas para "En proceso"
+                    }
+
+                    "Finalizado" -> {
+                        // Realizar acciones específicas para "Finalizado"
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Se llama cuando no se ha seleccionado nada
+            }
+
+        }
+
+
+
+
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
@@ -46,6 +94,9 @@ class Reclamo_analistaActivity : AppCompatActivity() {
 
         val call=apiService.obtenerReclamos()
         Log.d("ReclamoAnalistaActivity", "Before API call")
+
+        val reclamo = Intent(this,ReclamoSel_analistaActivity::class.java)
+
 
         call.enqueue(object : Callback<List<Reclamo>> {
             override fun onResponse(call: Call<List<Reclamo>>, response: Response<List<Reclamo>>) {
@@ -62,25 +113,21 @@ class Reclamo_analistaActivity : AppCompatActivity() {
 
                     // Asignar el adapter al ListView
                     listaReclamos.adapter = adapter
-                    /*
+
                                         // Al realizar click en cualquier elemento de la lista
-                                        listaEventos.setOnItemClickListener { adapterView, view, i, l ->
-                                            val eventoSeleccionado = eventos!!.get(i)
+                                        listaReclamos.setOnItemClickListener { adapterView, view, i, l ->
+                                            val reclamoSeleccionado = reclamos!!.get(i)
 
                                             // Convierte el objeto Evento a una cadena JSON (por ejemplo, utilizando Gson)
-                                            val eventoJson = Gson().toJson(eventoSeleccionado)
+                                            val eventoJson = Gson().toJson(reclamoSeleccionado)
 
                                             // Crea un Intent y agrega la cadena JSON como extra
-                                            evento.putExtra("evento", eventoJson)
+                                            reclamo.putExtra("evento", eventoJson)
 
                                             // Iniciar la actividad con el Intent configurado
-                                            startActivity(evento)
+                                            startActivity(reclamo)
                                         }
-
-                     */
                 }
-
-
                 else {
 
                     Log.e("ReclamoAnalistaActivity", "API call failed with code ${response.code()}")

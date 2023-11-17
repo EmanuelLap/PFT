@@ -13,7 +13,6 @@ import com.example.pft.ui.login.LoginActivity
 import com.example.pft.ui.perfil.PerfilActivity
 import com.example.pft.ui.reclamos.Reclamo_analistaActivity
 import com.example.pft.ui.usuarios.Usuarios_AnalistaActivity
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import java.util.Locale
 
 
@@ -46,22 +45,6 @@ class MainActivity_analista : AppCompatActivity() {
             showPopupMenu(it)
         }
 
-
-/*
-        bottomNavigationView = findViewById(R.id.analistaBottomNavigationView)
-        bottomNavigationView.setOnNavigationItemSelectedListener { menuItem ->
-            when (menuItem.itemId) {
-                R.id.menuAnalistaPerfil -> startActivity(perfilActivity)
-                R.id.menuAnalistaUsuarios -> startActivity(usuariosActivity)
-                R.id.menuAnalistaEventos -> startActivity(eventosActivity)
-              //  R.id.menuAnalistaReclamos -> startActivity(reclamosActivity)
-              //  R.id.menuAnalistaCerrarSesión -> startActivity(loginActivity)
-            }
-            true
-        }
-
- */
-
     }
 
     private fun showPopupMenu(view: View) {
@@ -76,7 +59,7 @@ class MainActivity_analista : AppCompatActivity() {
         val loginActivity = Intent(this, LoginActivity::class.java)
 
 
-        // Maneja los clics en los elementos del menú aquí
+        // clics en los elementos del menú
         popupMenu.setOnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.menuAnalistaPerfil -> startActivity(perfilActivity)
