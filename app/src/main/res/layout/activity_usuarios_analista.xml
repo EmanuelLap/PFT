@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="40dp"
-        android:text="Gestión de Usuarios"
+        android:text="Usuarios"
+        android:background="#00AEEF"
         android:gravity="center"
         android:layout_marginBottom="20dp"
         />
@@ -24,7 +25,7 @@
 
         <EditText
             android:id="@+id/Usuarios_AnalistaActivity_nombre"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:textSize="18dp"
@@ -32,7 +33,7 @@
             />
         <EditText
             android:id="@+id/Usuarios_AnalistaActivity_apellido"
-            android:layout_width="wrap_content"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
             android:textSize="18dp"
@@ -43,7 +44,7 @@
 
     <EditText
         android:id="@+id/Usuarios_AnalistaActivity_documento"
-        android:layout_width="wrap_content"
+        android:layout_width="150dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
         android:textSize="18dp"
@@ -103,7 +104,8 @@
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
-        android:layout_marginBottom="30dp"/>
+        android:layout_marginBottom="30dp"
+        android:backgroundTint="#00AEEF"/>
 
     <ListView
         android:id="@+id/Usuarios_AnalistaActivity_lista"
