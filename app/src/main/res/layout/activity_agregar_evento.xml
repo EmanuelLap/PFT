@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.eventos.AgregarEventoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nuevo Evento"
+            android:gravity="center_horizontal"
+            android:textSize="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="#00AEEF"
+            />
+
+        <EditText
+            android:id="@+id/agregarEvento_titulo"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="18dp"
+            android:hint="Titulo"
+            />
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:text="Tipo de Evento:"
+
+                />
+            <Spinner
+                android:id="@+id/agregarEvento_tipo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona un tipo de evento" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:text="Modalidad:"
+
+                />
+            <Spinner
+                android:id="@+id/agregarEvento_modalidad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona una modalidad" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:text="ITR:"
+
+                />
+            <Spinner
+                android:id="@+id/agregarEvento_itr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:hint="Selecciona un ITR" />
+
+            <EditText
+                android:id="@+id/agregarEvento_localizacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:hint="Localización"
+                />
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Inicio:"
+                android:textSize="18dp"
+                />
+
+            <TextView
+                android:id="@+id/agregarEvento_inicio_seleccion"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18dp"
+                />
+
+            <Button
+                android:id="@+id/agregarEvento_inicio"
+                android:backgroundTint="#00AEEF"
+                android:layout_marginLeft="10dp"
+                android:layout_width="wrap_content"
+                android:paddingLeft="30dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_calendar"
+                />
+
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="Fin:"
+                android:textSize="18dp" />
+
+            <TextView
+                android:id="@+id/agregarEvento_fin_seleccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp" />
+
+            <Button
+                android:id="@+id/agregarEvento_fin"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:backgroundTint="#00AEEF"
+                android:drawableLeft="@drawable/ic_calendar"
+                android:paddingLeft="30dp" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tutores asignados:"
+            android:textSize="18dp"
+            />
+        <ListView
+            android:id="@+id/agregarEvento_listaTutores"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+
+
+
+        <Button
+            android:id="@+id/agregarEvento_btnAsignarTutores"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:text="Asignar Tutores"
+            android:backgroundTint="#00AEEF"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"
+            android:layout_marginTop="50dp">
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/agregarEvento_volver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_volver"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="230dp"
+                android:backgroundTint="#00AEEF"
+
+                />
+
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/agregarEvento_agregar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:src="@drawable/ic_add"
+                android:backgroundTint="#00AEEF"
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

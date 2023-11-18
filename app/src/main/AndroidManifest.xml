@@ -16,6 +16,9 @@
         android:theme="@style/Theme.PFT"
         tools:targetApi="31">
         <activity
+            android:name=".ui.eventos.AgregarEventoActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity_tutor"
             android:exported="false" />
         <activity
