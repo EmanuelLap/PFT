@@ -66,7 +66,7 @@ class MainActivity_analista : AppCompatActivity() {
                 R.id.menuAnalistaUsuarios -> startActivity(usuariosActivity)
                 R.id.menuAnalistaEventos -> startActivity(eventosActivity)
                 R.id.menuAnalistaReclamos -> startActivity(reclamosActivity)
-                R.id.menuAnalistaCerrarSesión -> startActivity(loginActivity)
+                R.id.menuAnalistaCerrarSesion -> startActivity(loginActivity)
             }
             true
         }

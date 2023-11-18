@@ -40,14 +40,7 @@ interface ApiService {
     @FormUrlEncoded
     @POST("ByteMinds_s4/rest/reclamos/agregarJson")
     fun agregarReclamo(
-        @Field("activo") activo: Any?,
-        @Field("creditos") creditos: Int,
-        @Field("detalle")detalle: String,
-        @Field("estudianteId") estudianteId: EstudianteId,
-        @Field ("eventoID") eventoId: EventoId,
-        @Field ("fecha") fecha: Long,
-        @Field ("semestre") semestre: Int,
-        @Field ("titulo") titulo: String
+        @Body reclamo: Reclamo
     ): Call<ReclamoResponse>
 
 }

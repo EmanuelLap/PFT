@@ -19,7 +19,7 @@
         />
 
     <item
-        android:id="@+id/menuAnalistaCerrarSesión"
+        android:id="@+id/menuAnalistaCerrarSesion"
         android:title="Cerrar Sesión"
         />
 

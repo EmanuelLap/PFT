@@ -10,6 +10,7 @@ import android.widget.TextView
 import com.example.pft.ApiService
 import com.example.pft.MainActivity
 import com.example.pft.MainActivity_analista
+import com.example.pft.MainActivity_tutor
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.LoginResponse
@@ -85,6 +86,7 @@ class LoginActivity : AppCompatActivity() {
 
                                 val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
                                 val mainActivityAnalista = Intent(this@LoginActivity, MainActivity_analista::class.java)
+                                val mainActivityTutor = Intent(this@LoginActivity, MainActivity_tutor::class.java)
 
                 if(logResp.user?.utipo =="ANALISTA") {
                     mainActivityAnalista.putExtra("usuario", responseJson)
@@ -95,8 +97,8 @@ class LoginActivity : AppCompatActivity() {
                     startActivity(mainActivity)
                 }
                 else{
-                    mainActivity.putExtra("usuario", responseJson )
-                    startActivity(mainActivity)
+                    mainActivityTutor.putExtra("usuario", responseJson )
+                    startActivity(mainActivityTutor)
 
                 }
 

@@ -112,7 +112,7 @@ class Reclamo_analistaActivity : AppCompatActivity() {
                     )
 
                     // Asignar el adapter al ListView
-                    listaReclamos.adapter = adapter
+                    listaReclamos.adapter=adapter
 
                                         // Al realizar click en cualquier elemento de la lista
                                         listaReclamos.setOnItemClickListener { adapterView, view, i, l ->
@@ -122,7 +122,7 @@ class Reclamo_analistaActivity : AppCompatActivity() {
                                             val eventoJson = Gson().toJson(reclamoSeleccionado)
 
                                             // Crea un Intent y agrega la cadena JSON como extra
-                                            reclamo.putExtra("evento", eventoJson)
+                                            reclamo.putExtra("reclamo", eventoJson)
 
                                             // Iniciar la actividad con el Intent configurado
                                             startActivity(reclamo)

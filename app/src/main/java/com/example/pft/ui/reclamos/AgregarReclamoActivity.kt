@@ -143,6 +143,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
         //Agregar Reclamo
 
+        /*
         agregarReclamo.setOnClickListener{
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
@@ -153,11 +154,6 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
             val tituloIngresado=titulo.text.toString()
             val detalleIngresado=detalle.text.toString()
-
-
-
-
-
             val creditosIngresados=creditos.text.toString().toInt()
             val semestreSeleccionado=semestre.selectedItem.toString().toInt()
             val fechaIngresada=fechaText.text.toString()
@@ -210,6 +206,8 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
         }
 
+
+         */
 
         fechaButton.setOnClickListener {
             mostrarCalendario()

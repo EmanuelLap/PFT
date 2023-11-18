@@ -3,11 +3,13 @@ package com.example.pft.ui.reclamos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
-import com.example.pft.MainActivity
+import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.entidades.Reclamo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -38,14 +40,57 @@ class ReclamoSel_analistaActivity : AppCompatActivity() {
         btn_actualizar=findViewById(R.id.reclamoSel_btnModificarReclamo)
         btn_volver=findViewById(R.id.reclamoSel_btnVolver)
 
+
         titulo.text="Título: ${reclamoSeleccionado.titulo}"
         detalle.text="Detalle: ${reclamoSeleccionado.detalle}"
         estado.text = "Estado: ${reclamoSeleccionado.activo?.toString() ?: "Esperando respuesta"}"
 
 
+        //spinner estado
+
+        val estadoOpciones = ArrayList<String>()
+        estadoOpciones.add("Ingresado")
+        estadoOpciones.add("En proceso")
+        estadoOpciones.add("Finalizado")
+
+
+        // Crear un ArrayAdapter y establecerlo en el Spinner
+        val estadoAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, estadoOpciones)
+        estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        estadoActualizar.adapter = estadoAdapter
+
+        estadoActualizar.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: android.view.View?,
+                position: Int,
+                id: Long
+            ) {
+                // Manejar la selección aquí
+                val opcionSeleccionada = estadoOpciones[position]
+                when (opcionSeleccionada) {
+                    "Ingresado" -> {
+                        // Realizar acciones específicas para "Ingresado"
+                    }
+
+                    "En proceso" -> {
+                        // Realizar acciones específicas para "En proceso"
+                    }
+
+                    "Finalizado" -> {
+                        // Realizar acciones específicas para "Finalizado"
+                    }
+                }
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Se llama cuando no se ha seleccionado nada
+            }
+
+        }
 
         btn_volver.setOnClickListener{
-            val mainActivity = Intent(this@ReclamoSel_analistaActivity, MainActivity::class.java)
+            val mainActivity = Intent(this@ReclamoSel_analistaActivity, MainActivity_analista::class.java)
             startActivity(mainActivity)
         }
 
