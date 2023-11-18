@@ -29,6 +29,10 @@ interface ApiService {
         @Body credentials: Credenciales
     ): Call<LoginResponse>
 
+    //Usuarios
+    @GET("ByteMinds_s4/rest/usuarios/listar")
+    fun obtenerUsuarios(): Call<List<Usuario>>
+
     //Eventos
     @GET("ByteMinds_s4/rest/eventos/listar")
     fun obtenerEventos(): Call<List<Evento>>

@@ -134,6 +134,10 @@ class Evento_analistaActivity : AppCompatActivity() {
             startActivity(mainActivity)
         }
 
+        nuevo.setOnClickListener{
+            val agregarEventoActivity = Intent(this, AgregarEventoActivity::class.java)
+            startActivity(agregarEventoActivity)
+        }
     }
 
     private fun mostrarCalendarioInicio() {

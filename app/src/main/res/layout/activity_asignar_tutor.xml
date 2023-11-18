@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.eventos.AgregarEventoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Nuevo Evento"
+            android:gravity="center_horizontal"
+            android:textSize="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="#00AEEF"
+            />
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/asignarTutor_nombre"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:hint="Nombre"
+                />
+            <EditText
+                android:id="@+id/asignarTutor_apellido"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="18dp"
+                android:hint="Apellido"
+                />
+
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/asignarTutor_btnFiltrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Filtrar"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:backgroundTint="#00AEEF"/>
+
+        <ListView
+            android:id="@+id/asignarTutor_listaTutores"
+            android:layout_width="match_parent"
+            android:layout_height="260dp"
+            android:layout_marginBottom="20dp"
+
+            />
+
+        <TextView
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Tutores asignados:"
+            android:textSize="18dp"
+            />
+        <ListView
+            android:id="@+id/asignarTutor_listaTutoresAsignados"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            />
+
+
+
+        <Button
+            android:id="@+id/asignarTutor_btnConfirmar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_gravity="center"
+            android:text="Confirmar"
+            android:backgroundTint="#00AEEF"/>
+
+
+
+    </LinearLayout>
+</ScrollView>
