@@ -8,12 +8,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-<LinearLayout
+
+
+    <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingHorizontal="50dp"
     >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro"
+            android:gravity="center_horizontal"
+            android:textSize="40dp"
+            android:layout_marginBottom="20dp"
+            android:background="#00AEEF"
+            />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="50dp"
+        >
 
     <EditText
         android:id="@+id/registro_documento"
@@ -55,15 +73,7 @@
         android:alpha="0"
         />
 
-    <TextView
-        android:id="@+id/registro_mensaje_email_institucional"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:background="#CA1414"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
+
 
     <EditText
         android:id="@+id/registro_apellido"
@@ -148,6 +158,16 @@
         android:layout_height="wrap_content"
         android:hint="Email institucional"
         />
+
+    <TextView
+        android:id="@+id/registro_mensaje_email_institucional"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="#CA1414"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 
     <EditText
@@ -429,5 +449,6 @@
     </LinearLayout>
 
 </LinearLayout>
+    </LinearLayout>
 
 </ScrollView>

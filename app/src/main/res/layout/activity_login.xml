@@ -55,8 +55,9 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:inputType="textPassword"
         android:hint="Contraseña"
-        android:textSize="24dp"
+        android:textSize="24sp"
         android:background="#FFFFFF"
         android:alpha="0.8"
         />
@@ -102,17 +103,7 @@
         android:paddingTop="140dp"
         >
 
-        <TextView
-            android:id="@+id/login_recuperar_contrasena"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Recuperar contraseña"
-            android:textSize="24dp"
-            android:background="#FFFFFF"
-            android:textColor="#3A454B"
-            android:alpha="0.8"
-            android:layout_marginBottom="15dp"
-            />
+
 
         <TextView
             android:id="@+id/login_registrar"

@@ -25,7 +25,6 @@ import java.io.IOException
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var btnRegistrar:TextView
-    private lateinit var btnRecuperarContrasena:TextView
     private lateinit var btnIngresar:Button
     private lateinit var inputUsuario:EditText
     private lateinit var inputContrasena:EditText
@@ -43,7 +42,6 @@ class LoginActivity : AppCompatActivity() {
 
 
         btnRegistrar = findViewById(R.id.login_registrar)
-        btnRecuperarContrasena = findViewById(R.id.login_recuperar_contrasena)
         btnIngresar = findViewById(R.id.login_ingresar)
         mensaje = findViewById(R.id.login_mensaje)
         inputUsuario=findViewById(R.id.login_usuario)
