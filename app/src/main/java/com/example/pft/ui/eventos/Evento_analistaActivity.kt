@@ -5,16 +5,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pft.ApiService
 import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.entidades.Evento
+import com.example.pft.ui.login.RegistroAdapter_analista
+import com.example.pft.ui.login.RegistroAdapter_estudiante
+import com.example.pft.ui.login.RegistroAdapter_tutor
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import retrofit2.Call
@@ -120,6 +126,127 @@ class Evento_analistaActivity : AppCompatActivity() {
             }
         })
 
+        //Filtros
+
+        // Tipo
+
+        // Creo lista de tipos de evento
+        val listaTipo = ArrayList<String>()
+        // Agrego elementos
+        listaTipo.add("Estudiante")
+        listaTipo.add("Tutor")
+        listaTipo.add("Analista")
+
+        val tipoAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaTipo)
+        tipo.adapter=tipoAdapter
+
+        tipo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = listaTipo[position]
+                when (selectedItem) {
+                    "Estudiante" -> {
+
+                    }
+
+                    "Tutor" -> {
+
+                    }
+
+                    "Analista" -> {
+
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+
+       //Modalidad
+
+        // Creo lista de modalidades de evento
+        val listaModalidad = ArrayList<String>()
+        // Agrego elementos
+        listaModalidad.add("Estudiante")
+        listaModalidad.add("Tutor")
+        listaModalidad.add("Analista")
+
+        val modalidadAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaModalidad)
+        modalidad.adapter=modalidadAdapter
+
+        modalidad.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = listaModalidad[position]
+                when (selectedItem) {
+                    "Estudiante" -> {
+
+                    }
+
+                    "Tutor" -> {
+
+                    }
+
+                    "Analista" -> {
+
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+
+        //ITR
+
+        // Creo lista de ITR
+        val listaItr = ArrayList<String>()
+        // Agrego elementos
+        listaItr.add("Estudiante")
+        listaItr.add("Tutor")
+        listaItr.add("Analista")
+
+        val itrAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaItr)
+        itr.adapter=itrAdapter
+
+        itr.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                val selectedItem = listaItr[position]
+                when (selectedItem) {
+                    "Estudiante" -> {
+
+                    }
+
+                    "Tutor" -> {
+
+                    }
+
+                    "Analista" -> {
+
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
 
         inicio.setOnClickListener{
             mostrarCalendarioInicio()
