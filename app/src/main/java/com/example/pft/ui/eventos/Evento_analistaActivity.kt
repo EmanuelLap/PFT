@@ -46,7 +46,7 @@ class Evento_analistaActivity : AppCompatActivity() {
     private lateinit var listaEventos: ListView
     private lateinit var volver: FloatingActionButton
     private lateinit var nuevo: FloatingActionButton
-
+    private lateinit var eventos: List<Evento>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,6 +68,7 @@ class Evento_analistaActivity : AppCompatActivity() {
         listaEventos=findViewById(R.id.Evento_Analista_lista)
         volver=findViewById(R.id.Evento_Analista_volver)
         nuevo=findViewById(R.id.Evento_Analista_agregar)
+        eventos=ArrayList()
 
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
@@ -82,7 +83,7 @@ class Evento_analistaActivity : AppCompatActivity() {
         call.enqueue(object : Callback<List<Evento>> {
             override fun onResponse(call: Call<List<Evento>>, response: Response<List<Evento>>) {
                 if (response.isSuccessful) {
-                    val eventos = response.body()
+                    eventos = response.body()!!
                     Log.d("EventoFragment", "API call successful. Eventos: $eventos")
 
                     // Configurar el ArrayAdapter
@@ -110,6 +111,10 @@ class Evento_analistaActivity : AppCompatActivity() {
                     }
 
  */
+                    val eventosModalidad= ArrayList<Evento>()
+
+
+
                 }
 
 
@@ -133,13 +138,16 @@ class Evento_analistaActivity : AppCompatActivity() {
         // Creo lista de tipos de evento
         val listaTipo = ArrayList<String>()
         // Agrego elementos
-        listaTipo.add("Estudiante")
-        listaTipo.add("Tutor")
-        listaTipo.add("Analista")
+        listaTipo.add("Defensa de Proyecto")
+        listaTipo.add("Jornada presencial")
+        listaTipo.add("Prueba final")
+        listaTipo.add("Examen")
+
 
         val tipoAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaTipo)
         tipo.adapter=tipoAdapter
 
+        // En tu método onCreate o donde configuras el Spinner y la lista de eventos
         tipo.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -149,24 +157,40 @@ class Evento_analistaActivity : AppCompatActivity() {
             ) {
                 val selectedItem = listaTipo[position]
                 when (selectedItem) {
-                    "Estudiante" -> {
-
+                    "Defensa de Proyecto" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorTipo("Defensa de Proyecto", eventos)
                     }
 
-                    "Tutor" -> {
-
+                    "Jornada presencial" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorTipo("Jornada presencial", eventos)
                     }
 
-                    "Analista" -> {
+                    "Prueba final" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorTipo("Prueba final", eventos)
+                    }
 
+                    "Examen" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorTipo("Examen", eventos)
                     }
                 }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+                // Acciones cuando no se ha seleccionado nada
             }
         }
+        //-----------------------------------------------
+
+
+        //--------------------------------------------------
+
+
+
+
 
        //Modalidad
 
@@ -265,6 +289,20 @@ class Evento_analistaActivity : AppCompatActivity() {
             val agregarEventoActivity = Intent(this, AgregarEventoActivity::class.java)
             startActivity(agregarEventoActivity)
         }
+    }
+
+
+    // Esta función filtra los eventos por tipo y actualiza el adaptador del ListView
+    fun actualizarListaEventosPorTipo(tipoSeleccionado: String, eventos: List<Evento>) {
+        val eventosFiltrados = eventos.filter { it.tipoEvento.nombre == tipoSeleccionado }
+
+        val adapter = ArrayAdapter(
+            this@Evento_analistaActivity,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}" } ?: emptyList()
+        )
+
+        listaEventos.adapter = adapter
     }
 
     private fun mostrarCalendarioInicio() {
