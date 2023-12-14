@@ -183,13 +183,6 @@ class Evento_analistaActivity : AppCompatActivity() {
                 // Acciones cuando no se ha seleccionado nada
             }
         }
-        //-----------------------------------------------
-
-
-        //--------------------------------------------------
-
-
-
 
 
        //Modalidad
@@ -197,9 +190,9 @@ class Evento_analistaActivity : AppCompatActivity() {
         // Creo lista de modalidades de evento
         val listaModalidad = ArrayList<String>()
         // Agrego elementos
-        listaModalidad.add("Estudiante")
-        listaModalidad.add("Tutor")
-        listaModalidad.add("Analista")
+        listaModalidad.add("Virtual")
+        listaModalidad.add("Presencial")
+        listaModalidad.add("Semipresencial")
 
         val modalidadAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaModalidad)
         modalidad.adapter=modalidadAdapter
@@ -213,22 +206,26 @@ class Evento_analistaActivity : AppCompatActivity() {
             ) {
                 val selectedItem = listaModalidad[position]
                 when (selectedItem) {
-                    "Estudiante" -> {
-
+                    "Virtual" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorModalidad("Virtual", eventos)
                     }
 
-                    "Tutor" -> {
-
+                    "Presencial" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorModalidad("Presencial", eventos)
                     }
 
-                    "Analista" -> {
-
+                    "Semipresencial" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorModalidad("Semipresencial", eventos)
                     }
+
                 }
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
+                // Acciones cuando no se ha seleccionado nada
             }
         }
 
@@ -237,9 +234,16 @@ class Evento_analistaActivity : AppCompatActivity() {
         // Creo lista de ITR
         val listaItr = ArrayList<String>()
         // Agrego elementos
-        listaItr.add("Estudiante")
-        listaItr.add("Tutor")
-        listaItr.add("Analista")
+        listaItr.add("Durazno [Centro Sur]")
+        listaItr.add("FrayBentos [ITR Suroeste]")
+        listaItr.add("Sede Utec San Jose [ITR Suroeste]")
+        listaItr.add("Cure de Maldonado [ITR Suroeste]")
+        listaItr.add("La paz [ITR Suroeste]")
+        listaItr.add("Sede Mercedes [ITR Suroeste]")
+        listaItr.add("Nueva Helvecia [ITR Suroeste]")
+        listaItr.add("Polo tecnologico Paysandu [ITR Suroeste]")
+        listaItr.add("Rivera [ITR Norte]")
+        listaItr.add("Minas [ITR Este]")
 
         val itrAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaItr)
         itr.adapter=itrAdapter
@@ -253,16 +257,54 @@ class Evento_analistaActivity : AppCompatActivity() {
             ) {
                 val selectedItem = listaItr[position]
                 when (selectedItem) {
-                    "Estudiante" -> {
-
+                    "Durazno [Centro Sur]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Durazno [Centro Sur]", eventos)
                     }
 
-                    "Tutor" -> {
-
+                    "FrayBentos [ITR Suroeste]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("FrayBentos [ITR Suroeste]", eventos)
                     }
 
-                    "Analista" -> {
+                    "Sede Utec San Jose [ITR Suroeste]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Sede Utec San Jose [ITR Suroeste]", eventos)
+                    }
 
+                    "Cure de Maldonado [ITR Suroeste]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Cure de Maldonado [ITR Suroeste]", eventos)
+                    }
+
+                    "La paz [ITR Suroeste]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("La paz [ITR Suroeste]", eventos)
+                    }
+
+                    "Sede Mercedes [ITR Suroeste]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Sede Mercedes [ITR Suroeste]", eventos)
+                    }
+
+                    "Nueva Helvecia [ITR Suroeste]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Nueva Helvecia [ITR Suroeste]", eventos)
+                    }
+
+                    "Polo tecnologico Paysandu [ITR Suroeste]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Polo tecnologico Paysandu [ITR Suroeste]", eventos)
+                    }
+
+                    "Rivera [ITR Norte]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Rivera [ITR Norte]", eventos)
+                    }
+
+                    "Minas [ITR Este]" -> {
+                        // Llamar a la función para filtrar y actualizar la lista de eventos
+                        actualizarListaEventosPorItr("Minas [ITR Este]", eventos)
                     }
                 }
             }
@@ -301,7 +343,28 @@ class Evento_analistaActivity : AppCompatActivity() {
             android.R.layout.simple_list_item_1,
             eventosFiltrados.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}" } ?: emptyList()
         )
+        listaEventos.adapter = adapter
+    }
 
+    fun actualizarListaEventosPorModalidad(modalidad: String, eventos: List<Evento>) {
+        val eventosFiltrados = eventos.filter { it.modalidadEvento.nombre == modalidad }
+
+        val adapter = ArrayAdapter(
+            this@Evento_analistaActivity,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}" } ?: emptyList()
+        )
+        listaEventos.adapter = adapter
+    }
+
+    fun actualizarListaEventosPorItr(itr: String, eventos: List<Evento>) {
+        val eventosFiltrados = eventos.filter { it.itrDTO.nombre == itr }
+
+        val adapter = ArrayAdapter(
+            this@Evento_analistaActivity,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}" } ?: emptyList()
+        )
         listaEventos.adapter = adapter
     }
 
