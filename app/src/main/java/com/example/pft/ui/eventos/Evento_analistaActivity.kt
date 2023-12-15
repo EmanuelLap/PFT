@@ -111,7 +111,6 @@ class Evento_analistaActivity : AppCompatActivity() {
                     }
 
  */
-                    val eventosModalidad= ArrayList<Evento>()
 
 
 
