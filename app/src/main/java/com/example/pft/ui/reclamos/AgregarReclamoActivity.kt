@@ -5,6 +5,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
@@ -12,6 +13,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.pft.ApiService
@@ -24,6 +26,7 @@ import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoId
 import com.example.pft.entidades.LoginResponse
 import com.example.pft.entidades.Reclamo
+import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.entidades.ReclamoResponse
 import com.example.pft.ui.eventos.EventoActivity
 import com.example.pft.ui.eventos.EventoAdapter
@@ -51,6 +54,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
     private lateinit var semestre: Spinner
     private lateinit var agregarReclamo: FloatingActionButton
     private lateinit var volver: FloatingActionButton
+    var eventoId=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_reclamo)
@@ -126,7 +130,27 @@ class AgregarReclamoActivity : AppCompatActivity() {
                     // Asignar el adapter al ListView
                     listaEventos.adapter = eventosAdapter
 
-                } else {
+                    listaEventos.onItemSelectedListener =
+                        object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(
+                                parentView: AdapterView<*>,
+                                selectedItemView: View?,
+                                position: Int,
+                                id: Long
+                            ) {
+                                // Obtiene el evento seleccionado
+                                val eventoSeleccionado = listaEventos[position]
+
+                                // Almacena el ID del evento seleccionado en la variable
+                                eventoId = eventoSeleccionado.id
+                            }
+
+                            override fun onNothingSelected(parentView: AdapterView<*>) {
+                                // Manejar caso cuando no hay nada seleccionado (si es necesario)
+                            }
+
+                        }
+                }else {
                     Log.e("EventoFragment", "API call failed with code ${response.code()}")
                     // Resto del código para manejar errores...
                 }
@@ -143,7 +167,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
         //Agregar Reclamo
 
-        /*
+
         agregarReclamo.setOnClickListener{
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
@@ -152,40 +176,30 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
             val apiService = retrofit.create(ApiService::class.java)
 
+
+            val estudianteId=usuario.id
             val tituloIngresado=titulo.text.toString()
             val detalleIngresado=detalle.text.toString()
             val creditosIngresados=creditos.text.toString().toInt()
             val semestreSeleccionado=semestre.selectedItem.toString().toInt()
-            val fechaIngresada=fechaText.text.toString()
+            val fechaIngresada=fechaText.text.toString().toLong()
+
+
+            val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId, eventoId,fechaIngresada,null,semestreSeleccionado,tituloIngresado)
+
+
 
             // Convertir la cadena de fecha a un objeto Date
             val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val date: Date = dateFormat.parse(fechaIngresada) ?: Date()
+            val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
 
-            // Obtener el timestamp en milisegundos
-            val timestamp = date.time
-
-            val fechaProcesada= timestamp.toString().toLong()
-
-            val selectedPosition = listaEventos.selectedItemPosition
-
-            if (selectedPosition != AdapterView.INVALID_POSITION) {
-                val eventoIngresado = listaEventos.getItemAtPosition(selectedPosition) as Evento
-                val eventoIngresadoProcesado = EventoId(eventoIngresado)
 
                 val call = apiService.agregarReclamo(
-                    activo = null,
-                    creditos = creditosIngresados,
-                    detalle = detalleIngresado,
-                    estudianteId = usuario,
-                    eventoId = eventoIngresadoProcesado,
-                    fecha = fechaProcesada,
-                    semestre = semestreSeleccionado,
-                    titulo = tituloIngresado
+                  reclamo
                 )
 
-                call.enqueue(object : Callback<ReclamoResponse> {
-                    override fun onResponse(call: Call<ReclamoResponse>, response: Response<ReclamoResponse>) {
+                call.enqueue(object : Callback<ReclamoDTOMobile> {
+                    override fun onResponse(call: Call<ReclamoDTOMobile>, response: Response<ReclamoDTOMobile>) {
                         if (response.isSuccessful) {
                             val reclamoResp = response.body()
                             val responseJson = Gson().toJson(reclamoResp)
@@ -193,21 +207,22 @@ class AgregarReclamoActivity : AppCompatActivity() {
                         }
                     }
 
-                    override fun onFailure(call: Call<ReclamoResponse>, t: Throwable) {
-                        // Manejar la falla aquí
+                    override fun onFailure(call: Call<ReclamoDTOMobile>, t: Throwable) {
+                        TODO("Not yet implemented")
                     }
                 })
 
-            } else {
+            }
+        /*else {
                 // Manejar el caso en que no se haya seleccionado un evento
                 Log.e("AgregarReclamoActivity", "No se ha seleccionado un evento")
             }
+*/
 
 
-        }
 
 
-         */
+
 
         fechaButton.setOnClickListener {
             mostrarCalendario()

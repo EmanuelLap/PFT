@@ -5,9 +5,11 @@ import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoId
 import com.example.pft.entidades.LoginResponse
 import com.example.pft.entidades.Reclamo
+import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.entidades.ReclamoResponse
 import com.example.pft.ui.login.Credenciales
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -41,10 +43,15 @@ interface ApiService {
     @GET("ByteMinds_s4/rest/reclamos/listar")
     fun obtenerReclamos(): Call<List<Reclamo>>
 
+    @GET("ByteMinds_s4/rest/reclamos/obtenerEjemploJsonMobile")
+    fun obtenerReclamosMobile(): Call<List<ReclamoDTOMobile>>
+
+
+
     @FormUrlEncoded
-    @POST("ByteMinds_s4/rest/reclamos/agregarJson")
+    @POST("ByteMinds_s4/rest/reclamos/agregarJsonMobile")
     fun agregarReclamo(
-        @Body reclamo: Reclamo
-    ): Call<ReclamoResponse>
+        @Body reclamo: ReclamoDTOMobile
+    ): Call<ReclamoDTOMobile>
 
 }
