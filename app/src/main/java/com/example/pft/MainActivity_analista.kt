@@ -3,6 +3,7 @@ package com.example.pft
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.ImageView
@@ -26,6 +27,10 @@ class MainActivity_analista : AppCompatActivity() {
 
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
+
+        val usuario = intent.getStringExtra("usuario")
+
+        Log.d("MainActivity", "usuario: ${usuario}")
 
         val toolbar: Toolbar = findViewById(R.id.analista_toolbar)
         setSupportActionBar(toolbar)

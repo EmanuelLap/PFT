@@ -52,7 +52,11 @@ class ReclamoFragment : Fragment() {
         val agregarReclamo = Intent(requireContext(),AgregarReclamoActivity::class.java)
 
         // Recuperar el valor del "usuario" desde los argumentos
+
         val usuario = arguments?.getString("usuario")
+
+        Log.d("ReclamoFragment", "usuario: ${usuario}")
+
 
 
         btn_agregar = view.findViewById(R.id.reclamos_agregar)

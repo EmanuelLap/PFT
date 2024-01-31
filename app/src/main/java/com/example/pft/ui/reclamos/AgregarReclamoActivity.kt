@@ -53,6 +53,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
     private lateinit var fechaText: TextView
     private lateinit var semestre: Spinner
     private lateinit var agregarReclamo: FloatingActionButton
+    private lateinit var mensaje:TextView
     private lateinit var volver: FloatingActionButton
     var eventoId=0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +73,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
         semestre=findViewById(R.id.agregarReclamoActivity_semestre)
         agregarReclamo=findViewById(R.id.agregarReclamoActivity_agregar)
         volver=findViewById(R.id.agregarReclamoActivity_volver)
+        mensaje=findViewById(R.id.agregarReclamoActivity_Mensaje)
 
         // Recuperar el valor del "usuario"
 
@@ -116,7 +118,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
         val call = apiService.obtenerEventos()
 
-        Log.d("AgregarReclamoActivity", "Before API call")
+        Log.d("AgregarReclamoActivity", "Before API call, usuario: ${usuarioJson}")
 
         call.enqueue(object : Callback<List<Evento>> {
             override fun onResponse(call: Call<List<Evento>>, response: Response<List<Evento>>) {
@@ -208,9 +210,9 @@ class AgregarReclamoActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<ReclamoDTOMobile>, t: Throwable) {
-                        TODO("Not yet implemented")
+                    mensaje.text="Ocurrió un error al crear el reclamo"
                     }
-                })
+                    })
 
             }
         /*else {

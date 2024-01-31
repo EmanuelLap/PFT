@@ -15,6 +15,8 @@ import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.LoginResponse
 import com.google.gson.Gson
+import org.json.JSONException
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -87,15 +89,31 @@ class LoginActivity : AppCompatActivity() {
                                 val mainActivityTutor = Intent(this@LoginActivity, MainActivity_tutor::class.java)
 
                 if(logResp.user?.utipo =="ANALISTA") {
-                    mainActivityAnalista.putExtra("usuario", responseJson)
-                    startActivity(mainActivityAnalista)
+
+                        val jsonObject = JSONObject(responseJson)
+                        val userJson = jsonObject.getJSONObject("user")
+
+                        val usuario = userJson.toString()
+
+                        mainActivityAnalista.putExtra("usuario", usuario)
+                        startActivity(mainActivityAnalista)
+
+
+                   // mainActivityAnalista.putExtra("usuario", responseJson)
+                   // startActivity(mainActivityAnalista)
                 }
                 else if(logResp.user?.utipo=="ESTUDIANTE"){
-                    mainActivity.putExtra("usuario", responseJson )
+                    val jsonObject = JSONObject(responseJson)
+                    val userJson = jsonObject.getJSONObject("user")
+                    val usuario = userJson.toString()
+                    mainActivity.putExtra("usuario", usuario )
                     startActivity(mainActivity)
                 }
                 else{
-                    mainActivityTutor.putExtra("usuario", responseJson )
+                    val jsonObject = JSONObject(responseJson)
+                    val userJson = jsonObject.getJSONObject("user")
+                    val usuario = userJson.toString()
+                    mainActivityTutor.putExtra("usuario", usuario )
                     startActivity(mainActivityTutor)
 
                 }

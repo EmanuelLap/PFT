@@ -2,6 +2,7 @@ package com.example.pft
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.navigation.NavigationView
@@ -32,6 +33,8 @@ class MainActivity : AppCompatActivity() {
         Locale.setDefault(locale)
 
         val usuario = intent.getStringExtra("usuario")
+
+        Log.d("MainActivity", "usuario: ${usuario}")
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
