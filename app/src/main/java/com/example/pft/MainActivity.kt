@@ -34,6 +34,8 @@ class MainActivity : AppCompatActivity() {
 
         val usuario = intent.getStringExtra("usuario")
 
+        UsuarioSingleton.usuario=usuario
+
         Log.d("MainActivity", "usuario: ${usuario}")
 
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -41,16 +43,13 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        val bundle = Bundle()
-        bundle.putString("usuario", usuario)
+        Log.d("MainActivity", "Valor de usuario antes de asignar al Bundle: $usuario")
 
-        val fragmentReclamo = ReclamoFragment()
-        val fragmentEvento = EventoFragment()
-        val fragmentPerfil = PerfilFragment()
 
-        fragmentReclamo.arguments = bundle
-        fragmentEvento.arguments = bundle
-        fragmentPerfil.arguments = bundle
+
+
+
+
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView

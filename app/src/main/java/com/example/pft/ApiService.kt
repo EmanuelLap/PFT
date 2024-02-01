@@ -48,7 +48,7 @@ interface ApiService {
 
 
 
-    @FormUrlEncoded
+
     @POST("ByteMinds_s4/rest/reclamos/agregarJsonMobile")
     fun agregarReclamo(
         @Body reclamo: ReclamoDTOMobile

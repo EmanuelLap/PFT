@@ -13,6 +13,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.FragmentManager
 import com.example.pft.ApiService
 import com.example.pft.R
+import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Reclamo
 import com.example.pft.ui.eventos.EventoActivity
@@ -53,7 +54,9 @@ class ReclamoFragment : Fragment() {
 
         // Recuperar el valor del "usuario" desde los argumentos
 
-        val usuario = arguments?.getString("usuario")
+        val usuario = UsuarioSingleton.usuario
+
+        Log.d("ReclamoFragment", "Valor de usuario en el fragmento: $usuario")
 
         Log.d("ReclamoFragment", "usuario: ${usuario}")
 

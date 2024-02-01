@@ -178,13 +178,17 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
             val apiService = retrofit.create(ApiService::class.java)
 
+            val formatoFecha=SimpleDateFormat("dd/mm/yyyy")
 
             val estudianteId=usuario.id
             val tituloIngresado=titulo.text.toString()
             val detalleIngresado=detalle.text.toString()
             val creditosIngresados=creditos.text.toString().toInt()
             val semestreSeleccionado=semestre.selectedItem.toString().toInt()
-            val fechaIngresada=fechaText.text.toString().toLong()
+            val fechaString=fechaText.text.toString()
+            val fecha=formatoFecha.parse(fechaString)
+            val fechaTimestamp=fecha.time
+            val fechaIngresada=fechaTimestamp
 
 
             val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId, eventoId,fechaIngresada,null,semestreSeleccionado,tituloIngresado)
@@ -192,8 +196,8 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
 
             // Convertir la cadena de fecha a un objeto Date
-            val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-            val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
+        //    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+           // val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
 
 
                 val call = apiService.agregarReclamo(
@@ -210,7 +214,9 @@ class AgregarReclamoActivity : AppCompatActivity() {
                     }
 
                     override fun onFailure(call: Call<ReclamoDTOMobile>, t: Throwable) {
-                    mensaje.text="Ocurrió un error al crear el reclamo"
+                        Log.d("AgregarReclamoActivity", "error: ${t}")
+
+                        mensaje.text="Ocurrió un error al crear el reclamo"
                     }
                     })
 
