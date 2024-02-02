@@ -52,7 +52,7 @@ class ReclamoFragment : Fragment() {
 
         val agregarReclamo = Intent(requireContext(),AgregarReclamoActivity::class.java)
 
-        // Recuperar el valor del "usuario" desde los argumentos
+        // Recuperar el valor del "usuario"
 
         val usuario = UsuarioSingleton.usuario
 

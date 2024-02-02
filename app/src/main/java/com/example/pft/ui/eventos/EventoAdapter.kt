@@ -11,7 +11,7 @@ class EventoAdapter(context: Context, eventos: List<Evento>) : ArrayAdapter<Even
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val view = super.getView(position, convertView, parent)
         val evento = getItem(position)
-        (view as TextView).text = evento?.toString()
+        (view as TextView).text = evento?.titulo.toString()
         return view
     }
 

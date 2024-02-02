@@ -32,9 +32,14 @@ class MainActivity : AppCompatActivity() {
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
 
-        val usuario = intent.getStringExtra("usuario")
+        if(UsuarioSingleton.usuario==null) {
+            val usuario = intent.getStringExtra("usuario")
 
-        UsuarioSingleton.usuario=usuario
+            UsuarioSingleton.usuario = usuario
+        }
+
+            val usuario=UsuarioSingleton.usuario
+
 
         Log.d("MainActivity", "usuario: ${usuario}")
 

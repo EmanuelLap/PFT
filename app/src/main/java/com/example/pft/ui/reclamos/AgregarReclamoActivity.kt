@@ -21,6 +21,7 @@ import com.example.pft.MainActivity
 import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.Usuario
+import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.EstudianteId
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoId
@@ -77,7 +78,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
         // Recuperar el valor del "usuario"
 
-        val usuarioJson=intent.getStringExtra("usuario")
+        val usuarioJson = UsuarioSingleton.usuario
 
         // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
         val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
@@ -139,12 +140,18 @@ class AgregarReclamoActivity : AppCompatActivity() {
                                 selectedItemView: View?,
                                 position: Int,
                                 id: Long
-                            ) {
-                                // Obtiene el evento seleccionado
-                                val eventoSeleccionado = listaEventos[position]
+                            )  {
+                                // Verificar que la posición seleccionada esté dentro de los límites
+                                if (position >= 0 && position < eventos.size) {
+                                    // Obtiene el evento seleccionado
+                                    val eventoSeleccionado = eventos[position]
 
-                                // Almacena el ID del evento seleccionado en la variable
-                                eventoId = eventoSeleccionado.id
+                                    // Almacena el ID del evento seleccionado en la variable
+                                    eventoId = eventoSeleccionado.id
+                                } else {
+                                    // Puedes manejar esta situación según tus necesidades
+                                    Log.e("AgregarReclamoActivity", "Posición seleccionada fuera de los límites")
+                                }
                             }
 
                             override fun onNothingSelected(parentView: AdapterView<*>) {
@@ -193,7 +200,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
             val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId, eventoId,fechaIngresada,null,semestreSeleccionado,tituloIngresado)
 
-
+            Log.d("AgregarReclamoActivity", "eventoId: ${eventoId}")
 
             // Convertir la cadena de fecha a un objeto Date
         //    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
