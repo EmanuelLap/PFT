@@ -247,19 +247,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Fecha:"
-                    android:textSize="18dp"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="10sp"
+                    android:textSize="18sp"
                     />
 
                 <TextView
-                    android:id="@+id/registro_fecha_seleccionada"
+                    android:id="@+id/registro_fec_seleccionada"
                     android:layout_marginLeft="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     />
 
                 <Button
-                    android:id="@+id/registro_fecha"
+                    android:id="@+id/registro_fec_nac"
                     android:backgroundTint="#00AEEF"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"

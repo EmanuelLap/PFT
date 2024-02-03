@@ -47,11 +47,13 @@ interface ApiService {
     fun obtenerReclamosMobile(): Call<List<ReclamoDTOMobile>>
 
 
-
-
     @POST("ByteMinds_s4/rest/reclamos/agregarJsonMobile")
     fun agregarReclamo(
         @Body reclamo: ReclamoDTOMobile
     ): Call<ReclamoDTOMobile>
+
+    //ITR
+    @GET("ByteMinds_s4/rest/reclamos/obtenerEjemploJsonMobile")
+    fun obtenerITR(): Call<List<Itr>>
 
 }

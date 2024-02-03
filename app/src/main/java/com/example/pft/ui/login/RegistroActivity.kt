@@ -3,6 +3,7 @@ package com.example.pft.ui.login
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -37,9 +38,9 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var emailPersonalConfirmar: EditText
     private lateinit var telefono: EditText
     private lateinit var genero: EditText
-    private lateinit var fecNac: EditText
-    private lateinit var itr: EditText
-    private lateinit var departamento: EditText
+    private lateinit var fecNac: Button
+    private lateinit var itr: Spinner
+    private lateinit var departamento: Spinner
     private lateinit var localidad: EditText
     private lateinit var tipoUsuario: Spinner
     private lateinit var recyclerView: RecyclerView
@@ -89,14 +90,68 @@ class RegistroActivity : AppCompatActivity() {
        tipoUsuario=findViewById(R.id.registro_tipo)
        recyclerView=findViewById(R.id.registro_recyclerView_estudiante)
 
-        // Creo lista de tipos de usuario
-        val lista = ArrayList<String>()
-        // Agregar elementos a listaDeDatos aquí
-        lista.add("Estudiante")
-        lista.add("Tutor")
-        lista.add("Analista")
+        //-------------Spinner Departamentos-----------------------------------------------
+        val listaDepartamentos=ArrayList<String>()
+        var departamentoSeleccionado=""
 
-        val tipoUsuarioAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,lista)
+        listaDepartamentos.add("Artigas")
+        listaDepartamentos.add("Canelones")
+        listaDepartamentos.add("Cerro Largo")
+        listaDepartamentos.add("Colonia")
+        listaDepartamentos.add("Durazno")
+        listaDepartamentos.add("Flores")
+        listaDepartamentos.add("Florida")
+        listaDepartamentos.add("Lavalleja")
+        listaDepartamentos.add("Maldonado")
+        listaDepartamentos.add("Montevideo")
+        listaDepartamentos.add("Paysandú")
+        listaDepartamentos.add("Río Negro")
+        listaDepartamentos.add("Rivera")
+        listaDepartamentos.add("Rocha")
+        listaDepartamentos.add("Salto")
+        listaDepartamentos.add("San José")
+        listaDepartamentos.add("Soriano")
+        listaDepartamentos.add("Tacuarembó")
+        listaDepartamentos.add("Treinta y Tres")
+
+        val departamentosAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaDepartamentos)
+        departamento.adapter=departamentosAdapter
+
+        departamento.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parentView: AdapterView<*>,
+                    selectedItemView: View?,
+                    position: Int,
+                    id: Long
+                )  {
+                    // Verificar que la posición seleccionada esté dentro de los límites
+                    if (position >= 0 && position < listaDepartamentos.size) {
+                        // Obtiene el departamento seleccionado
+                         departamentoSeleccionado = listaDepartamentos[position]
+
+                    } else {
+                        // Puedes manejar esta situación según tus necesidades
+                        Log.e("AgregarReclamoActivity", "Posición seleccionada fuera de los límites")
+                    }
+                }
+
+                override fun onNothingSelected(parentView: AdapterView<*>) {
+                    // Manejar caso cuando no hay nada seleccionado (si es necesario)
+                }
+
+            }
+
+
+        //---------------------------------------------------------------------------------
+        // Creo lista de tipos de usuario
+        val listaTiposUsuario = ArrayList<String>()
+        // Agregar elementos a listaDeDatos aquí
+        listaTiposUsuario.add("Estudiante")
+        listaTiposUsuario.add("Tutor")
+        listaTiposUsuario.add("Analista")
+
+        val tipoUsuarioAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaTiposUsuario)
         tipoUsuario.adapter=tipoUsuarioAdapter
 
         var tipoUsuarioSeleccionado= ""
@@ -108,7 +163,7 @@ class RegistroActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val selectedItem = lista[position]
+                val selectedItem = listaTiposUsuario[position]
                 when (selectedItem) {
                     "Estudiante" -> {
                         recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
@@ -307,7 +362,7 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_itr.visibility = View.INVISIBLE
             }
 
-            if (departamento.text.toString().isEmpty()) {
+            if (departamentoSeleccionado!="") {
                 camposVacios.add("Departamento")
                 mensaje_departamento.text = "Selecciona un departamento"
                 mensaje_departamento.alpha = 0.8f
@@ -340,12 +395,11 @@ class RegistroActivity : AppCompatActivity() {
                 val telefono=telefono.text.toString()
                 val genero=genero.text.toString()
                 val itr=itr.text.toString()
-                val departamento=departamento.text.toString()
                 val localidad=localidad.text.toString()
                 val tipoUsuario=tipoUsuarioSeleccionado.toString()
                 val fecNac=fecNac.text.toString().toLong()
 
-                val usuarioNuevo=Usuario(false,apellido,contrasena,departamento, documento, fecNac,genero,null,itr,localidad,emailInstitucional,emailPersonal,nombre,"Prueba",telefono,nombreusuario,tipoUsuario )
+                val usuarioNuevo=Usuario(false,apellido,contrasena,departamentoSeleccionado, documento, fecNac,genero,null,itr,localidad,emailInstitucional,emailPersonal,nombre,"Prueba",telefono,nombreusuario,tipoUsuario )
             }
 
 
