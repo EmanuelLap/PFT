@@ -26,429 +26,453 @@
             android:background="#00AEEF"
             />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingHorizontal="50dp"
-        >
-
-    <EditText
-        android:id="@+id/registro_documento"
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Documento"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_documento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#CA1414"
-        android:alpha="0"
-        />
-
-
-
-    <EditText
-        android:id="@+id/registro_nombre"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_nombre"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#CA1414"
-        android:alpha="0"
-        />
-
-
-
-    <EditText
-        android:id="@+id/registro_apellido"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Apellido"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_apellido"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#CA1414"
-        android:alpha="0"
-        />
-
-    <EditText
-        android:id="@+id/registro_nombre_usuario"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Nombre de usuario"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_nombre_usuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#CA1414"
-        android:alpha="0"
-        />
-
-    <EditText
-        android:id="@+id/registro_contrasena"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Contraseña"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_contrasena"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#CA1414"
-        android:alpha="0"
-        />
-
-    <EditText
-        android:id="@+id/registro_confirmar_contrasena"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Confirma la contraseña"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_confirmar_contrasena"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#CA1414"
-        android:alpha="0"
-        />
-
-    <EditText
-        android:id="@+id/registro_email_institucional"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email institucional"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_email_institucional"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:alpha="0"
-        android:background="#CA1414"
-        android:gravity="center"
-        android:textColor="@color/white"
-        android:textStyle="bold" />
-
-
-    <EditText
-        android:id="@+id/registro_email_personal"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Email personal"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_email_personal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#FCCA1414"
-        android:alpha="0"
-        />
-
-    <EditText
-        android:id="@+id/registro_confirmar_email_personal"
-        android:layout_marginTop="15dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Confirma el email personal"
-        />
-
-    <TextView
-        android:id="@+id/registro_mensaje_confirmar_email_personal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:background="#CA1414"
-        android:alpha="0"
-        />
-
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <EditText
-        android:id="@+id/registro_telefono"
-        android:layout_marginTop="15dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:hint="Teléfono"
-        />
-
-
-
-    <EditText
-        android:id="@+id/registro_genero"
-        android:layout_marginTop="15dp"
-        android:layout_marginLeft="30dp"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:hint="Género"
-        />
-
-
-
-</LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/registro_mensaje_telefono"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="#CA1414"
-            android:alpha="0"
-            />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:paddingHorizontal="50dp">
 
-        <TextView
-            android:id="@+id/registro_mensaje_genero"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="#CA1414"
-            android:alpha="0"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+            <EditText
+                android:id="@+id/registro_documento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:hint="Documento" />
 
-        <EditText
-            android:id="@+id/registro_fec_nac"
-            android:layout_marginTop="15dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:hint="Fec nacimiento"
-            />
-
-        <EditText
-            android:id="@+id/registro_itr"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:hint="ITR"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/registro_mensaje_fec_nac"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="#CA1414"
-            android:alpha="0"
-            />
-
-        <TextView
-            android:id="@+id/registro_mensaje_itr"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="#CA1414"
-            android:alpha="0"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <EditText
-            android:id="@+id/registro_departamento"
-            android:layout_marginTop="15dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:hint="Departamento"
-            />
-
-        <EditText
-            android:id="@+id/registro_localidad"
-            android:layout_marginTop="15dp"
-            android:layout_marginLeft="30dp"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:hint="Localidad"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/registro_mensaje_departamento"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="#CA1414"
-            android:alpha="0"
-            />
-
-        <TextView
-            android:id="@+id/registro_mensaje_localidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="#CA1414"
-            android:alpha="0"
-            />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18dp"
-            android:text="Tipo de usuario"
-
-            />
-        <Spinner
-            android:id="@+id/registro_tipo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:hint="Selecciona un semestre" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/registro_mensaje_tipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            android:textColor="@color/white"
-            android:gravity="center"
-            android:background="#CA1414"
-            android:alpha="0"
-            />
-
-    </LinearLayout>
+            <TextView
+                android:id="@+id/registro_mensaje_documento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/registro_recyclerView_estudiante"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="16dp"
-        />
+            <EditText
+                android:id="@+id/registro_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Nombre" />
+
+            <TextView
+                android:id="@+id/registro_mensaje_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
 
-    <TextView
-        android:id="@+id/registro_Mensaje"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+            <EditText
+                android:id="@+id/registro_apellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Apellido" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:orientation="horizontal">
+            <TextView
+                android:id="@+id/registro_mensaje_apellido"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/registro_btnVolver"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_volver"
-            android:layout_marginRight="200dp"
-            android:backgroundTint="#00AEEF"
+            <EditText
+                android:id="@+id/registro_nombre_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Nombre de usuario" />
 
-            />
+            <TextView
+                android:id="@+id/registro_mensaje_nombre_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/registro_btnConfirmar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:src="@drawable/ic_check"
-            android:backgroundTint="#00AEEF"
+            <EditText
+                android:id="@+id/registro_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Contraseña" />
 
-            />
+            <TextView
+                android:id="@+id/registro_mensaje_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
 
-    </LinearLayout>
+            <EditText
+                android:id="@+id/registro_confirmar_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Confirma la contraseña" />
 
-</LinearLayout>
+            <TextView
+                android:id="@+id/registro_mensaje_confirmar_contrasena"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/registro_email_institucional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Email institucional" />
+
+            <TextView
+                android:id="@+id/registro_mensaje_email_institucional"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+
+            <EditText
+                android:id="@+id/registro_email_personal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Email personal" />
+
+            <TextView
+                android:id="@+id/registro_mensaje_email_personal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#FCCA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/registro_confirmar_email_personal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:hint="Confirma el email personal" />
+
+            <TextView
+                android:id="@+id/registro_mensaje_confirmar_email_personal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:alpha="0"
+                android:background="#CA1414"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/registro_telefono"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:hint="Teléfono" />
+
+
+                <EditText
+                    android:id="@+id/registro_genero"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="15dp"
+                    android:hint="Género" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/registro_mensaje_telefono"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="#CA1414"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/registro_mensaje_genero"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="#CA1414"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fecha:"
+                    android:textSize="18dp"
+                    android:layout_marginLeft="10dp"
+                    />
+
+                <TextView
+                    android:id="@+id/registro_fecha_seleccionada"
+                    android:layout_marginLeft="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    />
+
+                <Button
+                    android:id="@+id/registro_fecha"
+                    android:backgroundTint="#00AEEF"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="30dp"
+                    android:layout_height="wrap_content"
+                    android:drawableLeft="@drawable/ic_calendar"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
+                <TextView
+                    android:id="@+id/registro_mensaje_fec_nac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="#CA1414"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18dp"
+                    android:text="ITR:"
+
+                    />
+                <Spinner
+                    android:id="@+id/registro_itr"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="ITR" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/registro_mensaje_itr"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="#CA1414"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="18dp"
+                    android:text="Departamento:"
+                    />
+
+                <Spinner
+                    android:id="@+id/registro_departamento"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:hint="Departamento" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/registro_mensaje_departamento"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="#CA1414"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/registro_localidad"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:hint="Localidad" />
+
+            </LinearLayout>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/registro_mensaje_localidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="#CA1414"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tipo de usuario"
+                    android:layout_marginLeft="60dp"
+                    android:textSize="18dp"
+
+                    />
+
+                <Spinner
+                    android:id="@+id/registro_tipo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:hint="Selecciona un semestre" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/registro_mensaje_tipo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="0"
+                    android:background="#CA1414"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/registro_recyclerView_estudiante"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="16dp" />
+
+
+            <TextView
+                android:id="@+id/registro_Mensaje"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:orientation="horizontal">
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/registro_btnVolver"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="200dp"
+                    android:backgroundTint="#00AEEF"
+                    android:src="@drawable/ic_volver"
+
+                    />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/registro_btnConfirmar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:backgroundTint="#00AEEF"
+                    android:src="@drawable/ic_check"
+
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
     </LinearLayout>
 
 </ScrollView>
