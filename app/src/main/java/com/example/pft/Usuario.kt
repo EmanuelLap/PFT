@@ -8,7 +8,7 @@ data class Usuario(
     val documento: Int,
     val fechaNacimiento: Long,
     val genero: String,
-    val id: Int,
+    val id: Int?,
     val itr: Itr,
     val localidad: String,
     val mail: String,

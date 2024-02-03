@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.EventoAdapter
 import com.example.pft.R
+import com.example.pft.Usuario
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 class RegistroActivity : AppCompatActivity() {
@@ -98,6 +99,8 @@ class RegistroActivity : AppCompatActivity() {
         val tipoUsuarioAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,lista)
         tipoUsuario.adapter=tipoUsuarioAdapter
 
+        var tipoUsuarioSeleccionado= ""
+
         tipoUsuario.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -111,18 +114,23 @@ class RegistroActivity : AppCompatActivity() {
                         recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
                         val adapter = RegistroAdapter_estudiante()
                         recyclerView.adapter = adapter
+                        tipoUsuarioSeleccionado="Estudiante"
                     }
 
                     "Tutor" -> {
                         recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
                         val adapter = RegistroAdapter_tutor()
                         recyclerView.adapter = adapter
+                        tipoUsuarioSeleccionado="Tutor"
+
                     }
 
                     "Analista" -> {
                         recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
                         val adapter = RegistroAdapter_analista()
                         recyclerView.adapter = adapter
+                        tipoUsuarioSeleccionado="Analista"
+
                     }
                 }
             }
@@ -321,74 +329,25 @@ class RegistroActivity : AppCompatActivity() {
                 Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show()
             } else {
                 // Todos los campos están completos, puedes realizar alguna acción aquí
-            }
-/*
-            when {
-                apellido.text.toString().isEmpty() -> {
-                    mensaje_apellido.text = "Ingresa un apellido";
-                    mensaje_apellido.alpha = 0.8f
-                }
-                fecNac.text.toString().isEmpty() -> {
-                    mensaje_fecNac.text="Selecciona una fecha de nacimiento"
-                    mensaje_fecNac.alpha = 0.8f
-                }
 
-                contrasena.text.toString().isEmpty() -> {
-                    mensaje_contrasena.text = "Ingresa una contraseña"
-                    mensaje_contrasena.alpha = 0.8f
-                }
-                contrasenaConfirmar.text.toString().isEmpty() -> {
-                    mensaje_contrasenaConfirmar.text = "Confirma tu contraseña"
-                    mensaje_contrasenaConfirmar.alpha = 0.8f
-                }
-                documento.text.toString().isEmpty() -> {
-                    mensaje_documento.text = "Ingresa un documeto"
-                    mensaje_documento.alpha = 0.8f
-                }
-                departamento.text.toString().isEmpty() -> {
-                    mensaje_departamento.text="Ingresa un departamento"
-                mensaje_departamento.alpha = 0.8f
-                }
-                emailInstitucional.text.toString().isEmpty() ->{
-                    mensaje_emailInstitucional.text="Ingresa un email institucional"
-                mensaje_emailInstitucional.alpha = 0.8f
-                }
-                emailPersonal.text.toString().isEmpty() ->{
-                    mensaje_emailPersonal.text="Ingresa un email personal"
-                mensaje_emailPersonal.alpha = 0.8f
-                }
-                emailPersonalConfirmar.text.toString().isEmpty() -> {
-                    mensaje_emailPersonalConfirmar.text="Confirma tu email personal"
-                mensaje_emailPersonalConfirmar.alpha = 0.8f
-                }
-                genero.text.toString().isEmpty() -> {
-                    mensaje_genero.text="Ingresa un género"
-                mensaje_genero.alpha = 0.8f
-                }
-                itr.text.toString().isEmpty() -> {
-                    mensaje_itr.text="Ingresa un itr"
-                mensaje_itr.alpha = 0.8f
-                }
-                localidad.text.toString().isEmpty() ->{
-                    mensaje_localidad.text="Ingresa una localidad"
-                mensaje_localidad.alpha = 0.8f
-                }
-                nombre.text.toString().isEmpty() ->{
-                    mensaje_nombre.text="Ingresa un nombre"
-                mensaje_nombre.alpha = 0.8f
-                }
-                nombreUsuario.text.toString().isEmpty() ->{
-                    mensaje_nombreUsuario.text="Ingresa un nombre de usuario"
-                mensaje_nombreUsuario.alpha = 0.8f
-                }
-                telefono.text.toString().isEmpty() -> {
-                    mensaje_telefono.text = "Ingresa un teléfono"
-                    mensaje_telefono.alpha = 0.8f
-                }
+                val nombre=nombre.text.toString()
+                val apellido=apellido.text.toString()
+                val contrasena=contrasena.text.toString()
+                val documento=documento.text.toString().toInt()
+                val nombreusuario=nombreUsuario.text.toString()
+                val emailInstitucional=emailInstitucional.text.toString()
+                val emailPersonal=emailPersonal.text.toString()
+                val telefono=telefono.text.toString()
+                val genero=genero.text.toString()
+                val itr=itr.text.toString()
+                val departamento=departamento.text.toString()
+                val localidad=localidad.text.toString()
+                val tipoUsuario=tipoUsuarioSeleccionado.toString()
+                val fecNac=fecNac.text.toString().toLong()
 
+                val usuarioNuevo=Usuario(false,apellido,contrasena,departamento, documento, fecNac,genero,null,itr,localidad,emailInstitucional,emailPersonal,nombre,"Prueba",telefono,nombreusuario,tipoUsuario )
             }
 
- */
 
         }
     }
