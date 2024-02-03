@@ -400,8 +400,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo de usuario"
-                    android:layout_marginLeft="60dp"
+                    android:text="Tipo de usuario:"
+                    android:layout_marginLeft="10dp"
                     android:textSize="18dp"
 
                     />
