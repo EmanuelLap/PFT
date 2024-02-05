@@ -1,5 +1,6 @@
 package com.example.pft.ui.login
 
+import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,10 +16,22 @@ import android.widget.Toast
 import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pft.ApiService
 import com.example.pft.EventoAdapter
+import com.example.pft.Funcionalidade
+import com.example.pft.Itr
 import com.example.pft.R
+import com.example.pft.Rol
 import com.example.pft.Usuario
+import com.example.pft.entidades.Evento
+import com.example.pft.entidades.ItrDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
+import java.util.Calendar
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -44,6 +57,10 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var localidad: EditText
     private lateinit var tipoUsuario: Spinner
     private lateinit var recyclerView: RecyclerView
+    private var itrSeleccionado: Itr? = null
+    private lateinit var rol: Rol
+    private lateinit var fechaText: TextView
+
 
     //mensajes
     private lateinit var mensaje_documento: TextView
@@ -62,6 +79,7 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var mensaje_departamento: TextView
     private lateinit var mensaje_localidad: TextView
     private lateinit var mensaje_tipoUsuario: TextView
+
 
 
 
@@ -89,6 +107,73 @@ class RegistroActivity : AppCompatActivity() {
        localidad=findViewById(R.id.registro_localidad)
        tipoUsuario=findViewById(R.id.registro_tipo)
        recyclerView=findViewById(R.id.registro_recyclerView_estudiante)
+       fechaText=findViewById(R.id.registro_fec_seleccionada)
+
+       var listaFuncionalidade: List<Funcionalidade> = emptyList()
+       rol=Rol(true,null,listaFuncionalidade,null,null)
+
+
+        //-------------Spinner ITR---------------------------------------------------------
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+
+        val call = apiService.obtenerITR()
+
+        call.enqueue(object : Callback<List<Itr>> {
+            override fun onResponse(call: Call<List<Itr>>, response: Response<List<Itr>>) {
+                if (response.isSuccessful) {
+                    val itrs = response.body() ?: emptyList()
+                    Log.d("AgregarReclamoActivity", "API call successful. Itrs: $itrs")
+
+                    // Configurar el ArrayAdapter
+                    val itrAdapter = com.example.pft.ui.login.ItrAdapter(
+                        this@RegistroActivity,
+                        itrs
+                    )
+
+                    // Asignar el adapter al ListView
+                    itr.adapter = itrAdapter
+
+                    itr.onItemSelectedListener =
+                        object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(
+                                parentView: AdapterView<*>,
+                                selectedItemView: View?,
+                                position: Int,
+                                id: Long
+                            )  {
+                                // Verificar que la posición seleccionada esté dentro de los límites
+                                if (position >= 0 && position < itrs.size) {
+                                    // Obtiene el evento seleccionado
+                                    itrSeleccionado = itrs[position]
+
+                                } else {
+                                    // Puedes manejar esta situación según tus necesidades
+                                    Log.e("RegistroActivity", "Posición seleccionada fuera de los límites")
+                                }
+                            }
+
+                            override fun onNothingSelected(parentView: AdapterView<*>) {
+                                // Manejar caso cuando no hay nada seleccionado (si es necesario)
+                            }
+
+                        }
+                }else {
+                    Log.e("RegistroActivity", "API call failed with code ${response.code()}")
+                    // Resto del código para manejar errores...
+                }
+            }
+
+            override fun onFailure(call: Call<List<Itr>>, t: Throwable) {
+                Log.e("ItrActivity", "API call failed", t)
+                // Resto del código para manejar errores...
+            }
+        })
 
         //-------------Spinner Departamentos-----------------------------------------------
         val listaDepartamentos=ArrayList<String>()
@@ -170,6 +255,11 @@ class RegistroActivity : AppCompatActivity() {
                         val adapter = RegistroAdapter_estudiante()
                         recyclerView.adapter = adapter
                         tipoUsuarioSeleccionado="Estudiante"
+
+                        //rol
+                        rol.id=1
+                        rol.descripcion="Estudiante"
+                        rol.nombre="Estudiante"
                     }
 
                     "Tutor" -> {
@@ -177,6 +267,10 @@ class RegistroActivity : AppCompatActivity() {
                         val adapter = RegistroAdapter_tutor()
                         recyclerView.adapter = adapter
                         tipoUsuarioSeleccionado="Tutor"
+
+                        rol.id=3
+                        rol.descripcion="Tutor"
+                        rol.nombre="Tutor"
 
                     }
 
@@ -186,6 +280,9 @@ class RegistroActivity : AppCompatActivity() {
                         recyclerView.adapter = adapter
                         tipoUsuarioSeleccionado="Analista"
 
+                        rol.id=2
+                        rol.descripcion="Analista"
+                        rol.nombre="Analista"
                     }
                 }
             }
@@ -353,7 +450,7 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_fecNac.visibility = View.INVISIBLE
             }
 
-            if (itr.text.toString().isEmpty()) {
+            if (itrSeleccionado==null) {
                 camposVacios.add("Itr")
                 mensaje_itr.text = "Selecciona un itr"
                 mensaje_itr.alpha = 0.8f
@@ -394,15 +491,42 @@ class RegistroActivity : AppCompatActivity() {
                 val emailPersonal=emailPersonal.text.toString()
                 val telefono=telefono.text.toString()
                 val genero=genero.text.toString()
-                val itr=itr.text.toString()
                 val localidad=localidad.text.toString()
-                val tipoUsuario=tipoUsuarioSeleccionado.toString()
+                val tipoUsuario=tipoUsuarioSeleccionado
                 val fecNac=fecNac.text.toString().toLong()
 
-                val usuarioNuevo=Usuario(false,apellido,contrasena,departamentoSeleccionado, documento, fecNac,genero,null,itr,localidad,emailInstitucional,emailPersonal,nombre,"Prueba",telefono,nombreusuario,tipoUsuario )
+
+
+                val usuarioNuevo=Usuario(false,apellido,contrasena,departamentoSeleccionado, documento, fecNac,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
             }
 
 
         }
+
+        fecNac.setOnClickListener(){
+            mostrarCalendario()
+        }
+    }
+
+    
+
+
+    private fun mostrarCalendario() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, year, month, dayOfMonth ->
+
+                val fechaSeleccionada = "$dayOfMonth/${month + 1}/$year"
+                fechaText.text = fechaSeleccionada
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
     }
 }

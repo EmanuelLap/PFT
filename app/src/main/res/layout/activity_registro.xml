@@ -246,28 +246,24 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Fecha:"
                     android:layout_marginLeft="10sp"
-                    android:textSize="18sp"
-                    />
+                    android:text="Fecha:"
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/registro_fec_seleccionada"
-                    android:layout_marginLeft="12dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    />
+                    android:layout_marginLeft="12dp" />
 
                 <Button
                     android:id="@+id/registro_fec_nac"
-                    android:backgroundTint="#00AEEF"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
-                    android:paddingLeft="30dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:backgroundTint="#00AEEF"
                     android:drawableLeft="@drawable/ic_calendar"
-                    />
-
+                    android:paddingLeft="30dp" />
 
 
             </LinearLayout>
@@ -275,8 +271,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/registro_mensaje_fec_nac"
                     android:layout_width="match_parent"
@@ -287,6 +283,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -296,10 +293,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:textSize="18dp"
                     android:text="ITR:"
+                    android:textSize="18dp"
 
                     />
+
                 <Spinner
                     android:id="@+id/registro_itr"
                     android:layout_width="150dp"
@@ -334,9 +332,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:textSize="18dp"
                     android:text="Departamento:"
-                    />
+                    android:textSize="18dp" />
 
                 <Spinner
                     android:id="@+id/registro_departamento"
@@ -361,6 +358,7 @@
                     android:textColor="@color/white"
                     android:textStyle="bold" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -376,10 +374,10 @@
 
             </LinearLayout>
 
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-               android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/registro_mensaje_localidad"
@@ -400,8 +398,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tipo de usuario:"
                     android:layout_marginLeft="10dp"
+                    android:text="Tipo de usuario:"
                     android:textSize="18dp"
 
                     />
