@@ -25,12 +25,15 @@ import com.example.pft.Rol
 import com.example.pft.Usuario
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.ItrDTO
+import com.example.pft.entidades.ReclamoDTOMobile
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
 import java.util.Calendar
 
 class RegistroActivity : AppCompatActivity() {
@@ -79,6 +82,8 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var mensaje_departamento: TextView
     private lateinit var mensaje_localidad: TextView
     private lateinit var mensaje_tipoUsuario: TextView
+    private lateinit var registro_mensaje: TextView
+
 
 
 
@@ -109,29 +114,51 @@ class RegistroActivity : AppCompatActivity() {
        recyclerView=findViewById(R.id.registro_recyclerView_estudiante)
        fechaText=findViewById(R.id.registro_fec_seleccionada)
 
+        //Declaro rutas de mensajes
+        mensaje_apellido=findViewById(R.id.registro_mensaje_apellido)
+        mensaje_fecNac=findViewById(R.id.registro_mensaje_fec_nac)
+        mensaje_contrasena=findViewById(R.id.registro_mensaje_contrasena)
+        mensaje_documento=findViewById(R.id.registro_mensaje_documento)
+        mensaje_departamento=findViewById(R.id.registro_mensaje_departamento)
+        mensaje_contrasenaConfirmar=findViewById(R.id.registro_mensaje_confirmar_contrasena)
+        mensaje_emailInstitucional=findViewById(R.id.registro_mensaje_email_institucional)
+        mensaje_emailPersonal=findViewById(R.id.registro_mensaje_email_personal)
+        mensaje_emailPersonalConfirmar=findViewById(R.id.registro_mensaje_confirmar_email_personal)
+        mensaje_genero=findViewById(R.id.registro_mensaje_genero)
+        mensaje_itr=findViewById(R.id.registro_mensaje_itr)
+        mensaje_localidad=findViewById(R.id.registro_mensaje_localidad)
+        mensaje_nombre=findViewById(R.id.registro_mensaje_nombre)
+        mensaje_nombreUsuario=findViewById(R.id.registro_mensaje_nombre_usuario)
+        mensaje_telefono=findViewById(R.id.registro_mensaje_telefono)
+        mensaje_tipoUsuario=findViewById(R.id.registro_mensaje_tipo)
+        registro_mensaje=findViewById(R.id.registro_Mensaje)
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl("http://10.0.2.2:8080/")
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+
+        val apiService = retrofit.create(ApiService::class.java)
+
        var listaFuncionalidade: List<Funcionalidade> = emptyList()
        rol=Rol(true,null,listaFuncionalidade,null,null)
 
 
         //-------------Spinner ITR---------------------------------------------------------
 
-        val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
 
-        val apiService = retrofit.create(ApiService::class.java)
 
-        val call = apiService.obtenerITR()
+        val callItr = apiService.obtenerITR()
 
-        call.enqueue(object : Callback<List<Itr>> {
+
+        callItr.enqueue(object : Callback<List<Itr>> {
             override fun onResponse(call: Call<List<Itr>>, response: Response<List<Itr>>) {
                 if (response.isSuccessful) {
                     val itrs = response.body() ?: emptyList()
                     Log.d("AgregarReclamoActivity", "API call successful. Itrs: $itrs")
 
                     // Configurar el ArrayAdapter
-                    val itrAdapter = com.example.pft.ui.login.ItrAdapter(
+                    val itrAdapter = ItrAdapter(
                         this@RegistroActivity,
                         itrs
                     )
@@ -320,23 +347,8 @@ class RegistroActivity : AppCompatActivity() {
 
         btnConfirmar.setOnClickListener{
 
-            //Declaro rutas
-            mensaje_apellido=findViewById(R.id.registro_mensaje_apellido)
-            mensaje_fecNac=findViewById(R.id.registro_mensaje_fec_nac)
-            mensaje_contrasena=findViewById(R.id.registro_mensaje_contrasena)
-            mensaje_documento=findViewById(R.id.registro_mensaje_documento)
-            mensaje_departamento=findViewById(R.id.registro_mensaje_departamento)
-            mensaje_contrasenaConfirmar=findViewById(R.id.registro_mensaje_confirmar_contrasena)
-            mensaje_emailInstitucional=findViewById(R.id.registro_mensaje_email_institucional)
-            mensaje_emailPersonal=findViewById(R.id.registro_mensaje_email_personal)
-            mensaje_emailPersonalConfirmar=findViewById(R.id.registro_mensaje_confirmar_email_personal)
-            mensaje_genero=findViewById(R.id.registro_mensaje_genero)
-            mensaje_itr=findViewById(R.id.registro_mensaje_itr)
-            mensaje_localidad=findViewById(R.id.registro_mensaje_localidad)
-            mensaje_nombre=findViewById(R.id.registro_mensaje_nombre)
-            mensaje_nombreUsuario=findViewById(R.id.registro_mensaje_nombre_usuario)
-            mensaje_telefono=findViewById(R.id.registro_mensaje_telefono)
-            mensaje_tipoUsuario=findViewById(R.id.registro_mensaje_tipo)
+
+
 
             val camposVacios = mutableListOf<String>()
 
@@ -441,7 +453,7 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_genero.visibility = View.INVISIBLE
             }
 
-            if (fecNac.text.toString().isEmpty()) {
+            if (fechaText.text.toString().isEmpty()) {
                 camposVacios.add("Fec nac")
                 mensaje_fecNac.text = "Selecciona una fecha de nacimiento"
                 mensaje_fecNac.alpha = 0.8f
@@ -459,7 +471,7 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_itr.visibility = View.INVISIBLE
             }
 
-            if (departamentoSeleccionado!="") {
+            if (departamentoSeleccionado=="") {
                 camposVacios.add("Departamento")
                 mensaje_departamento.text = "Selecciona un departamento"
                 mensaje_departamento.alpha = 0.8f
@@ -482,6 +494,8 @@ class RegistroActivity : AppCompatActivity() {
             } else {
                 // Todos los campos están completos, puedes realizar alguna acción aquí
 
+                val formatoFecha= SimpleDateFormat("dd/mm/yyyy")
+
                 val nombre=nombre.text.toString()
                 val apellido=apellido.text.toString()
                 val contrasena=contrasena.text.toString()
@@ -493,11 +507,30 @@ class RegistroActivity : AppCompatActivity() {
                 val genero=genero.text.toString()
                 val localidad=localidad.text.toString()
                 val tipoUsuario=tipoUsuarioSeleccionado
-                val fecNac=fecNac.text.toString().toLong()
+                val fecNacString=fechaText.text.toString()
+                val fecha=formatoFecha.parse(fecNacString)
+                val fechaTimestamp=fecha.time
 
 
 
-                val usuarioNuevo=Usuario(false,apellido,contrasena,departamentoSeleccionado, documento, fecNac,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
+                val usuarioNuevo=Usuario(false,apellido,contrasena,departamentoSeleccionado, documento, fechaTimestamp,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
+                val callAgregarUsuario = apiService.agregarUsuario(usuarioNuevo)
+
+                callAgregarUsuario.enqueue(object : Callback<Usuario> {
+                    override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                        if (response.isSuccessful) {
+                            val usuarioResp = response.body()
+                            val responseJson = Gson().toJson(usuarioResp)
+                            Log.d("Registro Activity", "ResponseBody: $responseJson")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                        Log.d("Reclamo Activity", "error: ${t}")
+
+                        registro_mensaje.text="Ocurrió un error al crear el usuario"
+                    }
+                })
             }
 
 
