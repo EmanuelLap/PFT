@@ -2,7 +2,6 @@ package com.example.pft.entidades
 
 
 import com.google.gson.annotations.SerializedName
-import java.util.Date
 
 
 data class User (

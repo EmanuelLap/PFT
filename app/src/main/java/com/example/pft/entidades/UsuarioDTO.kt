@@ -1,9 +1,6 @@
-package com.example.pft
+package com.example.pft.entidades
 
-import com.example.pft.entidades.Itr
-import com.example.pft.entidades.Rol
-
-data class Usuario(
+data class UsuarioDTO(
     val activo: Boolean,
     val apellidos: String,
     val contrasenia: String,
@@ -13,9 +10,9 @@ data class Usuario(
     val genero: String,
     val id: Int?,
     val itr: Itr,
-    val localidad: String,
+    val localidad: Any,
     val mail: String,
-    val mailPersonal: String,
+    val mailPersonal: Any,
     val nombres: String,
     val rol: Rol,
     val telefono: String,

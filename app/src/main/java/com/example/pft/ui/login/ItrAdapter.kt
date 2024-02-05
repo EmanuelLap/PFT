@@ -5,9 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.TextView
-import com.example.pft.entidades.Evento
-import com.example.pft.Itr
-import com.example.pft.entidades.ItrDTO
+import com.example.pft.entidades.Itr
 
 class ItrAdapter(context: Context, itrs: List<Itr>) : ArrayAdapter<Itr>(context, android.R.layout.simple_spinner_item, itrs) {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {

@@ -3,10 +3,12 @@ package com.example.pft
 import com.example.pft.entidades.EstudianteId
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoId
+import com.example.pft.entidades.Itr
 import com.example.pft.entidades.LoginResponse
 import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.entidades.ReclamoResponse
+import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.Credenciales
 import retrofit2.Call
 import retrofit2.Response
@@ -37,8 +39,8 @@ interface ApiService {
 
     @POST("ByteMinds_s4/rest/usuarios/agregarJson")
     fun agregarUsuario(
-        @Body usuario: Usuario
-    ): Call<Usuario>
+        @Body usuario: UsuarioDTO
+    ): Call<UsuarioDTO>
 
     //Eventos
     @GET("ByteMinds_s4/rest/eventos/listar")

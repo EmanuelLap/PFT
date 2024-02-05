@@ -13,19 +13,15 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.view.marginBottom
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.ApiService
-import com.example.pft.EventoAdapter
-import com.example.pft.Funcionalidade
-import com.example.pft.Itr
 import com.example.pft.R
-import com.example.pft.Rol
 import com.example.pft.Usuario
-import com.example.pft.entidades.Evento
-import com.example.pft.entidades.ItrDTO
-import com.example.pft.entidades.ReclamoDTOMobile
+import com.example.pft.entidades.Funcionalidades
+import com.example.pft.entidades.Itr
+import com.example.pft.entidades.Rol
+import com.example.pft.entidades.UsuarioDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import retrofit2.Call
@@ -140,8 +136,8 @@ class RegistroActivity : AppCompatActivity() {
 
         val apiService = retrofit.create(ApiService::class.java)
 
-       var listaFuncionalidade: List<Funcionalidade> = emptyList()
-       rol=Rol(true,null,listaFuncionalidade,null,null)
+       var listaFuncionalidades: List<Funcionalidades> = emptyList()
+       rol=Rol(null,null,null,true,listaFuncionalidades)
 
 
         //-------------Spinner ITR---------------------------------------------------------
@@ -492,10 +488,8 @@ class RegistroActivity : AppCompatActivity() {
             if (camposVacios.isNotEmpty()) {
                 Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show()
             } else {
-                // Todos los campos están completos, puedes realizar alguna acción aquí
-
+                // Todos los campos están completos
                 val formatoFecha= SimpleDateFormat("dd/mm/yyyy")
-
                 val nombre=nombre.text.toString()
                 val apellido=apellido.text.toString()
                 val contrasena=contrasena.text.toString()
@@ -511,38 +505,32 @@ class RegistroActivity : AppCompatActivity() {
                 val fecha=formatoFecha.parse(fecNacString)
                 val fechaTimestamp=fecha.time
 
-
-
-                val usuarioNuevo=Usuario(false,apellido,contrasena,departamentoSeleccionado, documento, fechaTimestamp,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
+                val usuarioNuevo=UsuarioDTO(false,apellido,contrasena,departamentoSeleccionado, documento, fechaTimestamp,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
                 val callAgregarUsuario = apiService.agregarUsuario(usuarioNuevo)
 
-                callAgregarUsuario.enqueue(object : Callback<Usuario> {
-                    override fun onResponse(call: Call<Usuario>, response: Response<Usuario>) {
+                callAgregarUsuario.enqueue(object : Callback<UsuarioDTO> {
+                    override fun onResponse(call: Call<UsuarioDTO>, response: Response<UsuarioDTO>) {
                         if (response.isSuccessful) {
                             val usuarioResp = response.body()
                             val responseJson = Gson().toJson(usuarioResp)
                             Log.d("Registro Activity", "ResponseBody: $responseJson")
+                            Toast.makeText(this@RegistroActivity, "Usuario creado con éxito, pendiente de activación", Toast.LENGTH_SHORT).show()
                         }
                     }
 
-                    override fun onFailure(call: Call<Usuario>, t: Throwable) {
+                    override fun onFailure(call: Call<UsuarioDTO>, t: Throwable) {
                         Log.d("Reclamo Activity", "error: ${t}")
 
                         registro_mensaje.text="Ocurrió un error al crear el usuario"
                     }
                 })
             }
-
-
         }
 
         fecNac.setOnClickListener(){
             mostrarCalendario()
         }
     }
-
-    
-
 
     private fun mostrarCalendario() {
         val calendar = Calendar.getInstance()
