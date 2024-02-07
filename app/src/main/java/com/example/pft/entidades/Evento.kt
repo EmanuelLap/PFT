@@ -5,7 +5,7 @@ data class Evento(
     val fin: Long,
     val id: Int,
     val inicio: Long,
-    val itrDTO: ItrDTO,
+    val itr: Itr,
     val localizacion: String,
     val modalidadEvento: ModalidadEvento,
     val tipoEstadoEvento: TipoEstadoEvento,

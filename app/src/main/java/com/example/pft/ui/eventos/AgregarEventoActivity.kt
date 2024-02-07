@@ -17,8 +17,11 @@ import com.example.pft.ApiService
 import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.entidades.Evento
+import com.example.pft.entidades.EventoId
 import com.example.pft.entidades.Itr
+import com.example.pft.entidades.ItrDTO
 import com.example.pft.entidades.ModalidadEvento
+import com.example.pft.entidades.TipoEstadoEvento
 import com.example.pft.entidades.TipoEvento
 import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.ItrAdapter
@@ -43,10 +46,29 @@ class AgregarEventoActivity : AppCompatActivity() {
     private lateinit var inicioSeleccion: TextView;
     private lateinit var fin: Button;
     private lateinit var finSeleccion: TextView;
-    private lateinit var tutoresAgregados: ListView;
+    private lateinit var tutoresLista: ListView;
     private lateinit var btnAsignarTutores: Button;
     private lateinit var btnVolver: FloatingActionButton;
     private lateinit var btnConfirmar: FloatingActionButton;
+
+    private var tipoSeleccionado: TipoEvento? = null
+    private var modalidadSeleccionada: ModalidadEvento? = null
+    private var itrSeleccionado: Itr? = null
+    private var tipoEstado: TipoEstadoEvento? = null
+
+
+
+    //mensajes
+
+    private lateinit var mensaje_titulo:TextView
+    private lateinit var mensaje_tipo:TextView
+    private lateinit var mensaje_modalidad:TextView
+    private lateinit var mensaje_itr:TextView
+    private lateinit var mensaje_localizacion:TextView
+    private lateinit var mensaje_inicio:TextView
+    private lateinit var mensaje_fin:TextView
+    private lateinit var mensaje_tutores:TextView
+
 
 
 
@@ -63,10 +85,16 @@ class AgregarEventoActivity : AppCompatActivity() {
         inicioSeleccion=findViewById(R.id.agregarEvento_inicio_seleccion)
         fin=findViewById(R.id.agregarEvento_fin)
         finSeleccion=findViewById(R.id.agregarEvento_fin_seleccion)
-        tutoresAgregados=findViewById(R.id.agregarEvento_listaTutores)
+        tutoresLista=findViewById(R.id.agregarEvento_listaTutores)
         btnAsignarTutores=findViewById(R.id.agregarEvento_btnAsignarTutores)
         btnVolver=findViewById(R.id.agregarEvento_volver)
         btnConfirmar=findViewById(R.id.agregarEvento_agregar)
+
+        val tutoresAgregados = mutableListOf<UsuarioDTO>()
+
+
+
+
 
 
 //cargo datos a spinners------------------------------
@@ -79,6 +107,26 @@ class AgregarEventoActivity : AppCompatActivity() {
             .build()
 
         val apiService = retrofit.create(ApiService::class.java)
+
+        val callTipoEstados= apiService.obtenerTipoEstados()
+        callTipoEstados.enqueue(object : Callback<List<TipoEstadoEvento>> {
+            override fun onResponse(call: Call<List<TipoEstadoEvento>>, response: Response<List<TipoEstadoEvento>>) {
+                if (response.isSuccessful) {
+                    val tipoEstadosEvento = response.body() ?: emptyList()
+                    Log.d("AgregarEventoActivity", "API call successful. Tipos: $tipoEstadosEvento")
+
+
+                                    tipoEstado = tipoEstadosEvento[2]
+
+                }else {
+                    Log.e("AgregarEventoActivity", "API call failed with code ${response.code()}")
+                }
+            }
+
+            override fun onFailure(call: Call<List<TipoEstadoEvento>>, t: Throwable) {
+                Log.e("TipoEventoActivity", "API call failed", t)
+            }
+        })
 
         val callTipos = apiService.obtenerTipos()
 
@@ -106,7 +154,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                                 // Verificar que la posición seleccionada esté dentro de los límites
                                 if (position >= 0 && position < tiposEvento.size) {
                                     // Obtiene el evento seleccionado
-                                    val tipoSeleccionado = tiposEvento[position]
+                                    tipoSeleccionado = tiposEvento[position]
                                 } else {
                                     // Puedes manejar esta situación según tus necesidades
                                     Log.e("AgregarEventoActivity", "Posición seleccionada fuera de los límites")
@@ -154,7 +202,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                                 // Verificar que la posición seleccionada esté dentro de los límites
                                 if (position >= 0 && position < modalidadesEvento.size) {
                                     // Obtiene el evento seleccionado
-                                    val modalidadSeleccionada = modalidadesEvento[position]
+                                    modalidadSeleccionada = modalidadesEvento[position]
                                 } else {
                                     // Puedes manejar esta situación según tus necesidades
                                     Log.e("AgregarEventoActivity", "Posición seleccionada fuera de los límites")
@@ -262,169 +310,104 @@ class AgregarEventoActivity : AppCompatActivity() {
                 mensaje_titulo.visibility = View.INVISIBLE
             }
 
-            if (tipo.)) {
-                camposVacios.add("Nombre")
-                mensaje_nombre.text = "Ingresa un nombre"
-                mensaje_nombre.alpha = 0.8f
-                mensaje_nombre.visibility = View.VISIBLE
+            if (tipoSeleccionado==null) {
+                camposVacios.add("itr")
+                mensaje_tipo.text = "Selecciona un ITR"
+                mensaje_tipo.alpha = 0.8f
+                mensaje_tipo.visibility = View.VISIBLE
             } else {
-                mensaje_nombre.visibility = View.INVISIBLE
+                mensaje_tipo.visibility = View.INVISIBLE
             }
 
-            if (apellido.text.toString().isEmpty()) {
-                camposVacios.add("Apellido")
-                mensaje_apellido.text = "Ingresa un apellido"
-                mensaje_apellido.alpha = 0.8f
-                mensaje_apellido.visibility = View.VISIBLE // Mostrar el mensaje de error
+            if (modalidadSeleccionada==null) {
+                camposVacios.add("modalidad")
+                mensaje_modalidad.text = "Selecciona una modalidad"
+                mensaje_modalidad.alpha = 0.8f
+                mensaje_modalidad.visibility = View.VISIBLE // Mostrar el mensaje de error
             } else {
-                mensaje_apellido.visibility = View.INVISIBLE // Ocultar el mensaje de error si no está vacío
-            }
-
-            if (nombreUsuario.text.toString().isEmpty()) {
-                camposVacios.add("Nombre usuario")
-                mensaje_nombreUsuario.text = "Ingresa una contraseña"
-                mensaje_nombreUsuario.alpha = 0.8f
-                mensaje_nombreUsuario.visibility = View.VISIBLE
-            } else {
-                mensaje_nombreUsuario.visibility = View.INVISIBLE
-            }
-
-            if (contrasena.text.toString().isEmpty()) {
-                camposVacios.add("Contraseña")
-                mensaje_contrasena.text = "Ingresa una contraseña"
-                mensaje_contrasena.alpha = 0.8f
-                mensaje_contrasena.visibility = View.VISIBLE
-            } else {
-                mensaje_contrasena.visibility = View.INVISIBLE
-            }
-
-            if (contrasenaConfirmar.text.toString().isEmpty()) {
-                camposVacios.add("Contraseña confirmar")
-                mensaje_contrasenaConfirmar.text = "Confirma tu contraseña"
-                mensaje_contrasenaConfirmar.alpha = 0.8f
-                mensaje_contrasenaConfirmar.visibility = View.VISIBLE
-            } else {
-                mensaje_contrasenaConfirmar.visibility = View.INVISIBLE
-            }
-
-            if (emailInstitucional.text.toString().isEmpty()) {
-                camposVacios.add("Email institucional")
-                mensaje_emailInstitucional.text = "Ingresa un email institucional"
-                mensaje_emailInstitucional.alpha = 0.8f
-                mensaje_emailInstitucional.visibility = View.VISIBLE
-            } else {
-                mensaje_emailInstitucional.visibility = View.INVISIBLE
-            }
-
-            if (emailPersonal.text.toString().isEmpty()) {
-                camposVacios.add("Email personal")
-                mensaje_emailPersonal.text = "Ingresa un email personal"
-                mensaje_emailPersonal.alpha = 0.8f
-                mensaje_emailPersonal.visibility = View.VISIBLE
-            } else {
-                mensaje_emailPersonal.visibility = View.INVISIBLE
-            }
-
-            if (emailPersonalConfirmar.text.toString().isEmpty()) {
-                camposVacios.add("Fecha de Nacimiento")
-                mensaje_emailPersonalConfirmar.text = "Selecciona una fecha de nacimiento"
-                mensaje_emailPersonalConfirmar.alpha = 0.8f
-                mensaje_emailPersonalConfirmar.visibility = View.VISIBLE
-            } else {
-                mensaje_emailPersonalConfirmar.visibility = View.INVISIBLE
-            }
-
-            if (telefono.text.toString().isEmpty()) {
-                camposVacios.add("Telefono")
-                mensaje_telefono.text = "Ingresa un teléfono"
-                mensaje_telefono.alpha = 0.8f
-                mensaje_telefono.visibility = View.VISIBLE
-            } else {
-                mensaje_telefono.visibility = View.INVISIBLE
-            }
-
-            if (genero.text.toString().isEmpty()) {
-                camposVacios.add("Género")
-                mensaje_genero.text = "Selecciona un género"
-                mensaje_genero.alpha = 0.8f
-                mensaje_genero.visibility = View.VISIBLE
-            } else {
-                mensaje_genero.visibility = View.INVISIBLE
-            }
-
-            if (fechaText.text.toString().isEmpty()) {
-                camposVacios.add("Fec nac")
-                mensaje_fecNac.text = "Selecciona una fecha de nacimiento"
-                mensaje_fecNac.alpha = 0.8f
-                mensaje_fecNac.visibility = View.VISIBLE
-            } else {
-                mensaje_fecNac.visibility = View.INVISIBLE
+                mensaje_modalidad.visibility = View.INVISIBLE // Ocultar el mensaje de error si no está vacío
             }
 
             if (itrSeleccionado==null) {
-                camposVacios.add("Itr")
-                mensaje_itr.text = "Selecciona un itr"
+                camposVacios.add("itr")
+                mensaje_itr.text = "Selecciona un ITR"
                 mensaje_itr.alpha = 0.8f
                 mensaje_itr.visibility = View.VISIBLE
             } else {
                 mensaje_itr.visibility = View.INVISIBLE
             }
 
-            if (departamentoSeleccionado=="") {
-                camposVacios.add("Departamento")
-                mensaje_departamento.text = "Selecciona un departamento"
-                mensaje_departamento.alpha = 0.8f
-                mensaje_departamento.visibility = View.VISIBLE
+            if (localizacion.text.toString().isEmpty()) {
+                camposVacios.add("localizacion")
+                mensaje_localizacion.text = "Ingresa una localización"
+                mensaje_localizacion.alpha = 0.8f
+                mensaje_localizacion.visibility = View.VISIBLE
             } else {
-                mensaje_departamento.visibility = View.INVISIBLE
+                mensaje_localizacion.visibility = View.INVISIBLE
             }
 
-            if (localidad.text.toString().isEmpty()) {
-                camposVacios.add("Localidad")
-                mensaje_localidad.text = "Ingresa una localidad"
-                mensaje_localidad.alpha = 0.8f
-                mensaje_localidad.visibility = View.VISIBLE
+            if (inicioSeleccion.text.toString().isEmpty()) {
+                camposVacios.add("fecInicio")
+                mensaje_inicio.text = "Selecciona una fecha de inicio"
+                mensaje_inicio.alpha = 0.8f
+                mensaje_inicio.visibility = View.VISIBLE
             } else {
-                mensaje_localidad.visibility = View.INVISIBLE
+                mensaje_inicio.visibility = View.INVISIBLE
+            }
+
+            if (finSeleccion.text.toString().isEmpty()) {
+                camposVacios.add("fecFin")
+                mensaje_fin.text = "Selecciona una fecha de fin"
+                mensaje_fin.alpha = 0.8f
+                mensaje_fin.visibility = View.VISIBLE
+            } else {
+                mensaje_fin.visibility = View.INVISIBLE
+            }
+
+            if (tutoresAgregados.size==0) {
+                camposVacios.add("Tutores")
+                mensaje_tutores.text = "Selecciona tutores responsables"
+                mensaje_tutores.alpha = 0.8f
+                mensaje_tutores.visibility = View.VISIBLE
+            } else {
+                mensaje_tutores.visibility = View.INVISIBLE
             }
 
             if (camposVacios.isNotEmpty()) {
-                Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Completa todos los campos.", Toast.LENGTH_SHORT).show()
             } else {
                 // Todos los campos están completos
                 val formatoFecha= SimpleDateFormat("dd/mm/yyyy")
-                val nombre=nombre.text.toString()
-                val apellido=apellido.text.toString()
-                val contrasena=contrasena.text.toString()
-                val documento=documento.text.toString().toInt()
-                val nombreusuario=nombreUsuario.text.toString()
-                val emailInstitucional=emailInstitucional.text.toString()
-                val emailPersonal=emailPersonal.text.toString()
-                val telefono=telefono.text.toString()
-                val genero=genero.text.toString()
-                val localidad=localidad.text.toString()
-                val tipoUsuario=tipoUsuarioSeleccionado
-                val fecNacString=fechaText.text.toString()
-                val fecha=formatoFecha.parse(fecNacString)
-                val fechaTimestamp=fecha.time
+                val titulo=titulo.text.toString()
+                val localizacion=localizacion.text.toString()
+                val fechaInicioString=inicioSeleccion.text.toString()
+                val fechaInicio=formatoFecha.parse(fechaInicioString)
+                val fechaInicioTimestamp=fechaInicio.time
+                val fechaFinString=finSeleccion.text.toString()
+                val fechaFin=formatoFecha.parse(fechaFinString)
+                val fechaFinTimestamp=fechaFin.time
 
-                val usuarioNuevo= UsuarioDTO(false,apellido,contrasena,departamentoSeleccionado, documento, fechaTimestamp,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
-                val callAgregarUsuario = apiService.agregarUsuario(usuarioNuevo)
 
-                callAgregarUsuario.enqueue(object : Callback<UsuarioDTO> {
-                    override fun onResponse(call: Call<UsuarioDTO>, response: Response<UsuarioDTO>) {
+
+
+
+                val evento= EventoId(false,fechaFinTimestamp,null,fechaInicioTimestamp,itrSeleccionado!!,localizacion,modalidadSeleccionada!!,tipoEstado!!,tipoSeleccionado!!,titulo,null)
+                val callAgregarEvento = apiService.agregarEvento(evento)
+
+                callAgregarEvento.enqueue(object : Callback<EventoId> {
+                    override fun onResponse(call: Call<EventoId>, response: Response<EventoId>) {
                         if (response.isSuccessful) {
                             val usuarioResp = response.body()
                             val responseJson = Gson().toJson(usuarioResp)
                             Log.d("Registro Activity", "ResponseBody: $responseJson")
-                            Toast.makeText(this@RegistroActivity, "Usuario creado con éxito, pendiente de activación", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AgregarEventoActivity, "Evento creado con éxito, pendiente de activación", Toast.LENGTH_SHORT).show()
                         }
                     }
 
-                    override fun onFailure(call: Call<UsuarioDTO>, t: Throwable) {
-                        Log.d("Reclamo Activity", "error: ${t}")
+                    override fun onFailure(call: Call<EventoId>, t: Throwable) {
+                        Log.d("AgregarEvento Activity", "error: ${t}")
 
-                        registro_mensaje.text="Ocurrió un error al crear el usuario"
+                        Toast.makeText(this@AgregarEventoActivity, "Ocurrió un error al crear el evento", Toast.LENGTH_SHORT).show()
                     }
                 })
             }

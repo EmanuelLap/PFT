@@ -32,6 +32,16 @@
             android:hint="Titulo"
             />
 
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
@@ -54,6 +64,16 @@
                 android:hint="Selecciona un tipo de evento" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -78,6 +98,16 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_modalidad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
@@ -99,6 +129,18 @@
                 android:layout_marginLeft="10dp"
                 android:hint="Selecciona un ITR" />
 
+            </LinearLayout>
+
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_itr"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
             <EditText
                 android:id="@+id/agregarEvento_localizacion"
                 android:layout_width="wrap_content"
@@ -107,7 +149,17 @@
                 android:textSize="18dp"
                 android:hint="Localización"
                 />
-        </LinearLayout>
+
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_localizacion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
 
 
 
@@ -143,12 +195,17 @@
                 android:layout_height="wrap_content"
                 android:drawableLeft="@drawable/ic_calendar"
                 />
-
-
-
         </LinearLayout>
 
-
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_inicio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -181,6 +238,16 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/agregarEvento_mensaje_fin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
+        <TextView
             android:layout_marginTop="15dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -194,7 +261,15 @@
             android:layout_height="300dp"
             />
 
-
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_tutores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/agregarEvento_btnAsignarTutores"

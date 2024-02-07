@@ -9,6 +9,7 @@ import com.example.pft.entidades.ModalidadEvento
 import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.entidades.ReclamoResponse
+import com.example.pft.entidades.TipoEstadoEvento
 import com.example.pft.entidades.TipoEvento
 import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.Credenciales
@@ -53,6 +54,14 @@ interface ApiService {
 
     @GET("ByteMinds_s4/rest/eventos/listarTipos")
     fun obtenerModalidades(): Call<List<ModalidadEvento>>
+
+    @GET("ByteMinds_s4/rest/eventos/listarTipoEstado")
+    fun obtenerTipoEstados(): Call<List<TipoEstadoEvento>>
+
+    @POST("ByteMinds_s4/rest/eventos/agregarJsonMobile")
+    fun agregarEvento(
+        @Body evento: EventoId
+    ): Call<EventoId>
 
     //Reclamos
     @GET("ByteMinds_s4/rest/reclamos/listar")
