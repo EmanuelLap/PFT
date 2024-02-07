@@ -17,6 +17,7 @@ import com.example.pft.ApiService
 import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.entidades.Evento
+import com.example.pft.entidades.EventoDTOMobile
 import com.example.pft.entidades.EventoId
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.ItrDTO
@@ -53,7 +54,7 @@ class AgregarEventoActivity : AppCompatActivity() {
 
     private var tipoSeleccionado: TipoEvento? = null
     private var modalidadSeleccionada: ModalidadEvento? = null
-    private var itrSeleccionado: Itr? = null
+    private var itrDTOSeleccionado: ItrDTO? = null
     private var tipoEstado: TipoEstadoEvento? = null
 
 
@@ -254,6 +255,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                                 if (position >= 0 && position < itrs.size) {
                                     // Obtiene el itr seleccionado
                                     var itrSeleccionado = itrs[position]
+                                    itrDTOSeleccionado=ItrDTO(true,itrSeleccionado.departamento,itrSeleccionado.id,itrSeleccionado.nombre)
                                 } else {
                                     // Puedes manejar esta situación según tus necesidades
                                     Log.e("AgregarEventoActivity", "Posición seleccionada fuera de los límites")
@@ -328,7 +330,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                 mensaje_modalidad.visibility = View.INVISIBLE // Ocultar el mensaje de error si no está vacío
             }
 
-            if (itrSeleccionado==null) {
+            if (itrDTOSeleccionado==null) {
                 camposVacios.add("itr")
                 mensaje_itr.text = "Selecciona un ITR"
                 mensaje_itr.alpha = 0.8f
@@ -391,11 +393,11 @@ class AgregarEventoActivity : AppCompatActivity() {
 
 
 
-                val evento= EventoId(false,fechaFinTimestamp,null,fechaInicioTimestamp,itrSeleccionado!!,localizacion,modalidadSeleccionada!!,tipoEstado!!,tipoSeleccionado!!,titulo,null)
+                val evento= EventoDTOMobile(false,fechaFinTimestamp,null,fechaInicioTimestamp,itrDTOSeleccionado!!,localizacion,modalidadSeleccionada!!,tipoEstado!!,tipoSeleccionado!!,titulo,null)
                 val callAgregarEvento = apiService.agregarEvento(evento)
 
-                callAgregarEvento.enqueue(object : Callback<EventoId> {
-                    override fun onResponse(call: Call<EventoId>, response: Response<EventoId>) {
+                callAgregarEvento.enqueue(object : Callback<EventoDTOMobile> {
+                    override fun onResponse(call: Call<EventoDTOMobile>, response: Response<EventoDTOMobile>) {
                         if (response.isSuccessful) {
                             val usuarioResp = response.body()
                             val responseJson = Gson().toJson(usuarioResp)
@@ -404,7 +406,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                         }
                     }
 
-                    override fun onFailure(call: Call<EventoId>, t: Throwable) {
+                    override fun onFailure(call: Call<EventoDTOMobile>, t: Throwable) {
                         Log.d("AgregarEvento Activity", "error: ${t}")
 
                         Toast.makeText(this@AgregarEventoActivity, "Ocurrió un error al crear el evento", Toast.LENGTH_SHORT).show()

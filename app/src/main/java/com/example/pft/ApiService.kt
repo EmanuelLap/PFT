@@ -2,6 +2,7 @@ package com.example.pft
 
 import com.example.pft.entidades.EstudianteId
 import com.example.pft.entidades.Evento
+import com.example.pft.entidades.EventoDTOMobile
 import com.example.pft.entidades.EventoId
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.LoginResponse
@@ -60,8 +61,8 @@ interface ApiService {
 
     @POST("ByteMinds_s4/rest/eventos/agregarJsonMobile")
     fun agregarEvento(
-        @Body evento: EventoId
-    ): Call<EventoId>
+        @Body evento: EventoDTOMobile
+    ): Call<EventoDTOMobile>
 
     //Reclamos
     @GET("ByteMinds_s4/rest/reclamos/listar")
