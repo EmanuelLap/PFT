@@ -109,6 +109,16 @@
             android:textSize="24dp"
             />
 
+        <Button
+            android:id="@+id/reclamoAct_eliminarReclamo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#F44336"
+            android:text="Eliminar reclamo"
+            android:layout_marginBottom="30dp"
+            android:textSize="24dp"
+            />
+
         <TextView
             android:id="@+id/reclamoAct_mensaje"
             android:layout_width="wrap_content"

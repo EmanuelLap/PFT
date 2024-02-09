@@ -46,6 +46,7 @@ private lateinit var mensaje:TextView
 private lateinit var btn_fecha:Button
 private lateinit var btn_volver: FloatingActionButton;
 private lateinit var btn_modificar: FloatingActionButton;
+
 var eventoId=0
 
 

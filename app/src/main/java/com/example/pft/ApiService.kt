@@ -82,6 +82,11 @@ interface ApiService {
         @Body reclamo: ReclamoDTOMobile
     ): Call<ReclamoDTOMobile>
 
+    @POST("ByteMinds_s4/rest/reclamos/eliminarReclamoJsonMobile")
+    fun eliminarReclamo(
+        @Body reclamo: ReclamoDTOMobile
+    ): Call<ReclamoDTOMobile>
+
     //ITR
     @GET("ByteMinds_s4/rest/itrs/listar")
     fun obtenerITR(): Call<List<Itr>>
