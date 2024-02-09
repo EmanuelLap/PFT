@@ -11,6 +11,7 @@ import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Reclamo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import java.util.Locale
 
 private lateinit var titulo: TextView;
 private lateinit var detalle: TextView;
@@ -22,6 +23,9 @@ class ReclamoActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_reclamo)
+
+        val locale = Locale("es", "ES")
+        Locale.setDefault(locale)
 
         val reclamoJson = intent.getStringExtra("reclamo")
 
@@ -39,7 +43,11 @@ class ReclamoActivity : AppCompatActivity() {
         detalle.text="Detalle: ${reclamoSeleccionado.detalle}"
         estado.text = "Estado: ${reclamoSeleccionado.activo?.toString() ?: "Esperando respuesta"}"
 
-
+        btn_modificar.setOnClickListener{
+            val modificarActivity = Intent(this@ReclamoActivity, ModificarReclamoActivity::class.java)
+            modificarActivity.putExtra("reclamo", reclamoJson)
+            startActivity(modificarActivity)
+        }
 
         btn_volver.setOnClickListener{
             val mainActivity = Intent(this@ReclamoActivity, MainActivity::class.java)

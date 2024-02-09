@@ -31,6 +31,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Locale
 
 class RegistroActivity : AppCompatActivity() {
 
@@ -87,6 +88,9 @@ class RegistroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro)
+
+        val locale = Locale("es", "ES")
+        Locale.setDefault(locale)
 
        //Declaro rutas
        btnVolver=findViewById(R.id.registro_btnVolver)
