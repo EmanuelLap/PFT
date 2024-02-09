@@ -122,17 +122,6 @@
             />
 
 
-
-        <Button
-            android:id="@+id/evento_registrarReclamo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#00AEEF"
-            android:text="Crear Evento"
-            android:layout_marginBottom="30dp"
-            android:textSize="24dp"
-            />
-
         <TextView
             android:id="@+id/evento_mensaje"
             android:layout_width="wrap_content"
