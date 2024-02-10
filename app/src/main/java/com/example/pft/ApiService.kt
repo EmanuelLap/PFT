@@ -53,7 +53,7 @@ interface ApiService {
     @GET("ByteMinds_s4/rest/eventos/listarTipos")
     fun obtenerTipos(): Call<List<TipoEvento>>
 
-    @GET("ByteMinds_s4/rest/eventos/listarTipos")
+    @GET("ByteMinds_s4/rest/eventos/listarModalidades")
     fun obtenerModalidades(): Call<List<ModalidadEvento>>
 
     @GET("ByteMinds_s4/rest/eventos/listarTipoEstado")
