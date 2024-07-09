@@ -92,12 +92,9 @@ class LoginActivity : AppCompatActivity() {
 
                         val jsonObject = JSONObject(responseJson)
                         val userJson = jsonObject.getJSONObject("user")
-
                         val usuario = userJson.toString()
-
                         mainActivityAnalista.putExtra("usuario", usuario)
                         startActivity(mainActivityAnalista)
-
 
                    // mainActivityAnalista.putExtra("usuario", responseJson)
                    // startActivity(mainActivityAnalista)

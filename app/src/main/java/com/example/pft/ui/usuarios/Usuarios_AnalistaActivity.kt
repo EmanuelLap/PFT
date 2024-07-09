@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import com.example.pft.ApiService
 import com.example.pft.MainActivity
 import com.example.pft.MainActivity_analista
@@ -19,6 +20,7 @@ import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Itr
+import com.example.pft.ui.eventos.EventoActivity
 import com.example.pft.ui.login.ItrAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
@@ -74,6 +76,9 @@ class Usuarios_AnalistaActivity : AppCompatActivity() {
 
         val call=apiService.obtenerUsuarios()
 
+        val usuarioActivity = Intent(this, ModificarUsuario_AnalistaActivity::class.java)
+
+
         call.enqueue(object : Callback<List<Usuario>> {
             override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
                 if (response.isSuccessful) {
@@ -92,21 +97,16 @@ class Usuarios_AnalistaActivity : AppCompatActivity() {
                                         // Al realizar click en cualquier elemento de la lista
                                         listaUsuarios.setOnItemClickListener { adapterView, view, i, l ->
                                             val usuarioSeleccionado = usuarios!!.get(i)
-/*
-                                            // Convierte el objeto Evento a una cadena JSON (por ejemplo, utilizando Gson)
-                                            val eventoJson = Gson().toJson(usuarioSeleccionado)
 
+                                            // Convierte el objeto Evento a una cadena JSON (por ejemplo, utilizando Gson)
+                                            val usuarioJson = Gson().toJson(usuarioSeleccionado)
+
+                                            // Crea un Intent y agrega la cadena JSON como extra
+                                            usuarioActivity.putExtra("usuario", usuarioJson)
 
                                             // Iniciar la actividad con el Intent configurado
-                                            startActivity(evento)
-
- */
+                                            startActivity(usuarioActivity)
                                         }
-
-
-
-
-
                 }
 
 

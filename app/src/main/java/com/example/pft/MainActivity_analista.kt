@@ -7,23 +7,32 @@ import android.util.Log
 import android.view.Menu
 import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.appcompat.widget.PopupMenu
 import androidx.appcompat.widget.Toolbar
+import com.example.pft.entidades.EstudianteId
 import com.example.pft.ui.eventos.Evento_analistaActivity
 import com.example.pft.ui.login.LoginActivity
 import com.example.pft.ui.perfil.PerfilActivity
 import com.example.pft.ui.reclamos.Reclamo_analistaActivity
 import com.example.pft.ui.usuarios.Usuarios_AnalistaActivity
+import com.google.gson.Gson
 import java.util.Locale
 
 
 class MainActivity_analista : AppCompatActivity() {
 
+    private lateinit var nombre: TextView
+    private lateinit var imagen_perfil: ImageView
     private lateinit var icon: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_analista)
+
+
+        nombre=findViewById(R.id.analista_nombreApellido)
+        imagen_perfil=findViewById(R.id.analista_imagen)
 
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
@@ -31,11 +40,27 @@ class MainActivity_analista : AppCompatActivity() {
         if(UsuarioSingleton.usuario==null) {
             val usuario = intent.getStringExtra("usuario")
 
-            Log.d("MainActivity_analista", "usuario: ${usuario}")
-
-
             UsuarioSingleton.usuario = usuario
         }
+
+        val usuarioJson=UsuarioSingleton.usuario
+
+        // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
+        val usuario = Gson().fromJson(usuarioJson, Usuario::class.java)
+
+        // Determinar qué imagen de perfil cargar según el género del usuario
+        val imagenPerfil = if (usuario.genero == "F") {
+            R.drawable.drawable_perfil_femenino
+        } else {
+            R.drawable.drawable_perfil_masculino
+        }
+
+        // Establecer la imagen de perfil
+        imagen_perfil.setImageResource(imagenPerfil)
+        nombre.text=usuario.nombres + "\n" + usuario.apellidos
+
+
+
 
         val toolbar: Toolbar = findViewById(R.id.analista_toolbar)
         setSupportActionBar(toolbar)
