@@ -28,9 +28,14 @@ class MainActivity_analista : AppCompatActivity() {
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
 
-        val usuario = intent.getStringExtra("usuario")
+        if(UsuarioSingleton.usuario==null) {
+            val usuario = intent.getStringExtra("usuario")
 
-        Log.d("MainActivity", "usuario: ${usuario}")
+            Log.d("MainActivity_analista", "usuario: ${usuario}")
+
+
+            UsuarioSingleton.usuario = usuario
+        }
 
         val toolbar: Toolbar = findViewById(R.id.analista_toolbar)
         setSupportActionBar(toolbar)
@@ -71,7 +76,8 @@ class MainActivity_analista : AppCompatActivity() {
                 R.id.menuAnalistaUsuarios -> startActivity(usuariosActivity)
                 R.id.menuAnalistaEventos -> startActivity(eventosActivity)
                 R.id.menuAnalistaReclamos -> startActivity(reclamosActivity)
-                R.id.menuAnalistaCerrarSesion -> startActivity(loginActivity)
+                R.id.menuAnalistaCerrarSesion -> {UsuarioSingleton.usuario = null
+                startActivity(loginActivity)}
             }
             true
         }
