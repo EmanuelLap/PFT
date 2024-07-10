@@ -41,13 +41,14 @@ class MainActivity_analista : AppCompatActivity() {
             val usuario = intent.getStringExtra("usuario")
 
             UsuarioSingleton.usuario = usuario
+            Log.d("AnalistaMain", "Usuario: $usuario")
         }
 
         val usuarioJson=UsuarioSingleton.usuario
 
         // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
         val usuario = Gson().fromJson(usuarioJson, Usuario::class.java)
-
+        Log.d("AnalistaMain", "Usuario: $usuario")
         // Determinar qué imagen de perfil cargar según el género del usuario
         val imagenPerfil = if (usuario.genero == "F") {
             R.drawable.drawable_perfil_femenino

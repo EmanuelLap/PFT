@@ -74,8 +74,9 @@ class MainActivity : AppCompatActivity() {
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
                 R.id.nav_cerrarSesion -> {
-                    val intent = Intent(this,LoginActivity::class.java)
-                    startActivity(intent)
+                    UsuarioSingleton.usuario=null
+                    val login = Intent(this,LoginActivity::class.java)
+                    startActivity(login)
                     true
                 }
                 else -> {

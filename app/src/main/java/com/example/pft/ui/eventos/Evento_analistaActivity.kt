@@ -13,6 +13,7 @@ import android.widget.EditText
 import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pft.ApiService
 import com.example.pft.MainActivity_analista
@@ -28,7 +29,9 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.Date
 import java.util.Locale
 
 class Evento_analistaActivity : AppCompatActivity() {
@@ -86,16 +89,35 @@ class Evento_analistaActivity : AppCompatActivity() {
                     eventos = response.body()!!
                     Log.d("EventoFragment", "API call successful. Eventos: $eventos")
 
-                    // Configurar el ArrayAdapter
                     val adapter = ArrayAdapter(
                         this@Evento_analistaActivity,
                         android.R.layout.simple_list_item_1,
-                        eventos?.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}"  } ?: emptyList()
+                        eventos.map { evento ->
+                            val timestampInicio = evento.inicio
+                            val timestampFin = evento.fin
+
+                            // Convertir timestamps a fechas
+                            val fechaInicio = Date(timestampInicio)
+                            val fechaFin = Date(timestampFin)
+
+                            // Define el formato que deseas para la fecha
+                            val formato = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
+                            // Formatear las fechas a String legible
+                            val fechaInicioFormateada = formato.format(fechaInicio)
+                            val fechaFinFormateada = formato.format(fechaFin)
+
+                            // Construir el texto para cada evento con la fecha formateada
+                            "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+                        }
                     )
 
                     // Asignar el adapter al ListView
                     listaEventos.adapter = adapter
-/*
+
+
+                    val evento = Intent(this@Evento_analistaActivity, EventoActivity::class.java)
+
                     // Al realizar click en cualquier elemento de la lista
                     listaEventos.setOnItemClickListener { adapterView, view, i, l ->
                         val eventoSeleccionado = eventos!!.get(i)
@@ -109,11 +131,6 @@ class Evento_analistaActivity : AppCompatActivity() {
                         // Iniciar la actividad con el Intent configurado
                         startActivity(evento)
                     }
-
- */
-
-
-
                 }
 
 
@@ -340,7 +357,24 @@ class Evento_analistaActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(
             this@Evento_analistaActivity,
             android.R.layout.simple_list_item_1,
-            eventosFiltrados.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}" } ?: emptyList()
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
         )
         listaEventos.adapter = adapter
     }
@@ -351,7 +385,24 @@ class Evento_analistaActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(
             this@Evento_analistaActivity,
             android.R.layout.simple_list_item_1,
-            eventosFiltrados.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}" } ?: emptyList()
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
         )
         listaEventos.adapter = adapter
     }
@@ -362,7 +413,24 @@ class Evento_analistaActivity : AppCompatActivity() {
         val adapter = ArrayAdapter(
             this@Evento_analistaActivity,
             android.R.layout.simple_list_item_1,
-            eventosFiltrados.map { "${it.titulo}\n${it.modalidadEvento.nombre}\nInicio: ${it.inicio.toString()}" } ?: emptyList()
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy HH:mm")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
         )
         listaEventos.adapter = adapter
     }

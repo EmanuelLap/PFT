@@ -11,6 +11,8 @@ import com.example.pft.entidades.Evento
 import com.example.pft.ui.login.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class EventoActivity : AppCompatActivity() {
 
@@ -43,12 +45,26 @@ class EventoActivity : AppCompatActivity() {
         fin=findViewById(R.id.evento_fin)
         btn_volver=findViewById(R.id.evento_btnVolver)
 
+        // Paso timestamp de inicio y fin a fechas
+        val timestampInicio = eventoSeleccionado.inicio
+        val timestampFin = eventoSeleccionado.fin
+        val fechaInicio = Date(timestampInicio)
+        val fechaFin = Date(timestampFin)
+
+
+        // Define el formato que deseas para la fecha
+        val formato = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+
+    // Formatea la fecha a String
+        val fechaInicioFormateada = formato.format(fechaInicio)
+        val fechaFinFormateada = formato.format(fechaFin)
+
         titulo.text=eventoSeleccionado.titulo
         tipo.text="Tipo: ${eventoSeleccionado.tipoEvento.nombre}"
         modalidad.text="Modalidad: ${eventoSeleccionado.modalidadEvento.nombre}"
         localizacion.text="Localización: ${eventoSeleccionado.localizacion}"
-        inicio.text="Inicio: ${eventoSeleccionado.inicio.toString()}"
-        fin.text="Fin: ${eventoSeleccionado.fin.toString()}"
+        inicio.text="Inicio: $fechaInicioFormateada"
+        fin.text="Fin: $fechaFinFormateada"
 
 
         btn_volver.setOnClickListener{

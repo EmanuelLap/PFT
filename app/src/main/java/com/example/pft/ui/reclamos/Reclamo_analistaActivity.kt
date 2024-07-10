@@ -20,11 +20,13 @@ import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Reclamo
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
 
 class Reclamo_analistaActivity : AppCompatActivity() {
 
@@ -46,6 +48,13 @@ class Reclamo_analistaActivity : AppCompatActivity() {
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
+            .client(
+                OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de conexión
+                    .readTimeout(30, TimeUnit.SECONDS)    // Tiempo máximo de lectura
+                    .writeTimeout(30, TimeUnit.SECONDS)   // Tiempo máximo de escritura
+                    .build()
+            )
             .build()
 
         val apiService = retrofit.create(ApiService::class.java)
