@@ -1,5 +1,6 @@
 package com.example.pft.ui.reclamos
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -57,6 +59,12 @@ class AgregarReclamoActivity : AppCompatActivity() {
     private lateinit var mensaje:TextView
     private lateinit var volver: FloatingActionButton
     var eventoId=0
+
+    //mensajes
+    private lateinit var mensaje_titulo: TextView
+    private lateinit var mensaje_detalle: TextView
+    private lateinit var mensaje_creditos: TextView
+    private lateinit var mensaje_fecha: TextView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_reclamo)
@@ -75,6 +83,12 @@ class AgregarReclamoActivity : AppCompatActivity() {
         agregarReclamo=findViewById(R.id.agregarReclamoActivity_agregar)
         volver=findViewById(R.id.agregarReclamoActivity_volver)
         mensaje=findViewById(R.id.agregarReclamoActivity_Mensaje)
+
+        //mensajes
+        mensaje_titulo=findViewById(R.id.agregarReclamoActivity_mensaje_titulo)
+        mensaje_detalle=findViewById(R.id.agregarReclamoActivity_mensaje_descripcion)
+        mensaje_creditos=findViewById(R.id.agregarReclamoActivity_mensaje_creditos)
+        mensaje_fecha=findViewById(R.id.agregarReclamoActivity_mensaje_fecha)
 
         // Recuperar el valor del "usuario"
 
@@ -177,7 +191,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
         //Agregar Reclamo
 
 
-        agregarReclamo.setOnClickListener{
+        agregarReclamo.setOnClickListener {
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
                 .addConverterFactory(GsonConverterFactory.create())
@@ -185,71 +199,131 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
             val apiService = retrofit.create(ApiService::class.java)
 
-            val formatoFecha=SimpleDateFormat("dd/mm/yyyy")
+            val camposVacios = mutableListOf<String>()
 
-            val estudianteId=usuario.id
-            val tituloIngresado=titulo.text.toString()
-            val detalleIngresado=detalle.text.toString()
-            val creditosIngresados=creditos.text.toString().toInt()
-            val semestreSeleccionado=semestre.selectedItem.toString().toInt()
-            val fechaString=fechaText.text.toString()
-            val fecha=formatoFecha.parse(fechaString)
-            val fechaTimestamp=fecha.time
-            val fechaIngresada=fechaTimestamp
+            if (titulo.text.toString().isEmpty()) {
+                camposVacios.add("titulo")
+                mensaje_titulo.text = "Ingresa un titulo"
+                mensaje_titulo.alpha = 0.8f
+                mensaje_titulo.visibility = View.VISIBLE
+            } else {
+                mensaje_titulo.visibility = View.INVISIBLE
+            }
+
+            if (detalle.text.toString().isEmpty()) {
+                camposVacios.add("descripcion")
+                mensaje_detalle.text = "Ingresa una descripción"
+                mensaje_detalle.alpha = 0.8f
+                mensaje_detalle.visibility = View.VISIBLE
+            } else {
+                mensaje_detalle.visibility = View.INVISIBLE
+            }
+
+            if (fechaText.text.toString().isEmpty()) {
+                camposVacios.add("Fecha")
+                mensaje_fecha.text = "Selecciona una fecha"
+                mensaje_fecha.alpha = 0.8f
+                mensaje_fecha.visibility = View.VISIBLE
+            } else {
+                mensaje_fecha.visibility = View.INVISIBLE
+            }
+
+            if (creditos.text.toString().isEmpty()) {
+                camposVacios.add("creditos")
+                mensaje_creditos.text = "Ingresa la cantidad de créditos"
+                mensaje_creditos.alpha = 0.8f
+                mensaje_creditos.visibility = View.VISIBLE
+            } else {
+                mensaje_creditos.visibility = View.INVISIBLE
+            }
+
+            if (camposVacios.isNotEmpty()) {
+                Toast.makeText(this, "Por favor, completa todos los campos.", Toast.LENGTH_SHORT)
+                    .show()
+            } else {
+                // Todos los campos están completos
+
+                val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
+
+                val estudianteId = usuario.id
+                val tituloIngresado = titulo.text.toString()
+                val detalleIngresado = detalle.text.toString()
+                val creditosIngresados = creditos.text.toString().toInt()
+                val semestreSeleccionado = semestre.selectedItem.toString().toInt()
+                val fechaString = fechaText.text.toString()
+                val fecha = formatoFecha.parse(fechaString)
+                val fechaTimestamp = fecha.time
+                val fechaIngresada = fechaTimestamp
 
 
-            val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId, eventoId,fechaIngresada,null,semestreSeleccionado,tituloIngresado)
+                val reclamo = ReclamoDTOMobile(
+                    true,
+                    creditosIngresados,
+                    detalleIngresado,
+                    estudianteId,
+                    eventoId,
+                    fechaIngresada,
+                    null,
+                    semestreSeleccionado,
+                    tituloIngresado
+                )
 
-            Log.d("AgregarReclamoActivity", "eventoId: ${eventoId}")
+                Log.d("AgregarReclamoActivity", "eventoId: ${eventoId}")
 
-            // Convertir la cadena de fecha a un objeto Date
-        //    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-           // val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
+                // Convertir la cadena de fecha a un objeto Date
+                //    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                // val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
 
 
                 val call = apiService.agregarReclamo(
-                  reclamo
+                    reclamo
                 )
 
                 call.enqueue(object : Callback<ReclamoDTOMobile> {
-                    override fun onResponse(call: Call<ReclamoDTOMobile>, response: Response<ReclamoDTOMobile>) {
+                    override fun onResponse(
+                        call: Call<ReclamoDTOMobile>,
+                        response: Response<ReclamoDTOMobile>
+                    ) {
                         if (response.isSuccessful) {
                             val reclamoResp = response.body()
-                            val responseJson = Gson().toJson(reclamoResp)
                             Log.d("AgregarReclamoActivity", "ResponseBody: $reclamoResp")
+                            mostrarDialogoReclamoCreado()
                         }
                     }
 
                     override fun onFailure(call: Call<ReclamoDTOMobile>, t: Throwable) {
                         Log.d("AgregarReclamoActivity", "error: ${t}")
 
-                        mensaje.text="Ocurrió un error al crear el reclamo"
+                        mensaje.text = "Ocurrió un error al crear el reclamo"
                     }
-                    })
+                })
 
             }
-        /*else {
-                // Manejar el caso en que no se haya seleccionado un evento
-                Log.e("AgregarReclamoActivity", "No se ha seleccionado un evento")
-            }
-*/
-
-
-
-
-
+        }
 
         fechaButton.setOnClickListener {
             mostrarCalendario()
         }
 
         volver.setOnClickListener{
-            val mainActivity = Intent(this@AgregarReclamoActivity, MainActivity::class.java)
-            startActivity(mainActivity)
+           // val mainActivity = Intent(this@AgregarReclamoActivity, MainActivity::class.java)
+          //  startActivity(mainActivity)
+            finish()
         }
 
     }
 
+    private fun mostrarDialogoReclamoCreado() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Reclamo creado")
+        builder.setMessage("Su reclamo ha sido creado correctamente.")
+        builder.setPositiveButton("Aceptar") { dialog, which ->
+            // Al hacer clic en Aceptar, cierra la Activity
+            finish()
+        }
+        val dialog = builder.create()
+        dialog.show()
+    }
     private fun mostrarCalendario() {
         val calendar = Calendar.getInstance()
         val year = calendar.get(Calendar.YEAR)

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.reclamos.AgregarReclamoActivity">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,6 +25,16 @@
             android:hint="Titulo"
             />
 
+        <TextView
+            android:id="@+id/agregarReclamoActivity_mensaje_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/agregarReclamoActivity_Descripcion"
             android:layout_marginTop="15dp"
@@ -29,6 +43,16 @@
             android:layout_height="200dp"
             android:hint="Descrpición"
             />
+
+        <TextView
+            android:id="@+id/agregarReclamoActivity_mensaje_descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -52,6 +76,15 @@
                 android:hint="Selecciona un evento" />
 
         </LinearLayout>
+        <TextView
+            android:id="@+id/agregarReclamoActivity_mensaje_evento"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -76,6 +109,16 @@
                 android:hint="Selecciona un semestre" />
 
         </LinearLayout>
+
+        <TextView
+            android:id="@+id/agregarReclamoActivity_mensaje_semestre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -109,12 +152,20 @@
                 android:drawableLeft="@drawable/ic_calendar"
                 />
 
-
-
-
         </LinearLayout>
 
 
+
+
+        <TextView
+            android:id="@+id/agregarReclamoActivity_mensaje_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <EditText
             android:id="@+id/agregarReclamoActivity_creditos"
@@ -132,6 +183,16 @@
             />
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/agregarReclamoActivity_mensaje_creditos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="#CA1414"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -161,7 +222,8 @@
             />
 
 
+</LinearLayout>
 
     </LinearLayout>
 
-</FrameLayout>
+</ScrollView>
