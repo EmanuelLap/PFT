@@ -64,7 +64,12 @@ class ReclamoActivity : AppCompatActivity() {
 
         titulo.text="Título: ${reclamoSeleccionado.titulo}"
         detalle.text="Detalle: ${reclamoSeleccionado.detalle}"
-        estado.text = "Estado: ${reclamoSeleccionado.activo?.toString() ?: "Esperando respuesta"}"
+        val estadoTexto = if (reclamoSeleccionado.activo == true) {
+            "Estado: Esperando respuesta"
+        } else {
+            "Estado: Resuelto"
+        }
+        estado.text = estadoTexto
 
         btn_modificar.setOnClickListener{
             val modificarActivity = Intent(this@ReclamoActivity, ModificarReclamoActivity::class.java)
@@ -101,8 +106,7 @@ class ReclamoActivity : AppCompatActivity() {
         }
 
         btn_volver.setOnClickListener{
-            val mainActivity = Intent(this@ReclamoActivity, MainActivity::class.java)
-            startActivity(mainActivity)
+            finish()
         }
 
 

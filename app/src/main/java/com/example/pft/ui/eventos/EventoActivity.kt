@@ -53,7 +53,7 @@ class EventoActivity : AppCompatActivity() {
 
 
         // Define el formato que deseas para la fecha
-        val formato = SimpleDateFormat("dd/MM/yyyy HH:mm:ss")
+        val formato = SimpleDateFormat("dd/MM/yyyy HH:mm")
 
     // Formatea la fecha a String
         val fechaInicioFormateada = formato.format(fechaInicio)

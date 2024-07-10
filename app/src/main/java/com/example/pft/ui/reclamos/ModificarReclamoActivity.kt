@@ -268,8 +268,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
         }
 
         btn_volver.setOnClickListener{
-            val mainActivity = Intent(this@ModificarReclamoActivity, MainActivity::class.java)
-            startActivity(mainActivity)
+            finish()
         }
 
         fechaButton.setOnClickListener {

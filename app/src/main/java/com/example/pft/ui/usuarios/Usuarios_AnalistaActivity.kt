@@ -94,19 +94,19 @@ class Usuarios_AnalistaActivity : AppCompatActivity() {
                     // Asignar el adapter al ListView
                     listaUsuarios.adapter = adapter
 
-                                        // Al realizar click en cualquier elemento de la lista
-                                        listaUsuarios.setOnItemClickListener { adapterView, view, i, l ->
-                                            val usuarioSeleccionado = usuarios!!.get(i)
+                    // Al realizar click en cualquier elemento de la lista
+                    listaUsuarios.setOnItemClickListener { adapterView, view, i, l ->
+                        val usuarioSeleccionado = usuarios!!.get(i)
 
-                                            // Convierte el objeto Evento a una cadena JSON (por ejemplo, utilizando Gson)
-                                            val usuarioJson = Gson().toJson(usuarioSeleccionado)
+                        // Convierte el objeto Evento a una cadena JSON (por ejemplo, utilizando Gson)
+                        val usuarioJson = Gson().toJson(usuarioSeleccionado)
 
-                                            // Crea un Intent y agrega la cadena JSON como extra
-                                            usuarioActivity.putExtra("usuario", usuarioJson)
+                        // Crea un Intent y agrega la cadena JSON como extra
+                        usuarioActivity.putExtra("usuario", usuarioJson)
 
-                                            // Iniciar la actividad con el Intent configurado
-                                            startActivity(usuarioActivity)
-                                        }
+                        // Iniciar la actividad con el Intent configurado
+                        startActivity(usuarioActivity)
+                    }
                 }
 
 

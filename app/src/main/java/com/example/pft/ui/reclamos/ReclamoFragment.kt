@@ -81,14 +81,15 @@ class ReclamoFragment : Fragment() {
         call.enqueue(object : Callback<List<Reclamo>> {
             override fun onResponse(call: Call<List<Reclamo>>, response: Response<List<Reclamo>>) {
                 if (response.isSuccessful) {
-                    val reclamos = response.body()
+                    val reclamos = response.body()!!
                     Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamos")
+                    val reclamosActivos = reclamos.filter { it.activo == true }
 
                     // Configurar el ArrayAdapter
                     val adapter = ArrayAdapter(
                         requireContext(),
                         android.R.layout.simple_list_item_1,
-                        reclamos?.map { "${it.titulo}" } ?: emptyList()
+                        reclamosActivos?.map { "${it.titulo}" } ?: emptyList()
                     )
 
                     // Asignar el adapter al ListView

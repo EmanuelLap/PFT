@@ -1,55 +1,67 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.perfil.PerfilFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-
-
-    <LinearLayout
+    <!-- Título "Perfil" con fondo azul -->
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        >
+        android:layout_height="wrap_content"
+        android:text="Perfil"
+        android:gravity="center_horizontal"
+        android:textSize="40sp"
+        android:background="#00AEEF"
+        android:layout_marginBottom="20dp" />
 
-        <TextView
+    <!-- Contenedor principal del perfil -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Perfil"
-            android:gravity="center_horizontal"
-            android:textSize="40dp"
-            android:layout_marginBottom="20dp"
-            android:background="#00AEEF"
-            />
+            android:orientation="vertical">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingHorizontal="50dp">
-
-
-
+            <!-- Imagen del perfil -->
             <ImageView
                 android:id="@+id/perfilFragment_imagen"
                 android:layout_width="200dp"
                 android:layout_height="200dp"
                 android:src="@mipmap/perfil_masculino"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center"
                 android:layout_marginTop="20dp" />
 
+            <!-- Nombre y Apellido -->
             <TextView
                 android:id="@+id/perfilFragment_nombreApellido"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:textSize="40dp"
-                android:layout_marginTop="220dp" />
+                android:textSize="24sp"
+                android:layout_marginTop="20dp" />
 
-        </RelativeLayout>
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
-</ScrollView>
+    <!-- Barra gris en la parte inferior -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3A454B"
+        android:theme="@style/Theme.PFT.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/perfil_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/Theme.PFT.PopupOverlay" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+</LinearLayout>

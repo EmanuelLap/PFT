@@ -7,32 +7,62 @@
     android:orientation="vertical"
     tools:context=".ui.reclamos.ReclamoFragment">
 
-    <TextView
+    <!-- Contenedor principal con orientación vertical -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <!-- TextView de título "Reclamos" -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Reclamos"
+            android:gravity="center_horizontal"
+            android:textSize="40sp" />
+
+        <!-- ListView para mostrar los reclamos -->
+        <ListView
+            android:id="@+id/reclamos_lista"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="50dp" />
+
+    </LinearLayout>
+
+    <!-- Contenedor para el FAB y la barra gris -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Reclamos"
-        android:gravity="center_horizontal"
-        android:textSize="40dp"
-        />
-    <ListView
-        android:id="@+id/reclamos_lista"
-        android:layout_marginTop="50dp"
-        android:layout_width="match_parent"
-        android:layout_height="300dp"
-        />
+        android:orientation="vertical">
 
+        <!-- Botón flotante para agregar reclamos -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/reclamos_agregar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="30dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/ic_add"
+            android:backgroundTint="#00AEEF" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/reclamos_agregar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginRight="30dp"
-        android:src="@drawable/ic_add"
-        android:backgroundTint="#00AEEF"
+        <!-- Barra gris en la parte inferior -->
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#3A454B"
+            android:theme="@style/Theme.PFT.AppBarOverlay">
 
-        />
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/login_toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:popupTheme="@style/Theme.PFT.PopupOverlay" />
+        </com.google.android.material.appbar.AppBarLayout>
 
-
+    </LinearLayout>
 
 </LinearLayout>

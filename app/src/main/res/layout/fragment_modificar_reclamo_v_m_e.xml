@@ -13,8 +13,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Titulo"
-        />
+        android:hint="Título" />
 
     <EditText
         android:id="@+id/modificarReclamoVME_Descripcion"
@@ -22,8 +21,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="200dp"
-        android:hint="Descrpicion"
-        />
+        android:hint="Descripción" />
 
     <EditText
         android:id="@+id/modificarReclamoVME_VME"
@@ -31,9 +29,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Evento/Empresa/Institución (VME)"
-        />
-
+        android:hint="Evento/Empresa/Institución (VME)" />
 
     <EditText
         android:id="@+id/modificarReclamoVME_semestre"
@@ -41,8 +37,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Semestre"
-        />
+        android:hint="Semestre" />
 
     <EditText
         android:id="@+id/modificarReclamoVME_fecha"
@@ -50,8 +45,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Fecha"
-        />
+        android:hint="Fecha" />
 
     <EditText
         android:id="@+id/modificarReclamoVME_docente"
@@ -59,8 +53,7 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Docente"
-        />
+        android:hint="Docente" />
 
     <EditText
         android:id="@+id/modificarReclamoVME_creditos"
@@ -68,20 +61,22 @@
         android:layout_marginLeft="30dp"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:hint="Creditos"
-        />
+        android:hint="Créditos" />
 
     <TextView
         android:id="@+id/modificarReclamoVME_Mensaje"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        android:layout_height="wrap_content" />
 
+
+
+    <!-- Espacio para los botones de acción -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="65dp"
         android:orientation="horizontal">
 
+        <!-- Botón "Volver" -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/modificarReclamoVME_volver"
             android:layout_width="wrap_content"
@@ -89,22 +84,32 @@
             android:src="@drawable/ic_volver"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="230dp"
-            android:backgroundTint="#00AEEF"
+            android:backgroundTint="#00AEEF" />
 
-            />
-
+        <!-- Botón "Agregar" -->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/modificarReclamoVME_agregar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:src="@drawable/ic_check"
-            android:backgroundTint="#00AEEF"
-
-            />
-
-
+            android:backgroundTint="#00AEEF" />
 
     </LinearLayout>
+
+    <!-- Barra de herramientas (AppBarLayout con Toolbar) -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3A454B"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </com.google.android.material.appbar.AppBarLayout>
 
 </LinearLayout>
