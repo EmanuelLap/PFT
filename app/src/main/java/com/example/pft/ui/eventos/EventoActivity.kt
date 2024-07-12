@@ -3,10 +3,12 @@ package com.example.pft.ui.eventos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import com.example.pft.MainActivity
 import com.example.pft.R
+import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.Evento
 import com.example.pft.ui.login.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -22,7 +24,8 @@ class EventoActivity : AppCompatActivity() {
     private lateinit var localizacion:TextView;
     private lateinit var inicio:TextView;
     private lateinit var fin:TextView;
-    private lateinit var btn_reclamo:Button
+    private lateinit var btn_asignarTutores:Button
+    private lateinit var btn_eliminar:Button
     private lateinit var btn_volver:FloatingActionButton
 
 
@@ -44,6 +47,17 @@ class EventoActivity : AppCompatActivity() {
         inicio=findViewById(R.id.evento_inicio)
         fin=findViewById(R.id.evento_fin)
         btn_volver=findViewById(R.id.evento_btnVolver)
+        btn_asignarTutores=findViewById(R.id.evento_agregarTutores)
+        btn_eliminar=findViewById(R.id.evento_eliminarEvento)
+
+        // Configurar la visibilidad del layout basado en la condición del usuario
+        if (UsuarioSingleton.usuario?.rol?.nombre == "ANALISTA") {
+            btn_asignarTutores.visibility = View.VISIBLE
+            btn_eliminar.visibility = View.VISIBLE
+        } else {
+            btn_asignarTutores.visibility = View.GONE
+            btn_eliminar.visibility = View.GONE
+        }
 
         // Paso timestamp de inicio y fin a fechas
         val timestampInicio = eventoSeleccionado.inicio

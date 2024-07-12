@@ -88,6 +88,17 @@ class AgregarEventoActivity : AppCompatActivity() {
         btnVolver=findViewById(R.id.agregarEvento_volver)
         btnConfirmar=findViewById(R.id.agregarEvento_agregar)
 
+        //mensajes
+
+        mensaje_titulo=findViewById(R.id.agregarEvento_mensaje_titulo)
+        mensaje_tipo=findViewById(R.id.agregarEvento_mensaje_tipo)
+        mensaje_modalidad=findViewById(R.id.agregarEvento_mensaje_modalidad)
+        mensaje_itr=findViewById(R.id.agregarEvento_mensaje_itr)
+        mensaje_localizacion=findViewById(R.id.agregarEvento_mensaje_localizacion)
+        mensaje_inicio=findViewById(R.id.agregarEvento_mensaje_inicio)
+        mensaje_fin=findViewById(R.id.agregarEvento_mensaje_fin)
+        mensaje_tutores=findViewById(R.id.agregarEvento_mensaje_tutores)
+
         val tutoresAgregados = mutableListOf<UsuarioDTO>()
 
 
@@ -292,12 +303,7 @@ class AgregarEventoActivity : AppCompatActivity() {
 
         btnConfirmar.setOnClickListener{
 
-
-
-
             val camposVacios = mutableListOf<String>()
-
-
 
             if (titulo.text.toString().isEmpty()) {
                 camposVacios.add("titulo")
@@ -372,7 +378,7 @@ class AgregarEventoActivity : AppCompatActivity() {
             }
 
             if (camposVacios.isNotEmpty()) {
-                Toast.makeText(this, "Completa todos los campos.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AgregarEventoActivity, "Completa todos los campos.", Toast.LENGTH_SHORT).show()
             } else {
                 // Todos los campos están completos
                 val formatoFecha= SimpleDateFormat("dd/mm/yyyy")
