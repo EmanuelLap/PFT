@@ -32,13 +32,12 @@ class PerfilFragment : Fragment() {
 
         // Recuperar el valor del "usuario"
 
-        val usuarioJson = UsuarioSingleton.usuario
+        val usuario = UsuarioSingleton.usuario
 
-        // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
-        val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
+
 
         // Determinar qué imagen de perfil cargar según el género del usuario
-        val imagenPerfil = if (usuario.genero == "F") {
+        val imagenPerfil = if (usuario?.genero.toString() == "F") {
             R.drawable.drawable_perfil_femenino
         } else {
             R.drawable.drawable_perfil_masculino
@@ -46,7 +45,7 @@ class PerfilFragment : Fragment() {
 
         // Establecer la imagen de perfil
         imagen_perfil.setImageResource(imagenPerfil)
-        nombre.text=usuario.nombres + "\n" + usuario.apellidos
+        nombre.text=usuario?.nombres + "\n" + usuario?.apellidos
         // Inflate the layout for this fragment
         return view
     }

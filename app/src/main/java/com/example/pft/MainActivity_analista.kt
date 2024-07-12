@@ -36,7 +36,7 @@ class MainActivity_analista : AppCompatActivity() {
 
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
-
+/*
         if(UsuarioSingleton.usuario==null) {
             val usuario = intent.getStringExtra("usuario")
 
@@ -44,8 +44,10 @@ class MainActivity_analista : AppCompatActivity() {
             Log.d("AnalistaMain", "Usuario: $usuario")
         }
 
-        val usuarioJson=UsuarioSingleton.usuario
+ */
 
+        val usuarioJson=UsuarioSingleton.usuario
+/*
         // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
         val usuario = Gson().fromJson(usuarioJson, Usuario::class.java)
         Log.d("AnalistaMain", "Usuario: $usuario")
@@ -62,6 +64,8 @@ class MainActivity_analista : AppCompatActivity() {
 
 
 
+
+ */
 
         val toolbar: Toolbar = findViewById(R.id.analista_toolbar)
         setSupportActionBar(toolbar)

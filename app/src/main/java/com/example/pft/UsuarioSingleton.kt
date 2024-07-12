@@ -1,5 +1,4 @@
 package com.example.pft
 
 object UsuarioSingleton {
-    var usuario: String? = null
-}
+    var usuario: Usuario? = null}

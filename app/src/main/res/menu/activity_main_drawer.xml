@@ -1,26 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
-    >
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_home"
-            android:icon="@drawable/ic_perfil"
-            android:title="Mi Perfil" />
+            android:id="@+id/nav_perfil"
+            android:title="Perfil" />
+
+    <!-- Ítems específicos para analistas -->
+    <group android:id="@+id/group_analista_specific">
         <item
-            android:id="@+id/nav_gallery"
-            android:icon="@drawable/ic_evento"
+            android:id="@+id/nav_usuarios"
+            android:title="Usuarios" />
+        <item
+            android:id="@+id/nav_eventos_analista"
             android:title="Eventos" />
         <item
-            android:id="@+id/nav_slideshow"
-            android:icon="@drawable/ic_reclamo"
+            android:id="@+id/nav_reclamos_analista"
             android:title="Reclamos" />
-
-        <item
-            android:id="@+id/nav_cerrarSesion"
-            android:icon="@drawable/ic_logout"
-            android:title="Cerrar Sesión" />
     </group>
+
+    <!-- Ítems específicos para estudiantes -->
+    <group android:id="@+id/group_estudiante_specific">
+        <item
+            android:id="@+id/nav_eventos_estudiante"
+            android:title="Eventos" />
+        <item
+            android:id="@+id/nav_reclamos_estudiante"
+            android:title="Reclamos" />
+    </group>
+
+    <!-- Ítems específicos para tutores -->
+    <group android:id="@+id/group_tutor_specific">
+        <item
+            android:id="@+id/nav_eventos_tutor"
+            android:title="Eventos" />
+        <!-- Aquí no es necesario añadir ningún ítem específico para este ejemplo -->
+    </group>
+    <item
+        android:id="@+id/nav_logout"
+        android:title="Cerrar sesión" />
 </menu>

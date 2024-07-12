@@ -32,12 +32,15 @@ class MainActivity_tutor : AppCompatActivity() {
         //val toolbar = findViewById<Toolbar>(R.id.tutor_toolbar)
        // setSupportActionBar(toolbar)
 
+// Configura el tema sin ActionBar
+        setTheme(R.style.Theme_PFT_NoActionBar)
+
         nombre=findViewById(R.id.tutor_nombreApellido)
         imagen_perfil=findViewById(R.id.tutor_imagen)
 
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
-
+/*
         if(UsuarioSingleton.usuario==null) {
             val usuario = intent.getStringExtra("usuario")
 
@@ -100,10 +103,12 @@ class MainActivity_tutor : AppCompatActivity() {
             }
             true
         }
+
+ */
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.main_analista_menu, menu)
+        menuInflater.inflate(R.menu.main_tutor_menu, menu)
         return true
     }
 

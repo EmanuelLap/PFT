@@ -3,26 +3,52 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_perfil">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_perfil"
         android:name="com.example.pft.ui.perfil.PerfilFragment"
         android:label="Mi Perfil"
         tools:layout="@layout/fragment_perfil" />
 
+    <!--EVENTOS-->
     <fragment
-        android:id="@+id/nav_gallery"
+        android:id="@+id/nav_eventos_analista"
         android:name="com.example.pft.ui.eventos.EventoFragment"
         android:label="Eventos"
         tools:layout="@layout/fragment_evento" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
+        android:id="@+id/nav_eventos_estudiante"
+        android:name="com.example.pft.ui.eventos.EventoFragment"
+        android:label="Eventos"
+        tools:layout="@layout/fragment_evento" />
+
+    <fragment
+        android:id="@+id/nav_eventos_tutor"
+        android:name="com.example.pft.ui.eventos.EventoFragment"
+        android:label="Eventos"
+        tools:layout="@layout/fragment_evento" />
+
+    <!--RECLAMOS-->
+
+    <fragment
+        android:id="@+id/nav_reclamos_analista"
         android:name="com.example.pft.ui.reclamos.ReclamoFragment"
         android:label="Reclamos"
         tools:layout="@layout/fragment_reclamo" />
 
+    <fragment
+        android:id="@+id/nav_reclamos_estudiante"
+        android:name="com.example.pft.ui.reclamos.ReclamoFragment"
+        android:label="Reclamos"
+        tools:layout="@layout/fragment_reclamo" />
+
+    <fragment
+        android:id="@+id/nav_reclamos_tutor"
+        android:name="com.example.pft.ui.reclamos.ReclamoFragment"
+        android:label="Reclamos"
+        tools:layout="@layout/fragment_reclamo" />
     <activity
         android:id="@+id/nav_cerrarSesion"
         android:name="com.example.pft.ui.login.LoginActivity"

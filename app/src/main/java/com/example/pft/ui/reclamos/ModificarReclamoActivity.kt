@@ -115,7 +115,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
         val usuarioJson = UsuarioSingleton.usuario
 
         // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
-        val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
+        /*val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
 
         //spinner semestre
         // opciones (del 1 al 10)
@@ -289,6 +289,8 @@ class ModificarReclamoActivity : AppCompatActivity() {
             val dialog = builder.create()
             dialog.show()
         }
+
+         */
     }
     private fun mostrarCalendario() {
         val calendar = Calendar.getInstance()

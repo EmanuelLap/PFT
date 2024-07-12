@@ -92,10 +92,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
         // Recuperar el valor del "usuario"
 
-        val usuarioJson = UsuarioSingleton.usuario
-
-        // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
-        val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
+        val usuario = UsuarioSingleton.usuario
 
         //spinner semestre
         // opciones (del 1 al 10)
@@ -133,7 +130,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
         val call = apiService.obtenerEventos()
 
-        Log.d("AgregarReclamoActivity", "Before API call, usuario: ${usuarioJson}")
+
 
         call.enqueue(object : Callback<List<Evento>> {
             override fun onResponse(call: Call<List<Evento>>, response: Response<List<Evento>>) {
@@ -245,7 +242,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
                 val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
 
-                val estudianteId = usuario.id
+                val estudianteId = usuario?.id
                 val tituloIngresado = titulo.text.toString()
                 val detalleIngresado = detalle.text.toString()
                 val creditosIngresados = creditos.text.toString().toInt()
@@ -260,7 +257,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
                     true,
                     creditosIngresados,
                     detalleIngresado,
-                    estudianteId,
+                    estudianteId!!,
                     eventoId,
                     fechaIngresada,
                     null,

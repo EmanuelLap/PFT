@@ -32,13 +32,23 @@ class MainActivity : AppCompatActivity() {
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
 
-        if(UsuarioSingleton.usuario==null) {
+        Log.d("MainActivity", "usuarioSingleton1: ${UsuarioSingleton.usuario}")
+        val usuarioA = intent.getStringExtra("usuario")
+        Log.d("MainActivity", "usuario: ${usuarioA}")
+
+        Log.d("MainActivity", "usuarioSingleton2: ${UsuarioSingleton.usuario}")
+
+
+       /* if(UsuarioSingleton.usuario==null) {
             val usuario = intent.getStringExtra("usuario")
 
             UsuarioSingleton.usuario = usuario
         }
 
-            val usuario=UsuarioSingleton.usuario
+        */
+
+        val usuario = UsuarioSingleton.usuario
+
 
 
         Log.d("MainActivity", "usuario: ${usuario}")
@@ -50,12 +60,6 @@ class MainActivity : AppCompatActivity() {
 
         Log.d("MainActivity", "Valor de usuario antes de asignar al Bundle: $usuario")
 
-
-
-
-
-
-
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_main)
@@ -64,22 +68,72 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top-level destinations.
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow, R.id.nav_cerrarSesion
+                R.id.nav_perfil, R.id.nav_eventos_analista, R.id.nav_reclamos_estudiante, R.id.nav_cerrarSesion
             ), drawerLayout
         )
 
+        val navMenu = navView.menu
+
+        // Ocultar todos los grupos específicos inicialmente
+        navMenu.setGroupVisible(R.id.group_analista_specific, false)
+        navMenu.setGroupVisible(R.id.group_estudiante_specific, false)
+        navMenu.setGroupVisible(R.id.group_tutor_specific, false)
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
+        when (usuario?.rol!!.nombre) {
+            "ANALISTA" -> {
+                navMenu.setGroupVisible(R.id.group_analista_specific, true)
+            }
+
+            "ESTUDIANTE" -> {
+                navMenu.setGroupVisible(R.id.group_estudiante_specific, true)
+            }
+
+            "TUTOR" -> {
+                navMenu.setGroupVisible(R.id.group_tutor_specific, true)
+            }
+        }
+
         navView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
-                R.id.nav_cerrarSesion -> {
+                R.id.nav_logout -> {
                     UsuarioSingleton.usuario=null
                     val login = Intent(this,LoginActivity::class.java)
                     startActivity(login)
                     true
                 }
+
+                R.id.nav_perfil -> {
+                    navController.navigate(R.id.nav_perfil)
+                    true
+                }
+
+                //ANALISTA
+                R.id.nav_eventos_analista -> {
+                    navController.navigate(R.id.nav_eventos_analista)
+                   true
+                }
+
+                R.id.nav_reclamos_estudiante -> {
+                    navController.navigate(R.id.nav_reclamos_estudiante)
+                    true
+                }
+
+                //ESTUDIANTE
+                R.id.nav_eventos_analista -> {
+                    navController.navigate(R.id.nav_eventos_analista)
+                    true
+                }
+
+                R.id.nav_reclamos_estudiante -> {
+                    navController.navigate(R.id.nav_reclamos_estudiante)
+                    true
+                }
+
                 else -> {
+                    Log.d("MainActivity", "No funciona")
+
                     NavigationUI.onNavDestinationSelected(
                         menuItem,
                         navController

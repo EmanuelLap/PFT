@@ -13,6 +13,7 @@ import com.example.pft.MainActivity_analista
 import com.example.pft.MainActivity_tutor
 import com.example.pft.R
 import com.example.pft.Usuario
+import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.LoginResponse
 import com.google.gson.Gson
 import org.json.JSONException
@@ -88,32 +89,30 @@ class LoginActivity : AppCompatActivity() {
                                 val mainActivityAnalista = Intent(this@LoginActivity, MainActivity_analista::class.java)
                                 val mainActivityTutor = Intent(this@LoginActivity, MainActivity_tutor::class.java)
 
-                if(logResp.user?.utipo =="ANALISTA") {
-
+                    try { // Parsear el JSON
                         val jsonObject = JSONObject(responseJson)
                         val userJson = jsonObject.getJSONObject("user")
-                        val usuario = userJson.toString()
-                        mainActivityAnalista.putExtra("usuario", usuario)
-                        startActivity(mainActivityAnalista)
 
-                   // mainActivityAnalista.putExtra("usuario", responseJson)
-                   // startActivity(mainActivityAnalista)
-                }
-                else if(logResp.user?.utipo=="ESTUDIANTE"){
-                    val jsonObject = JSONObject(responseJson)
-                    val userJson = jsonObject.getJSONObject("user")
-                    val usuario = userJson.toString()
-                    mainActivity.putExtra("usuario", usuario )
-                    startActivity(mainActivity)
-                }
-                else{
-                    val jsonObject = JSONObject(responseJson)
-                    val userJson = jsonObject.getJSONObject("user")
-                    val usuario = userJson.toString()
-                    mainActivityTutor.putExtra("usuario", usuario )
-                    startActivity(mainActivityTutor)
+                        // Utilizar Gson para convertir el JSON a un objeto Usuario
+                        val gson = Gson()
+                        val usuario = gson.fromJson(userJson.toString(), Usuario::class.java)
 
-                }
+                        // Asignar el objeto Usuario a UsuarioSingleton
+                        UsuarioSingleton.usuario = usuario
+
+                        // Crear un Intent para abrir MainActivity
+                        val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
+
+                        // Iniciar MainActivity
+                        startActivity(mainActivity)
+
+                        // Finalizar esta actividad si se desea
+                        finish()
+                    } catch (e: JSONException) {
+                        // Manejar la excepción si ocurre un error al parsear el JSON
+                        Log.e("Error", "Error al parsear JSON: ${e.message}")
+                    }
+
 
                             } else {
                                 // La respuesta fue exitosa, pero no contiene un token válido.

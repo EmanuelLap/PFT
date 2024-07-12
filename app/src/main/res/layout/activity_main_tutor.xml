@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/drawer_layout_tutor"
+    android:id="@+id/drawer_layout_analista"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_above="@+id/tutorBottomNavigationView">
-
-    <!-- Asegúrate de que el Theme.PFT.AppBarOverlay no solicite una ActionBar -->
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:theme="@style/Theme.PFT.AppBarOverlay">
-
-        <!-- Utiliza androidx.appcompat.widget.Toolbar en lugar de android.widget.Toolbar -->
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/tutor_toolbar"
