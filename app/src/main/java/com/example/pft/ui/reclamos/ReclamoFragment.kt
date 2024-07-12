@@ -210,7 +210,7 @@ class ReclamoFragment : Fragment() {
                     }
                     R.id.opcion3 -> {
                         val fragmentOpcion3 = AgregarReclamoAPE_OPTFragment()
-                        replaceFragment(fragmentManager, R.id.nav_host_fragment_content_main, fragmentOpcion3)
+                        startActivity(Intent(requireContext(), AgregarReclamoAPE_OPTActivity::class.java))
                         true
                     }
                     else -> false
