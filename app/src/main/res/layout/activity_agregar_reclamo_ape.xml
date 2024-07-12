@@ -21,6 +21,16 @@
             android:hint="Titulo"
             />
 
+        <TextView
+            android:id="@+id/agregarReclamoAPE_OPTActivity_mensaje_titulo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/agregarReclamoAPE_OPT_Descripcion"
             android:layout_marginTop="15dp"
@@ -30,6 +40,16 @@
             android:hint="Descrpición"
             />
 
+        <TextView
+            android:id="@+id/agregarReclamoAPE_OPTActivity_mensaje_descripcion"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+
         <EditText
             android:id="@+id/agregarReclamoAPE_OPT_actividad"
             android:layout_marginTop="15dp"
@@ -38,6 +58,16 @@
             android:layout_height="wrap_content"
             android:hint="Nombre de la actividad"
             />
+
+        <TextView
+            android:id="@+id/agregarReclamoAPE_OPTActivity_mensaje_actividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
 
         <LinearLayout
@@ -85,6 +115,8 @@
                 android:textSize="18dp"
                 />
 
+
+
             <Button
                 android:id="@+id/agregarReclamoAPE_OPT_fecha"
                 android:backgroundTint="#00AEEF"
@@ -100,6 +132,15 @@
 
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/agregarReclamoAPE_OPTActivity_mensaje_fecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_marginTop="15dp"
@@ -132,6 +173,16 @@
             android:layout_height="wrap_content"
             android:hint="Créditos"
             />
+
+        <TextView
+            android:id="@+id/agregarReclamoAPE_OPTActivity_mensaje_creditos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/agregarReclamoAPE_OPT_Mensaje"
