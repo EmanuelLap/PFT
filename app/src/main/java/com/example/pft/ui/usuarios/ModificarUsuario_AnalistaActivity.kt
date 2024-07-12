@@ -47,8 +47,7 @@ class ModificarUsuario_AnalistaActivity : AppCompatActivity() {
 
 
         btn_volver.setOnClickListener{
-            val mainActivity = Intent(this@ModificarUsuario_AnalistaActivity, Usuarios_AnalistaActivity::class.java)
-            startActivity(mainActivity)
+            finish()
         }
     }
 }
