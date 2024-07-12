@@ -32,33 +32,16 @@ class MainActivity : AppCompatActivity() {
         val locale = Locale("es", "ES")
         Locale.setDefault(locale)
 
-        Log.d("MainActivity", "usuarioSingleton1: ${UsuarioSingleton.usuario}")
-        val usuarioA = intent.getStringExtra("usuario")
-        Log.d("MainActivity", "usuario: ${usuarioA}")
 
-        Log.d("MainActivity", "usuarioSingleton2: ${UsuarioSingleton.usuario}")
-
-
-       /* if(UsuarioSingleton.usuario==null) {
-            val usuario = intent.getStringExtra("usuario")
-
-            UsuarioSingleton.usuario = usuario
-        }
-
-        */
 
         val usuario = UsuarioSingleton.usuario
 
-
-
-        Log.d("MainActivity", "usuario: ${usuario}")
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        Log.d("MainActivity", "Valor de usuario antes de asignar al Bundle: $usuario")
 
         val drawerLayout: DrawerLayout = binding.drawerLayout
         val navView: NavigationView = binding.navView
@@ -106,34 +89,37 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.nav_perfil -> {
                     navController.navigate(R.id.nav_perfil)
+                    drawerLayout.closeDrawer(navView)
                     true
                 }
 
                 //ANALISTA
                 R.id.nav_eventos_analista -> {
                     navController.navigate(R.id.nav_eventos_analista)
+                    drawerLayout.closeDrawer(navView)
                    true
                 }
 
                 R.id.nav_reclamos_estudiante -> {
                     navController.navigate(R.id.nav_reclamos_estudiante)
+                    drawerLayout.closeDrawer(navView)
                     true
                 }
 
                 //ESTUDIANTE
                 R.id.nav_eventos_analista -> {
                     navController.navigate(R.id.nav_eventos_analista)
+                    drawerLayout.closeDrawer(navView)
                     true
                 }
 
                 R.id.nav_reclamos_estudiante -> {
                     navController.navigate(R.id.nav_reclamos_estudiante)
+                    drawerLayout.closeDrawer(navView)
                     true
                 }
 
                 else -> {
-                    Log.d("MainActivity", "No funciona")
-
                     NavigationUI.onNavDestinationSelected(
                         menuItem,
                         navController

@@ -1,5 +1,6 @@
 package com.example.pft.ui.eventos
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -29,37 +30,41 @@ import java.util.concurrent.TimeUnit
 
 class EventoFragment : Fragment() {
 
+    private lateinit var fragmentContext: Context
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        fragmentContext = context
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_evento, container, false)
-        val listaEventos=view.findViewById<ListView>(R.id.listaEventos)
+        val listaEventos = view.findViewById<ListView>(R.id.listaEventos)
         val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentEvento_analista)
         val btnAgregar = view.findViewById<FloatingActionButton>(R.id.fragmentEvento_agregar)
 
-
         // Configurar la visibilidad del layout basado en la condición del usuario
-        if (UsuarioSingleton.usuario?.rol?.nombre=="ANALISTA") {
+        if (UsuarioSingleton.usuario?.rol?.nombre == "ANALISTA") {
             layoutAnalista.visibility = View.VISIBLE
-            btnAgregar.visibility=View.VISIBLE
+            btnAgregar.visibility = View.VISIBLE
         } else {
             layoutAnalista.visibility = View.GONE
             btnAgregar.visibility = View.GONE
-
         }
-
 
         Log.d("EventoFragment", "onCreateView")
 
         val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
+            .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(
                 OkHttpClient.Builder()
-                    .connectTimeout(30, TimeUnit.SECONDS) // Tiempo máximo de conexión
-                    .readTimeout(30, TimeUnit.SECONDS)    // Tiempo máximo de lectura
-                    .writeTimeout(30, TimeUnit.SECONDS)   // Tiempo máximo de escritura
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
                     .build()
             )
             .build()
@@ -68,19 +73,18 @@ class EventoFragment : Fragment() {
 
         val call = apiService.obtenerEventos()
 
-        val evento = Intent(requireContext(), EventoActivity::class.java)
+        val evento = Intent(fragmentContext, EventoActivity::class.java)
 
         Log.d("EventoFragment", "Before API call")
 
         call.enqueue(object : Callback<List<Evento>> {
             override fun onResponse(call: Call<List<Evento>>, response: Response<List<Evento>>) {
-                if (response.isSuccessful) {
+                if (isAdded && response.isSuccessful) {  // Verifica si el fragmento está añadido antes de acceder al contexto
                     val eventos = response.body()!!
                     Log.d("EventoFragment", "API call successful. Eventos: $eventos")
 
-                    // Configurar el ArrayAdapter
                     val adapter = ArrayAdapter(
-                        requireContext(),
+                        fragmentContext,
                         android.R.layout.simple_list_item_1,
                         eventos.map { evento ->
                             val timestampInicio = evento.inicio
@@ -102,20 +106,12 @@ class EventoFragment : Fragment() {
                         }
                     )
 
-                    // Asignar el adapter al ListView
                     listaEventos.adapter = adapter
 
-                    // Al realizar click en cualquier elemento de la lista
-                    listaEventos.setOnItemClickListener { adapterView, view, i, l ->
-                        val eventoSeleccionado = eventos!!.get(i)
-
-                        // Convierte el objeto Evento a una cadena JSON (por ejemplo, utilizando Gson)
+                    listaEventos.setOnItemClickListener { _, _, i, _ ->
+                        val eventoSeleccionado = eventos[i]
                         val eventoJson = Gson().toJson(eventoSeleccionado)
-
-                        // Crea un Intent y agrega la cadena JSON como extra
                         evento.putExtra("evento", eventoJson)
-
-                        // Iniciar la actividad con el Intent configurado
                         startActivity(evento)
                     }
                 } else {
@@ -125,12 +121,15 @@ class EventoFragment : Fragment() {
             }
 
             override fun onFailure(call: Call<List<Evento>>, t: Throwable) {
-                Log.e("EventoFragment", "API call failed", t)
-                // Resto del código para manejar errores...
+                if (isAdded) {  // Verifica si el fragmento está añadido antes de acceder al contexto
+                    Log.e("EventoFragment", "API call failed", t)
+                    // Resto del código para manejar errores...
+                }
             }
         })
-        btnAgregar.setOnClickListener{
-            val agregarEventoActivity = Intent(requireContext(), AgregarEventoActivity::class.java)
+
+        btnAgregar.setOnClickListener {
+            val agregarEventoActivity = Intent(fragmentContext, AgregarEventoActivity::class.java)
             startActivity(agregarEventoActivity)
         }
 
