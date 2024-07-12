@@ -72,15 +72,29 @@ class ReclamoFragment : Fragment() {
                         Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamos")
                         val reclamosActivos = reclamos.filter { it.activo==true }
 
-                        // Configurar el ArrayAdapter
-                        val adapter = ArrayAdapter(
-                            requireContext(),
-                            android.R.layout.simple_list_item_1,
-                            reclamosActivos.map { it.titulo }
-                        )
+                        if(usuario.rol.nombre=="ESTUDIANTE"){
+                            val reclamosUsuario = reclamosActivos.filter {it.estudianteId.id==usuario.id}
 
-                        // Asignar el adapter al ListView
-                        listaReclamos.adapter = adapter
+                            // Configurar el ArrayAdapter para estudiantes
+                            val adapterEstudiante = ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_list_item_1,
+                                reclamosUsuario.map { it.titulo }
+                            )
+
+                            listaReclamos.adapter = adapterEstudiante
+                        } else {
+                            // Configurar el ArrayAdapter
+                            val adapter = ArrayAdapter(
+                                requireContext(),
+                                android.R.layout.simple_list_item_1,
+                                reclamosActivos.map { it.titulo }
+                            )
+
+                            // Asignar el adapter al ListView
+                            listaReclamos.adapter = adapter
+
+                        }
 
                         // Al hacer clic en cualquier elemento de la lista
                         listaReclamos.setOnItemClickListener { _, _, position, _ ->
@@ -105,6 +119,12 @@ class ReclamoFragment : Fragment() {
             }
         })
 
+        // Verificar el tipo de usuario y mostrar/ocultar el botón según corresponda
+        if (usuario.rol.nombre == "ESTUDIANTE") {
+            btn_agregar.visibility = View.VISIBLE
+        } else {
+            btn_agregar.visibility = View.GONE
+        }
         // Configuración del botón de agregar
         btn_agregar.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), btn_agregar)
