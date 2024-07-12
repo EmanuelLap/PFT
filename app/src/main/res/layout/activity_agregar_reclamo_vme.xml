@@ -16,6 +16,16 @@
         android:hint="Titulo"
         />
 
+    <TextView
+        android:id="@+id/agregarReclamoVMEActivity_mensaje_titulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="#CA1414"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/agregarReclamoVME_Descripcion"
         android:layout_marginTop="15dp"
@@ -25,6 +35,16 @@
         android:hint="Descrpicion"
         />
 
+    <TextView
+        android:id="@+id/agregarReclamoVMEActivity_mensaje_descripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="#CA1414"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
+
     <EditText
         android:id="@+id/agregarReclamoVME_VME"
         android:layout_marginTop="15dp"
@@ -33,6 +53,16 @@
         android:layout_height="wrap_content"
         android:hint="Evento/Empresa/Institución (VME)"
         />
+
+    <TextView
+        android:id="@+id/agregarReclamoVMEActivity_mensaje_vme"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="#CA1414"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -56,6 +86,8 @@
             android:hint="Selecciona un semestre" />
 
     </LinearLayout>
+
+
 
     <LinearLayout
         android:layout_marginTop="15dp"
@@ -94,7 +126,15 @@
 
     </LinearLayout>
 
-
+    <TextView
+        android:id="@+id/agregarReclamoVMEActivity_mensaje_fecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="#CA1414"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
     <LinearLayout
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
@@ -127,6 +167,16 @@
         android:layout_height="wrap_content"
         android:hint="Créditos"
         />
+
+    <TextView
+        android:id="@+id/agregarReclamoVMEActivity_mensaje_creditos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:alpha="0"
+        android:background="#CA1414"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/agregarReclamoVME_Mensaje"
