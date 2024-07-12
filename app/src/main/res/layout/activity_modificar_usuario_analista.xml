@@ -90,7 +90,7 @@
             />
 
         <Button
-            android:id="@+id/Usuarios_AnalistaActivity_btnFiltrar"
+            android:id="@+id/modificarUsuarioAnalista_btnModificar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -102,7 +102,7 @@
             android:backgroundTint="#00AEEF"/>
 
         <Button
-            android:id="@+id/evento_eliminarEvento"
+            android:id="@+id/modificarUsuarioAnalista_btnBaja"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#F44336"

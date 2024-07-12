@@ -46,6 +46,11 @@ interface ApiService {
         @Body usuario: UsuarioDTO
     ): Call<UsuarioDTO>
 
+    @POST("ByteMinds_s4/rest/usuarios/eliminarUsuarioJson")
+    fun eliminarUsuario(
+        @Body usuario: UsuarioDTO
+    ): Call<UsuarioDTO>
+
     //Eventos
     @GET("ByteMinds_s4/rest/eventos/listar")
     fun obtenerEventos(): Call<List<Evento>>
