@@ -22,6 +22,29 @@
             android:gravity="center_horizontal"
             android:textSize="40sp" />
 
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:id="@+id/reclamo_analista_estado">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:textSize="18sp"
+                android:text="Estado:"
+                />
+            <Spinner
+                android:id="@+id/reclamoAnalista_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                />
+
+        </LinearLayout>
+
         <!-- ListView para mostrar los reclamos -->
         <ListView
             android:id="@+id/reclamos_lista"

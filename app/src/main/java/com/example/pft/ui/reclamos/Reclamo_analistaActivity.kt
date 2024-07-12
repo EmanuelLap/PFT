@@ -124,6 +124,7 @@ class Reclamo_analistaActivity : AppCompatActivity() {
         estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         estado.adapter = estadoAdapter
 
+        /*
         estado.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
                 parent: AdapterView<*>?,
@@ -153,7 +154,9 @@ class Reclamo_analistaActivity : AppCompatActivity() {
                 // Se llama cuando no se ha seleccionado nada
             }
 
-        }
+
+         */
+
 
         volver.setOnClickListener{
             val mainActivity = Intent(this, MainActivity_analista::class.java)
@@ -161,7 +164,7 @@ class Reclamo_analistaActivity : AppCompatActivity() {
         }
 
     }
-
+/*
     fun actualizarListaReclamosPorEstado(estado: String, reclamos: List<Reclamo>) {
         val reclamosFiltrados = reclamos.filter { it.activo == estado }
 
@@ -174,5 +177,7 @@ class Reclamo_analistaActivity : AppCompatActivity() {
     }
 
 
+
+ */
 
 }

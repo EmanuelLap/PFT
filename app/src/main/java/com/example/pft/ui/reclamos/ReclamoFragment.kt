@@ -7,9 +7,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.PopupMenu
+import android.widget.Spinner
 import androidx.fragment.app.FragmentManager
 import com.example.pft.ApiService
 import com.example.pft.R
@@ -33,6 +36,10 @@ class ReclamoFragment : Fragment() {
     private lateinit var btn_agregar : FloatingActionButton
     private lateinit var listaReclamos: ListView
     private lateinit var usuario: Usuario // Cambia el tipo según lo que sea UsuarioSingleton.usuario
+    private lateinit var estado: Spinner
+    private lateinit var reclamos: List<Reclamo>
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +53,10 @@ class ReclamoFragment : Fragment() {
 
         btn_agregar = view.findViewById(R.id.reclamos_agregar)
         listaReclamos = view.findViewById(R.id.reclamos_lista)
+        estado = view.findViewById(R.id.reclamoAnalista_estado)
+        reclamos = ArrayList()
+
+
 
         // Configurar Retrofit
         val retrofit = Retrofit.Builder()
@@ -100,9 +111,9 @@ class ReclamoFragment : Fragment() {
                         listaReclamos.setOnItemClickListener { _, _, position, _ ->
                             val reclamoSeleccionado = reclamos[position]
                             val reclamoJson = Gson().toJson(reclamoSeleccionado)
-                            val intent = Intent(requireContext(), ReclamoActivity::class.java)
-                            intent.putExtra("reclamo", reclamoJson)
-                            startActivity(intent)
+                            val reclamoEstudianteActivity = Intent(requireContext(), ReclamoActivity::class.java)
+                            reclamoEstudianteActivity.putExtra("reclamo", reclamoJson)
+                            startActivity(reclamoEstudianteActivity)
                         }
                     } else {
                         Log.e("ReclamoFragment", "API call failed with code ${response.code()}")
@@ -125,6 +136,61 @@ class ReclamoFragment : Fragment() {
         } else {
             btn_agregar.visibility = View.GONE
         }
+
+        val estadoAnalista = view.findViewById<LinearLayout>(R.id.reclamo_analista_estado)
+
+        if (usuario.rol.nombre == "ANALISTA") {
+            estadoAnalista.visibility = View.VISIBLE
+        } else {
+            estadoAnalista.visibility = View.GONE
+        }
+
+        //Filtros
+
+        //spinner estado
+
+        val estadoOpciones = ArrayList<String>()
+        estadoOpciones.add("Ingresado")
+        estadoOpciones.add("En proceso")
+        estadoOpciones.add("Finalizado")
+
+
+        // Crear un ArrayAdapter y establecerlo en el Spinner
+        val estadoAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estadoOpciones)
+        estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        estado.adapter = estadoAdapter
+
+        estado.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: android.view.View?,
+                position: Int,
+                id: Long
+            ) {
+                // Manejar la selección aquí
+                val opcionSeleccionada = estadoOpciones[position]
+                when (opcionSeleccionada) {
+                    "Ingresado" -> {
+                        actualizarListaReclamosPorEstado(true, reclamos)
+                    }
+
+                    "En proceso" -> {
+                        actualizarListaReclamosPorEstado(true, reclamos)
+                    }
+
+                    "Finalizado" -> {
+                        actualizarListaReclamosPorEstado(false, reclamos)
+                    }
+                }
+            }
+
+
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                // Se llama cuando no se ha seleccionado nada
+            }
+
+        }
+
         // Configuración del botón de agregar
         btn_agregar.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), btn_agregar)
@@ -154,6 +220,17 @@ class ReclamoFragment : Fragment() {
         }
 
         return view
+    }
+
+    fun actualizarListaReclamosPorEstado(activo: Boolean, reclamos: List<Reclamo>) {
+        val reclamosFiltrados = reclamos.filter { it.activo == activo }
+
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1,
+            reclamosFiltrados?.map { "${it.titulo}\n${it.estudianteId.nombres} ${it.estudianteId.apellidos}\nSemestre ${it.semestre}"  } ?: emptyList()
+        )
+        listaReclamos.adapter = adapter
     }
 
     private fun replaceFragment(fragmentManager: FragmentManager, containerId: Int, fragment: Fragment) {

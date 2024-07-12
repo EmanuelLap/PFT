@@ -1,7 +1,7 @@
 package com.example.pft.entidades
 
 data class Reclamo(
-    val activo: Any?,
+    val activo: Boolean,
     val creditos: Int,
     val detalle: String,
     val estudianteId: EstudianteId,
