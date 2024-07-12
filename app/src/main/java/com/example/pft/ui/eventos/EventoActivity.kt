@@ -142,9 +142,6 @@ class EventoActivity : AppCompatActivity() {
             val mainActivity = Intent(this@EventoActivity, MainActivity::class.java)
             startActivity(mainActivity)
         }
-
-
-
     }
 
     private fun mostrarMensajeExito() {
