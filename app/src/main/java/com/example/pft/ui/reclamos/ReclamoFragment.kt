@@ -204,8 +204,8 @@ class ReclamoFragment : Fragment() {
                         true
                     }
                     R.id.opcion2 -> {
-                        val fragmentOpcion2 = AgregarReclamoVMEFragment()
-                        replaceFragment(fragmentManager, R.id.nav_host_fragment_content_main, fragmentOpcion2)
+
+                        startActivity(Intent(requireContext(), AgregarReclamoVMEActivity::class.java))
                         true
                     }
                     R.id.opcion3 -> {
@@ -232,10 +232,4 @@ class ReclamoFragment : Fragment() {
         listaReclamos.adapter = adapter
     }
 
-    private fun replaceFragment(fragmentManager: FragmentManager, containerId: Int, fragment: Fragment) {
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(containerId, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
 }

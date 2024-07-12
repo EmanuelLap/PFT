@@ -1,8 +1,8 @@
 package com.example.pft.ui.reclamos
 
 import android.app.DatePickerDialog
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,44 +11,45 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import com.example.pft.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.util.Calendar
+import java.util.Locale
 
-private lateinit var titulo: EditText
-private lateinit var descripcion: EditText
-private lateinit var nombre_actividad: EditText
-private lateinit var creditos: EditText
-private lateinit var fechaButton:Button
-private lateinit var fechaText:TextView
-private lateinit var semestre:Spinner
-private lateinit var docente:Spinner
-private lateinit var agregarReclamo: FloatingActionButton
-private lateinit var volver: FloatingActionButton
+class AgregarReclamoVMEActivity : AppCompatActivity() {
 
-class AgregarReclamoVMEFragment : Fragment() {
+    private lateinit var titulo: EditText
+    private lateinit var descripcion: EditText
+    private lateinit var nombre_actividad: EditText
+    private lateinit var creditos: EditText
+    private lateinit var empresa: EditText
+    private lateinit var fechaButton: Button
+    private lateinit var fechaText: TextView
+    private lateinit var semestre: Spinner
+    private lateinit var docente: Spinner
+    private lateinit var agregarReclamo: FloatingActionButton
+    private lateinit var volver: FloatingActionButton
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_agregar_reclamo_vme)
 
-
-
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_agregar_reclamo_v_m_e, container, false)
+        val locale = Locale("es", "ES")
+        Locale.setDefault(locale)
 
         //Declaro rutas a elementos
-        titulo=view.findViewById(R.id.agregarReclamoVME_Titulo)
-        descripcion=view.findViewById(R.id.agregarReclamoVME_Descripcion)
-        nombre_actividad=view.findViewById(R.id.agregarReclamoVME_VME)
-        creditos=view.findViewById(R.id.agregarReclamoVME_creditos)
-        fechaButton = view.findViewById(R.id.agregarReclamoVME_fecha)
-        fechaText=view.findViewById(R.id.agregarReclamoVME_fecha_seleccionada)
-        semestre=view.findViewById(R.id.agregarReclamoVme_semestre)
-        agregarReclamo=view.findViewById(R.id.agregarReclamoVME_agregar)
-        docente=view.findViewById(R.id.agregarReclamoVME_docente)
-        volver=view.findViewById(R.id.agregarReclamoVME_volver)
+        titulo=findViewById(R.id.agregarReclamoVME_Titulo)
+        descripcion=findViewById(R.id.agregarReclamoVME_Descripcion)
+        nombre_actividad=findViewById(R.id.agregarReclamoVME_VME)
+        creditos=findViewById(R.id.agregarReclamoVME_creditos)
+        fechaButton = findViewById(R.id.agregarReclamoVME_fecha)
+        fechaText=findViewById(R.id.agregarReclamoVME_fecha_seleccionada)
+        semestre=findViewById(R.id.agregarReclamoVme_semestre)
+        agregarReclamo=findViewById(R.id.agregarReclamoVME_agregar)
+        empresa=findViewById(R.id.agregarReclamoVME_VME)
+        docente=findViewById(R.id.agregarReclamoVME_docente)
+        volver=findViewById(R.id.agregarReclamoVME_volver)
 
         //spinner semestre
         // opciones (del 1 al 10)
@@ -65,7 +66,7 @@ class AgregarReclamoVMEFragment : Fragment() {
         semestreOpciones.add("10")
 
         // Crear un ArrayAdapter y establecerlo en el Spinner
-        val semestreAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, semestreOpciones)
+        val semestreAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, semestreOpciones)
         semestreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         semestre.adapter = semestreAdapter
 
@@ -81,7 +82,7 @@ class AgregarReclamoVMEFragment : Fragment() {
         docenteOpciones.add("docente 4")
         docenteOpciones.add("docente 5")
 
-        val docenteAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, docenteOpciones)
+        val docenteAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, docenteOpciones)
         docenteAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         docente.adapter = docenteAdapter
 
@@ -94,12 +95,12 @@ class AgregarReclamoVMEFragment : Fragment() {
         }
 
         volver.setOnClickListener{
-            val fragmentManager = requireActivity().supportFragmentManager
-            replaceFragment(fragmentManager,
-                R.id.nav_host_fragment_content_main,ReclamoFragment())
+            // val mainActivity = Intent(this@AgregarReclamoActivity, MainActivity::class.java)
+            //  startActivity(mainActivity)
+            finish()
         }
 
-        return view
+
     }
 
     private fun mostrarCalendario() {
@@ -109,7 +110,7 @@ class AgregarReclamoVMEFragment : Fragment() {
         val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         val datePickerDialog = DatePickerDialog(
-            requireContext(),
+            this,
             { _, year, month, dayOfMonth ->
 
                 val fechaSeleccionada = "$dayOfMonth/${month + 1}/$year"
@@ -120,11 +121,5 @@ class AgregarReclamoVMEFragment : Fragment() {
         datePickerDialog.show()
     }
 
-    private fun replaceFragment(fragmentManager: FragmentManager, containerId: Int, fragment: Fragment) {
-        val transaction = fragmentManager.beginTransaction()
-        transaction.replace(containerId, fragment)
-        transaction.addToBackStack(null)
-        transaction.commit()
-    }
 
-    }
+}
