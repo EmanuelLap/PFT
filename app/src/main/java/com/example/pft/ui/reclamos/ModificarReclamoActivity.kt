@@ -112,10 +112,10 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
         // Recuperar el valor del "usuario"
 
-        val usuarioJson = UsuarioSingleton.usuario
+        val usuario = UsuarioSingleton.usuario
 
         // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
-        /*val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
+        //val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
 
         //spinner semestre
         // opciones (del 1 al 10)
@@ -151,7 +151,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
         val call = apiService.obtenerEventos()
 
-        Log.d("AgregarReclamoActivity", "Before API call, usuario: ${usuarioJson}")
+        Log.d("AgregarReclamoActivity", "Before API call, usuario: ${usuario}")
 
         call.enqueue(object : Callback<List<Evento>> {
             override fun onResponse(call: Call<List<Evento>>, response: Response<List<Evento>>) {
@@ -220,8 +220,11 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
                 val apiService = retrofit.create(ApiService::class.java)
 
+                // Agrega un log para verificar que apiService se haya creado correctamente
+                Log.d("ModificarReclamoActivity", "apiService creado correctamente")
+
                 val formatoFecha= SimpleDateFormat("dd/mm/yyyy")
-                val estudianteId=usuario.id
+                val estudianteId=usuario?.id
                 val tituloIngresado=titulo.text.toString()
                 val detalleIngresado=detalle.text.toString()
                 val creditosIngresados=creditos.text.toString().toInt()
@@ -233,7 +236,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
                 val id=reclamoSeleccionado.id
 
 
-                val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId, eventoId,fechaIngresada,id,semestreSeleccionado,tituloIngresado)
+                val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId!!, eventoId,fechaIngresada,id,semestreSeleccionado,tituloIngresado)
 
                 Log.d("ModificarReclamoActivity", "eventoId: ${eventoId}")
 
@@ -290,7 +293,6 @@ class ModificarReclamoActivity : AppCompatActivity() {
             dialog.show()
         }
 
-         */
     }
     private fun mostrarCalendario() {
         val calendar = Calendar.getInstance()

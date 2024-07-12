@@ -38,6 +38,8 @@ class ReclamoFragment : Fragment() {
     private lateinit var usuario: Usuario // Cambia el tipo según lo que sea UsuarioSingleton.usuario
     private lateinit var estado: Spinner
     private lateinit var reclamos: List<Reclamo>
+    private var reclamosUsuario: List<Reclamo> = emptyList()
+
 
 
 
@@ -84,7 +86,7 @@ class ReclamoFragment : Fragment() {
                         val reclamosActivos = reclamos.filter { it.activo==true }
 
                         if(usuario.rol.nombre=="ESTUDIANTE"){
-                            val reclamosUsuario = reclamosActivos.filter {it.estudianteId.id==usuario.id}
+                             reclamosUsuario = reclamosActivos.filter {it.estudianteId.id==usuario.id}
 
                             // Configurar el ArrayAdapter para estudiantes
                             val adapterEstudiante = ArrayAdapter(
@@ -109,7 +111,12 @@ class ReclamoFragment : Fragment() {
 
                         // Al hacer clic en cualquier elemento de la lista
                         listaReclamos.setOnItemClickListener { _, _, position, _ ->
-                            val reclamoSeleccionado = reclamos[position]
+
+                            val reclamoSeleccionado: Reclamo = if (usuario.rol.nombre == "ESTUDIANTE") {
+                                reclamosUsuario[position]
+                            } else {
+                                reclamosActivos[position]
+                            }
                             val reclamoJson = Gson().toJson(reclamoSeleccionado)
                             val reclamoEstudianteActivity = Intent(requireContext(), ReclamoActivity::class.java)
                             reclamoEstudianteActivity.putExtra("reclamo", reclamoJson)
