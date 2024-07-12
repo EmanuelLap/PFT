@@ -14,14 +14,11 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Spinner
-import androidx.appcompat.app.AppCompatActivity
 import com.example.pft.ApiService
-import com.example.pft.MainActivity_analista
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.Itr
 import com.example.pft.ui.login.ItrAdapter
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import retrofit2.Call

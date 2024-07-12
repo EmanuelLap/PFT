@@ -9,8 +9,6 @@ import android.widget.EditText
 import android.widget.TextView
 import com.example.pft.ApiService
 import com.example.pft.MainActivity
-import com.example.pft.MainActivity_analista
-import com.example.pft.MainActivity_tutor
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.UsuarioSingleton
@@ -85,9 +83,7 @@ class LoginActivity : AppCompatActivity() {
                                 editor.putString("token", logResp.token)
                                 editor.apply()
 
-                                val mainActivity = Intent(this@LoginActivity, MainActivity::class.java)
-                                val mainActivityAnalista = Intent(this@LoginActivity, MainActivity_analista::class.java)
-                                val mainActivityTutor = Intent(this@LoginActivity, MainActivity_tutor::class.java)
+
 
                     try { // Parsear el JSON
                         val jsonObject = JSONObject(responseJson)

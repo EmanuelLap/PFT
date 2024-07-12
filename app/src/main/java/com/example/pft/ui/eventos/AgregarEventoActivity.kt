@@ -14,11 +14,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import com.example.pft.ApiService
-import com.example.pft.MainActivity_analista
 import com.example.pft.R
-import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoDTOMobile
-import com.example.pft.entidades.EventoId
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.ItrDTO
 import com.example.pft.entidades.ModalidadEvento

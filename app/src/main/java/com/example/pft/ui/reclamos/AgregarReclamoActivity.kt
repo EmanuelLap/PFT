@@ -2,7 +2,6 @@ package com.example.pft.ui.reclamos
 
 import android.app.AlertDialog
 import android.app.DatePickerDialog
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -14,36 +13,20 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.view.get
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.pft.ApiService
-import com.example.pft.MainActivity
-import com.example.pft.MainActivity_analista
 import com.example.pft.R
-import com.example.pft.Usuario
 import com.example.pft.UsuarioSingleton
-import com.example.pft.entidades.EstudianteId
 import com.example.pft.entidades.Evento
-import com.example.pft.entidades.EventoId
-import com.example.pft.entidades.LoginResponse
-import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile
-import com.example.pft.entidades.ReclamoResponse
-import com.example.pft.ui.eventos.EventoActivity
 import com.example.pft.ui.eventos.EventoAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.Date
 import java.util.Locale
 
 class AgregarReclamoActivity : AppCompatActivity() {
