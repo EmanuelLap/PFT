@@ -8,10 +8,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.LinearLayout
 import android.widget.ListView
 import com.example.pft.ApiService
 import com.example.pft.R
+import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.Evento
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import okhttp3.OkHttpClient
 import retrofit2.Call
@@ -32,6 +35,19 @@ class EventoFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_evento, container, false)
         val listaEventos=view.findViewById<ListView>(R.id.listaEventos)
+        val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentEvento_analista)
+        val btnAgregar = view.findViewById<FloatingActionButton>(R.id.fragmentEvento_agregar)
+
+
+        // Configurar la visibilidad del layout basado en la condición del usuario
+        if (UsuarioSingleton.usuario?.rol?.nombre=="ANALISTA") {
+            layoutAnalista.visibility = View.VISIBLE
+            btnAgregar.visibility=View.VISIBLE
+        } else {
+            layoutAnalista.visibility = View.GONE
+            btnAgregar.visibility = View.GONE
+
+        }
 
 
         Log.d("EventoFragment", "onCreateView")
@@ -113,6 +129,10 @@ class EventoFragment : Fragment() {
                 // Resto del código para manejar errores...
             }
         })
+        btnAgregar.setOnClickListener{
+            val agregarEventoActivity = Intent(requireContext(), AgregarEventoActivity::class.java)
+            startActivity(agregarEventoActivity)
+        }
 
         return view
     }

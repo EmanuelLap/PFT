@@ -17,10 +17,199 @@
         android:textSize="40dp"
         />
 
-    <ListView
-        android:paddingHorizontal="50dp"
-        android:id="@+id/listaEventos"
+<LinearLayout
+    android:id="@+id/fragmentEvento_analista"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <EditText
+        android:id="@+id/Evento_AnalistaActivity_titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:textSize="18dp"
+        android:hint="Titulo"
+        android:layout_marginRight="60dp"
+        />
+    <EditText
+        android:id="@+id/Eventos_AnalistaActivity_localizacion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:textSize="18dp"
+        android:hint="Localización"
+        />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="18dp"
+            android:text="Tipo de Evento:"
+
+            />
+        <Spinner
+            android:id="@+id/Eventos_AnalistaActivity_tipo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Selecciona un tipo de evento" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="18dp"
+            android:text="Modalidad:"
+
+            />
+        <Spinner
+            android:id="@+id/Eventos_AnalistaActivity_modalidad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Selecciona una modalidad" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:textSize="18dp"
+            android:text="ITR:"
+
+            />
+        <Spinner
+            android:id="@+id/Eventos_AnalistaActivity_itr"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:hint="Selecciona un ITR" />
+
+    </LinearLayout>
+
+
+
+
+
+
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicio:"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/Evento_AnalistaActivity_inicio_seleccion"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            />
+
+        <Button
+            android:id="@+id/Evento_AnalistaActivity_inicio"
+            android:backgroundTint="#00AEEF"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:paddingLeft="30dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar"
+            />
+
+
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fin:"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/Evento_AnalistaActivity_fin_seleccion"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            />
+
+        <Button
+            android:id="@+id/Evento_AnalistaActivity_fin"
+            android:backgroundTint="#00AEEF"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:paddingLeft="30dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar"
+            />
+    </LinearLayout>
+
+
+
+
+    <Button
+        android:id="@+id/Evento_AnalistaActivity_btnFiltrar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Filtrar"
+        android:layout_centerVertical="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginBottom="20dp"
+        android:backgroundTint="#00AEEF"/>
 
 </LinearLayout>
+
+    <ListView
+        android:id="@+id/listaEventos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="50dp"
+        android:paddingBottom="20dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fragmentEvento_agregar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginBottom="50dp"
+        android:layout_marginRight="20dp"
+        android:src="@drawable/ic_add"
+        android:backgroundTint="#00AEEF"
+
+        />
+
+
+    </LinearLayout>
+
