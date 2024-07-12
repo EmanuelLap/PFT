@@ -209,10 +209,20 @@ class ModificarReclamoActivity : AppCompatActivity() {
         btn_modificar.setOnClickListener{
             val reclamoTitulo=reclamoSeleccionado.titulo
             val reclamoDetalle=reclamoSeleccionado.detalle
+            val reclamoCreditos=reclamoSeleccionado.creditos.toInt()
+            val reclamoEvento=reclamoSeleccionado.eventoId
+            val reclamoFecha=fechaConFormato.toString()
+            val reclamoSemestre=reclamoSeleccionado.semestre.toString().toInt()
+
+
+
             var tituloActual=titulo.text.toString()
             var detalleActual=detalle.text.toString()
+            val creditosIngresados=creditos.text.toString().toInt()
+            val semestreSeleccionado=semestre.selectedItem.toString().toInt()
+            val fechaString=fechaText.text.toString()
 
-            if (tituloActual!=reclamoTitulo && detalleActual!=reclamoDetalle){
+            if (tituloActual!=reclamoTitulo || detalleActual!=reclamoDetalle||creditosIngresados!=reclamoCreditos||semestreSeleccionado!=reclamoSemestre||fechaString!=fechaConFormato){
                 val retrofit = Retrofit.Builder()
                     .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
                     .addConverterFactory(GsonConverterFactory.create())
@@ -266,6 +276,9 @@ class ModificarReclamoActivity : AppCompatActivity() {
                     }
                 })
 
+
+            } else{
+                Toast.makeText(this, "Ningún dato se ha modificado.", Toast.LENGTH_SHORT).show()
 
             }
         }
