@@ -209,7 +209,6 @@ class ReclamoFragment : Fragment() {
                         true
                     }
                     R.id.opcion3 -> {
-                        val fragmentOpcion3 = AgregarReclamoAPE_OPTFragment()
                         startActivity(Intent(requireContext(), AgregarReclamoAPE_OPTActivity::class.java))
                         true
                     }
