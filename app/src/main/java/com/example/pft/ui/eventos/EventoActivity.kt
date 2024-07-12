@@ -1,18 +1,28 @@
 package com.example.pft.ui.eventos
 
+import android.app.AlertDialog
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
+import com.example.pft.ApiService
 import com.example.pft.MainActivity
 import com.example.pft.R
 import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.Evento
+import com.example.pft.entidades.EventoDTOMobile
+import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.ui.login.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -80,6 +90,53 @@ class EventoActivity : AppCompatActivity() {
         inicio.text="Inicio: $fechaInicioFormateada"
         fin.text="Fin: $fechaFinFormateada"
 
+        //Datos del evento seleccionado
+
+        val eventoSeleccionadoTitulo=eventoSeleccionado.titulo
+        val eventoSeleccionadoId=eventoSeleccionado.id
+        val eventoSeleccionadoTipo=eventoSeleccionado.tipoEvento
+        val eventoSeleccionadoModalidad=eventoSeleccionado.modalidadEvento
+        val eventoSeleccionadoInicio=eventoSeleccionado.inicio
+        val eventoSeleccionadoFin=eventoSeleccionado.fin
+        val eventoSeleccionadoTipoEstado=eventoSeleccionado.tipoEstadoEvento
+        val eventoSeleccionadoTutores=eventoSeleccionado.tutorResponsableEventoDTOCollection
+        val eventoSeleccionadoBaja=eventoSeleccionado.bajaLogica
+        val eventoSeleccionadoItr=eventoSeleccionado.itrDTO
+        val eventoSeleccionadoLocalizacion=eventoSeleccionado.localizacion
+
+
+
+        val eventoMobile=EventoDTOMobile(false,eventoSeleccionadoFin,eventoSeleccionadoId,eventoSeleccionadoInicio,eventoSeleccionadoItr,eventoSeleccionadoLocalizacion,eventoSeleccionadoModalidad,eventoSeleccionadoTipoEstado,eventoSeleccionadoTipo,eventoSeleccionadoTitulo,eventoSeleccionadoTutores)
+
+        btn_eliminar.setOnClickListener{
+            val retrofit = Retrofit.Builder()
+                .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
+
+            val apiService = retrofit.create(ApiService::class.java)
+            val call = apiService.eliminarEvento(
+                eventoMobile
+            )
+
+            Log.d("EventoActivity", "btnEliminar")
+
+            call.enqueue(object : Callback<EventoDTOMobile> {
+                override fun onResponse(call: Call<EventoDTOMobile>, response: Response<EventoDTOMobile>) {
+                    if (response.isSuccessful) {
+                        val eventoResp = response.body()
+                        val responseJson = Gson().toJson(eventoResp)
+                        Log.d("EventoActivity", "ResponseBody: $responseJson")
+                        mostrarMensajeExito()
+                    }
+                }
+
+                override fun onFailure(call: Call<EventoDTOMobile>, t: Throwable) {
+                    Log.d("EventoActivity", "error: ${t}")
+
+                }
+            })
+        }
 
         btn_volver.setOnClickListener{
             val mainActivity = Intent(this@EventoActivity, MainActivity::class.java)
@@ -88,6 +145,21 @@ class EventoActivity : AppCompatActivity() {
 
 
 
+    }
+
+    private fun mostrarMensajeExito() {
+        runOnUiThread {
+            val builder = AlertDialog.Builder(this@EventoActivity)
+            builder.setTitle("Éxito")
+            builder.setMessage("Reclamo eliminado con éxito")
+            builder.setPositiveButton("Aceptar") { dialog, _ ->
+                val mainActivity = Intent(this@EventoActivity, MainActivity::class.java)
+                startActivity(mainActivity)
+                dialog.dismiss()
+            }
+            val dialog = builder.create()
+            dialog.show()
+        }
     }
 
 

@@ -64,6 +64,17 @@ interface ApiService {
         @Body evento: EventoDTOMobile
     ): Call<EventoDTOMobile>
 
+
+    @POST("ByteMinds_s4/rest/eventos/modificarEventoJsonMobile")
+    fun modificarEvento(
+        @Body evento: EventoDTOMobile
+    ): Call<EventoDTOMobile>
+
+    @POST("ByteMinds_s4/rest/eventos/eliminarEventoJsonMobile")
+    fun eliminarEvento(
+        @Body evento: EventoDTOMobile
+    ): Call<EventoDTOMobile>
+
     //Reclamos
     @GET("ByteMinds_s4/rest/reclamos/listar")
     fun obtenerReclamos(): Call<List<Reclamo>>
