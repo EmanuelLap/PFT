@@ -285,8 +285,7 @@ class AgregarEventoActivity : AppCompatActivity() {
     }
 
     btnVolver.setOnClickListener{
-        val mainActivity = Intent(this, MainActivity_analista::class.java)
-        startActivity(mainActivity)
+        finish()
     }
 
         btnAsignarTutores.setOnClickListener{
