@@ -9,6 +9,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!-- Título "Eventos" con fondo azul -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Eventos"
+        android:gravity="center_horizontal"
+        android:textSize="40sp"
+        android:background="#00AEEF"
+        android:layout_marginBottom="20dp" />
+
 <LinearLayout
     android:id="@+id/fragmentEvento_analista"
     android:layout_width="match_parent"

@@ -6,6 +6,16 @@
     android:orientation="vertical"
     tools:context=".ui.usuarios.UsuariosFragment">
 
+    <!-- Título "Usuarios" con fondo azul -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Usuarios"
+        android:gravity="center_horizontal"
+        android:textSize="40sp"
+        android:background="#00AEEF"
+        android:layout_marginBottom="20dp" />
+
     <LinearLayout
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
