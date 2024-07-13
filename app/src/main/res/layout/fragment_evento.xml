@@ -9,14 +9,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Eventos"
-        android:gravity="center_horizontal"
-        android:textSize="40dp"
-        />
-
 <LinearLayout
     android:id="@+id/fragmentEvento_analista"
     android:layout_width="match_parent"
