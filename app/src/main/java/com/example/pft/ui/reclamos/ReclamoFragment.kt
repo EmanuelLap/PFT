@@ -56,7 +56,8 @@ class ReclamoFragment : Fragment() {
         btn_agregar = view.findViewById(R.id.reclamos_agregar)
         listaReclamos = view.findViewById(R.id.reclamos_lista)
         estado = view.findViewById(R.id.reclamoAnalista_estado)
-        reclamos = ArrayList()
+        reclamos=ArrayList()
+
 
 
 
@@ -81,7 +82,7 @@ class ReclamoFragment : Fragment() {
             override fun onResponse(call: Call<List<Reclamo>>, response: Response<List<Reclamo>>) {
                 if (isAdded) {
                     if (response.isSuccessful) {
-                        val reclamos = response.body() ?: emptyList()
+                        reclamos = response.body() ?: emptyList()
                         Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamos")
                         val reclamosActivos = reclamos.filter { it.activo==true }
 
