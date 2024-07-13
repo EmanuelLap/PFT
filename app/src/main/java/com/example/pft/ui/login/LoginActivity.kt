@@ -117,7 +117,7 @@ class LoginActivity : AppCompatActivity() {
                             }
                         } else {
                             mensaje.alpha = 0.8f
-                            mensaje.text = "Error: ${response.code()} - ${response.message()}"
+                            mensaje.text = "Usuario o contraseña incorrectos"
                         }
                     }
 
