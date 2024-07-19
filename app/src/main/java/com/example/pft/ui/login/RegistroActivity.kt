@@ -57,9 +57,10 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var localidad: EditText
     private lateinit var tipoUsuario: Spinner
     private lateinit var recyclerView: RecyclerView
-    private var itrSeleccionado: Itr? = null
-    private lateinit var rol: Rol
     private lateinit var fechaText: TextView
+
+    private var itrSeleccionado: Itr? = null
+    private var rolSeleccionado: Rol? = null
 
 
     //mensajes
@@ -140,10 +141,6 @@ class RegistroActivity : AppCompatActivity() {
 
         val apiService = retrofit.create(ApiService::class.java)
 
-       var listaFuncionalidades: List<Funcionalidades> = emptyList()
-       rol=Rol(null,null,null,true,listaFuncionalidades)
-
-
         //-------------Spinner ITR---------------------------------------------------------
 
 
@@ -176,7 +173,7 @@ class RegistroActivity : AppCompatActivity() {
                             )  {
                                 // Verificar que la posición seleccionada esté dentro de los límites
                                 if (position >= 0 && position < itrs.size) {
-                                    // Obtiene el evento seleccionado
+                                    // Obtiene el itr seleccionado
                                     itrSeleccionado = itrs[position]
 
                                 } else {
@@ -197,6 +194,84 @@ class RegistroActivity : AppCompatActivity() {
             }
 
             override fun onFailure(call: Call<List<Itr>>, t: Throwable) {
+                Log.e("ItrActivity", "API call failed", t)
+                // Resto del código para manejar errores...
+            }
+        })
+
+
+        //-------------Spinner Roles------------------------------------------------------
+
+        val callRol = apiService.obtenerRoles()
+
+
+        callRol.enqueue(object : Callback<List<Rol>> {
+            override fun onResponse(call: Call<List<Rol>>, response: Response<List<Rol>>) {
+                if (response.isSuccessful) {
+                    val roles = response.body() ?: emptyList()
+                    Log.d("AgregarReclamoActivity", "API call successful. Rol: $roles")
+
+                    // Configurar el ArrayAdapter
+                    val rolAdapter = RolAdapter(
+                        this@RegistroActivity,
+                        roles
+                    )
+
+                    // Asignar el adapter al ListView
+                    tipoUsuario.adapter = rolAdapter
+
+                    tipoUsuario.onItemSelectedListener =
+                        object : AdapterView.OnItemSelectedListener {
+                            override fun onItemSelected(
+                                parentView: AdapterView<*>,
+                                selectedItemView: View?,
+                                position: Int,
+                                id: Long
+                            )  {
+                                // Verificar que la posición seleccionada esté dentro de los límites
+                                if (position >= 0 && position < roles.size) {
+                                    // Obtiene el evento seleccionado
+                                    rolSeleccionado = roles[position]
+
+                                    when (rolSeleccionado!!.nombre) {
+                                       "ESTUDIANTE" -> {
+                                            recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
+                                            val adapter = RegistroAdapter_estudiante()
+                                            recyclerView.adapter = adapter
+
+                                        }
+
+                                        "TUTOR" -> {
+                                            recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
+                                            val adapter = RegistroAdapter_tutor()
+                                            recyclerView.adapter = adapter
+                                        }
+
+                                        "ANALISTA" -> {
+                                            recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
+                                            val adapter = RegistroAdapter_analista()
+                                            recyclerView.adapter = adapter
+                                        }
+                                    }
+
+                                } else {
+                                    // Puedes manejar esta situación según tus necesidades
+                                    Log.e("RegistroActivity", "Posición seleccionada fuera de los límites")
+                                }
+                            }
+
+                            override fun onNothingSelected(parentView: AdapterView<*>) {
+                                // Manejar caso cuando no hay nada seleccionado (si es necesario)
+                            }
+
+                        }
+                }else {
+                    Log.e("RegistroActivity", "API call failed with code ${response.code()}")
+                    // Resto del código para manejar errores...
+                }
+            }
+
+            override fun onFailure(call: Call<List<Rol>>, t: Throwable) {
                 Log.e("ItrActivity", "API call failed", t)
                 // Resto del código para manejar errores...
             }
@@ -256,89 +331,7 @@ class RegistroActivity : AppCompatActivity() {
 
 
         //---------------------------------------------------------------------------------
-        // Creo lista de tipos de usuario
-        val listaTiposUsuario = ArrayList<String>()
-        // Agregar elementos a listaDeDatos aquí
-        listaTiposUsuario.add("Estudiante")
-        listaTiposUsuario.add("Tutor")
-        listaTiposUsuario.add("Analista")
 
-        val tipoUsuarioAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaTiposUsuario)
-        tipoUsuario.adapter=tipoUsuarioAdapter
-
-        var tipoUsuarioSeleccionado= ""
-
-        tipoUsuario.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val selectedItem = listaTiposUsuario[position]
-                when (selectedItem) {
-                    "Estudiante" -> {
-                        recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
-                        val adapter = RegistroAdapter_estudiante()
-                        recyclerView.adapter = adapter
-                        tipoUsuarioSeleccionado="Estudiante"
-
-                        //rol
-                        rol.id=1
-                        rol.descripcion="Estudiante"
-                        rol.nombre="Estudiante"
-                    }
-
-                    "Tutor" -> {
-                        recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
-                        val adapter = RegistroAdapter_tutor()
-                        recyclerView.adapter = adapter
-                        tipoUsuarioSeleccionado="Tutor"
-
-                        rol.id=3
-                        rol.descripcion="Tutor"
-                        rol.nombre="Tutor"
-
-                    }
-
-                    "Analista" -> {
-                        recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
-                        val adapter = RegistroAdapter_analista()
-                        recyclerView.adapter = adapter
-                        tipoUsuarioSeleccionado="Analista"
-
-                        rol.id=2
-                        rol.descripcion="Analista"
-                        rol.nombre="Analista"
-                    }
-                }
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-                TODO("Not yet implemented")
-            }
-        }
-
-            /*
-            // Configurar el RecyclerView con un LinearLayoutManager
-            recyclerView.layoutManager = LinearLayoutManager(this)
-
-            /*
-            // Crear una lista de datos o modelos que deseas mostrar en las secciones
-            val lista = ArrayList<String>()
-            // Agregar elementos a listaDeDatos aquí
-            lista.add("Evento 1")
-            lista.add("Evento 2")
-            lista.add("Evento 3")
-            lista.add("Evento 4")
-            // Crear un adaptador personalizado y asignarlo al RecyclerView
-             */
-
-            val adapter = RegistroAdapter_estudiante()
-
-            recyclerView.adapter = adapter
-
-             */
 
         btnVolver.setOnClickListener {
             val loginActivity = Intent(this, LoginActivity::class.java)
@@ -504,14 +497,14 @@ class RegistroActivity : AppCompatActivity() {
                 val telefono=telefono.text.toString()
                 val genero=genero.text.toString()
                 val localidad=localidad.text.toString()
-                val tipoUsuario=tipoUsuarioSeleccionado
+        //        val tipoUsuario=tipoUsuarioSeleccionado
                 val fecNacString=fechaText.text.toString()
                 val fecha=formatoFecha.parse(fecNacString)
                 val fechaTimestamp=fecha.time
 
-                val usuarioNuevo=UsuarioDTO(false,apellido,contrasena,departamentoSeleccionado, documento, fechaTimestamp,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
-                val callAgregarUsuario = apiService.agregarUsuario(usuarioNuevo)
-
+             //   val usuarioNuevo=UsuarioDTO(false,apellido,contrasena,departamentoSeleccionado, documento, fechaTimestamp,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
+              //  val callAgregarUsuario = apiService.agregarUsuario(usuarioNuevo)
+/*
                 callAgregarUsuario.enqueue(object : Callback<UsuarioDTO> {
                     override fun onResponse(call: Call<UsuarioDTO>, response: Response<UsuarioDTO>) {
                         if (response.isSuccessful) {
@@ -528,6 +521,8 @@ class RegistroActivity : AppCompatActivity() {
                         registro_mensaje.text="Ocurrió un error al crear el usuario"
                     }
                 })
+
+ */
             }
         }
 

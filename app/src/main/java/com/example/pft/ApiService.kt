@@ -10,6 +10,7 @@ import com.example.pft.entidades.ModalidadEvento
 import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.entidades.ReclamoResponse
+import com.example.pft.entidades.Rol
 import com.example.pft.entidades.TipoEstadoEvento
 import com.example.pft.entidades.TipoEvento
 import com.example.pft.entidades.UsuarioDTO
@@ -106,5 +107,8 @@ interface ApiService {
     //ITR
     @GET("ByteMinds_s4/rest/itrs/listar")
     fun obtenerITR(): Call<List<Itr>>
+
+    @GET("ByteMinds_s4/rest/rol/listar")
+    fun obtenerRoles(): Call<List<Rol>>
 
 }
