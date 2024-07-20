@@ -205,14 +205,20 @@ class RegistroActivity : AppCompatActivity() {
 
         //-------------Tipos Tutor-------------------------------------------------------
 
-        fun obtenerTiposTutor() {
+        // Listas de datos
+        val tiposTutorList: MutableList<TipoTutorDTO> = mutableListOf()
+        val tiposAreaList: MutableList<TipoAreaDTO> = mutableListOf()
+
+        // Función para obtener tipos de tutor con callback
+        fun obtenerTiposTutor(callback: () -> Unit) {
             val callTiposTutor = apiService.obtenerTiposTutor()
             callTiposTutor.enqueue(object : Callback<List<TipoTutorDTO>> {
                 override fun onResponse(call: Call<List<TipoTutorDTO>>, response: Response<List<TipoTutorDTO>>) {
                     if (response.isSuccessful) {
-                        val tiposTutorList = response.body() ?: emptyList()
+                        tiposTutorList.clear()
+                        tiposTutorList.addAll(response.body() ?: emptyList())
                         Log.d("RegistroActivity", "API call successful. Tipos de Tutor: $tiposTutorList")
-
+                        callback() // Llamar al callback cuando los datos estén listos
                     } else {
                         Log.e("RegistroActivity", "API call failed for tipos de tutor with code ${response.code()}")
                         // Manejar error en la obtención de tipos de tutor
@@ -226,16 +232,16 @@ class RegistroActivity : AppCompatActivity() {
             })
         }
 
-        //-------------Areas--------------------------------------------------------------
-
-        fun obtenerAreas() {
+        // Función para obtener áreas con callback
+        fun obtenerAreas(callback: () -> Unit) {
             val callAreas = apiService.obtenerAreas()
             callAreas.enqueue(object : Callback<List<TipoAreaDTO>> {
                 override fun onResponse(call: Call<List<TipoAreaDTO>>, response: Response<List<TipoAreaDTO>>) {
                     if (response.isSuccessful) {
-                        val tiposAreaList = response.body() ?: emptyList()
+                        tiposAreaList.clear()
+                        tiposAreaList.addAll(response.body() ?: emptyList())
                         Log.d("RegistroActivity", "API call successful. Tipos de Tutor: $tiposAreaList")
-
+                        callback() // Llamar al callback cuando los datos estén listos
                     } else {
                         Log.e("RegistroActivity", "API call failed for tipos de tutor with code ${response.code()}")
                         // Manejar error en la obtención de tipos de tutor
@@ -247,6 +253,21 @@ class RegistroActivity : AppCompatActivity() {
                     // Manejar fallo en la llamada para obtener tipos de tutor
                 }
             })
+        }
+
+        // Llamada a las funciones y configuración del RecyclerView
+        fun cargarDatosTutor() {
+            obtenerTiposTutor {
+                obtenerAreas {
+                    // Aquí dentro, ambos llamados a la API han completado y las listas están llenas
+                    Log.d("RegistroActivity", "Lista tipos: $tiposTutorList")
+                    Log.d("RegistroActivity", "Lista areas: $tiposAreaList")
+
+                    recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
+                    val adapter = RegistroAdapter_tutor(tiposTutorList, tiposAreaList)
+                    recyclerView.adapter = adapter
+                }
+            }
         }
         //-------------Spinner Roles------------------------------------------------------
 
@@ -290,13 +311,7 @@ class RegistroActivity : AppCompatActivity() {
                                         }
 
                                         "TUTOR" -> {
-
-                                            obtenerTiposTutor()
-                                            obtenerAreas()
-
-                                            recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
-                                            val adapter = RegistroAdapter_tutor()
-                                            recyclerView.adapter = adapter
+                                           cargarDatosTutor()
                                         }
 
                                         "ANALISTA" -> {

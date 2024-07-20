@@ -9,11 +9,12 @@ import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.R
 import com.example.pft.entidades.AreaDTO
+import com.example.pft.entidades.TipoAreaDTO
 import com.example.pft.entidades.TipoTutorDTO
 
 class RegistroAdapter_tutor(
     private val tiposTutor: List<TipoTutorDTO>,
-    private val areas: List<AreaDTO>
+    private val areas: List<TipoAreaDTO>
 ) : RecyclerView.Adapter<RegistroAdapter_tutor.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -28,15 +29,14 @@ class RegistroAdapter_tutor(
     }
 
     override fun getItemCount(): Int {
-        return tiposTutor.size
+        return 1
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val context = holder.itemView.context
-        val tipoTutor = tiposTutor[position]
 
         // Configurar el adaptador para el Spinner 'tipoTutorSpinner'
-        val tipoTutorAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, listOf(tipoTutor.nombre))
+        val tipoTutorAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, tiposTutor.map { it.nombre })
         tipoTutorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         holder.tipoTutorSpinner.adapter = tipoTutorAdapter
 
