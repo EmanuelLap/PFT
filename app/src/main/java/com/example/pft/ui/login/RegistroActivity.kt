@@ -18,9 +18,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.Usuario
+import com.example.pft.entidades.AreaDTO
 import com.example.pft.entidades.Funcionalidades
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.Rol
+import com.example.pft.entidades.TipoAreaDTO
+import com.example.pft.entidades.TipoTutorDTO
 import com.example.pft.entidades.UsuarioDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
@@ -200,6 +203,51 @@ class RegistroActivity : AppCompatActivity() {
         })
 
 
+        //-------------Tipos Tutor-------------------------------------------------------
+
+        fun obtenerTiposTutor() {
+            val callTiposTutor = apiService.obtenerTiposTutor()
+            callTiposTutor.enqueue(object : Callback<List<TipoTutorDTO>> {
+                override fun onResponse(call: Call<List<TipoTutorDTO>>, response: Response<List<TipoTutorDTO>>) {
+                    if (response.isSuccessful) {
+                        val tiposTutorList = response.body() ?: emptyList()
+                        Log.d("RegistroActivity", "API call successful. Tipos de Tutor: $tiposTutorList")
+
+                    } else {
+                        Log.e("RegistroActivity", "API call failed for tipos de tutor with code ${response.code()}")
+                        // Manejar error en la obtención de tipos de tutor
+                    }
+                }
+
+                override fun onFailure(call: Call<List<TipoTutorDTO>>, t: Throwable) {
+                    Log.e("RegistroActivity", "Failed to fetch tipos de tutor", t)
+                    // Manejar fallo en la llamada para obtener tipos de tutor
+                }
+            })
+        }
+
+        //-------------Areas--------------------------------------------------------------
+
+        fun obtenerAreas() {
+            val callAreas = apiService.obtenerAreas()
+            callAreas.enqueue(object : Callback<List<TipoAreaDTO>> {
+                override fun onResponse(call: Call<List<TipoAreaDTO>>, response: Response<List<TipoAreaDTO>>) {
+                    if (response.isSuccessful) {
+                        val tiposAreaList = response.body() ?: emptyList()
+                        Log.d("RegistroActivity", "API call successful. Tipos de Tutor: $tiposAreaList")
+
+                    } else {
+                        Log.e("RegistroActivity", "API call failed for tipos de tutor with code ${response.code()}")
+                        // Manejar error en la obtención de tipos de tutor
+                    }
+                }
+
+                override fun onFailure(call: Call<List<TipoAreaDTO>>, t: Throwable) {
+                    Log.e("RegistroActivity", "Failed to fetch area", t)
+                    // Manejar fallo en la llamada para obtener tipos de tutor
+                }
+            })
+        }
         //-------------Spinner Roles------------------------------------------------------
 
         val callRol = apiService.obtenerRoles()
@@ -242,6 +290,10 @@ class RegistroActivity : AppCompatActivity() {
                                         }
 
                                         "TUTOR" -> {
+
+                                            obtenerTiposTutor()
+                                            obtenerAreas()
+
                                             recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
                                             val adapter = RegistroAdapter_tutor()
                                             recyclerView.adapter = adapter

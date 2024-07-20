@@ -8,15 +8,17 @@ import android.widget.EditText
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.R
+import com.example.pft.entidades.AreaDTO
+import com.example.pft.entidades.TipoTutorDTO
 
-class RegistroAdapter_tutor (): RecyclerView.Adapter<RegistroAdapter_tutor.ViewHolder>() {
-
-    private val areas = arrayOf("Área 1", "Área 2", "Área 3")
-    private val roles = arrayOf("Rol 1", "Rol 2", "Rol 3")
+class RegistroAdapter_tutor(
+    private val tiposTutor: List<TipoTutorDTO>,
+    private val areas: List<AreaDTO>
+) : RecyclerView.Adapter<RegistroAdapter_tutor.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val area: Spinner = itemView.findViewById(R.id.seccion_registro_tutor_area)
-        val rol: Spinner = itemView.findViewById(R.id.seccion_registro_tutor_rol)
+        val tipoTutorSpinner: Spinner = itemView.findViewById(R.id.seccion_registro_tutor_rol)
+        val areaSpinner: Spinner = itemView.findViewById(R.id.seccion_registro_tutor_area)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -26,21 +28,21 @@ class RegistroAdapter_tutor (): RecyclerView.Adapter<RegistroAdapter_tutor.ViewH
     }
 
     override fun getItemCount(): Int {
-        return 1
+        return tiposTutor.size
     }
-
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val context = holder.itemView.context
+        val tipoTutor = tiposTutor[position]
 
-        // Crear y establecer un adaptador para el Spinner 'area'
-        val areaAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, areas)
+        // Configurar el adaptador para el Spinner 'tipoTutorSpinner'
+        val tipoTutorAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, listOf(tipoTutor.nombre))
+        tipoTutorAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        holder.tipoTutorSpinner.adapter = tipoTutorAdapter
+
+        // Configurar el adaptador para el Spinner 'areaSpinner'
+        val areaAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, areas.map { it.nombre })
         areaAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        holder.area.adapter = areaAdapter
-
-        // Crear y establecer un adaptador para el Spinner 'rol'
-        val rolAdapter = ArrayAdapter(context, android.R.layout.simple_spinner_item, roles)
-        rolAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        holder.rol.adapter = rolAdapter
+        holder.areaSpinner.adapter = areaAdapter
     }
 }
