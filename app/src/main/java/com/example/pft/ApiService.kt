@@ -11,8 +11,10 @@ import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.entidades.ReclamoResponse
 import com.example.pft.entidades.Rol
+import com.example.pft.entidades.TipoAreaDTO
 import com.example.pft.entidades.TipoEstadoEvento
 import com.example.pft.entidades.TipoEvento
+import com.example.pft.entidades.TipoTutorDTO
 import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.Credenciales
 import retrofit2.Call
@@ -108,7 +110,15 @@ interface ApiService {
     @GET("ByteMinds_s4/rest/itrs/listar")
     fun obtenerITR(): Call<List<Itr>>
 
+    //ROLES
     @GET("ByteMinds_s4/rest/rol/listar")
     fun obtenerRoles(): Call<List<Rol>>
 
+    //TIPOS TUTOR
+    @GET("ByteMinds_s4/rest/tipotutor/listar")
+    fun obtenerTiposTutor(): Call<List<TipoTutorDTO>>
+
+    //AREAS
+    @GET("ByteMinds_s4/rest/area/listar")
+    fun obtenerAreas(): Call<List<TipoAreaDTO>>
 }
