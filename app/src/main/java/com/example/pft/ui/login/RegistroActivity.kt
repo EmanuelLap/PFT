@@ -208,6 +208,7 @@ class RegistroActivity : AppCompatActivity() {
         // Listas de datos
         val tiposTutorList: MutableList<TipoTutorDTO> = mutableListOf()
         val tiposAreaList: MutableList<TipoAreaDTO> = mutableListOf()
+        var tipoTutorSeleccionado=null
 
         // Función para obtener tipos de tutor con callback
         fun obtenerTiposTutor(callback: () -> Unit) {

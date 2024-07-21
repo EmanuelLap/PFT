@@ -15,6 +15,7 @@ import com.example.pft.entidades.TipoAreaDTO
 import com.example.pft.entidades.TipoEstadoEvento
 import com.example.pft.entidades.TipoEvento
 import com.example.pft.entidades.TipoTutorDTO
+import com.example.pft.entidades.TutorId
 import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.Credenciales
 import retrofit2.Call
@@ -48,6 +49,16 @@ interface ApiService {
     fun agregarUsuario(
         @Body usuario: UsuarioDTO
     ): Call<UsuarioDTO>
+
+    @POST("ByteMinds_s4/rest/usuarios/agregarJson")
+    fun agregarUsuarioEstudiante(
+        @Body usuario: EstudianteId
+    ): Call<EstudianteId>
+
+    @POST("ByteMinds_s4/rest/usuarios/agregarJson")
+    fun agregarUsuarioTutor(
+        @Body usuario: TutorId
+    ): Call<TutorId>
 
     @POST("ByteMinds_s4/rest/usuarios/eliminarUsuarioJson")
     fun eliminarUsuario(

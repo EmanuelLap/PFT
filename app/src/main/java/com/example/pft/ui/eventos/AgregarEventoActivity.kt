@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
@@ -15,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import com.example.pft.ApiService
 import com.example.pft.R
+import com.example.pft.Usuario
 import com.example.pft.entidades.EventoDTOMobile
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.ItrDTO
@@ -25,6 +27,7 @@ import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.ItrAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
+import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -32,6 +35,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
+import java.util.concurrent.TimeUnit
 
 class AgregarEventoActivity : AppCompatActivity() {
 
@@ -48,11 +52,14 @@ class AgregarEventoActivity : AppCompatActivity() {
     private lateinit var btnAsignarTutores: Button;
     private lateinit var btnVolver: FloatingActionButton;
     private lateinit var btnConfirmar: FloatingActionButton;
+    private lateinit var usuarios: List<Usuario>
+
 
     private var tipoSeleccionado: TipoEvento? = null
     private var modalidadSeleccionada: ModalidadEvento? = null
     private var itrDTOSeleccionado: ItrDTO? = null
     private var tipoEstado: TipoEstadoEvento? = null
+
 
 
 
@@ -84,6 +91,9 @@ class AgregarEventoActivity : AppCompatActivity() {
         fin=findViewById(R.id.agregarEvento_fin)
         finSeleccion=findViewById(R.id.agregarEvento_fin_seleccion)
         tutoresLista=findViewById(R.id.agregarEvento_listaTutores)
+
+        tutoresLista.choiceMode = ListView.CHOICE_MODE_MULTIPLE
+
         btnAsignarTutores=findViewById(R.id.agregarEvento_btnAsignarTutores)
         btnVolver=findViewById(R.id.agregarEvento_volver)
         btnConfirmar=findViewById(R.id.agregarEvento_agregar)
@@ -95,12 +105,10 @@ class AgregarEventoActivity : AppCompatActivity() {
         mensaje_modalidad=findViewById(R.id.agregarEvento_mensaje_modalidad)
         mensaje_itr=findViewById(R.id.agregarEvento_mensaje_itr)
         mensaje_localizacion=findViewById(R.id.agregarEvento_mensaje_localizacion)
-        mensaje_inicio=findViewById(R.id.agregarEvento_mensaje_inicio)
-        mensaje_fin=findViewById(R.id.agregarEvento_mensaje_fin)
-        mensaje_tutores=findViewById(R.id.agregarEvento_mensaje_tutores)
 
         val tutoresAgregados = mutableListOf<UsuarioDTO>()
 
+        usuarios = ArrayList()
 
 
 
@@ -113,9 +121,18 @@ class AgregarEventoActivity : AppCompatActivity() {
         val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
             .addConverterFactory(GsonConverterFactory.create())
+            .client(
+                OkHttpClient.Builder()
+                    .connectTimeout(30, TimeUnit.SECONDS)
+                    .readTimeout(30, TimeUnit.SECONDS)
+                    .writeTimeout(30, TimeUnit.SECONDS)
+                    .build()
+            )
             .build()
 
         val apiService = retrofit.create(ApiService::class.java)
+
+//---------------Tipo Estado-----------------------------------
 
         val callTipoEstados= apiService.obtenerTipoEstados()
         callTipoEstados.enqueue(object : Callback<List<TipoEstadoEvento>> {
@@ -136,6 +153,8 @@ class AgregarEventoActivity : AppCompatActivity() {
                 Log.e("TipoEventoActivity", "API call failed", t)
             }
         })
+
+//------------------------Tipos------------------------------------
 
         val callTipos = apiService.obtenerTipos()
 
@@ -283,6 +302,36 @@ class AgregarEventoActivity : AppCompatActivity() {
             }
         })
 
+        //----------Lista tutores------------------------------------
+
+        val callUsuarios = apiService.obtenerUsuarios()
+
+        callUsuarios.enqueue(object : Callback<List<Usuario>> {
+            override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
+                    if (response.isSuccessful) {
+                        usuarios = response.body()!!
+                        Log.d("AgregarEventoActivity", "API call successful. Usuarios: $usuarios")
+
+                        val usuariosFiltrados = usuarios.filter { it.rol.nombre == "TUTOR" }
+
+
+                        val adapter = ArrayAdapter(
+                            this@AgregarEventoActivity,
+                            android.R.layout.simple_list_item_1,
+                            usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
+                        )
+                        tutoresLista.adapter = adapter
+                    } else {
+                        Log.e("API_CALL", "Error en la respuesta: ${response.code()}")
+                    }
+                }
+            override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
+
+                Log.e("UsuariosFragment", "API call failed", t)
+
+            }
+        })
+
 
         inicio.setOnClickListener{
         mostrarCalendarioInicio()
@@ -315,8 +364,8 @@ class AgregarEventoActivity : AppCompatActivity() {
             }
 
             if (tipoSeleccionado==null) {
-                camposVacios.add("itr")
-                mensaje_tipo.text = "Selecciona un ITR"
+                camposVacios.add("tipo")
+                mensaje_tipo.text = "Selecciona un tipo de evento"
                 mensaje_tipo.alpha = 0.8f
                 mensaje_tipo.visibility = View.VISIBLE
             } else {
@@ -348,33 +397,6 @@ class AgregarEventoActivity : AppCompatActivity() {
                 mensaje_localizacion.visibility = View.VISIBLE
             } else {
                 mensaje_localizacion.visibility = View.INVISIBLE
-            }
-
-            if (inicioSeleccion.text.toString().isEmpty()) {
-                camposVacios.add("fecInicio")
-                mensaje_inicio.text = "Selecciona una fecha de inicio"
-                mensaje_inicio.alpha = 0.8f
-                mensaje_inicio.visibility = View.VISIBLE
-            } else {
-                mensaje_inicio.visibility = View.INVISIBLE
-            }
-
-            if (finSeleccion.text.toString().isEmpty()) {
-                camposVacios.add("fecFin")
-                mensaje_fin.text = "Selecciona una fecha de fin"
-                mensaje_fin.alpha = 0.8f
-                mensaje_fin.visibility = View.VISIBLE
-            } else {
-                mensaje_fin.visibility = View.INVISIBLE
-            }
-
-            if (tutoresAgregados.size==0) {
-                camposVacios.add("Tutores")
-                mensaje_tutores.text = "Selecciona tutores responsables"
-                mensaje_tutores.alpha = 0.8f
-                mensaje_tutores.visibility = View.VISIBLE
-            } else {
-                mensaje_tutores.visibility = View.INVISIBLE
             }
 
             if (camposVacios.isNotEmpty()) {
