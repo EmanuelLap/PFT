@@ -29,6 +29,7 @@ class AsignarTutorActivity : AppCompatActivity() {
     private lateinit var listaTutores: ListView
     private lateinit var btnConfirmar: Button
     private lateinit var usuarios: List<Usuario>
+    private lateinit var usuariosFiltrados : List<Usuario>
     private lateinit var tutoresSeleccionados: MutableList<Usuario>
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -67,8 +68,8 @@ class AsignarTutorActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     usuarios = response.body() ?: emptyList()
                     Log.d("AgregarTutorActivity", "API call successful. Usuarios: $usuarios")
+                    usuariosFiltrados = usuarios.filter { it.rol.nombre == "TUTOR" }
 
-                    val usuariosFiltrados = usuarios.filter { it.rol.nombre == "TUTOR" }
 
                     val adapter = ArrayAdapter(
                         this@AsignarTutorActivity,
@@ -87,7 +88,7 @@ class AsignarTutorActivity : AppCompatActivity() {
         })
 
         listaTutores.setOnItemClickListener { parent, view, position, id ->
-            val usuarioSeleccionado = usuarios[position]
+            val usuarioSeleccionado = usuariosFiltrados[position]
             if (!tutoresSeleccionados.contains(usuarioSeleccionado)) {
                 tutoresSeleccionados.add(usuarioSeleccionado)
             }
@@ -98,7 +99,7 @@ class AsignarTutorActivity : AppCompatActivity() {
             Log.d("AsignarTutorActivity", "Tutores seleccionados: ${tutoresSeleccionados}")
 
             val intent = Intent(this@AsignarTutorActivity,AgregarEventoActivity::class.java)
-            intent.putExtra("tutoresSeleccionados", ArrayList(tutoresSeleccionados))
+            intent.putParcelableArrayListExtra("tutoresSeleccionados", ArrayList(tutoresSeleccionados))
             startActivity(intent)
         }
     }

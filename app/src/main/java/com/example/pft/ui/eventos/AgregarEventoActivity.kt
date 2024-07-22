@@ -54,6 +54,9 @@ class AgregarEventoActivity : AppCompatActivity() {
     private lateinit var btnConfirmar: FloatingActionButton;
     private lateinit var usuarios: List<Usuario>
 
+    // Variable para almacenar tutores seleccionados
+    private lateinit var tutoresSeleccionados: MutableList<Usuario>
+
 
     private var tipoSeleccionado: TipoEvento? = null
     private var modalidadSeleccionada: ModalidadEvento? = null
@@ -70,9 +73,6 @@ class AgregarEventoActivity : AppCompatActivity() {
     private lateinit var mensaje_modalidad:TextView
     private lateinit var mensaje_itr:TextView
     private lateinit var mensaje_localizacion:TextView
-    private lateinit var mensaje_inicio:TextView
-    private lateinit var mensaje_fin:TextView
-    private lateinit var mensaje_tutores:TextView
 
 
 
@@ -94,6 +94,9 @@ class AgregarEventoActivity : AppCompatActivity() {
 
         tutoresLista.choiceMode = ListView.CHOICE_MODE_MULTIPLE
 
+        // Recibir la lista de tutores seleccionados del intent
+        tutoresSeleccionados = intent.getParcelableArrayListExtra("tutoresSeleccionados") ?: mutableListOf()
+
         btnAsignarTutores=findViewById(R.id.agregarEvento_btnAsignarTutores)
         btnVolver=findViewById(R.id.agregarEvento_volver)
         btnConfirmar=findViewById(R.id.agregarEvento_agregar)
@@ -101,9 +104,6 @@ class AgregarEventoActivity : AppCompatActivity() {
         //mensajes
 
         mensaje_titulo=findViewById(R.id.agregarEvento_mensaje_titulo)
-        mensaje_tipo=findViewById(R.id.agregarEvento_mensaje_tipo)
-        mensaje_modalidad=findViewById(R.id.agregarEvento_mensaje_modalidad)
-        mensaje_itr=findViewById(R.id.agregarEvento_mensaje_itr)
         mensaje_localizacion=findViewById(R.id.agregarEvento_mensaje_localizacion)
 
         val tutoresAgregados = mutableListOf<UsuarioDTO>()
@@ -303,7 +303,7 @@ class AgregarEventoActivity : AppCompatActivity() {
         })
 
         //----------Lista tutores------------------------------------
-
+/*
         val callUsuarios = apiService.obtenerUsuarios()
 
         callUsuarios.enqueue(object : Callback<List<Usuario>> {
@@ -318,7 +318,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                         val adapter = ArrayAdapter(
                             this@AgregarEventoActivity,
                             android.R.layout.simple_list_item_1,
-                            usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
+                            tutoresSeleccionados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
                         )
                         tutoresLista.adapter = adapter
                     } else {
@@ -332,6 +332,15 @@ class AgregarEventoActivity : AppCompatActivity() {
             }
         })
 
+
+ */
+
+        val adapter = ArrayAdapter(
+            this@AgregarEventoActivity,
+            android.R.layout.simple_list_item_1,
+            tutoresSeleccionados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
+        )
+        tutoresLista.adapter = adapter
 
         inicio.setOnClickListener{
         mostrarCalendarioInicio()
@@ -361,33 +370,6 @@ class AgregarEventoActivity : AppCompatActivity() {
                 mensaje_titulo.visibility = View.VISIBLE
             } else {
                 mensaje_titulo.visibility = View.INVISIBLE
-            }
-
-            if (tipoSeleccionado==null) {
-                camposVacios.add("tipo")
-                mensaje_tipo.text = "Selecciona un tipo de evento"
-                mensaje_tipo.alpha = 0.8f
-                mensaje_tipo.visibility = View.VISIBLE
-            } else {
-                mensaje_tipo.visibility = View.INVISIBLE
-            }
-
-            if (modalidadSeleccionada==null) {
-                camposVacios.add("modalidad")
-                mensaje_modalidad.text = "Selecciona una modalidad"
-                mensaje_modalidad.alpha = 0.8f
-                mensaje_modalidad.visibility = View.VISIBLE // Mostrar el mensaje de error
-            } else {
-                mensaje_modalidad.visibility = View.INVISIBLE // Ocultar el mensaje de error si no está vacío
-            }
-
-            if (itrDTOSeleccionado==null) {
-                camposVacios.add("itr")
-                mensaje_itr.text = "Selecciona un ITR"
-                mensaje_itr.alpha = 0.8f
-                mensaje_itr.visibility = View.VISIBLE
-            } else {
-                mensaje_itr.visibility = View.INVISIBLE
             }
 
             if (localizacion.text.toString().isEmpty()) {

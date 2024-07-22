@@ -64,20 +64,13 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/agregarEvento_mensaje_tipo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:background="#CA1414"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -96,20 +89,13 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/agregarEvento_mensaje_modalidad"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:alpha="0"
-            android:background="#CA1414"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
+
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -128,16 +114,10 @@
 
             </LinearLayout>
 
-        <TextView
-            android:id="@+id/agregarEvento_mensaje_itr"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0"
-            android:background="#CA1414"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
+            android:orientation="horizontal">
             <EditText
                 android:id="@+id/agregarEvento_localizacion"
                 android:layout_width="wrap_content"
@@ -145,7 +125,36 @@
                 android:layout_marginLeft="30dp"
                 android:textSize="18dp"
                 android:hint="Localización"
+
                 />
+
+        <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Inicio:"
+            android:textSize="18dp"
+            />
+
+        <TextView
+            android:id="@+id/agregarEvento_inicio_seleccion"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18dp"
+            />
+
+        <Button
+            android:id="@+id/agregarEvento_inicio"
+            android:backgroundTint="#00AEEF"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:paddingLeft="30dp"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/ic_calendar"
+            />
+
+        </LinearLayout>
 
         <TextView
             android:id="@+id/agregarEvento_mensaje_localizacion"
@@ -159,38 +168,12 @@
 
 
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <TextView
-                android:layout_marginLeft="30dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Inicio:"
-                android:textSize="18dp"
-                />
 
-            <TextView
-                android:id="@+id/agregarEvento_inicio_seleccion"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18dp"
-                />
-
-            <Button
-                android:id="@+id/agregarEvento_inicio"
-                android:backgroundTint="#00AEEF"
-                android:layout_marginLeft="10dp"
-                android:layout_width="wrap_content"
-                android:paddingLeft="30dp"
-                android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/ic_calendar"
-                />
 
 
 
@@ -233,6 +216,8 @@
             android:id="@+id/agregarEvento_listaTutores"
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
             />
 
 
