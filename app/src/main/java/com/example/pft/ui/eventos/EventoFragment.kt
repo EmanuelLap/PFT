@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.ListView
+import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.UsuarioSingleton
@@ -57,7 +58,7 @@ class EventoFragment : Fragment() {
 
         Log.d("EventoFragment", "onCreateView")
 
-        val retrofit = Retrofit.Builder()
+        /*val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(
@@ -69,8 +70,8 @@ class EventoFragment : Fragment() {
             )
             .build()
 
-        val apiService = retrofit.create(ApiService::class.java)
-
+        val apiService = retrofit.create(ApiService::class.java)*/
+        val apiService = ApiClient.getApiService(requireContext())
         val call = apiService.obtenerEventos()
 
         val evento = Intent(fragmentContext, EventoActivity::class.java)
@@ -95,7 +96,7 @@ class EventoFragment : Fragment() {
                             val fechaFin = Date(timestampFin)
 
                             // Define el formato que deseas para la fecha
-                            val formato = SimpleDateFormat("dd/MM/yyyy HH:mm")
+                            val formato = SimpleDateFormat("dd/MM/yyyy")
 
                             // Formatear las fechas a String legible
                             val fechaInicioFormateada = formato.format(fechaInicio)

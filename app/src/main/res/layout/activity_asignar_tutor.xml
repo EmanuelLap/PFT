@@ -16,14 +16,14 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Nuevo Evento"
+            android:text="Asignar Tutores"
             android:gravity="center_horizontal"
             android:textSize="40dp"
             android:layout_marginBottom="20dp"
             android:background="#00AEEF"
             />
 
-        <LinearLayout
+        <!--LinearLayout
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,10 +46,10 @@
                 android:hint="Apellido"
                 />
 
-        </LinearLayout>
+        </LinearLayout-->
 
 
-        <Button
+        <!--Button
             android:id="@+id/asignarTutor_btnFiltrar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -59,12 +59,12 @@
             android:layout_alignParentEnd="true"
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
-            android:backgroundTint="#00AEEF"/>
+            android:backgroundTint="#00AEEF"/-->
 
         <ListView
             android:id="@+id/asignarTutor_listaTutores"
             android:layout_width="match_parent"
-            android:layout_height="300dp"
+            android:layout_height="546dp"
             android:layout_marginBottom="20dp"
 
             />
@@ -89,11 +89,10 @@
             android:id="@+id/asignarTutor_btnConfirmar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
             android:layout_gravity="center"
-            android:text="Confirmar"
-            android:backgroundTint="#00AEEF"/>
-
+            android:layout_marginTop="15dp"
+            android:backgroundTint="#00AEEF"
+            android:text="Guardar" />
 
 
     </LinearLayout>

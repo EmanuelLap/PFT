@@ -8,21 +8,17 @@ import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.TextView
-import com.example.pft.ApiService
+import com.example.pft.ApiClient
 import com.example.pft.MainActivity
 import com.example.pft.R
 import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoDTOMobile
-import com.example.pft.entidades.ReclamoDTOMobile
-import com.example.pft.ui.login.LoginActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Date
 
@@ -105,16 +101,17 @@ class EventoActivity : AppCompatActivity() {
         val eventoSeleccionadoLocalizacion=eventoSeleccionado.localizacion
 
 
-
-        val eventoMobile=EventoDTOMobile(false,eventoSeleccionadoFin,eventoSeleccionadoId,eventoSeleccionadoInicio,eventoSeleccionadoItr,eventoSeleccionadoLocalizacion,eventoSeleccionadoModalidad,eventoSeleccionadoTipoEstado,eventoSeleccionadoTipo,eventoSeleccionadoTitulo,eventoSeleccionadoTutores)
+        val evSelTutNoseque: List<Int> = eventoSeleccionadoTutores.map { it.id!! }
+        val eventoMobile=EventoDTOMobile(false,eventoSeleccionadoFin,eventoSeleccionadoId,eventoSeleccionadoInicio,eventoSeleccionadoItr?.id!!,eventoSeleccionadoLocalizacion,eventoSeleccionadoModalidad.id,eventoSeleccionadoTipoEstado.id,eventoSeleccionadoTipo.id,eventoSeleccionadoTitulo,evSelTutNoseque)
 
         btn_eliminar.setOnClickListener{
-            val retrofit = Retrofit.Builder()
+        /*    val retrofit = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            val apiService = retrofit.create(ApiService::class.java)
+            val apiService = retrofit.create(ApiService::class.java)*/
+            val apiService = ApiClient.getApiService(this)
             val call = apiService.eliminarEvento(
                 eventoMobile
             )

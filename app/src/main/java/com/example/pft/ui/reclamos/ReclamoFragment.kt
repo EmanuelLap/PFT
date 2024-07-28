@@ -14,6 +14,7 @@ import android.widget.ListView
 import android.widget.PopupMenu
 import android.widget.Spinner
 import androidx.fragment.app.FragmentManager
+import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.Usuario
@@ -62,7 +63,7 @@ class ReclamoFragment : Fragment() {
 
 
         // Configurar Retrofit
-        val retrofit = Retrofit.Builder()
+      /*  val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")  // Reemplaza con tu URL base
             .addConverterFactory(GsonConverterFactory.create())
             .client(
@@ -74,7 +75,8 @@ class ReclamoFragment : Fragment() {
             )
             .build()
 
-        val apiService = retrofit.create(ApiService::class.java)
+        val apiService = retrofit.create(ApiService::class.java)*/
+        val apiService = ApiClient.getApiService(requireContext())
         val call = apiService.obtenerReclamos()
 
         // Realizar la llamada asíncrona con Retrofit

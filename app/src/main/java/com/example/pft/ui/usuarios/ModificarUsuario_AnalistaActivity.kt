@@ -7,6 +7,8 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.MainActivity
 import com.example.pft.R
@@ -86,12 +88,14 @@ class ModificarUsuario_AnalistaActivity : AppCompatActivity() {
         }
 
         btn_baja.setOnClickListener{
-            val retrofit = Retrofit.Builder()
+           /* val retrofit = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            val apiService = retrofit.create(ApiService::class.java)
+            val apiService = retrofit.create(ApiService::class.java)*/
+
+            val apiService = ApiClient.getApiService(this)
             val call = apiService.eliminarUsuario(
                 usuarioDTO
             )

@@ -15,6 +15,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.Usuario
@@ -137,13 +138,13 @@ class RegistroActivity : AppCompatActivity() {
         mensaje_tipoUsuario=findViewById(R.id.registro_mensaje_tipo)
         registro_mensaje=findViewById(R.id.registro_Mensaje)
 
-        val retrofit = Retrofit.Builder()
+        /*val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
-        val apiService = retrofit.create(ApiService::class.java)
-
+        val apiService = retrofit.create(ApiService::class.java)*/
+        val apiService = ApiClient.getApiService(this)
         //-------------Spinner ITR---------------------------------------------------------
 
 

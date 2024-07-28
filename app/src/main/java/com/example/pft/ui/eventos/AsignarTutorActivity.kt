@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.TextView
+import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.Usuario
@@ -36,16 +37,16 @@ class AsignarTutorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_asignar_tutor)
 
-        nombre = findViewById(R.id.asignarTutor_nombre)
-        apellido = findViewById(R.id.asignarTutor_apellido)
-        btnFiltrar = findViewById(R.id.asignarTutor_btnFiltrar)
+      //  nombre = findViewById(R.id.asignarTutor_nombre)
+      //  apellido = findViewById(R.id.asignarTutor_apellido)
+       // btnFiltrar = findViewById(R.id.asignarTutor_btnFiltrar)
         listaTutores = findViewById(R.id.asignarTutor_listaTutores)
         listaTutores.choiceMode = ListView.CHOICE_MODE_MULTIPLE
         btnConfirmar = findViewById(R.id.asignarTutor_btnConfirmar)
         usuarios = ArrayList()
         tutoresSeleccionados = mutableListOf()
 
-        val retrofit = Retrofit.Builder()
+      /*  val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(
@@ -57,11 +58,11 @@ class AsignarTutorActivity : AppCompatActivity() {
             )
             .build()
 
-        val apiService = retrofit.create(ApiService::class.java)
-
+        val apiService = retrofit.create(ApiService::class.java)*/
+        val apiService = ApiClient.getApiService(this)
         //----------Lista tutores------------------------------------
 
-        val callUsuarios = apiService.obtenerUsuarios()
+        val callUsuarios = apiService.obtenerTutoresActivos()
 
         callUsuarios.enqueue(object : Callback<List<Usuario>> {
             override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
@@ -74,7 +75,7 @@ class AsignarTutorActivity : AppCompatActivity() {
                     val adapter = ArrayAdapter(
                         this@AsignarTutorActivity,
                         android.R.layout.simple_list_item_multiple_choice,
-                        usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
+                        usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos} - CI: ${it.documento}\n${it.rol.nombre} - ${it.itr.nombre}" }
                     )
                     listaTutores.adapter = adapter
                 } else {
@@ -102,5 +103,7 @@ class AsignarTutorActivity : AppCompatActivity() {
             intent.putParcelableArrayListExtra("tutoresSeleccionados", ArrayList(tutoresSeleccionados))
             startActivity(intent)
         }
+
+
     }
 }

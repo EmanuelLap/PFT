@@ -5,11 +5,11 @@ data class EventoDTOMobile(
     val fin: Long,
     val id: Int?,
     val inicio: Long,
-    val itrDTO: ItrDTO,
+    val itrDTO: Int,
     val localizacion: String,
-    val modalidadEvento: ModalidadEvento,
-    val tipoEstadoEvento: TipoEstadoEvento,
-    val tipoEvento: TipoEvento,
+    val modalidadEvento: Int,
+    val tipoEstadoEventoDTO: Int,
+    val tipoEvento: Int,
     val titulo: String,
-    val tutorResponsableEventoDTOCollection: List<TutorResponsableEventoDTOCollection>?
+    val tutorResponsableEventoDTOCollection: List<Int>?
 )

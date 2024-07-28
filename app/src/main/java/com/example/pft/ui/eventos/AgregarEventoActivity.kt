@@ -14,7 +14,7 @@ import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import com.example.pft.ApiService
+import com.example.pft.ApiClient
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.EventoDTOMobile
@@ -27,15 +27,13 @@ import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.ItrAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
-import java.util.concurrent.TimeUnit
+import com.google.gson.GsonBuilder
+
 
 class AgregarEventoActivity : AppCompatActivity() {
 
@@ -118,7 +116,7 @@ class AgregarEventoActivity : AppCompatActivity() {
 
 //Spinner evento_tipo
 
-        val retrofit = Retrofit.Builder()
+      /*  val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
             .addConverterFactory(GsonConverterFactory.create())
             .client(
@@ -130,8 +128,8 @@ class AgregarEventoActivity : AppCompatActivity() {
             )
             .build()
 
-        val apiService = retrofit.create(ApiService::class.java)
-
+        val apiService = retrofit.create(ApiService::class.java)*/
+        val apiService = ApiClient.getApiService(this)
 //---------------Tipo Estado-----------------------------------
 
         val callTipoEstados= apiService.obtenerTipoEstados()
@@ -217,9 +215,9 @@ class AgregarEventoActivity : AppCompatActivity() {
                     val modalidadesEventoAdapter = ModalidadEventoAdapter(this@AgregarEventoActivity, modalidadesEvento)
 
                     // Asignar el adapter al ListView
-                    tipo.adapter = modalidadesEventoAdapter
+                    modalidad.adapter = modalidadesEventoAdapter
 
-                    tipo.onItemSelectedListener =
+                    modalidad.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(
                                 parentView: AdapterView<*>,
@@ -397,25 +395,34 @@ class AgregarEventoActivity : AppCompatActivity() {
 
 
 
+//TODO: pasar tutoresSeleccionados a una lista de Integers con los ids
+                val tutorListId: List<Int> = tutoresSeleccionados.map { it.id!! }
 
+                val evento= EventoDTOMobile(false,fechaFinTimestamp,null,fechaInicioTimestamp,itrDTOSeleccionado?.id!!,localizacion,
+                    modalidadSeleccionada?.id!!,tipoEstado?.id!!,tipoSeleccionado?.id!!,titulo,tutorListId)
+                // Usa Gson para convertir el objeto a JSON
+                val gson = GsonBuilder().setPrettyPrinting().create()
+                val jsonEvento = gson.toJson(evento)
 
-                val evento= EventoDTOMobile(false,fechaFinTimestamp,null,fechaInicioTimestamp,itrDTOSeleccionado!!,localizacion,modalidadSeleccionada!!,tipoEstado!!,tipoSeleccionado!!,titulo,null)
+                // Muestra el JSON en la consola
+                println(jsonEvento)
                 val callAgregarEvento = apiService.agregarEvento(evento)
 
                 callAgregarEvento.enqueue(object : Callback<EventoDTOMobile> {
                     override fun onResponse(call: Call<EventoDTOMobile>, response: Response<EventoDTOMobile>) {
                         if (response.isSuccessful) {
-                            val usuarioResp = response.body()
-                            val responseJson = Gson().toJson(usuarioResp)
+                            val eventoResp = response.body()
+                            val responseJson = Gson().toJson(eventoResp)
                             Log.d("Registro Activity", "ResponseBody: $responseJson")
                             Toast.makeText(this@AgregarEventoActivity, "Evento creado con éxito, pendiente de activación", Toast.LENGTH_SHORT).show()
+                            finish()
                         }
                     }
 
                     override fun onFailure(call: Call<EventoDTOMobile>, t: Throwable) {
                         Log.d("AgregarEvento Activity", "error: ${t}")
 
-                        Toast.makeText(this@AgregarEventoActivity, "Ocurrió un error al crear el evento", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this@AgregarEventoActivity, "c", Toast.LENGTH_SHORT).show()
                     }
                 })
             }

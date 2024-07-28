@@ -14,6 +14,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ListView
 import android.widget.Spinner
+import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.Usuario
@@ -62,7 +63,7 @@ class UsuariosFragment : Fragment() {
         filtrar = view.findViewById(R.id.usuariosFragment_btnFiltrar)
         usuarios = ArrayList()
 
-        val retrofit = Retrofit.Builder()
+       /* val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .client(
@@ -74,8 +75,9 @@ class UsuariosFragment : Fragment() {
             )
             .build()
 
-        val apiService = retrofit.create(ApiService::class.java)
-
+        val apiService = retrofit.create(ApiService::class.java)*/
+       // val apiService: ApiService = ApiClient.getApiService(this)
+        val apiService = ApiClient.getApiService(requireContext())
         val usuarioActivity = Intent(fragmentContext, ModificarUsuario_AnalistaActivity::class.java)
 
         val call = apiService.obtenerUsuarios()

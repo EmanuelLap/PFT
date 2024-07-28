@@ -45,6 +45,9 @@ interface ApiService {
     @GET("ByteMinds_s4/rest/usuarios/listar")
     fun obtenerUsuarios(): Call<List<Usuario>>
 
+    @GET("ByteMinds_s4/rest/usuarios/listarTutoresActivos")
+    fun obtenerTutoresActivos(): Call<List<Usuario>>
+
     @POST("ByteMinds_s4/rest/usuarios/agregarJson")
     fun agregarUsuario(
         @Body usuario: UsuarioDTO
@@ -69,13 +72,13 @@ interface ApiService {
     @GET("ByteMinds_s4/rest/eventos/listar")
     fun obtenerEventos(): Call<List<Evento>>
 
-    @GET("ByteMinds_s4/rest/eventos/listarTipos")
+    @GET("ByteMinds_s4/rest/tipoevento/listar")
     fun obtenerTipos(): Call<List<TipoEvento>>
 
-    @GET("ByteMinds_s4/rest/eventos/listarModalidades")
+    @GET("ByteMinds_s4/rest/modalidadevento/listar")
     fun obtenerModalidades(): Call<List<ModalidadEvento>>
 
-    @GET("ByteMinds_s4/rest/eventos/listarTipoEstado")
+    @GET("ByteMinds_s4/rest/tipoestadoevento/listar")
     fun obtenerTipoEstados(): Call<List<TipoEstadoEvento>>
 
     @POST("ByteMinds_s4/rest/eventos/agregarJsonMobile")

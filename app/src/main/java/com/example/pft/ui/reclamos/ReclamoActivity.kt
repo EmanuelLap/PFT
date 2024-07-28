@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.MainActivity
 import com.example.pft.R
@@ -78,12 +79,13 @@ class ReclamoActivity : AppCompatActivity() {
         }
 
         btn_eliminar.setOnClickListener{
-            val retrofit = Retrofit.Builder()
+           /* val retrofit = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            val apiService = retrofit.create(ApiService::class.java)
+            val apiService = retrofit.create(ApiService::class.java)*/
+            val apiService = ApiClient.getApiService(this)
             val call = apiService.eliminarReclamo(
                 reclamoMobile
             )
