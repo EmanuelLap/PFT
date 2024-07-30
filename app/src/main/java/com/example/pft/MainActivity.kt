@@ -100,8 +100,14 @@ class MainActivity : AppCompatActivity() {
                    true
                 }
 
-                R.id.nav_reclamos_estudiante -> {
-                    navController.navigate(R.id.nav_reclamos_estudiante)
+                R.id.nav_reclamos_analista -> {
+                    navController.navigate(R.id.nav_reclamos_analista)
+                    drawerLayout.closeDrawer(navView)
+                    true
+                }
+
+                R.id.nav_usuarios -> {
+                    navController.navigate(R.id.nav_usuarios)
                     drawerLayout.closeDrawer(navView)
                     true
                 }
@@ -115,6 +121,13 @@ class MainActivity : AppCompatActivity() {
 
                 R.id.nav_reclamos_estudiante -> {
                     navController.navigate(R.id.nav_reclamos_estudiante)
+                    drawerLayout.closeDrawer(navView)
+                    true
+                }
+
+                //TUTOR
+                R.id.nav_eventos_tutor -> {
+                    navController.navigate(R.id.nav_eventos_tutor)
                     drawerLayout.closeDrawer(navView)
                     true
                 }
