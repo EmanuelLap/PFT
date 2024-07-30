@@ -94,6 +94,12 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
     <Button
         android:id="@+id/usuariosFragment_btnFiltrar"
         android:layout_width="wrap_content"
@@ -104,7 +110,23 @@
         android:layout_alignParentEnd="true"
         android:layout_marginTop="30dp"
         android:layout_marginBottom="30dp"
+        android:layout_marginLeft="50dp"
         android:backgroundTint="#00AEEF"/>
+
+        <Button
+            android:id="@+id/usuariosFragment_btnLimpiarFiltros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Limpiar Filtros"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="50dp"
+            android:backgroundTint="#00AEEF"/>
+
+    </LinearLayout>
 
     <ListView
         android:id="@+id/usuariosFragment_lista"

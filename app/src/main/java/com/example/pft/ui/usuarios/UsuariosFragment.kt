@@ -38,7 +38,10 @@ class UsuariosFragment : Fragment() {
     private lateinit var rol: Spinner
     private lateinit var listaUsuarios: ListView
     private lateinit var filtrar: Button
+    private lateinit var limpiarFiltros: Button
     private lateinit var usuarios: List<Usuario>
+    private lateinit var usuariosFiltrados: List<Usuario>
+
 
     private var itrSeleccionado: Itr? = null
     private lateinit var fragmentContext: Context
@@ -61,7 +64,9 @@ class UsuariosFragment : Fragment() {
         rol = view.findViewById(R.id.usuariosFragment_rol)
         listaUsuarios = view.findViewById(R.id.usuariosFragment_lista)
         filtrar = view.findViewById(R.id.usuariosFragment_btnFiltrar)
+        limpiarFiltros = view.findViewById(R.id.usuariosFragment_btnLimpiarFiltros)
         usuarios = ArrayList()
+        usuariosFiltrados= ArrayList()
 
        /* val retrofit = Retrofit.Builder()
             .baseUrl("http://10.0.2.2:8080/")
@@ -87,6 +92,7 @@ class UsuariosFragment : Fragment() {
                 if (isAdded()) {
                     if (response.isSuccessful) {
                         usuarios = response.body()!!
+                        usuariosFiltrados=usuarios
 
                         val adapter = ArrayAdapter(
                             fragmentContext,
@@ -96,7 +102,7 @@ class UsuariosFragment : Fragment() {
                         listaUsuarios.adapter = adapter
 
                         listaUsuarios.setOnItemClickListener { _, _, i, _ ->
-                            val usuarioSeleccionado = usuarios[i]
+                            val usuarioSeleccionado = usuariosFiltrados[i]
                             val usuarioJson = Gson().toJson(usuarioSeleccionado)
                             usuarioActivity.putExtra("usuario", usuarioJson)
                             startActivity(usuarioActivity)
@@ -121,7 +127,7 @@ class UsuariosFragment : Fragment() {
         rol.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = listaRol[position]
-                actualizarListaUsuariosPorRol(selectedItem, usuarios)
+                actualizarListaUsuariosPorRol(selectedItem)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -143,7 +149,7 @@ class UsuariosFragment : Fragment() {
                             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                                 if (position >= 0 && position < itrs.size) {
                                     itrSeleccionado = itrs[position]
-                                    actualizarListaUsuariosPorItr(itrSeleccionado?.nombre.toString(), usuarios)
+                                    actualizarListaUsuariosPorItr(itrSeleccionado?.nombre.toString())
                                 } else {
                                     Log.e("UsuariosFragment", "Posición seleccionada fuera de los límites")
                                 }
@@ -169,18 +175,29 @@ class UsuariosFragment : Fragment() {
         filtrar.setOnClickListener {
             when {
                 nombre.text.isNotEmpty() && apellido.text.isEmpty() && documento.text.isEmpty() -> {
-                    actualizarListaUsuariosPorNombre(nombre.text.toString(), usuarios)
+                    actualizarListaUsuariosPorNombre(nombre.text.toString())
                 }
                 apellido.text.isNotEmpty() && nombre.text.isEmpty() && documento.text.isEmpty() -> {
-                    actualizarListaUsuariosPorApellido(apellido.text.toString(), usuarios)
+                    actualizarListaUsuariosPorApellido(apellido.text.toString())
                 }
                 nombre.text.isNotEmpty() && apellido.text.isNotEmpty() -> {
-                    actualizarListaUsuariosPorNombreYApellido(nombre.text.toString(), apellido.text.toString(), usuarios)
+                    actualizarListaUsuariosPorNombreYApellido(nombre.text.toString(), apellido.text.toString())
                 }
                 documento.text.isNotEmpty() -> {
-                    actualizarListaUsuariosPorDocumento(documento.text.toString(), usuarios)
+                    actualizarListaUsuariosPorDocumento(documento.text.toString())
                 }
             }
+        }
+
+        limpiarFiltros.setOnClickListener{
+            usuariosFiltrados = usuarios
+            val adapter = ArrayAdapter(
+                fragmentContext,
+                android.R.layout.simple_list_item_1,
+                usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
+            )
+
+            listaUsuarios.adapter = adapter
         }
 
         return view
@@ -188,8 +205,30 @@ class UsuariosFragment : Fragment() {
 
     // Funciones de actualización del ListView
 
-    private fun actualizarListaUsuariosPorDocumento(documento: String, usuarios: List<Usuario>) {
-        val usuariosFiltrados = usuarios.filter { it.documento.toString() == documento }
+    private fun actualizarListaUsuariosPorDocumento(documento: String,) {
+        usuariosFiltrados = usuarios.filter { it.documento.toString() == documento }
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
+        )
+
+        listaUsuarios.adapter = adapter
+    }
+
+    private fun actualizarListaUsuariosPorNombre(nombre: String) {
+        usuariosFiltrados = usuarios.filter { it.nombres == nombre }
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
+        )
+
+        listaUsuarios.adapter = adapter
+    }
+
+    private fun actualizarListaUsuariosPorApellido(apellido: String) {
+        usuariosFiltrados = usuarios.filter { it.apellidos == apellido }
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
@@ -198,29 +237,9 @@ class UsuariosFragment : Fragment() {
         listaUsuarios.adapter = adapter
     }
 
-    private fun actualizarListaUsuariosPorNombre(nombre: String, usuarios: List<Usuario>) {
-        val usuariosFiltrados = usuarios.filter { it.nombres == nombre }
-        val adapter = ArrayAdapter(
-            fragmentContext,
-            android.R.layout.simple_list_item_1,
-            usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
-        )
-        listaUsuarios.adapter = adapter
-    }
-
-    private fun actualizarListaUsuariosPorApellido(apellido: String, usuarios: List<Usuario>) {
-        val usuariosFiltrados = usuarios.filter { it.apellidos == apellido }
-        val adapter = ArrayAdapter(
-            fragmentContext,
-            android.R.layout.simple_list_item_1,
-            usuariosFiltrados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
-        )
-        listaUsuarios.adapter = adapter
-    }
-
-    private fun actualizarListaUsuariosPorNombreYApellido(nombre: String, apellido: String, usuarios: List<Usuario>) {
+    private fun actualizarListaUsuariosPorNombreYApellido(nombre: String, apellido: String) {
         val usuariosFiltradosPorNombre = usuarios.filter { it.nombres == nombre }
-        val usuariosFiltrados = usuariosFiltradosPorNombre.filter { it.apellidos == apellido }
+        usuariosFiltrados = usuariosFiltradosPorNombre.filter { it.apellidos == apellido }
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
@@ -229,8 +248,8 @@ class UsuariosFragment : Fragment() {
         listaUsuarios.adapter = adapter
     }
 
-    private fun actualizarListaUsuariosPorRol(rol: String, usuarios: List<Usuario>) {
-        val usuariosFiltrados = usuarios.filter { it.rol.nombre == rol }
+    private fun actualizarListaUsuariosPorRol(rol: String) {
+        usuariosFiltrados = usuarios.filter { it.rol.nombre == rol }
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
@@ -239,8 +258,8 @@ class UsuariosFragment : Fragment() {
         listaUsuarios.adapter = adapter
     }
 
-    private fun actualizarListaUsuariosPorItr(itr: String, usuarios: List<Usuario>) {
-        val usuariosFiltrados = usuarios.filter { it.itr.nombre == itr }
+    private fun actualizarListaUsuariosPorItr(itr: String) {
+        usuariosFiltrados = usuarios.filter { it.itr.nombre == itr }
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,

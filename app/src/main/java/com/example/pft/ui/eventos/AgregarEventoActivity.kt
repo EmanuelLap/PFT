@@ -67,9 +67,6 @@ class AgregarEventoActivity : AppCompatActivity() {
     //mensajes
 
     private lateinit var mensaje_titulo:TextView
-    private lateinit var mensaje_tipo:TextView
-    private lateinit var mensaje_modalidad:TextView
-    private lateinit var mensaje_itr:TextView
     private lateinit var mensaje_localizacion:TextView
 
 
@@ -301,37 +298,6 @@ class AgregarEventoActivity : AppCompatActivity() {
         })
 
         //----------Lista tutores------------------------------------
-/*
-        val callUsuarios = apiService.obtenerUsuarios()
-
-        callUsuarios.enqueue(object : Callback<List<Usuario>> {
-            override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
-                    if (response.isSuccessful) {
-                        usuarios = response.body()!!
-                        Log.d("AgregarEventoActivity", "API call successful. Usuarios: $usuarios")
-
-                        val usuariosFiltrados = usuarios.filter { it.rol.nombre == "TUTOR" }
-
-
-                        val adapter = ArrayAdapter(
-                            this@AgregarEventoActivity,
-                            android.R.layout.simple_list_item_1,
-                            tutoresSeleccionados.map { "Nombre: ${it.nombres} ${it.apellidos}\nDocumento: ${it.documento}\nRol: ${it.rol.nombre}\nITR: ${it.itr.nombre}" }
-                        )
-                        tutoresLista.adapter = adapter
-                    } else {
-                        Log.e("API_CALL", "Error en la respuesta: ${response.code()}")
-                    }
-                }
-            override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
-
-                Log.e("UsuariosFragment", "API call failed", t)
-
-            }
-        })
-
-
- */
 
         val adapter = ArrayAdapter(
             this@AgregarEventoActivity,
