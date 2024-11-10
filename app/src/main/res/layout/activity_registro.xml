@@ -200,23 +200,23 @@
                     android:layout_marginTop="15dp"
                     android:hint="Teléfono" />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="15dp"
-                        android:text="Género:"
-                        android:textSize="18dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:text="Género:"
+                    android:textSize="18dp"
 
-                        />
+                    />
 
-                    <Spinner
-                        android:id="@+id/registro_genero"
-                        android:layout_width="150dp"
-                        android:layout_marginTop="15dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:hint="Género" />
+                <Spinner
+                    android:id="@+id/registro_genero"
+                    android:layout_width="160dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginTop="15dp"
+                    android:hint="Género" />
 
             </LinearLayout>
 
@@ -310,7 +310,7 @@
                     android:id="@+id/registro_itr"
                     android:layout_width="150dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:hint="ITR" />
             </LinearLayout>
 
@@ -346,6 +346,7 @@
                 <Spinner
                     android:id="@+id/registro_departamento"
                     android:layout_width="150dp"
+                    android:layout_marginLeft="5dp"
                     android:layout_height="wrap_content"
                     android:hint="Departamento" />
 
@@ -416,7 +417,7 @@
                     android:id="@+id/registro_tipo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="5dp"
                     android:hint="Selecciona un tipo de usuario" />
 
             </LinearLayout>
