@@ -8,10 +8,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.TextView
 import com.example.pft.ApiClient
-import com.example.pft.ApiService
 import com.example.pft.MainActivity
 import com.example.pft.R
-import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -19,8 +17,6 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.util.Locale
 
 private lateinit var titulo: TextView;
@@ -46,7 +42,7 @@ class ReclamoActivity : AppCompatActivity() {
 
         val reclamoCreditos=reclamoSeleccionado.creditos
         val reclamoDetalle=reclamoSeleccionado.detalle
-        val reclamoEstudianteId=reclamoSeleccionado.estudianteId.id
+        val reclamoEstudianteId=reclamoSeleccionado.estudianteDTO.id
         val reclamoEventoId=reclamoSeleccionado.eventoId.id
         val reclamoFecha=reclamoSeleccionado.fecha
         val reclamoId=reclamoSeleccionado.id

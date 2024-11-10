@@ -1,6 +1,6 @@
 package com.example.pft.entidades
 
-data class TutorId(
+data class TutorDTO(
     val activo: Boolean,
     val apellidos: String,
     val areaDTO: AreaDTO,

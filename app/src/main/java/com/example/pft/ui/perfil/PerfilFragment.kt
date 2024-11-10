@@ -5,13 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import com.example.pft.R
 import com.example.pft.UsuarioSingleton
-import com.example.pft.entidades.EstudianteId
-import com.google.gson.Gson
 
 
 class PerfilFragment : Fragment() {

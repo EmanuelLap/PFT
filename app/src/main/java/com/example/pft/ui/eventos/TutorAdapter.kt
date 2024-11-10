@@ -6,12 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import com.example.pft.R
 import com.example.pft.Usuario
-import com.example.pft.entidades.TutorId
 
 class TutorAdapter(context: Context, tutorList: List<Usuario>) : ArrayAdapter<Usuario>(context, 0, tutorList) {
 

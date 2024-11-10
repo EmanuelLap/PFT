@@ -54,7 +54,7 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var emailPersonal: EditText
     private lateinit var emailPersonalConfirmar: EditText
     private lateinit var telefono: EditText
-    private lateinit var genero: EditText
+    private lateinit var genero: Spinner
     private lateinit var fecNac: Button
     private lateinit var itr: Spinner
     private lateinit var departamento: Spinner
@@ -399,6 +399,41 @@ class RegistroActivity : AppCompatActivity() {
             }
 
 
+        //-------------Spinner Genero-----------------------------------------------
+        val listaGeneros=ArrayList<String>()
+        var generoSeleccionado=""
+
+        listaGeneros.add("Maculino")
+        listaGeneros.add("Femenino")
+
+
+        val generosAdapter=ArrayAdapter(this,android.R.layout.simple_list_item_1,listaGeneros)
+        genero.adapter=generosAdapter
+
+        genero.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parentView: AdapterView<*>,
+                    selectedItemView: View?,
+                    position: Int,
+                    id: Long
+                )  {
+                    // Verificar que la posición seleccionada esté dentro de los límites
+                    if (position >= 0 && position < listaGeneros.size) {
+                        // Obtiene el departamento seleccionado
+                        generoSeleccionado = listaGeneros[position]
+
+                    } else {
+                        Log.e("AgregarReclamoActivity", "Posición seleccionada fuera de los límites")
+                    }
+                }
+
+                override fun onNothingSelected(parentView: AdapterView<*>) {
+                }
+
+            }
+
+
         //---------------------------------------------------------------------------------
 
 
@@ -506,8 +541,9 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_telefono.visibility = View.INVISIBLE
             }
 
-            if (genero.text.toString().isEmpty()) {
-                camposVacios.add("Género")
+
+            if (generoSeleccionado=="") {
+                camposVacios.add("Genero")
                 mensaje_genero.text = "Selecciona un género"
                 mensaje_genero.alpha = 0.8f
                 mensaje_genero.visibility = View.VISIBLE
@@ -564,8 +600,13 @@ class RegistroActivity : AppCompatActivity() {
                 val emailInstitucional=emailInstitucional.text.toString()
                 val emailPersonal=emailPersonal.text.toString()
                 val telefono=telefono.text.toString()
-                val genero=genero.text.toString()
                 val localidad=localidad.text.toString()
+                var genero=""
+                if (generoSeleccionado=="Masculino"){
+                    genero="M"
+                } else{
+                    genero="F"
+                }
         //        val tipoUsuario=tipoUsuarioSeleccionado
                 val fecNacString=fechaText.text.toString()
                 val fecha=formatoFecha.parse(fecNacString)

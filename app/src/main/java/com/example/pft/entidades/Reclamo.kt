@@ -4,7 +4,7 @@ data class Reclamo(
     val activo: Boolean,
     val creditos: Int,
     val detalle: String,
-    val estudianteId: EstudianteId,
+    val estudianteDTO: EstudianteDTO,
     val eventoId: EventoId,
     val fecha: Long,
     val id: Int,

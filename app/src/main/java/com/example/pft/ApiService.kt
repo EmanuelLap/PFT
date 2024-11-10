@@ -1,25 +1,22 @@
 package com.example.pft
 
-import com.example.pft.entidades.EstudianteId
+import com.example.pft.entidades.EstudianteDTO
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoDTOMobile
-import com.example.pft.entidades.EventoId
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.LoginResponse
 import com.example.pft.entidades.ModalidadEvento
 import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile
-import com.example.pft.entidades.ReclamoResponse
 import com.example.pft.entidades.Rol
 import com.example.pft.entidades.TipoAreaDTO
 import com.example.pft.entidades.TipoEstadoEvento
 import com.example.pft.entidades.TipoEvento
 import com.example.pft.entidades.TipoTutorDTO
-import com.example.pft.entidades.TutorId
+import com.example.pft.entidades.TutorDTO
 import com.example.pft.entidades.UsuarioDTO
 import com.example.pft.ui.login.Credenciales
 import retrofit2.Call
-import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
@@ -55,13 +52,13 @@ interface ApiService {
 
     @POST("ByteMinds_s4/rest/usuarios/agregarJson")
     fun agregarUsuarioEstudiante(
-        @Body usuario: EstudianteId
-    ): Call<EstudianteId>
+        @Body usuario: EstudianteDTO
+    ): Call<EstudianteDTO>
 
     @POST("ByteMinds_s4/rest/usuarios/agregarJson")
     fun agregarUsuarioTutor(
-        @Body usuario: TutorId
-    ): Call<TutorId>
+        @Body usuario: TutorDTO
+    ): Call<TutorDTO>
 
     @POST("ByteMinds_s4/rest/usuarios/eliminarUsuarioJson")
     fun eliminarUsuario(

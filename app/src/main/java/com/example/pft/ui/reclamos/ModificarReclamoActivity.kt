@@ -20,7 +20,6 @@ import com.example.pft.ApiService
 import com.example.pft.MainActivity
 import com.example.pft.R
 import com.example.pft.UsuarioSingleton
-import com.example.pft.entidades.EstudianteId
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Reclamo
 import com.example.pft.entidades.ReclamoDTOMobile

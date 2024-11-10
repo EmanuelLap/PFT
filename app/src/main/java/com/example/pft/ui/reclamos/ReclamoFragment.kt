@@ -13,24 +13,16 @@ import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.PopupMenu
 import android.widget.Spinner
-import androidx.fragment.app.FragmentManager
 import com.example.pft.ApiClient
-import com.example.pft.ApiService
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.UsuarioSingleton
-import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Reclamo
-import com.example.pft.ui.eventos.EventoActivity
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
-import okhttp3.OkHttpClient
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.util.concurrent.TimeUnit
 
 class ReclamoFragment : Fragment() {
 
@@ -89,7 +81,7 @@ class ReclamoFragment : Fragment() {
                         val reclamosActivos = reclamos.filter { it.activo==true }
 
                         if(usuario.rol.nombre=="ESTUDIANTE"){
-                             reclamosUsuario = reclamosActivos.filter {it.estudianteId.id==usuario.id}
+                             reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
 
                             // Configurar el ArrayAdapter para estudiantes
                             val adapterEstudiante = ArrayAdapter(
@@ -237,7 +229,7 @@ class ReclamoFragment : Fragment() {
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1,
-            reclamosFiltrados?.map { "${it.titulo}\n${it.estudianteId.nombres} ${it.estudianteId.apellidos}\nSemestre ${it.semestre}"  } ?: emptyList()
+            reclamosFiltrados?.map { "${it.titulo}\n${it.estudianteDTO.nombres} ${it.estudianteDTO.apellidos}\nSemestre ${it.semestre}"  } ?: emptyList()
         )
         listaReclamos.adapter = adapter
     }
