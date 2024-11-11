@@ -10,7 +10,7 @@ import android.widget.TextView
 import com.example.pft.ApiClient
 import com.example.pft.MainActivity
 import com.example.pft.R
-import com.example.pft.entidades.Reclamo
+import com.example.pft.entidades.ReclamoDTO
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
@@ -38,16 +38,16 @@ class ReclamoActivity : AppCompatActivity() {
         val reclamoJson = intent.getStringExtra("reclamo")
 
         // Convertir la cadena JSON de vuelta a un objeto Evento (usando Gson)
-        val reclamoSeleccionado = Gson().fromJson(reclamoJson, Reclamo::class.java)
+        val reclamoDTOSeleccionado = Gson().fromJson(reclamoJson, ReclamoDTO::class.java)
 
-        val reclamoCreditos=reclamoSeleccionado.creditos
-        val reclamoDetalle=reclamoSeleccionado.detalle
-        val reclamoEstudianteId=reclamoSeleccionado.estudianteDTO.id
-        val reclamoEventoId=reclamoSeleccionado.eventoId.id
-        val reclamoFecha=reclamoSeleccionado.fecha
-        val reclamoId=reclamoSeleccionado.id
-        val reclamoSemestre=reclamoSeleccionado.semestre
-        val reclamoTitulo=reclamoSeleccionado.titulo
+        val reclamoCreditos=reclamoDTOSeleccionado.creditos
+        val reclamoDetalle=reclamoDTOSeleccionado.detalle
+        val reclamoEstudianteId=reclamoDTOSeleccionado.estudianteDTO.id
+        val reclamoEventoId=reclamoDTOSeleccionado.eventoId.id
+        val reclamoFecha=reclamoDTOSeleccionado.fecha
+        val reclamoId=reclamoDTOSeleccionado.id
+        val reclamoSemestre=reclamoDTOSeleccionado.semestre
+        val reclamoTitulo=reclamoDTOSeleccionado.titulo
         val reclamoMobile= ReclamoDTOMobile(true,reclamoCreditos,reclamoDetalle,reclamoEstudianteId,reclamoEventoId!!,reclamoFecha,reclamoId,reclamoSemestre,reclamoTitulo)
 
 
@@ -59,9 +59,9 @@ class ReclamoActivity : AppCompatActivity() {
         btn_eliminar=findViewById(R.id.reclamoAct_eliminarReclamo)
         btn_volver=findViewById(R.id.reclamoAct_btnVolver)
 
-        titulo.text="Título: ${reclamoSeleccionado.titulo}"
-        detalle.text="Detalle: ${reclamoSeleccionado.detalle}"
-        val estadoTexto = if (reclamoSeleccionado.activo == true) {
+        titulo.text="Título: ${reclamoDTOSeleccionado.titulo}"
+        detalle.text="Detalle: ${reclamoDTOSeleccionado.detalle}"
+        val estadoTexto = if (reclamoDTOSeleccionado.activo == true) {
             "Estado: Esperando respuesta"
         } else {
             "Estado: Resuelto"

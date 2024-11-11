@@ -6,7 +6,7 @@ import com.example.pft.entidades.EventoDTOMobile
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.LoginResponse
 import com.example.pft.entidades.ModalidadEvento
-import com.example.pft.entidades.Reclamo
+import com.example.pft.entidades.ReclamoDTO
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.entidades.Rol
 import com.example.pft.entidades.TipoAreaDTO
@@ -96,7 +96,7 @@ interface ApiService {
 
     //Reclamos
     @GET("ByteMinds_s4/rest/reclamos/listar")
-    fun obtenerReclamos(): Call<List<Reclamo>>
+    fun obtenerReclamos(): Call<List<ReclamoDTO>>
 
     @GET("ByteMinds_s4/rest/reclamos/obtenerEjemploJsonMobile")
     fun obtenerReclamosMobile(): Call<List<ReclamoDTOMobile>>

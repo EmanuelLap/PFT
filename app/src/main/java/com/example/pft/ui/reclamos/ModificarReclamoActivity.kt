@@ -21,7 +21,7 @@ import com.example.pft.MainActivity
 import com.example.pft.R
 import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.Evento
-import com.example.pft.entidades.Reclamo
+import com.example.pft.entidades.ReclamoDTO
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.ui.eventos.EventoAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -74,7 +74,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
 
 
-        val reclamoSeleccionado = Gson().fromJson(reclamoJson, Reclamo::class.java)
+        val reclamoDTOSeleccionado = Gson().fromJson(reclamoJson, ReclamoDTO::class.java)
 
         /*
         val reclamoActivo=reclamoSeleccionado.activo
@@ -91,15 +91,15 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
          */
         //Cargo Datos del reclamo
-        val tituloEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoSeleccionado.titulo)
-        val detalleEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoSeleccionado.detalle)
-        val creditosEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoSeleccionado.creditos.toString())
+        val tituloEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoDTOSeleccionado.titulo)
+        val detalleEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoDTOSeleccionado.detalle)
+        val creditosEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoDTOSeleccionado.creditos.toString())
 
 
         titulo.text=tituloEditable
         detalle.text=detalleEditable
         creditos.text=creditosEditable
-        val fechaDate= Date(reclamoSeleccionado.fecha)
+        val fechaDate= Date(reclamoDTOSeleccionado.fecha)
         val formatoFecha=SimpleDateFormat("dd/mm/yyyy")
         val fechaConFormato=formatoFecha.format(fechaDate)
 
@@ -136,7 +136,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
         semestreAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         semestre.adapter = semestreAdapter
 
-        semestre.setSelection(reclamoSeleccionado.semestre.toString().toInt()-1)
+        semestre.setSelection(reclamoDTOSeleccionado.semestre.toString().toInt()-1)
 
         // Establecer el "hint" en el Spinner
         semestre.prompt = "Selecciona un semestre"
@@ -207,12 +207,12 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
 
         btn_modificar.setOnClickListener{
-            val reclamoTitulo=reclamoSeleccionado.titulo
-            val reclamoDetalle=reclamoSeleccionado.detalle
-            val reclamoCreditos=reclamoSeleccionado.creditos.toInt()
-            val reclamoEvento=reclamoSeleccionado.eventoId
+            val reclamoTitulo=reclamoDTOSeleccionado.titulo
+            val reclamoDetalle=reclamoDTOSeleccionado.detalle
+            val reclamoCreditos=reclamoDTOSeleccionado.creditos.toInt()
+            val reclamoEvento=reclamoDTOSeleccionado.eventoId
             val reclamoFecha=fechaConFormato.toString()
-            val reclamoSemestre=reclamoSeleccionado.semestre.toString().toInt()
+            val reclamoSemestre=reclamoDTOSeleccionado.semestre.toString().toInt()
 
 
 
@@ -243,7 +243,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
                 val fecha=formatoFecha.parse(fechaString)
                 val fechaTimestamp=fecha.time
                 val fechaIngresada=fechaTimestamp
-                val id=reclamoSeleccionado.id
+                val id=reclamoDTOSeleccionado.id
 
 
                 val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId!!, eventoId,fechaIngresada,id,semestreSeleccionado,tituloIngresado)

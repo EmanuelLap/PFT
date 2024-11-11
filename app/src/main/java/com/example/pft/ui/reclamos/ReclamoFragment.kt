@@ -17,7 +17,7 @@ import com.example.pft.ApiClient
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.UsuarioSingleton
-import com.example.pft.entidades.Reclamo
+import com.example.pft.entidades.ReclamoDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import retrofit2.Call
@@ -30,8 +30,8 @@ class ReclamoFragment : Fragment() {
     private lateinit var listaReclamos: ListView
     private lateinit var usuario: Usuario // Cambia el tipo según lo que sea UsuarioSingleton.usuario
     private lateinit var estado: Spinner
-    private lateinit var reclamos: List<Reclamo>
-    private var reclamosUsuario: List<Reclamo> = emptyList()
+    private lateinit var reclamoDTOS: List<ReclamoDTO>
+    private var reclamosUsuario: List<ReclamoDTO> = emptyList()
 
 
 
@@ -49,7 +49,7 @@ class ReclamoFragment : Fragment() {
         btn_agregar = view.findViewById(R.id.reclamos_agregar)
         listaReclamos = view.findViewById(R.id.reclamos_lista)
         estado = view.findViewById(R.id.reclamoAnalista_estado)
-        reclamos=ArrayList()
+        reclamoDTOS=ArrayList()
 
 
 
@@ -72,22 +72,22 @@ class ReclamoFragment : Fragment() {
         val call = apiService.obtenerReclamos()
 
         // Realizar la llamada asíncrona con Retrofit
-        call.enqueue(object : Callback<List<Reclamo>> {
-            override fun onResponse(call: Call<List<Reclamo>>, response: Response<List<Reclamo>>) {
+        call.enqueue(object : Callback<List<ReclamoDTO>> {
+            override fun onResponse(call: Call<List<ReclamoDTO>>, response: Response<List<ReclamoDTO>>) {
                 if (isAdded) {
                     if (response.isSuccessful) {
-                        reclamos = response.body() ?: emptyList()
-                        Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamos")
-                        val reclamosActivos = reclamos.filter { it.activo==true }
+                        reclamoDTOS = response.body() ?: emptyList()
+                        Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamoDTOS")
+                        val reclamosActivos = reclamoDTOS.filter { it.activo==true }
 
                         if(usuario.rol.nombre=="ESTUDIANTE"){
-                             reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
+                    //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
 
                             // Configurar el ArrayAdapter para estudiantes
                             val adapterEstudiante = ArrayAdapter(
                                 requireContext(),
                                 android.R.layout.simple_list_item_1,
-                                reclamosUsuario.map { it.titulo }
+                                reclamosActivos.map { it.titulo }
                             )
 
                             listaReclamos.adapter = adapterEstudiante
@@ -107,12 +107,12 @@ class ReclamoFragment : Fragment() {
                         // Al hacer clic en cualquier elemento de la lista
                         listaReclamos.setOnItemClickListener { _, _, position, _ ->
 
-                            val reclamoSeleccionado: Reclamo = if (usuario.rol.nombre == "ESTUDIANTE") {
+                            val reclamoDTOSeleccionado: ReclamoDTO = if (usuario.rol.nombre == "ESTUDIANTE") {
                                 reclamosUsuario[position]
                             } else {
                                 reclamosActivos[position]
                             }
-                            val reclamoJson = Gson().toJson(reclamoSeleccionado)
+                            val reclamoJson = Gson().toJson(reclamoDTOSeleccionado)
                             val reclamoEstudianteActivity = Intent(requireContext(), ReclamoActivity::class.java)
                             reclamoEstudianteActivity.putExtra("reclamo", reclamoJson)
                             startActivity(reclamoEstudianteActivity)
@@ -124,7 +124,7 @@ class ReclamoFragment : Fragment() {
                 }
             }
 
-            override fun onFailure(call: Call<List<Reclamo>>, t: Throwable) {
+            override fun onFailure(call: Call<List<ReclamoDTO>>, t: Throwable) {
                 if (isAdded) {
                     Log.e("ReclamoFragment", "API call failed", t)
                     // Resto del manejo de errores
@@ -173,15 +173,15 @@ class ReclamoFragment : Fragment() {
                 val opcionSeleccionada = estadoOpciones[position]
                 when (opcionSeleccionada) {
                     "Ingresado" -> {
-                        actualizarListaReclamosPorEstado(true, reclamos)
+                        actualizarListaReclamosPorEstado(true, reclamoDTOS)
                     }
 
                     "En proceso" -> {
-                        actualizarListaReclamosPorEstado(true, reclamos)
+                        actualizarListaReclamosPorEstado(true, reclamoDTOS)
                     }
 
                     "Finalizado" -> {
-                        actualizarListaReclamosPorEstado(false, reclamos)
+                        actualizarListaReclamosPorEstado(false, reclamoDTOS)
                     }
                 }
             }
@@ -223,8 +223,8 @@ class ReclamoFragment : Fragment() {
         return view
     }
 
-    fun actualizarListaReclamosPorEstado(activo: Boolean, reclamos: List<Reclamo>) {
-        val reclamosFiltrados = reclamos.filter { it.activo == activo }
+    fun actualizarListaReclamosPorEstado(activo: Boolean, reclamoDTOS: List<ReclamoDTO>) {
+        val reclamosFiltrados = reclamoDTOS.filter { it.activo == activo }
 
         val adapter = ArrayAdapter(
             requireContext(),

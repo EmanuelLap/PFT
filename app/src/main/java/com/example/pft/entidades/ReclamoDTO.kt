@@ -1,6 +1,6 @@
 package com.example.pft.entidades
 
-data class Reclamo(
+data class ReclamoDTO(
     val activo: Boolean,
     val creditos: Int,
     val detalle: String,
