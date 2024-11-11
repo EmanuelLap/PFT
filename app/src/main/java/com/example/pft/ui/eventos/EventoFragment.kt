@@ -62,6 +62,7 @@ class EventoFragment : Fragment() {
         val modalidadSpinner = view.findViewById<Spinner>(R.id.Eventos_AnalistaActivity_modalidad)
 
 
+
         // Configurar la visibilidad del layout basado en la condición del usuario
         if (UsuarioSingleton.usuario?.rol?.nombre == "ANALISTA") {
             layoutAnalista.visibility = View.VISIBLE
@@ -89,9 +90,9 @@ class EventoFragment : Fragment() {
         val apiService = ApiClient.getApiService(requireContext())
         val call = apiService.obtenerEventos()
 
+
+
         //-------------Spinner ITR---------------------------------------------------------
-
-
 
         val callItr = apiService.obtenerITR()
 
@@ -147,9 +148,8 @@ class EventoFragment : Fragment() {
             }
         })
 
+
         //-------------Spinner Tipo---------------------------------------------------------
-
-
 
         val callTipo = apiService.obtenerTipos()
 
@@ -203,9 +203,8 @@ class EventoFragment : Fragment() {
             }
         })
 
-        //-------------Spinner Tipo---------------------------------------------------------
 
-
+        //-------------Spinner Modalidad---------------------------------------------------------
 
         val callModalidad = apiService.obtenerModalidades()
 
@@ -258,7 +257,6 @@ class EventoFragment : Fragment() {
         })
 
         //-------------------------------------------------------------------------------------
-
 
 
 
