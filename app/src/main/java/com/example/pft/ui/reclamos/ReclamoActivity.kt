@@ -42,7 +42,7 @@ class ReclamoActivity : AppCompatActivity() {
 
         val reclamoCreditos=reclamoDTOSeleccionado.creditos
         val reclamoDetalle=reclamoDTOSeleccionado.detalle
-        val reclamoEstudianteId=reclamoDTOSeleccionado.estudianteDTO.id
+        val reclamoEstudianteId=reclamoDTOSeleccionado.estudianteDTO.id!!
         val reclamoEventoId=reclamoDTOSeleccionado.eventoId.id
         val reclamoFecha=reclamoDTOSeleccionado.fecha
         val reclamoId=reclamoDTOSeleccionado.id
