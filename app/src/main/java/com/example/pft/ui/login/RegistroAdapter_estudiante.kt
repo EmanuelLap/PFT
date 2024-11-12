@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.EventoAdapter
 import com.example.pft.R
 
-class RegistroAdapter_estudiante(): RecyclerView.Adapter<RegistroAdapter_estudiante.ViewHolder>() {
+class RegistroAdapter_estudiante : RecyclerView.Adapter<RegistroAdapter_estudiante.ViewHolder>() {
 
+    // ViewHolder con los campos EditText
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val ingreso: EditText = itemView.findViewById(R.id.seccion_registro_estudiante_anoDeIngreso)
+        val anoDeIngresoEditText: EditText = itemView.findViewById(R.id.seccion_registro_estudiante_anoDeIngreso)
+        val generacionEditText: EditText = itemView.findViewById(R.id.seccion_registro_estudiante_generacion)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -25,9 +27,13 @@ class RegistroAdapter_estudiante(): RecyclerView.Adapter<RegistroAdapter_estudia
         return 1
     }
 
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
     }
 
-
+    fun obtenerDatosRegistro(holder: ViewHolder): Pair<Int, Long> {
+        // Obtener el texto de los campos de los EditText en el ViewHolder
+        val generacion = holder.generacionEditText.text.toString().toInt()
+        val anoDeIngreso = holder.anoDeIngresoEditText.text.toString().toLong()
+        return Pair(generacion,anoDeIngreso)
+    }
 }

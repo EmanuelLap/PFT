@@ -55,6 +55,7 @@ interface ApiService {
         @Body usuario: EstudianteDTO
     ): Call<EstudianteDTO>
 
+
     @POST("ByteMinds_s4/rest/usuarios/agregarJson")
     fun agregarUsuarioTutor(
         @Body usuario: TutorDTO
