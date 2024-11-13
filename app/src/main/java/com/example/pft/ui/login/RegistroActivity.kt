@@ -13,16 +13,11 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
-import androidx.lifecycle.ReportFragment.Companion.reportFragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.ApiClient
-import com.example.pft.ApiService
 import com.example.pft.R
-import com.example.pft.Usuario
-import com.example.pft.entidades.AreaDTO
 import com.example.pft.entidades.EstudianteDTO
-import com.example.pft.entidades.Funcionalidades
 import com.example.pft.entidades.Itr
 import com.example.pft.entidades.Rol
 import com.example.pft.entidades.TipoAreaDTO
@@ -30,12 +25,9 @@ import com.example.pft.entidades.TipoTutorDTO
 import com.example.pft.entidades.TutorDTO
 import com.example.pft.entidades.UsuarioDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -830,7 +822,7 @@ class RegistroActivity : AppCompatActivity() {
 
                 }
             }
-      
+
         }
 
         fecNac.setOnClickListener(){

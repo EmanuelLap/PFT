@@ -5,13 +5,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.EditText
 import android.widget.Spinner
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pft.R
-import com.example.pft.entidades.AreaDTO
 import com.example.pft.entidades.TipoAreaDTO
-import com.example.pft.entidades.TipoDTO
 import com.example.pft.entidades.TipoTutorDTO
 
 class RegistroAdapter_tutor(
