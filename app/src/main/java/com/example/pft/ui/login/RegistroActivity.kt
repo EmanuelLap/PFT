@@ -27,7 +27,6 @@ import com.example.pft.entidades.Itr
 import com.example.pft.entidades.Rol
 import com.example.pft.entidades.TipoAreaDTO
 import com.example.pft.entidades.TipoTutorDTO
-import com.example.pft.entidades.TutorDTO
 import com.example.pft.entidades.UsuarioDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
@@ -646,12 +645,7 @@ class RegistroActivity : AppCompatActivity() {
                 val fecha = formatoFecha.parse(fecNacString)
                 val fechaTimestamp = fecha.time
 
-                Log.d("Registro Activity", "Datos: $genero $nombre $apellido")
-
-
                 if (rolSeleccionado!!.nombre == "ESTUDIANTE") {
-
-                    Log.d("Registro Activity", "Rol seleccionado: Estudiante")
 
                     val viewHolder =
                         recyclerView.findViewHolderForAdapterPosition(0) as RegistroAdapter_estudiante.ViewHolder
@@ -671,7 +665,7 @@ class RegistroActivity : AppCompatActivity() {
                         anoDeIngreso,
                         generacion,
                         genero,
-                        null,
+                        800,
                         itrSeleccionado!!,
                         localidad,
                         emailInstitucional,
@@ -680,12 +674,9 @@ class RegistroActivity : AppCompatActivity() {
                         rolSeleccionado!!,
                         telefono,
                         nombreusuario,
-                        null,
+                        "1",
                         false
                     )
-
-                    Log.d("Registro Activity", "Estudiante: $usuarioNuevo")
-
                     val callAgregarUsuarioEstudiante =
                         apiService.agregarUsuarioEstudiante(usuarioNuevo)
 
@@ -696,7 +687,8 @@ class RegistroActivity : AppCompatActivity() {
                         ) {
                             if (response.isSuccessful) {
                                 val usuarioResp = response.body()
-                                Log.d("Registro Activity", "ResponseBody: $usuarioResp")
+                                val responseJson = Gson().toJson(usuarioResp)
+                                Log.d("Registro Activity", "ResponseBody: $responseJson")
                                 Toast.makeText(
                                     this@RegistroActivity,
                                     "Usuario creado con éxito, pendiente de activación",
@@ -707,6 +699,7 @@ class RegistroActivity : AppCompatActivity() {
 
                         override fun onFailure(call: Call<EstudianteDTO>, t: Throwable) {
                             Log.d("Reclamo Activity", "error: ${t}")
+
                             registro_mensaje.text = "Ocurrió un error al crear el usuario"
                         }
                     })
@@ -714,39 +707,6 @@ class RegistroActivity : AppCompatActivity() {
 
                 } else if (rolSeleccionado!!.nombre == "TUTOR") {
                     cargarDatosTutor()
-                    Log.d("Registro Activity", "Rol seleccionado: Tutor")
-
-
-                    // Obtener los datos de tutor del Viewholder
-                    val tipo = RegistroAdapter_tutor(tiposTutorList,tiposAreaList).getSelectedTipoTutor(0)
-                    val area = RegistroAdapter_tutor(tiposTutorList,tiposAreaList).getSelectedArea(0)
-
-
-
-                    val usuarioNuevo = TutorDTO(
-                        false,
-                        apellido,
-                        area,
-                        contrasena,
-                        departamentoSeleccionado,
-                        documento,
-                        fechaTimestamp,
-                        genero,
-                        null,
-                        itrSeleccionado!!,
-                        localidad,
-                        emailInstitucional,
-                        emailPersonal,
-                        nombre,
-                        rolSeleccionado!!,
-                        telefono,
-                        tipo,
-                        nombreusuario,
-                        1,
-                        false
-                    )
-
-                    Log.d("Registro Activity", "Tutor: $usuarioNuevo")
                 } else {
                     recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
                     val adapter = RegistroAdapter_analista()
