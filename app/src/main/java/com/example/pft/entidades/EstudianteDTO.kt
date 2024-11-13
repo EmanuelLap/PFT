@@ -9,7 +9,7 @@ data class EstudianteDTO(
     val fechaNacimiento: Long,
     val generacion: Int,
     val genero: String,
-    val id: Int,
+    val id: Int?,
     val itr: Itr,
     val localidad: Any,
     val mail: String,
@@ -18,6 +18,6 @@ data class EstudianteDTO(
     val rol: Rol,
     val telefono: String,
     val usuario: String,
-    val utipo: String,
+    val utipo: String?,
     val validado: Boolean
 )
