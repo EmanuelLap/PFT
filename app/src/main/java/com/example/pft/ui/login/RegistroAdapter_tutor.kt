@@ -15,13 +15,13 @@ import com.example.pft.entidades.TipoDTO
 import com.example.pft.entidades.TipoTutorDTO
 
 class RegistroAdapter_tutor(
-    private val tiposTutor: List<TipoDTO>,
-    private val areas: List<AreaDTO>
+    private val tiposTutor: List<TipoTutorDTO>,
+    private val areas: List<TipoAreaDTO>
 ) : RecyclerView.Adapter<RegistroAdapter_tutor.ViewHolder>() {
 
     // Variables para guardar los objetos seleccionados (en lugar de solo los nombres)
-    private val selectedTipoTutores = mutableListOf<TipoDTO?>()
-    private val selectedAreas = mutableListOf<AreaDTO?>()
+    private val selectedTipoTutores = mutableListOf<TipoTutorDTO?>()
+    private val selectedAreas = mutableListOf<TipoAreaDTO?>()
 
     init {
         // Inicializar las listas con valores nulos para cada item
@@ -113,11 +113,11 @@ class RegistroAdapter_tutor(
     }
 
     // Funciones para obtener los objetos seleccionados
-    fun getSelectedTipoTutor(position: Int): TipoDTO? {
+    fun getSelectedTipoTutor(position: Int): TipoTutorDTO? {
         return selectedTipoTutores.getOrNull(position)
     }
 
-    fun getSelectedArea(position: Int): AreaDTO? {
+    fun getSelectedArea(position: Int): TipoAreaDTO? {
         return selectedAreas.getOrNull(position)
     }
 }

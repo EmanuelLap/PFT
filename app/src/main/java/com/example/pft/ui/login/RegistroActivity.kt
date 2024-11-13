@@ -680,7 +680,7 @@ class RegistroActivity : AppCompatActivity() {
                         rolSeleccionado!!,
                         telefono,
                         nombreusuario,
-                        null,
+                        "ESTUDIANTE",
                         false
                     )
 
@@ -742,7 +742,7 @@ class RegistroActivity : AppCompatActivity() {
                         telefono,
                         tipo,
                         nombreusuario,
-                        1,
+                        "TUTOR",
                         false
                     )
 

@@ -3,7 +3,7 @@ package com.example.pft.entidades
 data class TutorDTO(
     val activo: Boolean,
     val apellidos: String,
-    val areaDTO: AreaDTO?,
+    val areaDTO: TipoAreaDTO?,
     val contrasenia: String,
     val departamento: String,
     val documento: Int,
@@ -17,7 +17,7 @@ data class TutorDTO(
     val nombres: String,
     val rol: Rol,
     val telefono: String,
-    val tipoDTO: TipoDTO?,
+    val tipoDTO: TipoTutorDTO?,
     val usuario: String,
     val utipo: String,
     val validado: Boolean
