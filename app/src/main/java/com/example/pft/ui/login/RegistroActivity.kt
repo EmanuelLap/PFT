@@ -747,33 +747,90 @@ class RegistroActivity : AppCompatActivity() {
                     )
 
                     Log.d("Registro Activity", "Tutor: $usuarioNuevo")
+
+                    val callAgregarUsuarioTutor =
+                        apiService.agregarUsuarioTutor(usuarioNuevo)
+
+                    callAgregarUsuarioTutor.enqueue(object : Callback<TutorDTO> {
+                        override fun onResponse(
+                            call: Call<TutorDTO>,
+                            response: Response<TutorDTO>
+                        ) {
+                            if (response.isSuccessful) {
+                                val usuarioResp = response.body()
+                                Log.d("Registro Activity", "ResponseBody: $usuarioResp")
+                                Toast.makeText(
+                                    this@RegistroActivity,
+                                    "Usuario creado con éxito, pendiente de activación",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<TutorDTO>, t: Throwable) {
+                            Log.d("Reclamo Activity", "error: ${t}")
+                            registro_mensaje.text = "Ocurrió un error al crear el usuario"
+                        }
+                    })
+
                 } else {
                     recyclerView.layoutManager = LinearLayoutManager(this@RegistroActivity)
                     val adapter = RegistroAdapter_analista()
                     recyclerView.adapter = adapter
+
+                    Log.d("Registro Activity", "Rol seleccionado: Analista")
+
+                    val usuarioNuevo = UsuarioDTO(
+                        false,
+                        apellido,
+                        contrasena,
+                        departamentoSeleccionado,
+                        documento,
+                        fechaTimestamp,
+                        genero,
+                        null,
+                        itrSeleccionado!!,
+                        localidad,
+                        emailInstitucional,
+                        emailPersonal,
+                        nombre,
+                        rolSeleccionado!!,
+                        telefono,
+                        nombreusuario,
+                        "ANALISTA",
+                        false
+                    )
+                    Log.d("Registro Activity", "Analista: $usuarioNuevo")
+
+                    val callAgregarUsuarioAnalista =
+                        apiService.agregarUsuario(usuarioNuevo)
+
+                    callAgregarUsuarioAnalista.enqueue(object : Callback<UsuarioDTO> {
+                        override fun onResponse(
+                            call: Call<UsuarioDTO>,
+                            response: Response<UsuarioDTO>
+                        ) {
+                            if (response.isSuccessful) {
+                                val usuarioResp = response.body()
+                                Log.d("Registro Activity", "ResponseBody: $usuarioResp")
+                                Toast.makeText(
+                                    this@RegistroActivity,
+                                    "Usuario creado con éxito, pendiente de activación",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+
+                        override fun onFailure(call: Call<UsuarioDTO>, t: Throwable) {
+                            Log.d("Reclamo Activity", "error: ${t}")
+                            registro_mensaje.text = "Ocurrió un error al crear el usuario"
+                        }
+                    })
+
+
                 }
             }
-            //  val usuarioNuevo=UsuarioDTO(false,apellido,contrasena,departamentoSeleccionado, documento, fechaTimestamp,genero,null,itrSeleccionado!!,localidad,emailInstitucional,emailPersonal,nombre,rol,telefono,nombreusuario,tipoUsuario,false )
-            //  val callAgregarUsuario = apiService.agregarUsuario(usuarioNuevo)
-            /*
-                callAgregarUsuario.enqueue(object : Callback<UsuarioDTO> {
-                    override fun onResponse(call: Call<UsuarioDTO>, response: Response<UsuarioDTO>) {
-                        if (response.isSuccessful) {
-                            val usuarioResp = response.body()
-                            val responseJson = Gson().toJson(usuarioResp)
-                            Log.d("Registro Activity", "ResponseBody: $responseJson")
-                            Toast.makeText(this@RegistroActivity, "Usuario creado con éxito, pendiente de activación", Toast.LENGTH_SHORT).show()
-                        }
-                    }
-
-                    override fun onFailure(call: Call<UsuarioDTO>, t: Throwable) {
-                        Log.d("Reclamo Activity", "error: ${t}")
-
-                        registro_mensaje.text="Ocurrió un error al crear el usuario"
-                    }
-                })
-
- */
+      
         }
 
         fecNac.setOnClickListener(){
