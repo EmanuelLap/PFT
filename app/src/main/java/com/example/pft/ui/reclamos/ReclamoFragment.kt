@@ -229,7 +229,7 @@ class ReclamoFragment : Fragment() {
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_list_item_1,
-            reclamosFiltrados?.map { "${it.titulo}\n${it.estudianteDTO.nombres} ${it.estudianteDTO.apellidos}\nSemestre ${it.semestre}"  } ?: emptyList()
+            reclamosFiltrados?.map { "${it.titulo}\n${it.estudianteId.nombres} ${it.estudianteId.apellidos}\nSemestre ${it.semestre}"  } ?: emptyList()
         )
         listaReclamos.adapter = adapter
     }

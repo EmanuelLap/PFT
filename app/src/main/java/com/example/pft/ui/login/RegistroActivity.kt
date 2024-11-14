@@ -25,6 +25,7 @@ import com.example.pft.entidades.TipoTutorDTO
 import com.example.pft.entidades.TutorDTO
 import com.example.pft.entidades.UsuarioDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -793,6 +794,9 @@ class RegistroActivity : AppCompatActivity() {
                         false
                     )
                     Log.d("Registro Activity", "Analista: $usuarioNuevo")
+
+                    val responseJson= Gson().toJson(usuarioNuevo)
+                    Log.d("RegistroActivity", "ResponseBody: $responseJson")
 
                     val callAgregarUsuarioAnalista =
                         apiService.agregarUsuario(usuarioNuevo)
