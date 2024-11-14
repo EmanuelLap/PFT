@@ -78,7 +78,12 @@ class ReclamoFragment : Fragment() {
                     if (response.isSuccessful) {
                         reclamoDTOS = response.body() ?: emptyList()
                         Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamoDTOS")
+
+                        //Filtramos Reclamos Activos
                         val reclamosActivos = reclamoDTOS.filter { it.activo==true }
+
+                        //Filtramos Reclamos del usuario
+                        reclamosUsuario=reclamoDTOS.filter{ it.estudianteId.id==usuario.id}
 
                         if(usuario.rol.nombre=="ESTUDIANTE"){
                     //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
@@ -87,7 +92,7 @@ class ReclamoFragment : Fragment() {
                             val adapterEstudiante = ArrayAdapter(
                                 requireContext(),
                                 android.R.layout.simple_list_item_1,
-                                reclamosActivos.map { it.titulo }
+                                reclamosUsuario.map { it.titulo }
                             )
 
                             listaReclamos.adapter = adapterEstudiante
@@ -108,6 +113,8 @@ class ReclamoFragment : Fragment() {
                         listaReclamos.setOnItemClickListener { _, _, position, _ ->
 
                             val reclamoDTOSeleccionado: ReclamoDTO = if (usuario.rol.nombre == "ESTUDIANTE") {
+                                Log.e("ReclamoFragment", "reclamosUsuario: $reclamosUsuario")
+
                                 reclamosUsuario[position]
                             } else {
                                 reclamosActivos[position]

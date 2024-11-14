@@ -16,6 +16,7 @@ import android.widget.Spinner
 import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.R
+import com.example.pft.Usuario
 import com.example.pft.UsuarioSingleton
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.Itr
@@ -41,6 +42,10 @@ class EventoFragment : Fragment() {
     private var itrSeleccionado: Itr? = null
     private var tipoSeleccionado: TipoEvento? = null
     private var modalidadSeleccionada: ModalidadEvento? = null
+    private lateinit var listaEventos: ListView
+    private lateinit var eventos: List<Evento>
+    private lateinit var eventosFiltrados: List<Evento>
+
 
 
 
@@ -54,12 +59,14 @@ class EventoFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_evento, container, false)
-        val listaEventos = view.findViewById<ListView>(R.id.listaEventos)
+        listaEventos = view.findViewById(R.id.listaEventos)
         val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentEvento_analista)
         val btnAgregar = view.findViewById<FloatingActionButton>(R.id.fragmentEvento_agregar)
         val itrSpinner = view.findViewById<Spinner>(R.id.Eventos_AnalistaActivity_itr)
         val tipoSpinner = view.findViewById<Spinner>(R.id.Eventos_AnalistaActivity_tipo)
         val modalidadSpinner = view.findViewById<Spinner>(R.id.Eventos_AnalistaActivity_modalidad)
+        eventos= ArrayList()
+        eventosFiltrados= ArrayList()
 
 
 
@@ -124,6 +131,7 @@ class EventoFragment : Fragment() {
                                 if (position >= 0 && position < itrs.size) {
                                     // Obtiene el itr seleccionado
                                     itrSeleccionado = itrs[position]
+                                    actualizarListaEventosPorITR(itrSeleccionado!!)
 
                                 } else {
                                     // Puedes manejar esta situación según tus necesidades
@@ -267,7 +275,8 @@ class EventoFragment : Fragment() {
         call.enqueue(object : Callback<List<Evento>> {
             override fun onResponse(call: Call<List<Evento>>, response: Response<List<Evento>>) {
                 if (isAdded && response.isSuccessful) {  // Verifica si el fragmento está añadido antes de acceder al contexto
-                    val eventos = response.body()!!
+                    eventos = response.body()!!
+                    eventosFiltrados=eventos
                     Log.d("EventoFragment", "API call successful. Eventos: $eventos")
 
                     val adapter = ArrayAdapter(
@@ -296,7 +305,7 @@ class EventoFragment : Fragment() {
                     listaEventos.adapter = adapter
 
                     listaEventos.setOnItemClickListener { _, _, i, _ ->
-                        val eventoSeleccionado = eventos[i]
+                        val eventoSeleccionado = eventosFiltrados[i]
                         val eventoJson = Gson().toJson(eventoSeleccionado)
                         evento.putExtra("evento", eventoJson)
                         startActivity(evento)
@@ -322,4 +331,34 @@ class EventoFragment : Fragment() {
 
         return view
     }
+
+    private fun actualizarListaEventosPorITR(itr: Itr) {
+        eventosFiltrados = eventos.filter { it.itrDTO.nombre == itr.nombre }
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
+        )
+        listaEventos.adapter = adapter
+    }
+
 }
+
+

@@ -101,8 +101,9 @@ class EventoActivity : AppCompatActivity() {
         val eventoSeleccionadoLocalizacion=eventoSeleccionado.localizacion
 
 
-        val evSelTutNoseque: List<Int> = eventoSeleccionadoTutores.map { it.id!! }
-        val eventoMobile=EventoDTOMobile(false,eventoSeleccionadoFin,eventoSeleccionadoId,eventoSeleccionadoInicio,eventoSeleccionadoItr?.id!!,eventoSeleccionadoLocalizacion,eventoSeleccionadoModalidad.id,eventoSeleccionadoTipoEstado.id,eventoSeleccionadoTipo.id,eventoSeleccionadoTitulo,evSelTutNoseque)
+        val eventoSeleccioadotutores: List<Int> = eventoSeleccionadoTutores.map { it.id!! }
+
+        val eventoMobile=EventoDTOMobile(eventoSeleccionadoBaja,eventoSeleccionadoFin,eventoSeleccionadoId,eventoSeleccionadoInicio,eventoSeleccionadoItr?.id!!,eventoSeleccionadoLocalizacion,eventoSeleccionadoModalidad.id,eventoSeleccionadoTipoEstado.id,eventoSeleccionadoTipo.id,eventoSeleccionadoTitulo,eventoSeleccioadotutores)
 
         btn_eliminar.setOnClickListener{
         /*    val retrofit = Retrofit.Builder()

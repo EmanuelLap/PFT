@@ -143,7 +143,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
                                     val eventoSeleccionado = eventos[position]
 
                                     // Almacena el ID del evento seleccionado en la variable
-                                    eventoId = eventoSeleccionado.id
+                                    eventoId = eventoSeleccionado.id!!
                                 } else {
                                     // Puedes manejar esta situación según tus necesidades
                                     Log.e("AgregarReclamoActivity", "Posición seleccionada fuera de los límites")

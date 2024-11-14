@@ -5,7 +5,7 @@ data class ReclamoDTO(
     val creditos: Int,
     val detalle: String,
     val estudianteId: EstudianteDTO,
-    val eventoId: EventoId,
+    val eventoId: Evento,
     val fecha: Long,
     val id: Int,
     val semestre: Int,
