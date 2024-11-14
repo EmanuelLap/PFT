@@ -220,7 +220,15 @@
             android:paddingRight="30dp"
             />
 
-
+        <TextView
+            android:id="@+id/agregarEvento_mensaje_tutores"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:alpha="0"
+            android:background="#CA1414"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/agregarEvento_btnAsignarTutores"

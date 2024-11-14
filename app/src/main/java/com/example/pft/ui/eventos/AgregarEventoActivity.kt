@@ -14,6 +14,7 @@ import android.widget.ListView
 import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isEmpty
 import com.example.pft.ApiClient
 import com.example.pft.R
 import com.example.pft.Usuario
@@ -68,6 +69,8 @@ class AgregarEventoActivity : AppCompatActivity() {
 
     private lateinit var mensaje_titulo:TextView
     private lateinit var mensaje_localizacion:TextView
+    private lateinit var mensaje_tutores:TextView
+
 
 
 
@@ -100,34 +103,31 @@ class AgregarEventoActivity : AppCompatActivity() {
 
         mensaje_titulo=findViewById(R.id.agregarEvento_mensaje_titulo)
         mensaje_localizacion=findViewById(R.id.agregarEvento_mensaje_localizacion)
-
-        val tutoresAgregados = mutableListOf<UsuarioDTO>()
+        mensaje_tutores=findViewById(R.id.agregarEvento_mensaje_tutores)
 
         usuarios = ArrayList()
 
 
+        /*  val retrofit = Retrofit.Builder()
+                  .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
+                  .addConverterFactory(GsonConverterFactory.create())
+                  .client(
+                      OkHttpClient.Builder()
+                          .connectTimeout(30, TimeUnit.SECONDS)
+                          .readTimeout(30, TimeUnit.SECONDS)
+                          .writeTimeout(30, TimeUnit.SECONDS)
+                          .build()
+                  )
+                  .build()
 
-
-
-//cargo datos a spinners------------------------------
-
-//Spinner evento_tipo
-
-      /*  val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(
-                OkHttpClient.Builder()
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .build()
-            )
-            .build()
-
-        val apiService = retrofit.create(ApiService::class.java)*/
+              val apiService = retrofit.create(ApiService::class.java)*/
         val apiService = ApiClient.getApiService(this)
-//---------------Tipo Estado-----------------------------------
+
+
+//Cargo datos a spinners------------------------------
+
+        /*
+//---------------Spinner Estado-----------------------------------
 
         val callTipoEstados= apiService.obtenerTipoEstados()
         callTipoEstados.enqueue(object : Callback<List<TipoEstadoEvento>> {
@@ -135,10 +135,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                 if (response.isSuccessful) {
                     val tipoEstadosEvento = response.body() ?: emptyList()
                     Log.d("AgregarEventoActivity", "API call successful. Tipos: $tipoEstadosEvento")
-
-
                                     tipoEstado = tipoEstadosEvento[2]
-
                 }else {
                     Log.e("AgregarEventoActivity", "API call failed with code ${response.code()}")
                 }
@@ -149,7 +146,9 @@ class AgregarEventoActivity : AppCompatActivity() {
             }
         })
 
-//------------------------Tipos------------------------------------
+
+         */
+//------------------------Spinner Tipos------------------------------------
 
         val callTipos = apiService.obtenerTipos()
 
@@ -179,7 +178,6 @@ class AgregarEventoActivity : AppCompatActivity() {
                                     // Obtiene el evento seleccionado
                                     tipoSeleccionado = tiposEvento[position]
                                 } else {
-                                    // Puedes manejar esta situación según tus necesidades
                                     Log.e("AgregarEventoActivity", "Posición seleccionada fuera de los límites")
                                 }
                             }
@@ -197,7 +195,7 @@ class AgregarEventoActivity : AppCompatActivity() {
             }
         })
 
-        //Spinner modalidad
+        //-----------------------Spinner modalidad-----------------------
 
         val callModalidades = apiService.obtenerModalidades()
 
@@ -227,7 +225,6 @@ class AgregarEventoActivity : AppCompatActivity() {
                                     // Obtiene el evento seleccionado
                                     modalidadSeleccionada = modalidadesEvento[position]
                                 } else {
-                                    // Puedes manejar esta situación según tus necesidades
                                     Log.e("AgregarEventoActivity", "Posición seleccionada fuera de los límites")
                                 }
                             }
@@ -345,6 +342,15 @@ class AgregarEventoActivity : AppCompatActivity() {
                 mensaje_localizacion.visibility = View.INVISIBLE
             }
 
+            if (tutoresLista.isEmpty()){
+                camposVacios.add("tutores")
+                mensaje_tutores.text = "El evento debe de tener tutores asignados"
+                mensaje_tutores.alpha = 0.8f
+                mensaje_tutores.visibility = View.VISIBLE
+            } else {
+                mensaje_localizacion.visibility = View.INVISIBLE
+            }
+
             if (camposVacios.isNotEmpty()) {
                 Toast.makeText(this@AgregarEventoActivity, "Completa todos los campos.", Toast.LENGTH_SHORT).show()
             } else {
@@ -359,13 +365,11 @@ class AgregarEventoActivity : AppCompatActivity() {
                 val fechaFin=formatoFecha.parse(fechaFinString)
                 val fechaFinTimestamp=fechaFin.time
 
-
-
-//TODO: pasar tutoresSeleccionados a una lista de Integers con los ids
                 val tutorListId: List<Int> = tutoresSeleccionados.map { it.id!! }
 
                 val evento= EventoDTOMobile(false,fechaFinTimestamp,null,fechaInicioTimestamp,itrDTOSeleccionado?.id!!,localizacion,
-                    modalidadSeleccionada?.id!!,tipoEstado?.id!!,tipoSeleccionado?.id!!,titulo,tutorListId)
+                    modalidadSeleccionada?.id!!,1,tipoSeleccionado?.id!!,titulo,tutorListId)
+
                 // Usa Gson para convertir el objeto a JSON
                 val gson = GsonBuilder().setPrettyPrinting().create()
                 val jsonEvento = gson.toJson(evento)
@@ -380,7 +384,7 @@ class AgregarEventoActivity : AppCompatActivity() {
                             val eventoResp = response.body()
                             val responseJson = Gson().toJson(eventoResp)
                             Log.d("Registro Activity", "ResponseBody: $responseJson")
-                            Toast.makeText(this@AgregarEventoActivity, "Evento creado con éxito, pendiente de activación", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(this@AgregarEventoActivity, "Evento creado con éxito", Toast.LENGTH_SHORT).show()
                             finish()
                         }
                     }
