@@ -83,7 +83,7 @@ class ReclamoFragment : Fragment() {
                         val reclamosActivos = reclamoDTOS.filter { it.activo==true }
 
                         //Filtramos Reclamos del usuario
-                        reclamosUsuario=reclamoDTOS.filter{ it.estudianteId.id==usuario.id}
+                        reclamosUsuario=reclamosActivos.filter{ it.estudianteId.id==usuario.id}
 
                         if(usuario.rol.nombre=="ESTUDIANTE"){
                     //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
