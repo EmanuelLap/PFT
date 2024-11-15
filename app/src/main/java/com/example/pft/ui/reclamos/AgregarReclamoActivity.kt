@@ -22,6 +22,7 @@ import com.example.pft.entidades.Evento
 import com.example.pft.entidades.ReclamoDTOMobile
 import com.example.pft.ui.eventos.EventoAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -107,7 +108,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
         Log.d("AgregarReclamoActivity", "onCreateView")
 
        /* val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
+            .baseUrl("http://10.0.2.2:8080/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
 
@@ -174,12 +175,14 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
 
         agregarReclamo.setOnClickListener {
-            val retrofit = Retrofit.Builder()
+          /*  val retrofit = Retrofit.Builder()
                 .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 
-            val apiService = retrofit.create(ApiService::class.java)
+           */
+
+
 
             val camposVacios = mutableListOf<String>()
 
@@ -250,6 +253,9 @@ class AgregarReclamoActivity : AppCompatActivity() {
                     tituloIngresado
                 )
 
+                val responseJson= Gson().toJson(reclamo)
+                Log.d("ReclamoActivity", "ResponseBody: $responseJson")
+
                 Log.d("AgregarReclamoActivity", "eventoId: ${eventoId}")
 
                 // Convertir la cadena de fecha a un objeto Date
@@ -257,6 +263,7 @@ class AgregarReclamoActivity : AppCompatActivity() {
                 // val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
 
 
+                val apiService = ApiClient.getApiService(this)
                 val call = apiService.agregarReclamo(
                     reclamo
                 )

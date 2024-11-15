@@ -52,26 +52,9 @@ class ReclamoFragment : Fragment() {
         reclamoDTOS=ArrayList()
 
 
-
-
-        // Configurar Retrofit
-      /*  val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza con tu URL base
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(
-                OkHttpClient.Builder()
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .build()
-            )
-            .build()
-
-        val apiService = retrofit.create(ApiService::class.java)*/
         val apiService = ApiClient.getApiService(requireContext())
         val call = apiService.obtenerReclamos()
 
-        // Realizar la llamada asíncrona con Retrofit
         call.enqueue(object : Callback<List<ReclamoDTO>> {
             override fun onResponse(call: Call<List<ReclamoDTO>>, response: Response<List<ReclamoDTO>>) {
                 if (isAdded) {
@@ -195,7 +178,6 @@ class ReclamoFragment : Fragment() {
 
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Se llama cuando no se ha seleccionado nada
             }
 
         }
@@ -206,7 +188,6 @@ class ReclamoFragment : Fragment() {
             popupMenu.menuInflater.inflate(R.menu.reclamo_menu, popupMenu.menu)
 
             popupMenu.setOnMenuItemClickListener { item ->
-                val fragmentManager = requireActivity().supportFragmentManager
                 when (item.itemId) {
                     R.id.opcion1 -> {
                         startActivity(Intent(requireContext(), AgregarReclamoActivity::class.java))

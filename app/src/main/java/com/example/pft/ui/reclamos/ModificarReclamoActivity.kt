@@ -223,12 +223,6 @@ class ModificarReclamoActivity : AppCompatActivity() {
             val fechaString=fechaText.text.toString()
 
             if (tituloActual!=reclamoTitulo || detalleActual!=reclamoDetalle||creditosIngresados!=reclamoCreditos||semestreSeleccionado!=reclamoSemestre||fechaString!=fechaConFormato){
-                val retrofit = Retrofit.Builder()
-                    .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .build()
-
-                val apiService = retrofit.create(ApiService::class.java)
 
                 // Agrega un log para verificar que apiService se haya creado correctamente
                 Log.d("ModificarReclamoActivity", "apiService creado correctamente")
@@ -254,6 +248,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
                 //    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 // val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
 
+                val apiService = ApiClient.getApiService(this)
 
                 val call = apiService.modificarReclamo(
                     reclamo

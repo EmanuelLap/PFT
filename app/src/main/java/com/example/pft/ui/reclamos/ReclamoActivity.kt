@@ -75,12 +75,7 @@ class ReclamoActivity : AppCompatActivity() {
         }
 
         btn_eliminar.setOnClickListener{
-           /* val retrofit = Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
 
-            val apiService = retrofit.create(ApiService::class.java)*/
             val apiService = ApiClient.getApiService(this)
             val call = apiService.eliminarReclamo(
                 reclamoMobile
