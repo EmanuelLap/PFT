@@ -108,19 +108,7 @@ class AgregarEventoActivity : AppCompatActivity() {
         usuarios = ArrayList()
 
 
-        /*  val retrofit = Retrofit.Builder()
-                  .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-                  .addConverterFactory(GsonConverterFactory.create())
-                  .client(
-                      OkHttpClient.Builder()
-                          .connectTimeout(30, TimeUnit.SECONDS)
-                          .readTimeout(30, TimeUnit.SECONDS)
-                          .writeTimeout(30, TimeUnit.SECONDS)
-                          .build()
-                  )
-                  .build()
 
-              val apiService = retrofit.create(ApiService::class.java)*/
         val apiService = ApiClient.getApiService(this)
 
 
