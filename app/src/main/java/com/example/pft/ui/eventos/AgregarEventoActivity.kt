@@ -353,10 +353,10 @@ class AgregarEventoActivity : AppCompatActivity() {
                 val fechaFin=formatoFecha.parse(fechaFinString)
                 val fechaFinTimestamp=fechaFin.time
 
-                val tutorListId: List<Int> = tutoresSeleccionados.map { it.id!! }
+                val tutoresSeleccionados: List<Int> = tutoresSeleccionados.map { it.id!! }
 
                 val evento= EventoDTOMobile(false,fechaFinTimestamp,null,fechaInicioTimestamp,itrDTOSeleccionado?.id!!,localizacion,
-                    modalidadSeleccionada?.id!!,1,tipoSeleccionado?.id!!,titulo,tutorListId)
+                    modalidadSeleccionada?.id!!,1,tipoSeleccionado?.id!!,titulo,tutoresSeleccionados)
 
                 // Usa Gson para convertir el objeto a JSON
                 val gson = GsonBuilder().setPrettyPrinting().create()
