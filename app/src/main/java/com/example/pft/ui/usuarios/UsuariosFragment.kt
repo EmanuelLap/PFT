@@ -206,7 +206,7 @@ class UsuariosFragment : Fragment() {
     // Funciones de actualización del ListView
 
     private fun actualizarListaUsuariosPorDocumento(documento: String,) {
-        usuariosFiltrados = usuarios.filter { it.documento.toString() == documento }
+        usuariosFiltrados = usuarios.filter { it.documento.toString().contains(documento)}
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
@@ -217,7 +217,7 @@ class UsuariosFragment : Fragment() {
     }
 
     private fun actualizarListaUsuariosPorNombre(nombre: String) {
-        usuariosFiltrados = usuarios.filter { it.nombres == nombre }
+        usuariosFiltrados = usuarios.filter { it.nombres.contains(nombre)}
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
@@ -228,7 +228,7 @@ class UsuariosFragment : Fragment() {
     }
 
     private fun actualizarListaUsuariosPorApellido(apellido: String) {
-        usuariosFiltrados = usuarios.filter { it.apellidos == apellido }
+        usuariosFiltrados = usuarios.filter { it.apellidos.contains(apellido)}
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
@@ -238,8 +238,8 @@ class UsuariosFragment : Fragment() {
     }
 
     private fun actualizarListaUsuariosPorNombreYApellido(nombre: String, apellido: String) {
-        val usuariosFiltradosPorNombre = usuarios.filter { it.nombres == nombre }
-        usuariosFiltrados = usuariosFiltradosPorNombre.filter { it.apellidos == apellido }
+        val usuariosFiltradosPorNombre = usuarios.filter { it.nombres.contains(nombre)}
+        usuariosFiltrados = usuariosFiltradosPorNombre.filter { it.apellidos.contains(apellido)}
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
