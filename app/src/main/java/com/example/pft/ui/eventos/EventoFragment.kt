@@ -1,5 +1,6 @@
 package com.example.pft.ui.eventos
 
+import android.app.DatePickerDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,9 +11,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.Spinner
+import android.widget.TextView
 import com.example.pft.ApiClient
 import com.example.pft.ApiService
 import com.example.pft.R
@@ -32,6 +36,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.concurrent.TimeUnit
 
@@ -39,15 +44,19 @@ import java.util.concurrent.TimeUnit
 class EventoFragment : Fragment() {
 
     private lateinit var fragmentContext: Context
+    private lateinit var titulo: EditText
+    private lateinit var localizacion: EditText
     private var itrSeleccionado: Itr? = null
     private var tipoSeleccionado: TipoEvento? = null
     private var modalidadSeleccionada: ModalidadEvento? = null
     private lateinit var listaEventos: ListView
     private lateinit var eventos: List<Evento>
     private lateinit var eventosFiltrados: List<Evento>
-
-
-
+    private lateinit var filtrar: Button
+    private lateinit var inicio: Button;
+    private lateinit var fin: Button;
+    private lateinit var inicioSeleccion: TextView;
+    private lateinit var finSeleccion: TextView;
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -62,11 +71,22 @@ class EventoFragment : Fragment() {
         listaEventos = view.findViewById(R.id.listaEventos)
         val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentEvento_analista)
         val btnAgregar = view.findViewById<FloatingActionButton>(R.id.fragmentEvento_agregar)
-        val itrSpinner = view.findViewById<Spinner>(R.id.Eventos_AnalistaActivity_itr)
-        val tipoSpinner = view.findViewById<Spinner>(R.id.Eventos_AnalistaActivity_tipo)
-        val modalidadSpinner = view.findViewById<Spinner>(R.id.Eventos_AnalistaActivity_modalidad)
+        val itrSpinner = view.findViewById<Spinner>(R.id.fragmentEvento_analista_itr)
+        val tipoSpinner = view.findViewById<Spinner>(R.id.fragmentEvento_analista_tipo)
+        val modalidadSpinner = view.findViewById<Spinner>(R.id.fragmentEvento_analista_modalidad)
         eventos= ArrayList()
         eventosFiltrados= ArrayList()
+        titulo = view.findViewById(R.id.fragmentEvento_analista_titulo)
+        localizacion = view.findViewById(R.id.fragmentEvento_analista_localizacion)
+        filtrar = view.findViewById(R.id.fragmentEvento_analista_btnFiltrar)
+        inicio=view.findViewById(R.id.fragmentEvento_analista_inicio)
+        inicioSeleccion=view.findViewById(R.id.fragmentEvento_analista_inicio_seleccion)
+        fin=view.findViewById(R.id.fragmentEvento_analista_fin)
+        finSeleccion=view.findViewById(R.id.fragmentEvento_analista_fin_seleccion)
+
+
+
+
 
 
 
@@ -315,6 +335,28 @@ class EventoFragment : Fragment() {
             }
         })
 
+        inicio.setOnClickListener{
+            mostrarCalendarioInicio()
+        }
+
+        fin.setOnClickListener{
+            mostrarCalendarioFin()
+        }
+
+        filtrar.setOnClickListener {
+            when {
+                titulo.text.isNotEmpty() && localizacion.text.isEmpty() -> {
+                    actualizarListaEventosPorTitulo(titulo.text.toString())
+                }
+                titulo.text.isEmpty() && localizacion.text.isNotEmpty() -> {
+                    actualizarListaEventosPorLocalizacion(titulo.text.toString())
+                }
+                titulo.text.isNotEmpty() && localizacion.text.isNotEmpty() -> {
+                    actualizarListaUsuariosPorTituloYLocalizacion(titulo.text.toString(), localizacion.text.toString())
+                }
+            }
+        }
+
         btnAgregar.setOnClickListener {
             val agregarEventoActivity = Intent(fragmentContext, AgregarEventoActivity::class.java)
             startActivity(agregarEventoActivity)
@@ -402,6 +444,131 @@ class EventoFragment : Fragment() {
             }
         )
         listaEventos.adapter = adapter
+    }
+
+    private fun actualizarListaEventosPorTitulo(titulo: String,) {
+        eventosFiltrados = eventos.filter { it.titulo.contains(titulo)}
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
+        )
+
+        listaEventos.adapter = adapter
+    }
+
+    private fun actualizarListaEventosPorLocalizacion(localizacion: String,) {
+        eventosFiltrados = eventos.filter { it.localizacion.contains(localizacion) }
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
+        )
+
+        listaEventos.adapter = adapter
+    }
+
+    private fun actualizarListaUsuariosPorTituloYLocalizacion(titulo: String, localizacion: String) {
+        val eventosFiltradosPorTitulo = eventos.filter { it.titulo.contains(titulo) }
+        eventosFiltrados = eventosFiltradosPorTitulo.filter { it.localizacion.contains(localizacion) }
+        eventosFiltrados = eventos.filter { it.localizacion == localizacion }
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
+        )
+
+        listaEventos.adapter = adapter
+
+    }
+
+    private fun mostrarCalendarioInicio() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+
+                val fechaSeleccionada = "$dayOfMonth/${month + 1}/$year"
+                inicioSeleccion.text = fechaSeleccionada
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
+    }
+
+    private fun mostrarCalendarioFin() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+
+                val fechaSeleccionada = "$dayOfMonth/${month + 1}/$year"
+                finSeleccion.text = fechaSeleccionada
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
     }
 
 }

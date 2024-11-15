@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
     <EditText
-        android:id="@+id/Evento_AnalistaActivity_titulo"
+        android:id="@+id/fragmentEvento_analista_titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -40,7 +40,7 @@
         android:layout_marginRight="60dp"
         />
     <EditText
-        android:id="@+id/Eventos_AnalistaActivity_localizacion"
+        android:id="@+id/fragmentEvento_analista_localizacion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
@@ -64,7 +64,7 @@
 
             />
         <Spinner
-            android:id="@+id/Eventos_AnalistaActivity_tipo"
+            android:id="@+id/fragmentEvento_analista_tipo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -87,7 +87,7 @@
 
             />
         <Spinner
-            android:id="@+id/Eventos_AnalistaActivity_modalidad"
+            android:id="@+id/fragmentEvento_analista_modalidad"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -110,7 +110,7 @@
 
             />
         <Spinner
-            android:id="@+id/Eventos_AnalistaActivity_itr"
+            android:id="@+id/fragmentEvento_analista_itr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
@@ -137,7 +137,7 @@
             />
 
         <TextView
-            android:id="@+id/Evento_AnalistaActivity_inicio_seleccion"
+            android:id="@+id/fragmentEvento_analista_inicio_seleccion"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -145,7 +145,7 @@
             />
 
         <Button
-            android:id="@+id/Evento_AnalistaActivity_inicio"
+            android:id="@+id/fragmentEvento_analista_inicio"
             android:backgroundTint="#00AEEF"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
@@ -164,7 +164,7 @@
             />
 
         <TextView
-            android:id="@+id/Evento_AnalistaActivity_fin_seleccion"
+            android:id="@+id/fragmentEvento_analista_fin_seleccion"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -172,7 +172,7 @@
             />
 
         <Button
-            android:id="@+id/Evento_AnalistaActivity_fin"
+            android:id="@+id/fragmentEvento_analista_fin"
             android:backgroundTint="#00AEEF"
             android:layout_marginLeft="10dp"
             android:layout_width="wrap_content"
@@ -186,7 +186,7 @@
 
 
     <Button
-        android:id="@+id/Evento_AnalistaActivity_btnFiltrar"
+        android:id="@+id/fragmentEvento_analista_btnFiltrar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
