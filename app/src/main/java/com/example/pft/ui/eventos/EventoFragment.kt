@@ -175,8 +175,9 @@ class EventoFragment : Fragment() {
                             )  {
                                 // Verificar que la posición seleccionada esté dentro de los límites
                                 if (position >= 0 && position < tipos.size) {
-                                    // Obtiene el itr seleccionado
+                                    // Obtiene el tipo de evento seleccionado
                                     tipoSeleccionado = tipos[position]
+                                    actualizarListaEventosPorTipo(tipoSeleccionado!!)
 
                                 } else {
                                     // Puedes manejar esta situación según tus necesidades
@@ -220,7 +221,7 @@ class EventoFragment : Fragment() {
                     // Asignar el adapter al ListView
                     modalidadSpinner.adapter = modalidadEventoAdapter
 
-                    tipoSpinner.onItemSelectedListener =
+                    modalidadSpinner.onItemSelectedListener =
                         object : AdapterView.OnItemSelectedListener {
                             override fun onItemSelected(
                                 parentView: AdapterView<*>,
@@ -230,8 +231,10 @@ class EventoFragment : Fragment() {
                             )  {
                                 // Verificar que la posición seleccionada esté dentro de los límites
                                 if (position >= 0 && position < modalidades.size) {
-                                    // Obtiene el itr seleccionado
+                                    // Obtiene la modalidad seleccionada
                                     modalidadSeleccionada = modalidades[position]
+                                    actualizarListaEventosPorModalidad(modalidadSeleccionada!!)
+
 
                                 } else {
                                     Log.e("EventoFragment", "Posición seleccionada fuera de los límites")
@@ -286,7 +289,7 @@ class EventoFragment : Fragment() {
                             val fechaFinFormateada = formato.format(fechaFin)
 
                             // Construir el texto para cada evento con la fecha formateada
-                            "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+                            "${evento.titulo}\nModalidad: ${evento.modalidadEvento.nombre}\nITR: ${evento.itrDTO.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
                         }
                     )
 
@@ -322,6 +325,60 @@ class EventoFragment : Fragment() {
 
     private fun actualizarListaEventosPorITR(itr: Itr) {
         eventosFiltrados = eventos.filter { it.itrDTO.nombre == itr.nombre }
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
+        )
+        listaEventos.adapter = adapter
+    }
+
+    private fun actualizarListaEventosPorTipo(tipo: TipoEvento) {
+        eventosFiltrados = eventos.filter { it.tipoEvento.nombre == tipo.nombre }
+        val adapter = ArrayAdapter(
+            fragmentContext,
+            android.R.layout.simple_list_item_1,
+            eventosFiltrados.map { evento ->
+                val timestampInicio = evento.inicio
+                val timestampFin = evento.fin
+
+                // Convertir timestamps a fechas
+                val fechaInicio = Date(timestampInicio)
+                val fechaFin = Date(timestampFin)
+
+                // Define el formato que deseas para la fecha
+                val formato = SimpleDateFormat("dd/MM/yyyy")
+
+                // Formatear las fechas a String legible
+                val fechaInicioFormateada = formato.format(fechaInicio)
+                val fechaFinFormateada = formato.format(fechaFin)
+
+                // Construir el texto para cada evento con la fecha formateada
+                "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+            }
+        )
+        listaEventos.adapter = adapter
+    }
+
+    private fun actualizarListaEventosPorModalidad(modalidad: ModalidadEvento) {
+        eventosFiltrados = eventos.filter { it.modalidadEvento.nombre == modalidad.nombre }
         val adapter = ArrayAdapter(
             fragmentContext,
             android.R.layout.simple_list_item_1,
