@@ -113,7 +113,7 @@ class ReclamoFragment : Fragment() {
                         listaReclamos.setOnItemClickListener { _, _, position, _ ->
 
                             val reclamoDTOSeleccionado: ReclamoDTO = if (usuario.rol.nombre == "ESTUDIANTE") {
-                                Log.e("ReclamoFragment", "reclamosUsuario: $reclamosUsuario")
+                                Log.d("ReclamoFragment", "reclamosUsuario: $reclamosUsuario")
 
                                 reclamosUsuario[position]
                             } else {
