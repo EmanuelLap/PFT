@@ -51,7 +51,6 @@ class RegistroActivity : AppCompatActivity() {
     private lateinit var emailPersonalConfirmar: EditText
     private lateinit var telefono: EditText
     private lateinit var genero: Spinner
-    private lateinit var generacion: EditText
     private lateinit var fecNac: Button
     private lateinit var itr: Spinner
     private lateinit var departamento: Spinner
@@ -476,7 +475,12 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_documento.text = "Ingresa un documento"
                 mensaje_documento.alpha = 0.8f
                 mensaje_documento.visibility = View.VISIBLE
-            } else {
+            } else if(documento.text.toString().length>45) {
+                camposVacios.add("Documento")
+                mensaje_documento.text = "El documento no puede contener más de 10 caracteres"
+                mensaje_documento.alpha = 0.8f
+                mensaje_documento.visibility = View.VISIBLE}
+            else {
                 mensaje_documento.visibility = View.INVISIBLE
             }
 
@@ -485,16 +489,26 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_nombre.text = "Ingresa un nombre"
                 mensaje_nombre.alpha = 0.8f
                 mensaje_nombre.visibility = View.VISIBLE
-            } else {
+            } else if(nombre.text.toString().length>45) {
+            camposVacios.add("Nombre")
+            mensaje_nombre.text = "El nombre no puede contener más de 45 caracteres"
+            mensaje_nombre.alpha = 0.8f
+            mensaje_nombre.visibility = View.VISIBLE}
+            else {
                 mensaje_nombre.visibility = View.INVISIBLE
             }
 
-            if (apellido.text.toString().isEmpty()) {
+            if  (apellido.text.toString().isEmpty()) {
                 camposVacios.add("Apellido")
                 mensaje_apellido.text = "Ingresa un apellido"
                 mensaje_apellido.alpha = 0.8f
                 mensaje_apellido.visibility = View.VISIBLE // Mostrar el mensaje de error
-            } else {
+            } else if (apellido.text.toString().length>45) {
+                camposVacios.add("Apellido")
+                mensaje_apellido.text = "El apellido no puede contener más de 45 caracteres"
+                mensaje_apellido.alpha = 0.8f
+                mensaje_apellido.visibility = View.VISIBLE // Mostrar el mensaje de error
+            }else {
                 mensaje_apellido.visibility =
                     View.INVISIBLE // Ocultar el mensaje de error si no está vacío
             }
@@ -504,7 +518,12 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_nombreUsuario.text = "Ingresa una contraseña"
                 mensaje_nombreUsuario.alpha = 0.8f
                 mensaje_nombreUsuario.visibility = View.VISIBLE
-            } else {
+            } else if (nombreUsuario.text.toString().length>45) {
+                camposVacios.add("Nombre usuario")
+                mensaje_nombreUsuario.text = "El nombre de usuario no puede contener más de 45 caracteres"
+                mensaje_nombreUsuario.alpha = 0.8f
+                mensaje_nombreUsuario.visibility = View.VISIBLE
+            }else {
                 mensaje_nombreUsuario.visibility = View.INVISIBLE
             }
 
@@ -513,13 +532,23 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_contrasena.text = "Ingresa una contraseña"
                 mensaje_contrasena.alpha = 0.8f
                 mensaje_contrasena.visibility = View.VISIBLE
-            } else {
+            } else if (contrasena.text.toString().length>45) {
+                camposVacios.add("Contraseña")
+                mensaje_contrasena.text = "La contraseña no puede contener más de 45 caracteres"
+                mensaje_contrasena.alpha = 0.8f
+                mensaje_contrasena.visibility = View.VISIBLE
+            }else {
                 mensaje_contrasena.visibility = View.INVISIBLE
             }
 
             if (contrasenaConfirmar.text.toString().isEmpty()) {
                 camposVacios.add("Contraseña confirmar")
                 mensaje_contrasenaConfirmar.text = "Confirma tu contraseña"
+                mensaje_contrasenaConfirmar.alpha = 0.8f
+                mensaje_contrasenaConfirmar.visibility = View.VISIBLE
+            }else if (contrasenaConfirmar.text.toString()!=contrasena.text.toString()) {
+                camposVacios.add("Contraseña confirmar")
+                mensaje_contrasenaConfirmar.text = "La confirmación de la contraseña no coincide "
                 mensaje_contrasenaConfirmar.alpha = 0.8f
                 mensaje_contrasenaConfirmar.visibility = View.VISIBLE
             } else {
@@ -531,7 +560,17 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_emailInstitucional.text = "Ingresa un email institucional"
                 mensaje_emailInstitucional.alpha = 0.8f
                 mensaje_emailInstitucional.visibility = View.VISIBLE
-            } else {
+            } else if (emailInstitucional.text.toString().length>45) {
+                camposVacios.add("Email institucional")
+                mensaje_emailInstitucional.text = "El email institucional no puede contener más de 45 caracteres"
+                mensaje_emailInstitucional.alpha = 0.8f
+                mensaje_emailInstitucional.visibility = View.VISIBLE
+            } else if (emailInstitucional.text.toString().contains(".utec.edu.uy")==false) {
+                camposVacios.add("Email institucional")
+                mensaje_emailInstitucional.text = "El email ingresado no pertenece a la institución"
+                mensaje_emailInstitucional.alpha = 0.8f
+                mensaje_emailInstitucional.visibility = View.VISIBLE
+            }else {
                 mensaje_emailInstitucional.visibility = View.INVISIBLE
             }
 
@@ -540,22 +579,42 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_emailPersonal.text = "Ingresa un email personal"
                 mensaje_emailPersonal.alpha = 0.8f
                 mensaje_emailPersonal.visibility = View.VISIBLE
-            } else {
+            } else if (emailPersonal.text.toString().contains("@gmail.com")==false && emailPersonal.text.toString().contains("@hotmail.com")==false && emailPersonal.text.toString().contains("@outlook.com")==false) {
+                camposVacios.add("Email personal")
+                mensaje_emailPersonal.text = "Ingresa un email válido"
+                mensaje_emailPersonal.alpha = 0.8f
+                mensaje_emailPersonal.visibility = View.VISIBLE
+            } else if (emailPersonal.text.toString().length>255) {
+                camposVacios.add("Email personal")
+                mensaje_emailPersonal.text = "El email no puede contener más de 255 caracteres"
+                mensaje_emailPersonal.alpha = 0.8f
+                mensaje_emailPersonal.visibility = View.VISIBLE
+            }else {
                 mensaje_emailPersonal.visibility = View.INVISIBLE
             }
 
             if (emailPersonalConfirmar.text.toString().isEmpty()) {
-                camposVacios.add("Fecha de Nacimiento")
-                mensaje_emailPersonalConfirmar.text = "Selecciona una fecha de nacimiento"
+                camposVacios.add("Email personal confirmar")
+                mensaje_emailPersonalConfirmar.text = "Confirma tu email personal"
                 mensaje_emailPersonalConfirmar.alpha = 0.8f
                 mensaje_emailPersonalConfirmar.visibility = View.VISIBLE
-            } else {
+            } else if (emailPersonalConfirmar.text.toString()!=emailPersonal.text.toString()) {
+                camposVacios.add("Email personal confirmar")
+                mensaje_emailPersonalConfirmar.text = "El email confirmado no coincide"
+                mensaje_emailPersonalConfirmar.alpha = 0.8f
+                mensaje_emailPersonalConfirmar.visibility = View.VISIBLE
+            }else {
                 mensaje_emailPersonalConfirmar.visibility = View.INVISIBLE
             }
 
             if (telefono.text.toString().isEmpty()) {
                 camposVacios.add("Telefono")
                 mensaje_telefono.text = "Ingresa un teléfono"
+                mensaje_telefono.alpha = 0.8f
+                mensaje_telefono.visibility = View.VISIBLE
+            } else if (telefono.text.toString().length>45) {
+                camposVacios.add("Telefono")
+                mensaje_telefono.text = "Ingresa un teléfono válido"
                 mensaje_telefono.alpha = 0.8f
                 mensaje_telefono.visibility = View.VISIBLE
             } else {
@@ -602,6 +661,11 @@ class RegistroActivity : AppCompatActivity() {
             if (localidad.text.toString().isEmpty()) {
                 camposVacios.add("Localidad")
                 mensaje_localidad.text = "Ingresa una localidad"
+                mensaje_localidad.alpha = 0.8f
+                mensaje_localidad.visibility = View.VISIBLE
+            } else if (localidad.text.toString().length>45) {
+                camposVacios.add("Localidad")
+                mensaje_localidad.text = "La localidad no puede contener más de 45 caracteres"
                 mensaje_localidad.alpha = 0.8f
                 mensaje_localidad.visibility = View.VISIBLE
             } else {
