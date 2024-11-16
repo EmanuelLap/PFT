@@ -114,6 +114,9 @@ class EventoActivity : AppCompatActivity() {
 
             Log.d("EventoActivity", "btnEliminar")
 
+            val responseJson = Gson().toJson(eventoMobile)
+            Log.d("EventoActivity", "ResponseBody: $responseJson")
+
             call.enqueue(object : Callback<EventoDTOMobile> {
                 override fun onResponse(call: Call<EventoDTOMobile>, response: Response<EventoDTOMobile>) {
                     if (response.isSuccessful) {
@@ -141,7 +144,7 @@ class EventoActivity : AppCompatActivity() {
         runOnUiThread {
             val builder = AlertDialog.Builder(this@EventoActivity)
             builder.setTitle("Éxito")
-            builder.setMessage("Reclamo eliminado con éxito")
+            builder.setMessage("El evento ha sido dado de baja")
             builder.setPositiveButton("Aceptar") { dialog, _ ->
                 val mainActivity = Intent(this@EventoActivity, MainActivity::class.java)
                 startActivity(mainActivity)
