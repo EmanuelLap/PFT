@@ -631,13 +631,49 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_genero.visibility = View.INVISIBLE
             }
 
+
             if (fechaText.text.toString().isEmpty()) {
                 camposVacios.add("Fec nac")
                 mensaje_fecNac.text = "Selecciona una fecha de nacimiento"
                 mensaje_fecNac.alpha = 0.8f
                 mensaje_fecNac.visibility = View.VISIBLE
-            } else {
-                mensaje_fecNac.visibility = View.INVISIBLE
+            }
+
+            else{
+
+            val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
+            val fecNacString = fechaText.text.toString()
+            val fechaNacimiento = formatoFecha.parse(fecNacString)
+            val fechaTimestamp = fechaNacimiento.time
+
+            if (fechaNacimiento != null) {
+                val calNacimiento = Calendar.getInstance()
+                calNacimiento.time = fechaNacimiento
+
+                val calActual = Calendar.getInstance()
+
+                // Calcular la edad
+                var edad = calActual.get(Calendar.YEAR) - calNacimiento.get(Calendar.YEAR)
+
+                // Ajustar si no ha pasado el cumpleaños este año
+                if (calActual.get(Calendar.MONTH) < calNacimiento.get(Calendar.MONTH) ||
+                    (calActual.get(Calendar.MONTH) == calNacimiento.get(Calendar.MONTH) && calActual.get(
+                        Calendar.DAY_OF_MONTH
+                    ) < calNacimiento.get(Calendar.DAY_OF_MONTH))
+                ) {
+                    edad--
+                }
+
+                if (edad < 18) {
+                    // La persona tiene 18 años o más
+                    mensaje_fecNac.text = "Debes de ser mayor a 18 años para registrarte"
+                    mensaje_fecNac.alpha = 0.8f
+                    mensaje_fecNac.visibility = View.VISIBLE
+                } else {
+                    mensaje_fecNac.visibility = View.INVISIBLE
+                }
+
+            }
             }
 
             if (itrSeleccionado == null) {
@@ -677,7 +713,6 @@ class RegistroActivity : AppCompatActivity() {
                     .show()
             } else {
                 // Todos los campos están completos
-                val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
                 val nombre = nombre.text.toString()
                 val apellido = apellido.text.toString()
                 val contrasena = contrasena.text.toString()
@@ -693,13 +728,15 @@ class RegistroActivity : AppCompatActivity() {
                 } else {
                     genero = "F"
                 }
-                //        val tipoUsuario=tipoUsuarioSeleccionado
-                val fecNacString = fechaText.text.toString()
-                val fecha = formatoFecha.parse(fecNacString)
-                val fechaTimestamp = fecha.time
+
+
 
                 Log.d("Registro Activity", "Datos: $genero $nombre $apellido")
 
+                val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
+                val fecNacString = fechaText.text.toString()
+                val fechaNacimiento = formatoFecha.parse(fecNacString)
+                val fechaTimestamp = fechaNacimiento.time
 
                 if (rolSeleccionado!!.nombre == "ESTUDIANTE") {
 
@@ -887,6 +924,7 @@ class RegistroActivity : AppCompatActivity() {
             }
 
         }
+
 
         fecNac.setOnClickListener(){
             mostrarCalendario()
