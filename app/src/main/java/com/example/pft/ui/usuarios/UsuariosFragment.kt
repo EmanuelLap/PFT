@@ -68,20 +68,7 @@ class UsuariosFragment : Fragment() {
         usuarios = ArrayList()
         usuariosFiltrados= ArrayList()
 
-       /* val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .client(
-                OkHttpClient.Builder()
-                    .connectTimeout(30, TimeUnit.SECONDS)
-                    .readTimeout(30, TimeUnit.SECONDS)
-                    .writeTimeout(30, TimeUnit.SECONDS)
-                    .build()
-            )
-            .build()
 
-        val apiService = retrofit.create(ApiService::class.java)*/
-       // val apiService: ApiService = ApiClient.getApiService(this)
         val apiService = ApiClient.getApiService(requireContext())
         val usuarioActivity = Intent(fragmentContext, ModificarUsuario_AnalistaActivity::class.java)
 

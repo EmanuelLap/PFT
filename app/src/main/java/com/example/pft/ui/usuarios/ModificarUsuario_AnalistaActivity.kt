@@ -71,7 +71,7 @@ class ModificarUsuario_AnalistaActivity : AppCompatActivity() {
         val usuariotelefono=usuarioSeleccionado.telefono
         val usuarioTipo=usuarioSeleccionado.utipo
         val usuarioValidado=usuarioSeleccionado.validado
-        val usuarioDTO= UsuarioDTO(usuarioActivo,usuarioApellidos,usuarioContrasenia,usuariodepartamento,usuariodocumento,usuariofecNac,usuariogenero,usuarioId,usuarioItr,"",usuariomail,"",usuarionombres,usuariorol,usuariotelefono,usuarioUsuario,"",usuarioValidado)
+        val usuarioDTO= UsuarioDTO(usuarioActivo,usuarioApellidos,usuarioContrasenia,usuariodepartamento,usuariodocumento,usuariofecNac,usuariogenero,usuarioId,usuarioItr,usuariolocalidad,usuariomail,usuariomailPersonal,usuarionombres,usuariorol,usuariotelefono,usuarioUsuario,usuarioTipo,usuarioValidado)
 
         nombre.text="Nombre: ${usuarioSeleccionado.nombres}"
         apellido.text="Apellido: ${usuarioSeleccionado.apellidos}"
@@ -88,18 +88,16 @@ class ModificarUsuario_AnalistaActivity : AppCompatActivity() {
         }
 
         btn_baja.setOnClickListener{
-           /* val retrofit = Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-            val apiService = retrofit.create(ApiService::class.java)*/
 
             val apiService = ApiClient.getApiService(this)
             val call = apiService.eliminarUsuario(
                 usuarioDTO
             )
             Log.d("ModificarUsuarioActivity", "btnBaja")
+            Log.d("Registro Activity", "Usuario: $usuarioDTO")
+
+            val responseJson= Gson().toJson(usuarioDTO)
+            Log.d("RegistroActivity", "UsuarioJSON: $responseJson")
 
             call.enqueue(object : Callback<UsuarioDTO> {
                 override fun onResponse(call: Call<UsuarioDTO>, response: Response<UsuarioDTO>) {
@@ -124,17 +122,14 @@ class ModificarUsuario_AnalistaActivity : AppCompatActivity() {
     }
 
     private fun mostrarMensajeExito() {
-        runOnUiThread {
-            val builder = AlertDialog.Builder(this@ModificarUsuario_AnalistaActivity)
-            builder.setTitle("Éxito")
-            builder.setMessage("Reclamo eliminado con éxito")
-            builder.setPositiveButton("Aceptar") { dialog, _ ->
-                val mainActivity = Intent(this@ModificarUsuario_AnalistaActivity, MainActivity::class.java)
-                startActivity(mainActivity)
-                dialog.dismiss()
-            }
-            val dialog = builder.create()
-            dialog.show()
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Baja exitosa")
+        builder.setMessage("El usuario ha sido dado de baja")
+        builder.setPositiveButton("Aceptar") { dialog, which ->
+            // Al hacer clic en Aceptar, cierra la Activity
+            finish()
         }
+        val dialog = builder.create()
+        dialog.show()
     }
-}
+    }
