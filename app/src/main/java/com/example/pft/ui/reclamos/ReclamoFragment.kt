@@ -104,8 +104,16 @@ class ReclamoFragment : Fragment() {
                             }
                             val reclamoJson = Gson().toJson(reclamoDTOSeleccionado)
                             val reclamoEstudianteActivity = Intent(requireContext(), ReclamoActivity::class.java)
-                            reclamoEstudianteActivity.putExtra("reclamo", reclamoJson)
-                            startActivity(reclamoEstudianteActivity)
+                            val reclamoAnalistaActivity = Intent(requireContext(), ReclamoAnalistaActivity::class.java)
+
+                            if(usuario.utipo=="ESTUDIANTE") {
+                                reclamoEstudianteActivity.putExtra("reclamo", reclamoJson)
+                                startActivity(reclamoEstudianteActivity)
+                            } else {
+                                reclamoAnalistaActivity.putExtra("reclamo", reclamoJson)
+                                startActivity(reclamoAnalistaActivity)
+
+                            }
                         }
                     } else {
                         Log.e("ReclamoFragment", "API call failed with code ${response.code()}")
