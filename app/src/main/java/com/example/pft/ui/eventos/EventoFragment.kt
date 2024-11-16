@@ -53,6 +53,7 @@ class EventoFragment : Fragment() {
     private lateinit var eventos: List<Evento>
     private lateinit var eventosFiltrados: List<Evento>
     private lateinit var filtrar: Button
+    private lateinit var limpiarFiltros: Button
     private lateinit var inicio: Button;
     private lateinit var fin: Button;
     private lateinit var inicioSeleccion: TextView;
@@ -79,6 +80,7 @@ class EventoFragment : Fragment() {
         titulo = view.findViewById(R.id.fragmentEvento_analista_titulo)
         localizacion = view.findViewById(R.id.fragmentEvento_analista_localizacion)
         filtrar = view.findViewById(R.id.fragmentEvento_analista_btnFiltrar)
+        limpiarFiltros = view.findViewById(R.id.fragmentEvento_analista_btnLimpiar)
         inicio=view.findViewById(R.id.fragmentEvento_analista_inicio)
         inicioSeleccion=view.findViewById(R.id.fragmentEvento_analista_inicio_seleccion)
         fin=view.findViewById(R.id.fragmentEvento_analista_fin)
@@ -355,6 +357,34 @@ class EventoFragment : Fragment() {
                     actualizarListaUsuariosPorTituloYLocalizacion(titulo.text.toString(), localizacion.text.toString())
                 }
             }
+        }
+
+        limpiarFiltros.setOnClickListener{
+            eventosFiltrados = eventos
+            val adapter = ArrayAdapter(
+                fragmentContext,
+                android.R.layout.simple_list_item_1,
+                eventosFiltrados.map { evento ->
+                    val timestampInicio = evento.inicio
+                    val timestampFin = evento.fin
+
+                    // Convertir timestamps a fechas
+                    val fechaInicio = Date(timestampInicio)
+                    val fechaFin = Date(timestampFin)
+
+                    // Define el formato que deseas para la fecha
+                    val formato = SimpleDateFormat("dd/MM/yyyy")
+
+                    // Formatear las fechas a String legible
+                    val fechaInicioFormateada = formato.format(fechaInicio)
+                    val fechaFinFormateada = formato.format(fechaFin)
+
+                    // Construir el texto para cada evento con la fecha formateada
+                    "${evento.titulo}\n${evento.modalidadEvento.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"
+                }
+            )
+
+            listaEventos.adapter = adapter
         }
 
         btnAgregar.setOnClickListener {

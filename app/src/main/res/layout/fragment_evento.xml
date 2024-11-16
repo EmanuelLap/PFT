@@ -180,22 +180,46 @@
             android:layout_height="wrap_content"
             android:drawableLeft="@drawable/ic_calendar"
             />
+
+
+
     </LinearLayout>
 
-
-
-
-    <Button
-        android:id="@+id/fragmentEvento_analista_btnFiltrar"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="Filtrar"
-        android:layout_centerVertical="true"
-        android:layout_alignParentEnd="true"
+        android:orientation="horizontal">
 
-        android:layout_marginBottom="20dp"
-        android:backgroundTint="#00AEEF"/>
+
+
+        <Button
+            android:id="@+id/fragmentEvento_analista_btnFiltrar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Filtrar"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="50dp"
+            android:backgroundTint="#00AEEF"/>
+
+        <Button
+            android:id="@+id/fragmentEvento_analista_btnLimpiar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Limpiar Filtros"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="50dp"
+            android:backgroundTint="#00AEEF"/>
+
+    </LinearLayout>
 
 </LinearLayout>
 

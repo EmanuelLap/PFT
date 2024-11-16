@@ -359,11 +359,9 @@ class AgregarEventoActivity : AppCompatActivity() {
                     modalidadSeleccionada?.id!!,1,tipoSeleccionado?.id!!,titulo,tutoresSeleccionados)
 
                 // Usa Gson para convertir el objeto a JSON
-                val gson = GsonBuilder().setPrettyPrinting().create()
-                val jsonEvento = gson.toJson(evento)
 
-                // Muestra el JSON en la consola
-                println(jsonEvento)
+                val responseJson = Gson().toJson(evento)
+                Log.d("Registro Activity", "ResponseBody: $responseJson")
                 val callAgregarEvento = apiService.agregarEvento(evento)
 
                 callAgregarEvento.enqueue(object : Callback<EventoDTOMobile> {
