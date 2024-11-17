@@ -55,7 +55,7 @@
 
 
             <Button
-                android:id="@+id/reclamoSel_btnResponder"
+                android:id="@+id/reclamo_btnResponder"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
                 android:backgroundTint="#00AEEF"
@@ -64,7 +64,7 @@
                 android:layout_marginTop="25dp"
                 android:layout_marginRight="10dp"
                 android:textSize="16dp"
-                
+
                 />
 
 
