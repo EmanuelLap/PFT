@@ -54,7 +54,10 @@ class EventoFragment : Fragment() {
     private lateinit var eventosFiltrados: List<Evento>
     private lateinit var filtrar: Button
     private lateinit var limpiarFiltros: Button
-
+    private lateinit var inicio: Button;
+    private lateinit var fin: Button;
+    private lateinit var inicioSeleccion: TextView;
+    private lateinit var finSeleccion: TextView;
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -78,6 +81,12 @@ class EventoFragment : Fragment() {
         localizacion = view.findViewById(R.id.fragmentEvento_analista_localizacion)
         filtrar = view.findViewById(R.id.fragmentEvento_analista_btnFiltrar)
         limpiarFiltros = view.findViewById(R.id.fragmentEvento_analista_btnLimpiar)
+        inicio=view.findViewById(R.id.fragmentEvento_analista_inicio)
+        inicioSeleccion=view.findViewById(R.id.fragmentEvento_analista_inicio_seleccion)
+        fin=view.findViewById(R.id.fragmentEvento_analista_fin)
+        finSeleccion=view.findViewById(R.id.fragmentEvento_analista_fin_seleccion)
+
+
 
 
 
@@ -328,6 +337,13 @@ class EventoFragment : Fragment() {
             }
         })
 
+        inicio.setOnClickListener{
+            mostrarCalendarioInicio()
+        }
+
+        fin.setOnClickListener{
+            mostrarCalendarioFin()
+        }
 
         filtrar.setOnClickListener {
             when {
@@ -547,6 +563,43 @@ class EventoFragment : Fragment() {
 
     }
 
+    private fun mostrarCalendarioInicio() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+
+                val fechaSeleccionada = "$dayOfMonth/${month + 1}/$year"
+                inicioSeleccion.text = fechaSeleccionada
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
+    }
+
+    private fun mostrarCalendarioFin() {
+        val calendar = Calendar.getInstance()
+        val year = calendar.get(Calendar.YEAR)
+        val month = calendar.get(Calendar.MONTH)
+        val day = calendar.get(Calendar.DAY_OF_MONTH)
+
+
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            { _, year, month, dayOfMonth ->
+
+                val fechaSeleccionada = "$dayOfMonth/${month + 1}/$year"
+                finSeleccion.text = fechaSeleccionada
+            },
+            year, month, day
+        )
+        datePickerDialog.show()
+    }
 
 }
 

@@ -135,7 +135,7 @@ class ReclamoFragment : Fragment() {
             btn_agregar.visibility = View.GONE
         }
 
-
+        
         // Configuración del botón de agregar
         btn_agregar.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), btn_agregar)

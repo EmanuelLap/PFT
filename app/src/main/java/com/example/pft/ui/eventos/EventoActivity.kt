@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Button
-import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.pft.ApiClient
 import com.example.pft.MainActivity
@@ -47,8 +46,6 @@ class EventoActivity : AppCompatActivity() {
         // Convertir la cadena JSON de vuelta a un objeto Evento (usando Gson)
         val eventoSeleccionado = Gson().fromJson(eventoJson, Evento::class.java)
 
-
-
         titulo=findViewById(R.id.evento_titulo)
         tipo=findViewById(R.id.evento_tipo)
         modalidad=findViewById(R.id.evento_modalidad)
@@ -56,12 +53,15 @@ class EventoActivity : AppCompatActivity() {
         inicio=findViewById(R.id.evento_inicio)
         fin=findViewById(R.id.evento_fin)
         btn_volver=findViewById(R.id.evento_btnVolver)
+        btn_asignarTutores=findViewById(R.id.evento_agregarTutores)
         btn_eliminar=findViewById(R.id.evento_eliminarEvento)
 
         // Configurar la visibilidad del layout basado en la condición del usuario
         if (UsuarioSingleton.usuario?.rol?.nombre == "ANALISTA") {
+            btn_asignarTutores.visibility = View.VISIBLE
             btn_eliminar.visibility = View.VISIBLE
         } else {
+            btn_asignarTutores.visibility = View.GONE
             btn_eliminar.visibility = View.GONE
         }
 
