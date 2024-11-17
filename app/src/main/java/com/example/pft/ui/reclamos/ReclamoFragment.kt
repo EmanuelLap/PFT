@@ -28,8 +28,7 @@ class ReclamoFragment : Fragment() {
 
     private lateinit var btn_agregar : FloatingActionButton
     private lateinit var listaReclamos: ListView
-    private lateinit var usuario: Usuario // Cambia el tipo según lo que sea UsuarioSingleton.usuario
-    private lateinit var estado: Spinner
+    private lateinit var usuario: Usuario
     private lateinit var reclamoDTOS: List<ReclamoDTO>
     private var reclamosUsuario: List<ReclamoDTO> = emptyList()
 
@@ -48,7 +47,6 @@ class ReclamoFragment : Fragment() {
 
         btn_agregar = view.findViewById(R.id.reclamos_agregar)
         listaReclamos = view.findViewById(R.id.reclamos_lista)
-        estado = view.findViewById(R.id.reclamoAnalista_estado)
         reclamoDTOS=ArrayList()
 
 
@@ -137,59 +135,7 @@ class ReclamoFragment : Fragment() {
             btn_agregar.visibility = View.GONE
         }
 
-        val estadoAnalista = view.findViewById<LinearLayout>(R.id.reclamo_analista_estado)
-
-        if (usuario.rol.nombre == "ANALISTA") {
-            estadoAnalista.visibility = View.VISIBLE
-        } else {
-            estadoAnalista.visibility = View.GONE
-        }
-
-        //Filtros
-
-        //spinner estado
-
-        val estadoOpciones = ArrayList<String>()
-        estadoOpciones.add("Ingresado")
-        estadoOpciones.add("En proceso")
-        estadoOpciones.add("Finalizado")
-
-
-        // Crear un ArrayAdapter y establecerlo en el Spinner
-        val estadoAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, estadoOpciones)
-        estadoAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        estado.adapter = estadoAdapter
-
-        estado.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: android.view.View?,
-                position: Int,
-                id: Long
-            ) {
-                // Manejar la selección aquí
-                val opcionSeleccionada = estadoOpciones[position]
-                when (opcionSeleccionada) {
-                    "Ingresado" -> {
-                        actualizarListaReclamosPorEstado(true, reclamoDTOS)
-                    }
-
-                    "En proceso" -> {
-                        actualizarListaReclamosPorEstado(true, reclamoDTOS)
-                    }
-
-                    "Finalizado" -> {
-                        actualizarListaReclamosPorEstado(false, reclamoDTOS)
-                    }
-                }
-            }
-
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-            }
-
-        }
-
+        
         // Configuración del botón de agregar
         btn_agregar.setOnClickListener {
             val popupMenu = PopupMenu(requireContext(), btn_agregar)
