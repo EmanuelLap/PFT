@@ -26,6 +26,7 @@ private lateinit var detalle: TextView;
 private lateinit var estado: TextView;
 private lateinit var respuesta: EditText
 private lateinit var btn_actualizar: Button
+private lateinit var btn_responder: Button
 private lateinit var spinnerEstado: Spinner
 private lateinit var btn_volver: FloatingActionButton
 
@@ -57,7 +58,8 @@ class ReclamoAnalistaActivity : AppCompatActivity() {
         detalle=findViewById(R.id.reclamoSel_detalle)
         estado=findViewById(R.id.reclamoSel_estado)
         respuesta=findViewById(R.id.reclamoSel_respuesta)
-        btn_actualizar=findViewById(R.id.reclamoSel_btnModificarReclamo)
+        btn_actualizar=findViewById(R.id.reclamoSel_btnActualizar)
+        btn_responder=findViewById(R.id.reclamoSel_btnResponder)
         spinnerEstado=findViewById(R.id.reclamoSel_actEstado)
         btn_volver=findViewById(R.id.reclamoSel_btnVolver)
 
@@ -75,6 +77,11 @@ class ReclamoAnalistaActivity : AppCompatActivity() {
             finish()
         }
 
+        btn_responder.setOnClickListener {
+            val reclamoResponderActivity = Intent(this@ReclamoAnalistaActivity, ReclamoResponderActivity::class.java)
+            reclamoResponderActivity.putExtra("reclamo", reclamoJson)
+            startActivity(reclamoResponderActivity)
+        }
 
     }
 
