@@ -1,6 +1,5 @@
 package com.example.pft
 
-import com.example.pft.entidades.AccionReclamoDTO
 import com.example.pft.entidades.EstudianteDTO
 import com.example.pft.entidades.Evento
 import com.example.pft.entidades.EventoDTOMobile
@@ -119,22 +118,6 @@ interface ApiService {
         @Body reclamo: ReclamoDTOMobile
     ): Call<ReclamoDTOMobile>
 
-    //Accion Reclamos
-
-    @POST("ByteMinds_s4/rest/accion_reclamos/agregarAccionReclamoJson")
-    fun agregarAccionReclamo(
-        @Body reclamo: AccionReclamoDTO
-    ): Call<AccionReclamoDTO>
-
-    @POST("ByteMinds_s4/rest/accion_reclamos/modificarAccionReclamoJson")
-    fun modificarAccionReclamo(
-        @Body reclamo: AccionReclamoDTO
-    ): Call<AccionReclamoDTO>
-
-    @GET("ByteMinds_s4/rest/accion_reclamos/listarAccionesAReclamo")
-    fun obtenerAccionesReclamo(): Call<List<AccionReclamoDTO>>
-
-    
     //ITR
     @GET("ByteMinds_s4/rest/itrs/listar")
     fun obtenerITR(): Call<List<Itr>>
