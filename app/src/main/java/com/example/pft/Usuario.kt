@@ -16,9 +16,9 @@ data class Usuario(
     val genero: String,
     val id: Int?,
     val itr: Itr,
-    val localidad: Any?,
+    val localidad: String,
     val mail: String,
-    val mailPersonal: Any?,
+    val mailPersonal: String,
     val nombres: String,
     val rol: Rol,
     val telefono: String,
@@ -36,9 +36,9 @@ data class Usuario(
         parcel.readString() ?: "",
         parcel.readValue(Int::class.java.classLoader) as? Int,
         parcel.readParcelable(Itr::class.java.classLoader) ?: Itr(),
-        parcel.readValue(Any::class.java.classLoader), // Lee cualquier tipo de objeto
+        parcel.readString() ?: "", // Lee cualquier tipo de objeto
         parcel.readString() ?: "",
-        parcel.readValue(Any::class.java.classLoader), // Lee cualquier tipo de objeto
+        parcel.readString() ?: "", // Lee cualquier tipo de objeto
         parcel.readString() ?: "",
         parcel.readParcelable(Rol::class.java.classLoader) ?: Rol(),
         parcel.readString() ?: "",
@@ -57,9 +57,9 @@ data class Usuario(
         parcel.writeString(genero)
         parcel.writeValue(id)
         parcel.writeParcelable(itr, flags)
-        parcel.writeValue(localidad) // Escribe cualquier tipo de objeto
+        parcel.writeString(localidad)
         parcel.writeString(mail)
-        parcel.writeValue(mailPersonal) // Escribe cualquier tipo de objeto
+        parcel.writeString(mailPersonal)
         parcel.writeString(nombres)
         parcel.writeParcelable(rol, flags)
         parcel.writeString(telefono)

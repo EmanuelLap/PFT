@@ -71,7 +71,7 @@
 
 
         <TextView
-            android:id="@+id/reclamoSel_mensaje"
+            android:id="@+id/reclamoRespuesta_mensaje"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="24dp"
@@ -106,7 +106,7 @@
             android:orientation="horizontal">
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/reclamoSel_btnVolver"
+                android:id="@+id/reclamo_btnVolver"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_volver"

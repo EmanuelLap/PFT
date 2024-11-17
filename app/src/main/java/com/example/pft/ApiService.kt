@@ -134,7 +134,7 @@ interface ApiService {
     @GET("ByteMinds_s4/rest/accion_reclamos/listarAccionesAReclamo")
     fun obtenerAccionesReclamo(): Call<List<AccionReclamoDTO>>
 
-    
+
     //ITR
     @GET("ByteMinds_s4/rest/itrs/listar")
     fun obtenerITR(): Call<List<Itr>>
