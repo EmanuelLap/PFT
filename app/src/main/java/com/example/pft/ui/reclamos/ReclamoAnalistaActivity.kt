@@ -19,14 +19,15 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Date
 import java.util.Locale
 
 private lateinit var titulo: TextView;
 private lateinit var detalle: TextView;
-private lateinit var estado: TextView;
-private lateinit var respuesta: EditText
-private lateinit var btn_actualizar: Button
-private lateinit var spinnerEstado: Spinner
+private lateinit var fecha: TextView;
+private lateinit var evento: TextView;
+private lateinit var semestre: TextView;
+private lateinit var creditos: TextView;
 private lateinit var btn_volver: FloatingActionButton
 
 class ReclamoAnalistaActivity : AppCompatActivity() {
@@ -55,21 +56,19 @@ class ReclamoAnalistaActivity : AppCompatActivity() {
 
         titulo=findViewById(R.id.reclamoSel_titulo)
         detalle=findViewById(R.id.reclamoSel_detalle)
-        estado=findViewById(R.id.reclamoSel_estado)
-        respuesta=findViewById(R.id.reclamoSel_respuesta)
-        btn_actualizar=findViewById(R.id.reclamoSel_btnModificarReclamo)
-        spinnerEstado=findViewById(R.id.reclamoSel_actEstado)
+        fecha=findViewById(R.id.reclamoSel_fecha)
+        evento=findViewById(R.id.reclamoSel_evento)
+        semestre=findViewById(R.id.reclamoSel_semestre)
+        creditos=findViewById(R.id.reclamoSel_creditos)
         btn_volver=findViewById(R.id.reclamoSel_btnVolver)
 
         titulo.text="Título: ${reclamoDTOSeleccionado.titulo}"
         detalle.text="Detalle: ${reclamoDTOSeleccionado.detalle}"
-        val estadoTexto = if (reclamoDTOSeleccionado.activo == true) {
-            "Estado: Esperando respuesta"
-        } else {
-            "Estado: Resuelto"
-        }
-        estado.text = estadoTexto
-
+        val fechaString = Date(reclamoDTOSeleccionado.fecha).toString()
+        fecha.text="Fecha: ${fechaString}"
+        evento.text="Evento: ${reclamoDTOSeleccionado.eventoId.titulo}"
+        semestre.text="Semestre: ${reclamoDTOSeleccionado.semestre}"
+        creditos.text="Créditos: ${reclamoDTOSeleccionado.creditos}"
 
         btn_volver.setOnClickListener{
             finish()

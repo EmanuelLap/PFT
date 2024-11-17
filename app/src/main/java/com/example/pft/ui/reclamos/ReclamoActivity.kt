@@ -67,7 +67,6 @@ class ReclamoActivity : AppCompatActivity() {
         titulo.text="Título: ${reclamoDTOSeleccionado.titulo}"
         detalle.text="Detalle: ${reclamoDTOSeleccionado.detalle}"
         val fechaString = Date(reclamoDTOSeleccionado.fecha).toString()
-
         fecha.text="Fecha: ${fechaString}"
         evento.text="Evento: ${reclamoDTOSeleccionado.eventoId.titulo}"
         semestre.text="Semestre: ${reclamoDTOSeleccionado.semestre}"
