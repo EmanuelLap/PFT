@@ -2,11 +2,11 @@ package com.example.pft.ui.reclamos
 
 import android.app.AlertDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.example.pft.ApiClient
 import com.example.pft.MainActivity
 import com.example.pft.R
@@ -17,12 +17,15 @@ import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.Date
 import java.util.Locale
 
 private lateinit var titulo: TextView;
 private lateinit var detalle: TextView;
-private lateinit var estado: TextView;
-private lateinit var respuesta: TextView
+private lateinit var fecha: TextView;
+private lateinit var evento: TextView;
+private lateinit var semestre: TextView;
+private lateinit var creditos: TextView;
 private lateinit var btn_modificar: Button
 private lateinit var btn_eliminar: Button;
 private lateinit var btn_volver: FloatingActionButton
@@ -53,20 +56,23 @@ class ReclamoActivity : AppCompatActivity() {
 
         titulo=findViewById(R.id.reclamoAct_titulo)
         detalle=findViewById(R.id.reclamoAct_detalle)
-        estado=findViewById(R.id.reclamoAct_estado)
-        respuesta=findViewById(R.id.reclamoAct_respuesta)
+        fecha=findViewById(R.id.reclamoAct_fecha)
+        evento=findViewById(R.id.reclamoAct_evento)
+        semestre=findViewById(R.id.reclamoAct_semestre)
+        creditos=findViewById(R.id.reclamoAct_creditos)
         btn_modificar=findViewById(R.id.reclamoAct_modificarReclamo)
         btn_eliminar=findViewById(R.id.reclamoAct_eliminarReclamo)
         btn_volver=findViewById(R.id.reclamoAct_btnVolver)
 
         titulo.text="Título: ${reclamoDTOSeleccionado.titulo}"
         detalle.text="Detalle: ${reclamoDTOSeleccionado.detalle}"
-        val estadoTexto = if (reclamoDTOSeleccionado.activo == true) {
-            "Estado: Esperando respuesta"
-        } else {
-            "Estado: Resuelto"
-        }
-        estado.text = estadoTexto
+        val fechaString = Date(reclamoDTOSeleccionado.fecha).toString()
+
+        fecha.text="Fecha: ${fechaString}"
+        evento.text="Evento: ${reclamoDTOSeleccionado.eventoId.titulo}"
+        semestre.text="Semestre: ${reclamoDTOSeleccionado.semestre}"
+        creditos.text="Créditos: ${reclamoDTOSeleccionado.creditos}"
+
 
         btn_modificar.setOnClickListener{
             val modificarActivity = Intent(this@ReclamoActivity, ModificarReclamoActivity::class.java)
