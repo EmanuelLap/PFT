@@ -287,6 +287,8 @@ class AgregarReclamoActivity : AppCompatActivity() {
         }
 
         volver.setOnClickListener{
+           // val mainActivity = Intent(this@AgregarReclamoActivity, MainActivity::class.java)
+          //  startActivity(mainActivity)
             finish()
         }
 
