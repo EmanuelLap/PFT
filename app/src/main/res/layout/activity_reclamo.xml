@@ -108,26 +108,46 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        >
 
 
         <Button
-            android:id="@+id/reclamoAct_modificarReclamo"
-            android:layout_width="wrap_content"
+            android:id="@+id/reclamoAct_btnModificarReclamo"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#00AEEF"
-            android:text="Modificar reclamo"
+            android:text="Modificar"
             android:layout_marginBottom="10dp"
-            android:textSize="24dp"
+            android:layout_marginRight="10dp"
+
+            android:textSize="16dp"
             />
 
         <Button
-            android:id="@+id/reclamoAct_eliminarReclamo"
+            android:id="@+id/reclamoAct_btnResponder"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00AEEF"
+            android:text="Responder"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16dp"
+            />
+
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/reclamoAct_btnEliminarReclamo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#F44336"
             android:text="Eliminar reclamo"
             android:layout_marginBottom="30dp"
-            android:textSize="24dp"
+            android:textSize="16dp"
             />
 
         <TextView

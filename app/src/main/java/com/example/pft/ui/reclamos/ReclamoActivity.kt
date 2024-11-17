@@ -24,6 +24,7 @@ private lateinit var detalle: TextView;
 private lateinit var estado: TextView;
 private lateinit var respuesta: TextView
 private lateinit var btn_modificar: Button
+private lateinit var btn_responder: Button
 private lateinit var btn_eliminar: Button;
 private lateinit var btn_volver: FloatingActionButton
 
@@ -55,8 +56,9 @@ class ReclamoActivity : AppCompatActivity() {
         detalle=findViewById(R.id.reclamoAct_detalle)
         estado=findViewById(R.id.reclamoAct_estado)
         respuesta=findViewById(R.id.reclamoAct_respuesta)
-        btn_modificar=findViewById(R.id.reclamoAct_modificarReclamo)
-        btn_eliminar=findViewById(R.id.reclamoAct_eliminarReclamo)
+        btn_modificar=findViewById(R.id.reclamoAct_btnModificarReclamo)
+        btn_responder=findViewById(R.id.reclamoAct_btnResponder)
+        btn_eliminar=findViewById(R.id.reclamoAct_btnEliminarReclamo)
         btn_volver=findViewById(R.id.reclamoAct_btnVolver)
 
         titulo.text="Título: ${reclamoDTOSeleccionado.titulo}"
@@ -72,6 +74,12 @@ class ReclamoActivity : AppCompatActivity() {
             val modificarActivity = Intent(this@ReclamoActivity, ModificarReclamoActivity::class.java)
             modificarActivity.putExtra("reclamo", reclamoJson)
             startActivity(modificarActivity)
+        }
+
+        btn_responder.setOnClickListener {
+            val reclamoResponderActivity = Intent(this@ReclamoActivity, ReclamoResponderActivity::class.java)
+            reclamoResponderActivity.putExtra("reclamo", reclamoJson)
+            startActivity(reclamoResponderActivity)
         }
 
         btn_eliminar.setOnClickListener{
