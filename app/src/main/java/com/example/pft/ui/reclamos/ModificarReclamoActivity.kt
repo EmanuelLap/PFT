@@ -47,7 +47,7 @@ private lateinit var btn_fecha:Button
 private lateinit var btn_volver: FloatingActionButton;
 private lateinit var btn_modificar: FloatingActionButton;
 
-var eventoId=0
+ var eventoId=0
 
 
 
@@ -70,26 +70,14 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
         val reclamoJson = intent.getStringExtra("reclamo")
 
+
+
         //Consigo datos del reclamo
-
-
 
         val reclamoDTOSeleccionado = Gson().fromJson(reclamoJson, ReclamoDTO::class.java)
 
-        /*
-        val reclamoActivo=reclamoSeleccionado.activo
-        val reclamoCreditos=reclamoSeleccionado.creditos
-        val reclamoDetalle=reclamoSeleccionado.detalle
-        val reclamoEstudianteId=reclamoSeleccionado.estudianteId.id
-        val reclamoEventoId=reclamoSeleccionado.eventoId.id
-        val reclamoFecha=reclamoSeleccionado.fecha
-        val reclamoId=reclamoSeleccionado.id
-        val reclamoSemestre=reclamoSeleccionado.semestre
-        val reclamoTitulo=reclamoSeleccionado.titulo
-        val reclamoMobile=ReclamoDTOMobile(reclamoActivo,reclamoCreditos,reclamoDetalle,reclamoEstudianteId,reclamoEventoId!!,reclamoFecha,reclamoId,reclamoSemestre,reclamoTitulo)
+        eventoId=reclamoDTOSeleccionado.eventoId.id!!
 
-
-         */
         //Cargo Datos del reclamo
         val tituloEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoDTOSeleccionado.titulo)
         val detalleEditable: Editable = Editable.Factory.getInstance().newEditable(reclamoDTOSeleccionado.detalle)
@@ -106,18 +94,10 @@ class ModificarReclamoActivity : AppCompatActivity() {
         fechaText.text=fechaConFormato.toString()
 
 
-
-
-
-
         // Recuperar el valor del "usuario"
 
         val usuario = UsuarioSingleton.usuario
 
-        // Convertir la cadena JSON de vuelta a un objeto Usuario (usando Gson)
-        //val usuario = Gson().fromJson(usuarioJson, EstudianteId::class.java)
-
-        //spinner semestre
         // opciones (del 1 al 10)
         val semestreOpciones = ArrayList<String>()
         semestreOpciones.add("1")
@@ -142,12 +122,6 @@ class ModificarReclamoActivity : AppCompatActivity() {
         semestre.prompt = "Selecciona un semestre"
 
 
-       /* val retrofit = Retrofit.Builder()
-            .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-
-        val apiService = retrofit.create(ApiService::class.java)*/
         val apiService = ApiClient.getApiService(this)
         val call = apiService.obtenerEventos()
 
@@ -185,21 +159,17 @@ class ModificarReclamoActivity : AppCompatActivity() {
                                     Log.e("AgregarReclamoActivity", "Posición seleccionada fuera de los límites")
                                 }
                             }
-
                             override fun onNothingSelected(parentView: AdapterView<*>) {
-                                // Manejar caso cuando no hay nada seleccionado (si es necesario)
                             }
 
                         }
                 }else {
                     Log.e("EventoFragment", "API call failed with code ${response.code()}")
-                    // Resto del código para manejar errores...
                 }
             }
 
             override fun onFailure(call: Call<List<Evento>>, t: Throwable) {
                 Log.e("EventoFragment", "API call failed", t)
-                // Resto del código para manejar errores...
             }
         })
 
@@ -244,9 +214,6 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
                 Log.d("ModificarReclamoActivity", "eventoId: ${eventoId}")
 
-                // Convertir la cadena de fecha a un objeto Date
-                //    val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-                // val date: Date = dateFormat.parse(fechaIngresada.toString()) ?: Date()
 
                 val apiService = ApiClient.getApiService(this)
 
