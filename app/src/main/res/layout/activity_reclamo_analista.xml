@@ -134,16 +134,33 @@
         </LinearLayout>
 
 
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        >
         <Button
-            android:id="@+id/reclamoSel_btnModificarReclamo"
-            android:layout_width="wrap_content"
+            android:id="@+id/reclamoSel_btnResponder"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:backgroundTint="#00AEEF"
-            android:text="Actualizar reclamo"
+            android:text="Responder"
             android:layout_marginBottom="30dp"
-            android:textSize="24dp"
+            android:layout_marginRight="10dp"
+            android:textSize="16dp"
             />
+
+        <Button
+            android:id="@+id/reclamoSel_btnActualizar"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00AEEF"
+            android:text="Actualizar"
+            android:layout_marginBottom="30dp"
+            android:textSize="16dp"
+            />
+
+    </LinearLayout>
 
         <TextView
             android:id="@+id/reclamoSel_mensaje"
