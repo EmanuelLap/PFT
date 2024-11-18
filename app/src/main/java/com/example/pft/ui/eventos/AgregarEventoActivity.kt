@@ -16,6 +16,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isEmpty
 import com.example.pft.ApiClient
+import com.example.pft.MainActivity
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.entidades.EventoDTOMobile
@@ -34,6 +35,7 @@ import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import com.google.gson.GsonBuilder
+import kotlin.math.log
 
 
 class AgregarEventoActivity : AppCompatActivity() {
@@ -343,11 +345,14 @@ class AgregarEventoActivity : AppCompatActivity() {
                 Toast.makeText(this@AgregarEventoActivity, "Completa todos los campos.", Toast.LENGTH_SHORT).show()
             } else {
                 // Todos los campos están completos
-                val formatoFecha= SimpleDateFormat("dd/mm/yyyy")
+                val formatoFecha= SimpleDateFormat("dd/MM/yyyy")
                 val titulo=titulo.text.toString()
                 val localizacion=localizacion.text.toString()
                 val fechaInicioString=inicioSeleccion.text.toString()
+                Log.d("DEBUG JAVI", "fechaInicioString: $fechaInicioString")
                 val fechaInicio=formatoFecha.parse(fechaInicioString)
+                Log.d("DEBUG JAVI", "fechaInicio: $fechaInicio")
+
                 val fechaInicioTimestamp=fechaInicio.time
                 val fechaFinString=finSeleccion.text.toString()
                 val fechaFin=formatoFecha.parse(fechaFinString)
@@ -371,7 +376,10 @@ class AgregarEventoActivity : AppCompatActivity() {
                             val responseJson = Gson().toJson(eventoResp)
                             Log.d("Registro Activity", "ResponseBody: $responseJson")
                             Toast.makeText(this@AgregarEventoActivity, "Evento creado con éxito", Toast.LENGTH_SHORT).show()
-                            finish()
+                            //finish()
+                            val mainActivity = Intent(this@AgregarEventoActivity, MainActivity::class.java)
+                            startActivity(mainActivity)
+
                         }
                     }
 

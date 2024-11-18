@@ -107,6 +107,9 @@ class EventoActivity : AppCompatActivity() {
 
         btn_eliminar.setOnClickListener{
 
+            val responseJson2= Gson().toJson(eventoMobile)
+            Log.d("JAVIIIII", "responseJson: $responseJson2")
+
             val apiService = ApiClient.getApiService(this)
             val call = apiService.eliminarEvento(
                 eventoMobile
