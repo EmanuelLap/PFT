@@ -475,11 +475,17 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_documento.text = "Ingresa un documento"
                 mensaje_documento.alpha = 0.8f
                 mensaje_documento.visibility = View.VISIBLE
-            } else if(documento.text.toString().length>45) {
+            }else if (!documento.text.toString().all { it.isDigit() }) {
+                camposVacios.add("Documento")
+                mensaje_documento.text = "El documento solo puede contener números"
+                mensaje_documento.alpha = 0.8f
+                mensaje_documento.visibility = View.VISIBLE}
+                else if(documento.text.toString().length>45) {
                 camposVacios.add("Documento")
                 mensaje_documento.text = "El documento no puede contener más de 10 caracteres"
                 mensaje_documento.alpha = 0.8f
                 mensaje_documento.visibility = View.VISIBLE}
+
             else {
                 mensaje_documento.visibility = View.INVISIBLE
             }
@@ -489,7 +495,13 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_nombre.text = "Ingresa un nombre"
                 mensaje_nombre.alpha = 0.8f
                 mensaje_nombre.visibility = View.VISIBLE
-            } else if(nombre.text.toString().length>45) {
+            }else if (!nombre.text.toString().all { it.isLetter() }) {
+                camposVacios.add("Nombre")
+                mensaje_nombre.text = "El nombre solo puede contener letras"
+                mensaje_nombre.alpha = 0.8f
+                mensaje_nombre.visibility = View.VISIBLE
+            }
+            else if(nombre.text.toString().length>45) {
             camposVacios.add("Nombre")
             mensaje_nombre.text = "El nombre no puede contener más de 45 caracteres"
             mensaje_nombre.alpha = 0.8f
