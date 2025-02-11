@@ -480,9 +480,9 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_documento.text = "El documento solo puede contener números"
                 mensaje_documento.alpha = 0.8f
                 mensaje_documento.visibility = View.VISIBLE}
-                else if(documento.text.toString().length>45) {
+                else if(documento.text.toString().length!=8) {
                 camposVacios.add("Documento")
-                mensaje_documento.text = "El documento no puede contener más de 10 caracteres"
+                mensaje_documento.text = "Ingresa un documento válido"
                 mensaje_documento.alpha = 0.8f
                 mensaje_documento.visibility = View.VISIBLE}
 
@@ -515,7 +515,12 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_apellido.text = "Ingresa un apellido"
                 mensaje_apellido.alpha = 0.8f
                 mensaje_apellido.visibility = View.VISIBLE // Mostrar el mensaje de error
-            } else if (apellido.text.toString().length>45) {
+            } else if (!apellido.text.toString().all { it.isLetter() }) {
+                camposVacios.add("Apellido")
+                mensaje_apellido.text = "El apellido solo puede contener letras"
+                mensaje_apellido.alpha = 0.8f
+                mensaje_apellido.visibility = View.VISIBLE}
+            else if (apellido.text.toString().length>45) {
                 camposVacios.add("Apellido")
                 mensaje_apellido.text = "El apellido no puede contener más de 45 caracteres"
                 mensaje_apellido.alpha = 0.8f
@@ -549,7 +554,12 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_contrasena.text = "La contraseña no puede contener más de 45 caracteres"
                 mensaje_contrasena.alpha = 0.8f
                 mensaje_contrasena.visibility = View.VISIBLE
-            }else {
+            } else if (contrasena.text.toString().contains(" ")) {
+                camposVacios.add("Contraseña")
+                mensaje_contrasena.text = "La contraseña no puede contener espacios"
+                mensaje_contrasena.alpha = 0.8f
+                mensaje_contrasena.visibility = View.VISIBLE}
+            else {
                 mensaje_contrasena.visibility = View.INVISIBLE
             }
 
@@ -577,7 +587,12 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_emailInstitucional.text = "El email institucional no puede contener más de 45 caracteres"
                 mensaje_emailInstitucional.alpha = 0.8f
                 mensaje_emailInstitucional.visibility = View.VISIBLE
-            } else if (emailInstitucional.text.toString().contains(".utec.edu.uy")==false) {
+            }  else if (emailInstitucional.text.toString().contains(" ")) {
+                camposVacios.add("Email institucional")
+                mensaje_emailInstitucional.text = "No puede contener espacios"
+                mensaje_emailInstitucional.alpha = 0.8f
+                mensaje_emailInstitucional.visibility = View.VISIBLE}
+            else if (emailInstitucional.text.toString().contains(".utec.edu.uy")==false) {
                 camposVacios.add("Email institucional")
                 mensaje_emailInstitucional.text = "El email ingresado no pertenece a la institución"
                 mensaje_emailInstitucional.alpha = 0.8f
@@ -596,7 +611,12 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_emailPersonal.text = "Ingresa un email válido"
                 mensaje_emailPersonal.alpha = 0.8f
                 mensaje_emailPersonal.visibility = View.VISIBLE
-            } else if (emailPersonal.text.toString().length>255) {
+            }  else if (emailPersonal.text.toString().contains(" ")) {
+                camposVacios.add("Email personal")
+                mensaje_emailPersonal.text = "No puede contener espacios"
+                mensaje_emailPersonal.alpha = 0.8f
+                mensaje_emailPersonal.visibility = View.VISIBLE}
+            else if (emailPersonal.text.toString().length>255) {
                 camposVacios.add("Email personal")
                 mensaje_emailPersonal.text = "El email no puede contener más de 255 caracteres"
                 mensaje_emailPersonal.alpha = 0.8f
@@ -624,12 +644,22 @@ class RegistroActivity : AppCompatActivity() {
                 mensaje_telefono.text = "Ingresa un teléfono"
                 mensaje_telefono.alpha = 0.8f
                 mensaje_telefono.visibility = View.VISIBLE
-            } else if (telefono.text.toString().length>45) {
+            } else if (telefono.text.toString().length!=9) {
                 camposVacios.add("Telefono")
                 mensaje_telefono.text = "Ingresa un teléfono válido"
                 mensaje_telefono.alpha = 0.8f
                 mensaje_telefono.visibility = View.VISIBLE
-            } else {
+            } else if (!telefono.text.toString().all { it.isDigit() }) {
+                camposVacios.add("Telefono")
+                mensaje_telefono.text = "Solo puede contener números"
+                mensaje_telefono.alpha = 0.8f
+                mensaje_telefono.visibility = View.VISIBLE}
+            else if (!telefono.text.toString().startsWith("09")) {
+                camposVacios.add("Telefono")
+                mensaje_telefono.text = "Ingresa un teléfono válido"
+                mensaje_telefono.alpha = 0.8f
+                mensaje_telefono.visibility = View.VISIBLE}
+            else {
                 mensaje_telefono.visibility = View.INVISIBLE
             }
 
@@ -656,7 +686,6 @@ class RegistroActivity : AppCompatActivity() {
             val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
             val fecNacString = fechaText.text.toString()
             val fechaNacimiento = formatoFecha.parse(fecNacString)
-            val fechaTimestamp = fechaNacimiento.time
 
             if (fechaNacimiento != null) {
                 val calNacimiento = Calendar.getInstance()
@@ -714,6 +743,11 @@ class RegistroActivity : AppCompatActivity() {
             } else if (localidad.text.toString().length>45) {
                 camposVacios.add("Localidad")
                 mensaje_localidad.text = "La localidad no puede contener más de 45 caracteres"
+                mensaje_localidad.alpha = 0.8f
+                mensaje_localidad.visibility = View.VISIBLE
+            }else if (!localidad.text.toString().all { it.isLetter() }) {
+                camposVacios.add("Localidad")
+                mensaje_localidad.text = "Solo puede contener letras"
                 mensaje_localidad.alpha = 0.8f
                 mensaje_localidad.visibility = View.VISIBLE
             } else {
