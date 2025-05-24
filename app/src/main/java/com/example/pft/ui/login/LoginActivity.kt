@@ -57,10 +57,16 @@ class LoginActivity : AppCompatActivity() {
             if (usuarioIngresado =="") {
                 mensaje.alpha=0.8f
                 mensaje.text = "Ingresa un nombre de usuario"
-            } else if (contrasenaIngresada =="") {
+            } else if (usuarioIngresado.contains(" ")) {
+                mensaje.alpha=0.8f
+                mensaje.text = "El usuario no puede contener espacios"}
+            else if (contrasenaIngresada =="") {
                 mensaje.alpha=0.8f
                 mensaje.text = "Ingresa una contraseña"
-            } else {
+            } else if (contrasenaIngresada.contains(" ")) {
+                mensaje.alpha=0.8f
+                mensaje.text = "La contraseña no puede contener espacios"}
+            else {
 
 //                val call = apiService.autenticarUsuario(usuarioIngresado, contrasenaIngresada)
                 val credenciales =Credenciales(usuarioIngresado, contrasenaIngresada) ;
@@ -124,9 +130,9 @@ class LoginActivity : AppCompatActivity() {
                     override fun onFailure(call: Call<LoginResponse>, t: Throwable) {
                         mensaje.alpha = 0.8f
                         if(t is IOException) {
-                            mensaje.text = "Error de conexión: ${t.message}"
+                            mensaje.text = "Error de conexión: sin respuesta del servidor"
                         } else {
-                            mensaje.text = "Error de conversión: ${t.message}"
+                            mensaje.text = "Error de conexión: datos no válidos"
                         }
                     }
                 })
