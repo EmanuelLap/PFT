@@ -1,5 +1,6 @@
 package com.example.pft.ui.reclamos
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -35,8 +36,8 @@ class ReclamoFragment : Fragment() {
     private lateinit var reclamosFiltrados: List<ReclamoDTO>
     private var reclamosUsuario: List<ReclamoDTO> = emptyList()
     private lateinit var limpiarFiltros: Button
-
-
+    private lateinit var usuarios: List<Usuario>
+    private lateinit var usuariosFiltrados: List<Usuario>
 
 
 
@@ -57,6 +58,10 @@ class ReclamoFragment : Fragment() {
         usuarioSpinner=view.findViewById(R.id.fragmentReclamo_usuario)
         reclamosFiltrados=ArrayList()
         limpiarFiltros=view.findViewById(R.id.fragmentReclamo_btnLimpiarFiltros)
+        usuarios = ArrayList()
+        usuariosFiltrados = ArrayList()
+
+
         val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentReclamo_analista_usuario)
 
         val estados = listOf("Ingresado", "En Proceso", "Finalizado")
@@ -76,9 +81,40 @@ class ReclamoFragment : Fragment() {
 
 
         val apiService = ApiClient.getApiService(requireContext())
-        val call = apiService.obtenerReclamos()
 
-        call.enqueue(object : Callback<List<ReclamoDTO>> {
+        val callUsuarios = apiService.obtenerUsuarios()
+
+        callUsuarios.enqueue(object : Callback<List<Usuario>> {
+            override fun onResponse(call: Call<List<Usuario>>, response: Response<List<Usuario>>) {
+                if (isAdded()) {
+                    if (response.isSuccessful) {
+                        usuarios = response.body()!!
+                        usuariosFiltrados = usuarios.filter { it.rol.nombre == "ESTUDIANTE" }
+
+
+                        val adapterUsuarios = ArrayAdapter(
+                            requireContext(),
+                            android.R.layout.simple_list_item_1,
+                            usuariosFiltrados
+                                .sortedBy { it.apellidos.lowercase() }
+                                .map { "${it.apellidos} ${it.nombres}, ${it.documento}, ${it.itr.nombre}" }
+                        )
+
+                        usuarioSpinner.adapter=adapterUsuarios
+
+                    }
+                }
+            }
+            override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
+                if (isAdded()) {
+                    Log.e("UsuariosFragment", "API call failed", t)
+                }
+            }
+        })
+
+        val callReclamos = apiService.obtenerReclamos()
+
+        callReclamos.enqueue(object : Callback<List<ReclamoDTO>> {
             override fun onResponse(call: Call<List<ReclamoDTO>>, response: Response<List<ReclamoDTO>>) {
                 if (isAdded) {
                     if (response.isSuccessful) {

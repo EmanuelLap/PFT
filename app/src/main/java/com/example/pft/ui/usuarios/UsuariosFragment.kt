@@ -118,7 +118,6 @@ class UsuariosFragment : Fragment() {
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                // Acciones cuando no se ha seleccionado nada
             }
         }
 
