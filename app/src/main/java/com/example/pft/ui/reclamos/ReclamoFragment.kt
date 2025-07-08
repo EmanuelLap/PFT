@@ -7,9 +7,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import android.widget.LinearLayout
+import android.widget.Button
 import android.widget.ListView
 import android.widget.PopupMenu
 import android.widget.Spinner
@@ -30,7 +29,12 @@ class ReclamoFragment : Fragment() {
     private lateinit var listaReclamos: ListView
     private lateinit var usuario: Usuario
     private lateinit var reclamoDTOS: List<ReclamoDTO>
+    private lateinit var estadoSpinner: Spinner
+    private lateinit var usuarioSpinner: Spinner
+    private lateinit var reclamosFiltrados: List<ReclamoDTO>
     private var reclamosUsuario: List<ReclamoDTO> = emptyList()
+    private lateinit var limpiarFiltros: Button
+
 
 
 
@@ -48,6 +52,12 @@ class ReclamoFragment : Fragment() {
         btn_agregar = view.findViewById(R.id.reclamos_agregar)
         listaReclamos = view.findViewById(R.id.reclamos_lista)
         reclamoDTOS=ArrayList()
+        estadoSpinner=view.findViewById(R.id.fragmentReclamo_estado)
+        usuarioSpinner=view.findViewById(R.id.fragmentReclamo_usuario)
+        reclamosFiltrados=ArrayList()
+        limpiarFiltros=view.findViewById(R.id.fragmentReclamo_btnLimpiarFiltros)
+
+
 
 
         val apiService = ApiClient.getApiService(requireContext())

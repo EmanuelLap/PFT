@@ -24,13 +24,69 @@
             android:background="#00AEEF"
             android:layout_marginBottom="20dp" />
 
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:textSize="18sp"
+                android:text="Usuario:"
+
+                />
+            <Spinner
+                android:id="@+id/fragmentReclamo_usuario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:hint="Selecciona un usuario" />
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_marginTop="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:textSize="18sp"
+                android:text="Estado:"
+
+                />
+            <Spinner
+                android:id="@+id/fragmentReclamo_estado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:hint="Selecciona un tipo de estado" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/fragmentReclamo_btnLimpiarFiltros"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Limpiar Filtros"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="#00AEEF"/>
+
         <!-- ListView para mostrar los reclamos -->
         <ListView
             android:id="@+id/reclamos_lista"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:layout_marginTop="50dp" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp" />
 
     </LinearLayout>
 
