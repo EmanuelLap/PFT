@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.ListView
 import android.widget.PopupMenu
 import android.widget.Spinner
@@ -56,6 +57,20 @@ class ReclamoFragment : Fragment() {
         usuarioSpinner=view.findViewById(R.id.fragmentReclamo_usuario)
         reclamosFiltrados=ArrayList()
         limpiarFiltros=view.findViewById(R.id.fragmentReclamo_btnLimpiarFiltros)
+        val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentReclamo_analista_usuario)
+
+        val estados = listOf("Ingresado", "En Proceso", "Finalizado")
+
+        val adapterEstados = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            estados
+        ).also {
+            it.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        }
+
+        estadoSpinner.adapter = adapterEstados
+
 
 
 
@@ -69,6 +84,9 @@ class ReclamoFragment : Fragment() {
                     if (response.isSuccessful) {
                         reclamoDTOS = response.body() ?: emptyList()
                         Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamoDTOS")
+
+
+
 
                         //Filtramos Reclamos Activos
                         val reclamosActivos = reclamoDTOS.filter { it.activo==true }
@@ -133,16 +151,18 @@ class ReclamoFragment : Fragment() {
             override fun onFailure(call: Call<List<ReclamoDTO>>, t: Throwable) {
                 if (isAdded) {
                     Log.e("ReclamoFragment", "API call failed", t)
-                    // Resto del manejo de errores
                 }
             }
         })
 
-        // Verificar el tipo de usuario y mostrar/ocultar el botón según corresponda
+        // Verificar el tipo de usuario y mostrar/ocultar contenido según corresponda
         if (usuario.rol.nombre == "ESTUDIANTE") {
+
             btn_agregar.visibility = View.VISIBLE
+            layoutAnalista.visibility = View.GONE
         } else {
             btn_agregar.visibility = View.GONE
+            layoutAnalista.visibility = View.VISIBLE
         }
 
 
