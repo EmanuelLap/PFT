@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.LinearLayout
@@ -18,16 +19,19 @@ import com.example.pft.ApiClient
 import com.example.pft.R
 import com.example.pft.Usuario
 import com.example.pft.UsuarioSingleton
+import com.example.pft.entidades.Itr
 import com.example.pft.entidades.ReclamoDTO
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.gson.Gson
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class ReclamoFragment : Fragment() {
 
-    private lateinit var btn_agregar : FloatingActionButton
+    private lateinit var btn_agregar: FloatingActionButton
     private lateinit var listaReclamos: ListView
     private lateinit var usuario: Usuario
     private lateinit var reclamoDTOS: List<ReclamoDTO>
@@ -38,7 +42,8 @@ class ReclamoFragment : Fragment() {
     private lateinit var limpiarFiltros: Button
     private lateinit var usuarios: List<Usuario>
     private lateinit var usuariosFiltrados: List<Usuario>
-
+    private lateinit var fragmentContext: Context
+    private lateinit var estadoSeleccionado: String
 
 
     override fun onCreateView(
@@ -53,16 +58,19 @@ class ReclamoFragment : Fragment() {
 
         btn_agregar = view.findViewById(R.id.reclamos_agregar)
         listaReclamos = view.findViewById(R.id.reclamos_lista)
-        reclamoDTOS=ArrayList()
-        estadoSpinner=view.findViewById(R.id.fragmentReclamo_estado)
-        usuarioSpinner=view.findViewById(R.id.fragmentReclamo_usuario)
-        reclamosFiltrados=ArrayList()
-        limpiarFiltros=view.findViewById(R.id.fragmentReclamo_btnLimpiarFiltros)
+        reclamoDTOS = ArrayList()
+        estadoSpinner = view.findViewById(R.id.fragmentReclamo_estado)
+        usuarioSpinner = view.findViewById(R.id.fragmentReclamo_usuario)
+        reclamosFiltrados = ArrayList()
+        limpiarFiltros = view.findViewById(R.id.fragmentReclamo_btnLimpiarFiltros)
         usuarios = ArrayList()
         usuariosFiltrados = ArrayList()
 
 
         val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentReclamo_analista_usuario)
+
+
+        //-------------Spinner Estados---------------------------------------------------------
 
         val estados = listOf("Ingresado", "En Proceso", "Finalizado")
 
@@ -76,8 +84,31 @@ class ReclamoFragment : Fragment() {
 
         estadoSpinner.adapter = adapterEstados
 
+        estadoSpinner.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parentView: AdapterView<*>,
+                    selectedItemView: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    // Verificar que la posición seleccionada esté dentro de los límites
+                    if (position >= 0 && position < 3) {
+                        // Obtiene el itr seleccionado
+                        estadoSeleccionado = estados[position]
+                        actualizarListaReclamosPorEstado(estadoSeleccionado)
 
+                    } else {
+                        // Puedes manejar esta situación según tus necesidades
+                        Log.e("RegistroActivity", "Posición seleccionada fuera de los límites")
+                    }
+                }
 
+                override fun onNothingSelected(parentView: AdapterView<*>) {
+                    // Manejar caso cuando no hay nada seleccionado (si es necesario)
+                }
+
+            }
 
 
         val apiService = ApiClient.getApiService(requireContext())
@@ -100,11 +131,12 @@ class ReclamoFragment : Fragment() {
                                 .map { "${it.apellidos} ${it.nombres}, ${it.documento}, ${it.itr.nombre}" }
                         )
 
-                        usuarioSpinner.adapter=adapterUsuarios
+                        usuarioSpinner.adapter = adapterUsuarios
 
                     }
                 }
             }
+
             override fun onFailure(call: Call<List<Usuario>>, t: Throwable) {
                 if (isAdded()) {
                     Log.e("UsuariosFragment", "API call failed", t)
@@ -115,23 +147,26 @@ class ReclamoFragment : Fragment() {
         val callReclamos = apiService.obtenerReclamos()
 
         callReclamos.enqueue(object : Callback<List<ReclamoDTO>> {
-            override fun onResponse(call: Call<List<ReclamoDTO>>, response: Response<List<ReclamoDTO>>) {
+            override fun onResponse(
+                call: Call<List<ReclamoDTO>>,
+                response: Response<List<ReclamoDTO>>
+            ) {
                 if (isAdded) {
                     if (response.isSuccessful) {
-                        reclamoDTOS = response.body() ?: emptyList()
+                        reclamoDTOS = response.body()!!
+                        reclamosFiltrados = reclamoDTOS
                         Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamoDTOS")
 
 
-
-
                         //Filtramos Reclamos Activos
-                        val reclamosActivos = reclamoDTOS.filter { it.activo==true }
+                        val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
 
                         //Filtramos Reclamos del usuario
-                        reclamosUsuario=reclamosActivos.filter{ it.estudianteId.id==usuario.id}
+                        reclamosUsuario =
+                            reclamosActivos.filter { it.estudianteId.id == usuario.id }
 
-                        if(usuario.rol.nombre=="ESTUDIANTE"){
-                    //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
+                        if (usuario.rol.nombre == "ESTUDIANTE") {
+                            //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
 
                             // Configurar el ArrayAdapter para estudiantes
                             val adapterEstudiante = ArrayAdapter(
@@ -157,18 +192,21 @@ class ReclamoFragment : Fragment() {
                         // Al hacer clic en cualquier elemento de la lista
                         listaReclamos.setOnItemClickListener { _, _, position, _ ->
 
-                            val reclamoDTOSeleccionado: ReclamoDTO = if (usuario.rol.nombre == "ESTUDIANTE") {
-                                Log.d("ReclamoFragment", "reclamosUsuario: $reclamosUsuario")
+                            val reclamoDTOSeleccionado: ReclamoDTO =
+                                if (usuario.rol.nombre == "ESTUDIANTE") {
+                                    Log.d("ReclamoFragment", "reclamosUsuario: $reclamosUsuario")
 
-                                reclamosUsuario[position]
-                            } else {
-                                reclamosActivos[position]
-                            }
+                                    reclamosUsuario[position]
+                                } else {
+                                    reclamosActivos[position]
+                                }
                             val reclamoJson = Gson().toJson(reclamoDTOSeleccionado)
-                            val reclamoEstudianteActivity = Intent(requireContext(), ReclamoActivity::class.java)
-                            val reclamoAnalistaActivity = Intent(requireContext(), ReclamoAnalistaActivity::class.java)
+                            val reclamoEstudianteActivity =
+                                Intent(requireContext(), ReclamoActivity::class.java)
+                            val reclamoAnalistaActivity =
+                                Intent(requireContext(), ReclamoAnalistaActivity::class.java)
 
-                            if(usuario.utipo=="ESTUDIANTE") {
+                            if (usuario.utipo == "ESTUDIANTE") {
                                 reclamoEstudianteActivity.putExtra("reclamo", reclamoJson)
                                 startActivity(reclamoEstudianteActivity)
                             } else {
@@ -190,6 +228,35 @@ class ReclamoFragment : Fragment() {
                 }
             }
         })
+
+        limpiarFiltros.setOnClickListener {
+            reclamosFiltrados = reclamoDTOS
+            val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
+
+            if (usuario.rol.nombre == "ESTUDIANTE") {
+                //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
+
+                // Configurar el ArrayAdapter para estudiantes
+                val adapterEstudiante = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_list_item_1,
+                    reclamosUsuario.map { it.titulo }
+                )
+
+                listaReclamos.adapter = adapterEstudiante
+            } else {
+                // Configurar el ArrayAdapter
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_list_item_1,
+                    reclamosActivos.map { it.titulo }
+                )
+
+                // Asignar el adapter al ListView
+                listaReclamos.adapter = adapter
+
+            }
+        }
 
         // Verificar el tipo de usuario y mostrar/ocultar contenido según corresponda
         if (usuario.rol.nombre == "ESTUDIANTE") {
@@ -213,15 +280,28 @@ class ReclamoFragment : Fragment() {
                         startActivity(Intent(requireContext(), AgregarReclamoActivity::class.java))
                         true
                     }
+
                     R.id.opcion2 -> {
 
-                        startActivity(Intent(requireContext(), AgregarReclamoVMEActivity::class.java))
+                        startActivity(
+                            Intent(
+                                requireContext(),
+                                AgregarReclamoVMEActivity::class.java
+                            )
+                        )
                         true
                     }
+
                     R.id.opcion3 -> {
-                        startActivity(Intent(requireContext(), AgregarReclamoAPE_OPTActivity::class.java))
+                        startActivity(
+                            Intent(
+                                requireContext(),
+                                AgregarReclamoAPE_OPTActivity::class.java
+                            )
+                        )
                         true
                     }
+
                     else -> false
                 }
             }
@@ -231,15 +311,41 @@ class ReclamoFragment : Fragment() {
         return view
     }
 
-    fun actualizarListaReclamosPorEstado(activo: Boolean, reclamoDTOS: List<ReclamoDTO>) {
-        val reclamosFiltrados = reclamoDTOS.filter { it.activo == activo }
+    private fun actualizarListaReclamosPorEstado(estado: String) {
+        reclamosFiltrados = reclamoDTOS.filter {
+            it.tipoEstadoReclamoDTO?.nombre?.trim()?.lowercase() == estado.trim().lowercase()
+        }        //Filtramos Reclamos Activos
+        val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
 
-        val adapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_list_item_1,
-            reclamosFiltrados?.map { "${it.titulo}\n${it.estudianteId.nombres} ${it.estudianteId.apellidos}\nSemestre ${it.semestre}"  } ?: emptyList()
-        )
-        listaReclamos.adapter = adapter
+        //Filtramos Reclamos del usuario
+        reclamosUsuario = reclamosActivos.filter { it.estudianteId.id == usuario.id }
+
+        if (usuario.rol.nombre == "ESTUDIANTE") {
+            //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
+
+            // Configurar el ArrayAdapter para estudiantes
+            val adapterEstudiante = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                reclamosUsuario.map { it.titulo }
+            )
+
+            listaReclamos.adapter = adapterEstudiante
+        } else {
+            // Configurar el ArrayAdapter
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                reclamosActivos.map { it.titulo }
+            )
+
+            // Asignar el adapter al ListView
+            listaReclamos.adapter = adapter
+
+        }
+
     }
 
 }
+
+

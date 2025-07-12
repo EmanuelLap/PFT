@@ -8,7 +8,7 @@ data class ReclamoDTO(
     val detalle: String,
     val estudianteId: EstudianteDTO,
     val eventoId: Evento,
-    val TipoEstadoReclamoDTO: estadoReclamoId,
+    val tipoEstadoReclamoDTO: estadoReclamoId,
     val fechaEstadoReclamo: Long,
     val fecha: Long,
     val id: Int,
