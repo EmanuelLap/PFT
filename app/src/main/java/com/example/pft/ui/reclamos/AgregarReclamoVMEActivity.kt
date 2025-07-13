@@ -179,7 +179,7 @@ class AgregarReclamoVMEActivity : AppCompatActivity() {
             } else {
                 // Todos los campos están completos
 
-                val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
+                val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
                 val estudianteId = usuario?.id
                 val tituloIngresado = titulo.text.toString()

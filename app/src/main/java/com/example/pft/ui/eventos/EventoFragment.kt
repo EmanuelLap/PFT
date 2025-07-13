@@ -38,6 +38,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 
@@ -295,11 +296,11 @@ class EventoFragment : Fragment() {
                             val fechaFin = Date(timestampFin)
 
                             // Define el formato que deseas para la fecha
-                            val formato = SimpleDateFormat("dd/MM/yyyy")
+                            val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
                             // Formatear las fechas a String legible
-                            val fechaInicioFormateada = formato.format(fechaInicio)
-                            val fechaFinFormateada = formato.format(fechaFin)
+                            val fechaInicioFormateada = formatoFecha.format(fechaInicio)
+                            val fechaFinFormateada = formatoFecha.format(fechaFin)
 
                             // Construir el texto para cada evento con la fecha formateada
                             "${evento.titulo}\nModalidad: ${evento.modalidadEvento.nombre}\nITR: ${evento.itrDTO.nombre}\nInicio: $fechaInicioFormateada\nFin: $fechaFinFormateada"

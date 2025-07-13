@@ -683,7 +683,7 @@ class RegistroActivity : AppCompatActivity() {
 
             else{
 
-            val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
+                val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val fecNacString = fechaText.text.toString()
             val fechaNacimiento = formatoFecha.parse(fecNacString)
 
@@ -779,7 +779,7 @@ class RegistroActivity : AppCompatActivity() {
 
                 Log.d("Registro Activity", "Datos: $genero $nombre $apellido")
 
-                val formatoFecha = SimpleDateFormat("dd/mm/yyyy")
+                val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
                 val fecNacString = fechaText.text.toString()
                 val fechaNacimiento = formatoFecha.parse(fecNacString)
                 val fechaTimestamp = fechaNacimiento.time

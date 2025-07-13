@@ -31,9 +31,11 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
+import java.util.Locale
 
 private lateinit var titulo: EditText;
 private lateinit var detalle: EditText;
@@ -192,54 +194,83 @@ class ModificarReclamoActivity : AppCompatActivity() {
             val semestreSeleccionado=semestre.selectedItem.toString().toInt()
             val fechaString=fechaText.text.toString()
 
-            if (tituloActual!=reclamoTitulo || detalleActual!=reclamoDetalle||creditosIngresados!=reclamoCreditos||semestreSeleccionado!=reclamoSemestre||fechaString!=fechaConFormato){
+            if (tituloActual!=reclamoTitulo || detalleActual!=reclamoDetalle||creditosIngresados!=reclamoCreditos||semestreSeleccionado!=reclamoSemestre||fechaString!=fechaConFormato) {
 
                 // Agrega un log para verificar que apiService se haya creado correctamente
                 Log.d("ModificarReclamoActivity", "apiService creado correctamente")
 
-                val formatoFecha= SimpleDateFormat("dd/mm/yyyy")
-                val estudianteId=usuario?.id
-                val tituloIngresado=titulo.text.toString()
-                val detalleIngresado=detalle.text.toString()
-                val creditosIngresados=creditos.text.toString().toInt()
-                val semestreSeleccionado=semestre.selectedItem.toString().toInt()
-                val fechaString=fechaText.text.toString()
-                val fecha=formatoFecha.parse(fechaString)
-                val fechaTimestamp=fecha.time
-                val fechaIngresada=fechaTimestamp
-                val id=reclamoDTOSeleccionado.id
+                val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                val estudianteId = usuario?.id
+                val tituloIngresado = titulo.text.toString()
+                val detalleIngresado = detalle.text.toString()
+                val creditosIngresados = creditos.text.toString().toInt()
+                val semestreSeleccionado = semestre.selectedItem.toString().toInt()
+                val fechaString = fechaText.text.toString()
+                val fecha = formatoFecha.parse(fechaString)
+                val fechaTimestamp = fecha.time
+                val fechaIngresada = fechaTimestamp
+                val id = reclamoDTOSeleccionado.id
+
+                // Validaciones
+                if (tituloIngresado.isEmpty()) {
+                    Toast.makeText(this, "El título no puede estar vacío.", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (detalleIngresado.isEmpty()) {
+                    Toast.makeText(this, "La descripción no puede estar vacía.", Toast.LENGTH_SHORT)
+                        .show()
+                } else if (fecha != null && fecha.after(Date())) {
+                    Toast.makeText(
+                        this,
+                        "La fecha no puede ser posterior a la actual.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
 
 
-                val reclamo=ReclamoDTOMobile(true,creditosIngresados,detalleIngresado,estudianteId!!, eventoId,fechaIngresada,id,semestreSeleccionado,tituloIngresado)
+                    val reclamo = ReclamoDTOMobile(
+                        true,
+                        creditosIngresados,
+                        detalleIngresado,
+                        estudianteId!!,
+                        eventoId,
+                        fechaIngresada,
+                        id,
+                        semestreSeleccionado,
+                        tituloIngresado
+                    )
 
-                Log.d("ModificarReclamoActivity", "eventoId: ${eventoId}")
+                    Log.d("ModificarReclamoActivity", "eventoId: ${eventoId}")
 
 
-                val apiService = ApiClient.getApiService(this)
+                    val apiService = ApiClient.getApiService(this)
 
-                val call = apiService.modificarReclamo(
-                    reclamo
-                )
+                    val call = apiService.modificarReclamo(
+                        reclamo
+                    )
 
-                call.enqueue(object : Callback<ReclamoDTOMobile> {
-                    override fun onResponse(call: Call<ReclamoDTOMobile>, response: Response<ReclamoDTOMobile>) {
-                        if (response.isSuccessful) {
-                            val reclamoResp = response.body()
-                            val responseJson = Gson().toJson(reclamoResp)
-                            Log.d("AgregarReclamoActivity", "ResponseBody: $responseJson")
-                            mostrarMensajeExito()
+                    call.enqueue(object : Callback<ReclamoDTOMobile> {
+                        override fun onResponse(
+                            call: Call<ReclamoDTOMobile>,
+                            response: Response<ReclamoDTOMobile>
+                        ) {
+                            if (response.isSuccessful) {
+                                val reclamoResp = response.body()
+                                val responseJson = Gson().toJson(reclamoResp)
+                                Log.d("AgregarReclamoActivity", "ResponseBody: $responseJson")
+                                mostrarMensajeExito()
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<ReclamoDTOMobile>, t: Throwable) {
-                        Log.d("ModificarReclamoActivity", "error: ${t}")
+                        override fun onFailure(call: Call<ReclamoDTOMobile>, t: Throwable) {
+                            Log.d("ModificarReclamoActivity", "error: ${t}")
 
-                        mensaje.text="Ocurrió un error al modificar el reclamo"
-                    }
-                })
+                            mensaje.text = "Ocurrió un error al modificar el reclamo"
+                        }
+                    })
 
 
-            } else{
+                }
+            }else{
                 Toast.makeText(this, "Ningún dato se ha modificado.", Toast.LENGTH_SHORT).show()
 
             }

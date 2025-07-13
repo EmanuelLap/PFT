@@ -22,6 +22,7 @@ import retrofit2.Callback
 import retrofit2.Response
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class EventoActivity : AppCompatActivity() {
 
@@ -72,12 +73,11 @@ class EventoActivity : AppCompatActivity() {
         val fechaFin = Date(timestampFin)
 
 
-        // Define el formato que deseas para la fecha
-        val formato = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        val formatoFecha = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
     // Formatea la fecha a String
-        val fechaInicioFormateada = formato.format(fechaInicio)
-        val fechaFinFormateada = formato.format(fechaFin)
+        val fechaInicioFormateada = formatoFecha.format(fechaInicio)
+        val fechaFinFormateada = formatoFecha.format(fechaFin)
 
         titulo.text=eventoSeleccionado.titulo
         tipo.text="Tipo: ${eventoSeleccionado.tipoEvento.nombre}"
@@ -107,8 +107,6 @@ class EventoActivity : AppCompatActivity() {
 
         btn_eliminar.setOnClickListener{
 
-            val responseJson2= Gson().toJson(eventoMobile)
-            Log.d("JAVIIIII", "responseJson: $responseJson2")
 
             val apiService = ApiClient.getApiService(this)
             val call = apiService.eliminarEvento(
