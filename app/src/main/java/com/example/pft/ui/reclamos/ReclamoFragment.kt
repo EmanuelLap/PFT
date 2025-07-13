@@ -110,10 +110,11 @@ class ReclamoFragment : Fragment() {
                     if (position >= 0 && position < 3) {
                         // Obtiene el estado seleccionado
                         estadoSeleccionado = estados[position]
+                        Log.d("RegistroActivity", "Estado seleccionado: $estadoSeleccionado")
+
                         actualizarListaReclamosPorEstado(estadoSeleccionado)
 
                     } else {
-                        Log.e("RegistroActivity", "Posición seleccionada fuera de los límites")
                     }
                 }
 
@@ -165,12 +166,9 @@ class ReclamoFragment : Fragment() {
                                     if (position >= 0 && position < usuariosOrdenados.size) {
                                         // Obtiene el estado seleccionado
                                         usuarioSeleccionado = usuariosOrdenados[position]
-                                        Log.e("RegistroActivity", "Usuario seleccionado: $usuarioSeleccionado")
-
                                         actualizarListaReclamosPorUsuario(usuarioSeleccionado!!)
 
                                     } else {
-                                        Log.e("RegistroActivity", "Posición seleccionada fuera de los límites")
                                     }
                                 }
 
@@ -200,8 +198,6 @@ class ReclamoFragment : Fragment() {
                     if (response.isSuccessful) {
                         reclamoDTOS = response.body()!!
                         reclamosFiltrados = reclamoDTOS
-                        Log.d("ReclamoFragment", "API call successful. Reclamos: $reclamoDTOS")
-
 
                         //Filtramos Reclamos Activos
                         val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
@@ -357,13 +353,20 @@ class ReclamoFragment : Fragment() {
     }
 
     private fun actualizarListaReclamosPorEstado(estado: String) {
+        // Log del estado de cada reclamo filtrado
+        for (reclamo in reclamoDTOS) {
+            Log.d("ReclamoEstado", "Reclamo: ${reclamo.titulo}, Estado: ${reclamo.tipoEstadoReclamoDTO?.nombre}")
+        }
         reclamosFiltrados = reclamoDTOS.filter {
             it.tipoEstadoReclamoDTO?.nombre?.trim()?.lowercase() == estado.trim().lowercase()
+
         }        //Filtramos Reclamos Activos
         val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
 
         //Filtramos Reclamos del usuario
         reclamosUsuario = reclamosActivos.filter { it.estudianteId.id == usuario.id }
+
+
 
         if (usuario.rol.nombre == "ESTUDIANTE") {
             //         reclamosUsuario = reclamosActivos.filter {it.estudianteDTO.id==usuario.id}
