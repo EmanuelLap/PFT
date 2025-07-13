@@ -42,8 +42,16 @@ class ReclamoFragment : Fragment() {
     private lateinit var limpiarFiltros: Button
     private lateinit var usuarios: List<Usuario>
     private lateinit var usuariosFiltrados: List<Usuario>
+    private lateinit var usuariosOrdenados: List<Usuario>
     private lateinit var fragmentContext: Context
     private lateinit var estadoSeleccionado: String
+    private var usuarioSeleccionado: Usuario? = null
+    private var usuarioEsPrimeraSeleccion = true
+    private var estadoEsPrimeraSeleccion = true
+
+
+
+
 
 
     override fun onCreateView(
@@ -65,12 +73,13 @@ class ReclamoFragment : Fragment() {
         limpiarFiltros = view.findViewById(R.id.fragmentReclamo_btnLimpiarFiltros)
         usuarios = ArrayList()
         usuariosFiltrados = ArrayList()
+        usuariosOrdenados = ArrayList()
 
 
         val layoutAnalista = view.findViewById<LinearLayout>(R.id.fragmentReclamo_analista_usuario)
 
 
-        //-------------Spinner Estados---------------------------------------------------------
+        //-------------Spinner Estado---------------------------------------------------------
 
         val estados = listOf("Ingresado", "En Proceso", "Finalizado")
 
@@ -92,26 +101,31 @@ class ReclamoFragment : Fragment() {
                     position: Int,
                     id: Long
                 ) {
+                    // Saltar la primera selección automática al cargar el spinner
+                    if (estadoEsPrimeraSeleccion) {
+                        estadoEsPrimeraSeleccion = false
+                        return
+                    }
                     // Verificar que la posición seleccionada esté dentro de los límites
                     if (position >= 0 && position < 3) {
-                        // Obtiene el itr seleccionado
+                        // Obtiene el estado seleccionado
                         estadoSeleccionado = estados[position]
                         actualizarListaReclamosPorEstado(estadoSeleccionado)
 
                     } else {
-                        // Puedes manejar esta situación según tus necesidades
                         Log.e("RegistroActivity", "Posición seleccionada fuera de los límites")
                     }
                 }
 
                 override fun onNothingSelected(parentView: AdapterView<*>) {
-                    // Manejar caso cuando no hay nada seleccionado (si es necesario)
                 }
 
             }
 
 
         val apiService = ApiClient.getApiService(requireContext())
+
+        //-------------Spinner Usuario---------------------------------------------------------
 
         val callUsuarios = apiService.obtenerUsuarios()
 
@@ -121,18 +135,49 @@ class ReclamoFragment : Fragment() {
                     if (response.isSuccessful) {
                         usuarios = response.body()!!
                         usuariosFiltrados = usuarios.filter { it.rol.nombre == "ESTUDIANTE" }
+                        usuariosOrdenados = usuariosFiltrados
+                            .sortedBy { it.apellidos.lowercase() }
 
 
                         val adapterUsuarios = ArrayAdapter(
                             requireContext(),
                             android.R.layout.simple_list_item_1,
-                            usuariosFiltrados
-                                .sortedBy { it.apellidos.lowercase() }
+                           usuariosOrdenados
                                 .map { "${it.apellidos} ${it.nombres}, ${it.documento}, ${it.itr.nombre}" }
                         )
 
                         usuarioSpinner.adapter = adapterUsuarios
 
+                        usuarioSpinner.onItemSelectedListener =
+                            object : AdapterView.OnItemSelectedListener {
+                                override fun onItemSelected(
+                                    parentView: AdapterView<*>,
+                                    selectedItemView: View?,
+                                    position: Int,
+                                    id: Long
+                                ) {
+                                    // Saltar la primera selección automática al cargar el spinner
+                                    if (usuarioEsPrimeraSeleccion) {
+                                        usuarioEsPrimeraSeleccion = false
+                                        return
+                                    }
+                                    // Verificar que la posición seleccionada esté dentro de los límites
+                                    if (position >= 0 && position < usuariosOrdenados.size) {
+                                        // Obtiene el estado seleccionado
+                                        usuarioSeleccionado = usuariosOrdenados[position]
+                                        Log.e("RegistroActivity", "Usuario seleccionado: $usuarioSeleccionado")
+
+                                        actualizarListaReclamosPorUsuario(usuarioSeleccionado!!)
+
+                                    } else {
+                                        Log.e("RegistroActivity", "Posición seleccionada fuera de los límites")
+                                    }
+                                }
+
+                                override fun onNothingSelected(parentView: AdapterView<*>) {
+                                }
+
+                            }
                     }
                 }
             }
@@ -346,6 +391,28 @@ class ReclamoFragment : Fragment() {
 
     }
 
+    private fun actualizarListaReclamosPorUsuario(usuario: Usuario) {
+        reclamosFiltrados = reclamoDTOS.filter {
+            //Log.d("ReclamosFiltro", "Comparando: it.estudianteId.id=${it.estudianteId.id} vs usuario.id=${usuario.id}")
+
+            it.estudianteId.id == usuario.id
+        }        //Filtramos Reclamos Activos
+        val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
+
+
+            // Configurar el ArrayAdapter
+            val adapter = ArrayAdapter(
+                requireContext(),
+                android.R.layout.simple_list_item_1,
+                reclamosActivos.map { it.titulo }
+            )
+
+            // Asignar el adapter al ListView
+            listaReclamos.adapter = adapter
+
+
+
+    }
 }
 
 
