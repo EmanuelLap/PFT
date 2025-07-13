@@ -62,7 +62,6 @@ class AgregarEventoActivity : AppCompatActivity() {
     private var tipoSeleccionado: TipoEvento? = null
     private var modalidadSeleccionada: ModalidadEvento? = null
     private var itrDTOSeleccionado: ItrDTO? = null
-    private var tipoEstado: TipoEstadoEvento? = null
 
 
 

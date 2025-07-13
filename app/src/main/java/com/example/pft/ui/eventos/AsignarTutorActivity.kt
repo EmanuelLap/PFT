@@ -24,9 +24,7 @@ import java.util.concurrent.TimeUnit
 
 class AsignarTutorActivity : AppCompatActivity() {
 
-    private lateinit var nombre: EditText
-    private lateinit var apellido: EditText
-    private lateinit var btnFiltrar: Button
+
     private lateinit var listaTutores: ListView
     private lateinit var btnConfirmar: Button
     private lateinit var usuarios: List<Usuario>
@@ -86,9 +84,11 @@ class AsignarTutorActivity : AppCompatActivity() {
             // Puedes pasar la lista tutoresSeleccionados a la siguiente actividad
             Log.d("AsignarTutorActivity", "Tutores seleccionados: ${tutoresSeleccionados}")
 
-            val intent = Intent(this@AsignarTutorActivity,AgregarEventoActivity::class.java)
+            val intent = Intent(this@AsignarTutorActivity, AgregarEventoActivity::class.java)
             intent.putParcelableArrayListExtra("tutoresSeleccionados", ArrayList(tutoresSeleccionados))
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             startActivity(intent)
+            finish()
         }
 
 

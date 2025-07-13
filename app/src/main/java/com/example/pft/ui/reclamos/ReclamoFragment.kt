@@ -355,10 +355,10 @@ class ReclamoFragment : Fragment() {
     private fun actualizarListaReclamosPorEstado(estado: String) {
         // Log del estado de cada reclamo filtrado
         for (reclamo in reclamoDTOS) {
-            Log.d("ReclamoEstado", "Reclamo: ${reclamo.titulo}, Estado: ${reclamo.tipoEstadoReclamoDTO?.nombre}")
+            Log.d("ReclamoEstado", "Reclamo: ${reclamo.titulo}, Estado: ${reclamo.estadoReclamoId?.nombre}")
         }
         reclamosFiltrados = reclamoDTOS.filter {
-            it.tipoEstadoReclamoDTO?.nombre?.trim()?.lowercase() == estado.trim().lowercase()
+            it.estadoReclamoId?.nombre?.trim()?.lowercase() == estado.trim().lowercase()
 
         }        //Filtramos Reclamos Activos
         val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
