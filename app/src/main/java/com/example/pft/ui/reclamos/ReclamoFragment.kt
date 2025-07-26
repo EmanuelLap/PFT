@@ -353,10 +353,6 @@ class ReclamoFragment : Fragment() {
     }
 
     private fun actualizarListaReclamosPorEstado(estado: String) {
-        // Log del estado de cada reclamo filtrado
-        for (reclamo in reclamoDTOS) {
-            Log.d("ReclamoEstado", "Reclamo: ${reclamo.titulo}, Estado: ${reclamo.estadoReclamoId?.nombre}")
-        }
         reclamosFiltrados = reclamoDTOS.filter {
             it.estadoReclamoId?.nombre?.trim()?.lowercase() == estado.trim().lowercase()
 
@@ -396,8 +392,6 @@ class ReclamoFragment : Fragment() {
 
     private fun actualizarListaReclamosPorUsuario(usuario: Usuario) {
         reclamosFiltrados = reclamoDTOS.filter {
-            //Log.d("ReclamosFiltro", "Comparando: it.estudianteId.id=${it.estudianteId.id} vs usuario.id=${usuario.id}")
-
             it.estudianteId.id == usuario.id
         }        //Filtramos Reclamos Activos
         val reclamosActivos = reclamosFiltrados.filter { it.activo == true }
@@ -412,9 +406,6 @@ class ReclamoFragment : Fragment() {
 
             // Asignar el adapter al ListView
             listaReclamos.adapter = adapter
-
-
-
     }
 }
 
