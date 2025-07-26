@@ -108,9 +108,20 @@
             android:gravity="center"
             android:textSize="24dp"
             android:background="#FFFFFF"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="40dp"
             android:alpha="0.8"
             android:text="Créditos"
+            />
+
+        <Button
+            android:id="@+id/reclamoSel_Responder"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#00AEEF"
+            android:layout_gravity="center"
+            android:text="Responder"
+            android:layout_marginBottom="30dp"
+            android:textSize="24dp"
             />
 
     </LinearLayout>
