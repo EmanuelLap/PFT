@@ -28,6 +28,7 @@ private lateinit var fecha: TextView;
 private lateinit var evento: TextView;
 private lateinit var semestre: TextView;
 private lateinit var creditos: TextView;
+private lateinit var btn_responder: Button
 private lateinit var btn_volver: FloatingActionButton
 
 class ReclamoAnalistaActivity : AppCompatActivity() {
@@ -43,15 +44,6 @@ class ReclamoAnalistaActivity : AppCompatActivity() {
         // Convertir la cadena JSON de vuelta a un objeto Evento (usando Gson)
         val reclamoDTOSeleccionado = Gson().fromJson(reclamoJson, ReclamoDTO::class.java)
 
-        val reclamoCreditos=reclamoDTOSeleccionado.creditos
-        val reclamoDetalle=reclamoDTOSeleccionado.detalle
-        val reclamoEstudianteId=reclamoDTOSeleccionado.estudianteId.id!!
-        val reclamoEventoId=reclamoDTOSeleccionado.eventoId.id
-        val reclamoFecha=reclamoDTOSeleccionado.fecha
-        val reclamoId=reclamoDTOSeleccionado.id
-        val reclamoSemestre=reclamoDTOSeleccionado.semestre
-        val reclamoTitulo=reclamoDTOSeleccionado.titulo
-        val reclamoMobile= ReclamoDTOMobile(true,reclamoCreditos,reclamoDetalle,reclamoEstudianteId,reclamoEventoId!!,reclamoFecha,reclamoId,reclamoSemestre,reclamoTitulo)
 
 
         titulo=findViewById(R.id.reclamoSel_titulo)
@@ -61,6 +53,7 @@ class ReclamoAnalistaActivity : AppCompatActivity() {
         semestre=findViewById(R.id.reclamoSel_semestre)
         creditos=findViewById(R.id.reclamoSel_creditos)
         btn_volver=findViewById(R.id.reclamoSel_btnVolver)
+        btn_responder=findViewById(R.id.reclamoSel_Responder)
 
         titulo.text="Título: ${reclamoDTOSeleccionado.titulo}"
         detalle.text="Detalle: ${reclamoDTOSeleccionado.detalle}"
@@ -70,6 +63,12 @@ class ReclamoAnalistaActivity : AppCompatActivity() {
         semestre.text="Semestre: ${reclamoDTOSeleccionado.semestre}"
         creditos.text="Créditos: ${reclamoDTOSeleccionado.creditos}"
 
+        btn_responder.setOnClickListener{
+            val responderActivity = Intent(this@ReclamoAnalistaActivity,ReclamoAccionActivity::class.java)
+            responderActivity.putExtra("reclamo", reclamoJson)
+            startActivity(responderActivity)
+        }
+
         btn_volver.setOnClickListener{
             finish()
         }
@@ -77,18 +76,4 @@ class ReclamoAnalistaActivity : AppCompatActivity() {
 
     }
 
-    private fun mostrarMensajeExito() {
-        runOnUiThread {
-            val builder = AlertDialog.Builder(this@ReclamoAnalistaActivity)
-            builder.setTitle("Éxito")
-            builder.setMessage("Reclamo eliminado con éxito")
-            builder.setPositiveButton("Aceptar") { dialog, _ ->
-                val mainActivity = Intent(this@ReclamoAnalistaActivity, MainActivity::class.java)
-                startActivity(mainActivity)
-                dialog.dismiss()
-            }
-            val dialog = builder.create()
-            dialog.show()
-        }
-    }
 }
