@@ -16,6 +16,12 @@
         android:theme="@style/Theme.PFT"
         tools:targetApi="31">
         <activity
+            android:name=".ui.reclamos.ReclamoAccionActivity"
+            android:exported="false" />
+        <activity
+            android:name=".reclamo_accion"
+            android:exported="false" />
+        <activity
             android:name=".ui.reclamos.ReclamoAnalistaActivity"
             android:exported="false" />
         <activity

@@ -110,7 +110,7 @@ class ReclamoFragment : Fragment() {
                     if (position >= 0 && position < 3) {
                         // Obtiene el estado seleccionado
                         estadoSeleccionado = estados[position]
-                        Log.d("RegistroActivity", "Estado seleccionado: $estadoSeleccionado")
+                        Log.d("ReclamoFragment", "Estado seleccionado: $estadoSeleccionado")
 
                         actualizarListaReclamosPorEstado(estadoSeleccionado)
 

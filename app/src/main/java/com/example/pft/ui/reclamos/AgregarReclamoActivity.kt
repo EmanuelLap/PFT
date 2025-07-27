@@ -175,14 +175,6 @@ class AgregarReclamoActivity : AppCompatActivity() {
 
 
         agregarReclamo.setOnClickListener {
-          /*  val retrofit = Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:8080/")  // Reemplaza "tu_direccion_ip" con la dirección IP de tu máquina de desarrollo
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-
-           */
-
-
 
             val camposVacios = mutableListOf<String>()
 
@@ -295,8 +287,6 @@ class AgregarReclamoActivity : AppCompatActivity() {
         }
 
         volver.setOnClickListener{
-           // val mainActivity = Intent(this@AgregarReclamoActivity, MainActivity::class.java)
-          //  startActivity(mainActivity)
             finish()
         }
 
