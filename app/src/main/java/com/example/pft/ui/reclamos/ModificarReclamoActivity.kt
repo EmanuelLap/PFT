@@ -100,7 +100,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
 
         val usuario = UsuarioSingleton.usuario
 
-        // opciones (del 1 al 10)
+        // opciones semestre
         val semestreOpciones = ArrayList<String>()
         semestreOpciones.add("1")
         semestreOpciones.add("2")
@@ -110,8 +110,7 @@ class ModificarReclamoActivity : AppCompatActivity() {
         semestreOpciones.add("6")
         semestreOpciones.add("7")
         semestreOpciones.add("8")
-        semestreOpciones.add("9")
-        semestreOpciones.add("10")
+
 
         // Crear un ArrayAdapter y establecerlo en el Spinner
         val semestreAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, semestreOpciones)
